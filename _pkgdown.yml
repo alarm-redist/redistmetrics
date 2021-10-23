@@ -6,4 +6,28 @@ reference:
 - title: Partisan Bias Calculations
   desc: "Functions to calulate partisan bias measures"
 - contents:
-  - has_concept('partisan')
+  - has_concept("partisan")
+- title: Compactness Calculations
+  desc: "Functions to calculate compactness measures"
+- contents:
+  - has_concept("compactness")
+- title: Split Calculations
+  desc: "Functions to calculate splits"
+- contents:
+  - has_concept("splits")
+- title: Competitiveness Calculations
+  desc: "Functions to calculate competitiveness measures"
+- contents:
+  - has_concept("competitiveness")
+- title: Distance Calculations
+  desc: "Functions to calculate distances between partitions"
+- contents:
+  - has_concept("distances")
+- title: Segregation Calculations
+  desc: "Functions to calculate segregation measures"
+- contents:
+  - has_concept("segregation")
+- title: Misc.
+  desc: "Remaining tools that don't fit into other categories"
+- contents:
+  - lacks_concepts(c("partisan", "compactness", "splits", "competitiveness", "segregation"))

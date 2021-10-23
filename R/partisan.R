@@ -13,18 +13,7 @@
 #' # todo example
 part_bias <- function(plans, dvote, rvote, v = 0.5) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -41,7 +30,7 @@ part_bias <- function(plans, dvote, rvote, v = 0.5) {
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
-  erp(biasatv(dvs = dvs, v = v, nd = nd), each = nd)
+  rep(biasatv(dvs = dvs, v = v, nd = nd), each = nd)
 }
 
 #' Calculate Democratic Seats
@@ -58,18 +47,7 @@ part_bias <- function(plans, dvote, rvote, v = 0.5) {
 #' # todo example
 part_dseats <- function(plans, dvote, rvote) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -104,18 +82,7 @@ part_dseats <- function(plans, dvote, rvote) {
 #' # todo example
 part_dvs <- function(plans, dvote, rvote) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -147,18 +114,7 @@ part_dvs <- function(plans, dvote, rvote) {
 #' # todo example
 part_egap <- function(plans, dvote, rvote) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -192,18 +148,7 @@ part_egap <- function(plans, dvote, rvote) {
 #' # todo example
 part_egap_ep <- function(plans, dvote, rvote) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -238,18 +183,7 @@ part_egap_ep <- function(plans, dvote, rvote) {
 #' # todo example
 part_tau_gap <- function(plans, dvote, rvote, tau = 1) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -283,18 +217,7 @@ part_tau_gap <- function(plans, dvote, rvote, tau = 1) {
 #' # todo example
 part_mean_median <- function(plans, dvote, rvote) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -328,18 +251,7 @@ part_mean_median <- function(plans, dvote, rvote) {
 #' # todo example
 part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -356,13 +268,13 @@ part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
   dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
-  dec <- rep(declination(dvs = dvs, dseat_vec = dseat_vec, nd = nd), each = nd)
+  dec <- declination(dvs = dvs, dseat_vec = dseat_vec, nd = nd)
 
   if (normalize) {
     dec <- atan(dec)/log(nd)
   }
 
-  dec
+  rep(dec, each = nd)
 }
 
 #' Calculate Responsiveness
@@ -380,18 +292,7 @@ part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
 #' # todo example
 part_resp <- function(plans, dvote, rvote, bandwidth = FALSE) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -425,18 +326,7 @@ part_resp <- function(plans, dvote, rvote, bandwidth = FALSE) {
 #' # todo example
 part_lopsided_wins <- function(plans, dvote, rvote) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -470,18 +360,7 @@ part_lopsided_wins <- function(plans, dvote, rvote) {
 #' # todo example
 part_rmd <- function(plans, dvote, rvote) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }
@@ -514,18 +393,7 @@ part_rmd <- function(plans, dvote, rvote) {
 #' # todo example
 part_sscd <- function(plans, dvote, rvote) {
 
-  if (inherits(plans, 'redist_plans')) {
-    plans <- attr(plans, 'plans')
-  }
-  if(!is.numeric(plans)){
-    stop('`plans` should be a numeric vector or matrix.')
-  }
-  if(!is.matrix(plans)){
-    plans <- as.matrix(plans)
-  }
-  if(any(is.na(plans))){
-    stop('NA value in argument to `plans`.')
-  }
+  plans <- process_plans(plans)
   if(any(is.na(dvote))){
     stop('NA value in argument to `dvote`.')
   }

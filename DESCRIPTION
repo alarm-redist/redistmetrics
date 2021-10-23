@@ -16,6 +16,11 @@ LinkingTo:
     Rcpp,
     RcppArmadillo
 Imports: 
-    Rcpp
+    sf,
+    Rcpp,
+    lwgeom,
+    cli,
+    foreach,
+    doParallel
 URL: https://alarm-redist.github.io/rict/, https::/github.com/alarm-redist/rict/
 BugReports: https://github.com/alarm-redist/rict/issues
