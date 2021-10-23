@@ -4,6 +4,8 @@
 # rict
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/alarm-redist/rict/workflows/R-CMD-check/badge.svg)](https://github.com/alarm-redist/rict/actions)
 <!-- badges: end -->
 
 `rict` is a member of the `redistverse`, which is a family of R packages

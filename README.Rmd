@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # rict
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/alarm-redist/rict/workflows/R-CMD-check/badge.svg)](https://github.com/alarm-redist/rict/actions)
 <!-- badges: end -->
 
 `rict` is a member of the `redistverse`, which is a family of R packages by the ALARM Project. `rict` provides the backend for the computation of summary statistics for a redistricting plan. It provides a more direct access point to use methods in `redist` without requiring `redist` objects.
