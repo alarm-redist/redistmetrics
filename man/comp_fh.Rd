@@ -4,7 +4,7 @@
 \alias{comp_fh}
 \title{Calulate Fryer Holden Compactness}
 \usage{
-comp_fh(shp, plans, total_pop, epsg = 3857)
+comp_fh(shp, plans, total_pop, epsg = 3857, ncores = 1)
 }
 \arguments{
 \item{shp}{todo inherits}
@@ -14,6 +14,8 @@ comp_fh(shp, plans, total_pop, epsg = 3857)
 \item{total_pop}{A numeric vector with the population for every observation.}
 
 \item{epsg}{todo inherits}
+
+\item{ncores}{todo inherits}
 }
 \value{
 numeric vector

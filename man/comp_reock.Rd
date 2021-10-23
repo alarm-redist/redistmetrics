@@ -12,6 +12,8 @@ comp_reock(shp, plans, epsg = 3857, ncores = 1)
 \item{plans}{todo inherits}
 
 \item{epsg}{todo inherits}
+
+\item{ncores}{todo inherits}
 }
 \value{
 numeric vector

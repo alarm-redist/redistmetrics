@@ -282,6 +282,7 @@ part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
 #' @param plans todo inherits
 #' @param dvote todo inherits
 #' @param rvote todo inherits
+#' @param v vote share to calculate bias at. Numeric. Default is 0.5.
 #' @param bandwidth Defaults to 0.01. A value between 0 and 1 for the step size to estimate the slope.
 #'
 #' @return numeric vector
@@ -290,7 +291,7 @@ part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
 #'
 #' @examples
 #' # todo example
-part_resp <- function(plans, dvote, rvote, bandwidth = FALSE) {
+part_resp <- function(plans, dvote, rvote, v, bandwidth = FALSE) {
 
   plans <- process_plans(plans)
   if(any(is.na(dvote))){
@@ -309,7 +310,7 @@ part_resp <- function(plans, dvote, rvote, bandwidth = FALSE) {
   dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
-  rep(responsiveness(dvs = dvs, v = respV, nd = nd, bandwidth = bandwidth), each = nd)
+  rep(responsiveness(dvs = dvs, v = v, nd = nd, bandwidth = bandwidth), each = nd)
 }
 
 #' Calculate Lopsided Wins

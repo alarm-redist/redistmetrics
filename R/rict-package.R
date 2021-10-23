@@ -7,3 +7,5 @@ NULL
 #' @importFrom Rcpp sourceCpp
 ## usethis namespace: end
 NULL
+
+globalVariables(c('map'))

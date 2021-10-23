@@ -4,7 +4,7 @@
 \alias{part_resp}
 \title{Calculate Responsiveness}
 \usage{
-part_resp(plans, dvote, rvote, bandwidth = FALSE)
+part_resp(plans, dvote, rvote, v, bandwidth = FALSE)
 }
 \arguments{
 \item{plans}{todo inherits}
@@ -12,6 +12,8 @@ part_resp(plans, dvote, rvote, bandwidth = FALSE)
 \item{dvote}{todo inherits}
 
 \item{rvote}{todo inherits}
+
+\item{v}{vote share to calculate bias at. Numeric. Default is 0.5.}
 
 \item{bandwidth}{Defaults to 0.01. A value between 0 and 1 for the step size to estimate the slope.}
 }

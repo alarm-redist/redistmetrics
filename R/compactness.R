@@ -3,6 +3,7 @@
 #' @param shp todo inherits
 #' @param plans todo inherits
 #' @param epsg todo inherits
+#' @param ncores todo inherits
 #'
 #' @return numeric vector
 #' @export
@@ -54,6 +55,7 @@ comp_reock <- function(shp, plans, epsg = 3857, ncores = 1) {
 #' @param shp todo inherits
 #' @param plans todo inherits
 #' @param epsg todo inherits
+#' @param ncores todo inherits
 #'
 #' @return numeric vector
 #' @export
@@ -78,7 +80,7 @@ comp_ch <- function(shp, plans, epsg = 3857, ncores = 1) {
     `%oper%` <- foreach::`%dopar%`
     cl <- parallel::makeCluster(nc, setup_strategy = 'sequential', methods=FALSE)
     doParallel::registerDoParallel(cl)
-    on.exit(stopCluster(cl))
+    on.exit(parallel::stopCluster(cl))
   }
 
   # compute ----
@@ -106,6 +108,7 @@ comp_ch <- function(shp, plans, epsg = 3857, ncores = 1) {
 #' @param plans todo inherits
 #' @param total_pop A numeric vector with the population for every observation.
 #' @param epsg todo inherits
+#' @param ncores todo inherits
 #'
 #' @return numeric vector
 #' @export
@@ -113,7 +116,7 @@ comp_ch <- function(shp, plans, epsg = 3857, ncores = 1) {
 #'
 #' @examples
 #' # todo example
-comp_fh <- function(shp, plans, total_pop, epsg = 3857) {
+comp_fh <- function(shp, plans, total_pop, epsg = 3857, ncores = 1) {
   shp <- planarize(shp, epsg)
   plans <- process_plans(plans)
   dists <- sort(unique(c(plans)))
