@@ -1,15 +1,21 @@
 Package: rict
 Title: Redistricting Metrics
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+    person("Christopher T.", "Kenny", email = "christopherkenny@fas.harvard.edu", role = c("aut", "cre")),
+    person("Cory", "McCartan", email = "cmccartan@g.harvard.edu", role = "aut"),
+    person("Ben", "Fifield", email = "benfifield@gmail.com", role = "aut"),
+    person("Kosuke", "Imai", email = "imai@harvard.edu", role = "aut"))
+Description: Measures and metrics for scoring redistricting plans. These functions provide key analysis functions for the 'redist' package while also providing more direct access to tools useful for non-simulation analyses.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
+Imports: 
+    Rcpp
+URL: https://alarm-redist.github.io/rict/, https::/github.com/alarm-redist/rict/
+BugReports: https://github.com/alarm-redist/rict/issues
