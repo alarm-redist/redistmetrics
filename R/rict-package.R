@@ -8,4 +8,9 @@ NULL
 ## usethis namespace: end
 NULL
 
-globalVariables(c('map'))
+globalVariables(c('map', '.', 'united', 'plans', 'from', 'edge',
+                  'origin', 'perim_full', 'perim_adj', 'perim_boundary',
+                  'X1', 'touching'))
+
+#' @importFrom rlang .data
+NULL
