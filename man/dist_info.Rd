@@ -22,3 +22,4 @@ Calculate Variation of Information Distances
 \examples{
 # todo example
 }
+\concept{distances}

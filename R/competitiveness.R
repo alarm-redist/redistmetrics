@@ -8,6 +8,7 @@
 #'
 #' @return numeric vector
 #' @export
+#' @concept competitiveness
 #'
 #' @examples
 #' # todo examples

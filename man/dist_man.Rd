@@ -20,3 +20,4 @@ Calculate Manhattan Distances
 \examples{
 # todo example
 }
+\concept{distances}

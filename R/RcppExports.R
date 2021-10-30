@@ -85,6 +85,10 @@ smoothseat <- function(dvs, nd) {
     .Call(`_rict_smoothseat`, dvs, nd)
 }
 
+segregationcalc <- function(distmat, grouppop, fullpop) {
+    .Call(`_rict_segregationcalc`, distmat, grouppop, fullpop)
+}
+
 splits <- function(dm, community, nd, max_split) {
     .Call(`_rict_splits`, dm, community, nd, max_split)
 }

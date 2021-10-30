@@ -283,6 +283,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// segregationcalc
+NumericVector segregationcalc(NumericMatrix distmat, NumericVector grouppop, NumericVector fullpop);
+RcppExport SEXP _rict_segregationcalc(SEXP distmatSEXP, SEXP grouppopSEXP, SEXP fullpopSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type distmat(distmatSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type grouppop(grouppopSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type fullpop(fullpopSEXP);
+    rcpp_result_gen = Rcpp::wrap(segregationcalc(distmat, grouppop, fullpop));
+    return rcpp_result_gen;
+END_RCPP
+}
 // splits
 IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_split);
 RcppExport SEXP _rict_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP) {
@@ -359,6 +372,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rict_biasatv", (DL_FUNC) &_rict_biasatv, 3},
     {"_rict_RankedMarginalDev", (DL_FUNC) &_rict_RankedMarginalDev, 1},
     {"_rict_smoothseat", (DL_FUNC) &_rict_smoothseat, 2},
+    {"_rict_segregationcalc", (DL_FUNC) &_rict_segregationcalc, 3},
     {"_rict_splits", (DL_FUNC) &_rict_splits, 4},
     {"_rict_dist_cty_splits", (DL_FUNC) &_rict_dist_cty_splits, 3},
     {"_rict_var_info_mat", (DL_FUNC) &_rict_var_info_mat, 3},

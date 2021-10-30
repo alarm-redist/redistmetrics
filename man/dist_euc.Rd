@@ -20,3 +20,4 @@ Calculate Euclidean Distances
 \examples{
 # todo example
 }
+\concept{distances}

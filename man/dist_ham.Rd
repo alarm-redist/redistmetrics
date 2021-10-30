@@ -20,3 +20,4 @@ Calculate Hamming Distances
 \examples{
 # todo example
 }
+\concept{distances}

@@ -26,3 +26,4 @@ Compute Talismanic Redistricting Competitiveness Metric
 \examples{
 # todo examples
 }
+\concept{competitiveness}
