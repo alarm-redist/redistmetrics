@@ -4,12 +4,12 @@
 \alias{comp_ch}
 \title{Calculate Convex Hull Compactness}
 \usage{
-comp_ch(shp, plans, epsg = 3857, ncores = 1)
+comp_ch(plans, shp, epsg = 3857, ncores = 1)
 }
 \arguments{
-\item{shp}{todo inherits}
-
 \item{plans}{todo inherits}
+
+\item{shp}{todo inherits}
 
 \item{epsg}{todo inherits}
 

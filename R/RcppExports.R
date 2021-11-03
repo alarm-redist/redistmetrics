@@ -25,6 +25,14 @@ minkowski <- function(v, m, p) {
     .Call(`_rict_minkowski`, v, m, p)
 }
 
+log_st_map <- function(g, districts, counties, n_distr) {
+    .Call(`_rict_log_st_map`, g, districts, counties, n_distr)
+}
+
+n_removed <- function(g, districts, n_distr) {
+    .Call(`_rict_n_removed`, g, districts, n_distr)
+}
+
 agg_p2d <- function(dm, vote, nd) {
     .Call(`_rict_agg_p2d`, dm, vote, nd)
 }

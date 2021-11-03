@@ -4,12 +4,12 @@
 \alias{comp_reock}
 \title{Calculate Reock Compactness}
 \usage{
-comp_reock(shp, plans, epsg = 3857, ncores = 1)
+comp_reock(plans, shp, epsg = 3857, ncores = 1)
 }
 \arguments{
-\item{shp}{todo inherits}
-
 \item{plans}{todo inherits}
+
+\item{shp}{todo inherits}
 
 \item{epsg}{todo inherits}
 

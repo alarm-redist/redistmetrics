@@ -4,12 +4,12 @@
 \alias{comp_bc}
 \title{Calculate Boyce Clark Ratio}
 \usage{
-comp_bc(shp, plans, epsg = 3857, ncores = 1)
+comp_bc(plans, shp, epsg = 3857, ncores = 1)
 }
 \arguments{
-\item{shp}{todo inherits}
-
 \item{plans}{todo inherits}
+
+\item{shp}{todo inherits}
 
 \item{epsg}{todo inherits}
 

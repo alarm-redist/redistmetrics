@@ -1,7 +1,7 @@
 #' Calculate Polsby Popper Compactness
 #'
-#' @param shp todo inherits
 #' @param plans todo inherits
+#' @param shp todo inherits
 #' @param use_Rcpp Logical. Use Rcpp?
 #' @param perim_path path to perimeter tibble saved by `prep_perims()`
 #' @param perim_df tibble of perimeters from `prep_perims()`
@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' # todo example
-comp_polsby <- function(shp, plans, use_Rcpp, perim_path, perim_df, epsg = 3857, ncores = 1) {
+comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
@@ -80,8 +80,8 @@ comp_polsby <- function(shp, plans, use_Rcpp, perim_path, perim_df, epsg = 3857,
 
 #' Calculate Schwartzberg Compactness
 #'
-#' @param shp todo inherits
 #' @param plans todo inherits
+#' @param shp todo inherits
 #' @param use_Rcpp Logical. Use Rcpp?
 #' @param perim_path path to perimeter tibble saved by `prep_perims()`
 #' @param perim_df tibble of perimeters from `prep_perims()`
@@ -94,7 +94,7 @@ comp_polsby <- function(shp, plans, use_Rcpp, perim_path, perim_df, epsg = 3857,
 #'
 #' @examples
 #' # todo example
-comp_schwartzberg <- function(shp, plans, use_Rcpp, perim_path, perim_df, epsg = 3857, ncores = 1) {
+comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
@@ -160,8 +160,8 @@ comp_schwartzberg <- function(shp, plans, use_Rcpp, perim_path, perim_df, epsg =
 
 #' Calculate Reock Compactness
 #'
-#' @param shp todo inherits
 #' @param plans todo inherits
+#' @param shp todo inherits
 #' @param epsg todo inherits
 #' @param ncores todo inherits
 #'
@@ -171,7 +171,7 @@ comp_schwartzberg <- function(shp, plans, use_Rcpp, perim_path, perim_df, epsg =
 #'
 #' @examples
 #' # todo example
-comp_reock <- function(shp, plans, epsg = 3857, ncores = 1) {
+comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
@@ -212,8 +212,8 @@ comp_reock <- function(shp, plans, epsg = 3857, ncores = 1) {
 
 #' Calculate Convex Hull Compactness
 #'
-#' @param shp todo inherits
 #' @param plans todo inherits
+#' @param shp todo inherits
 #' @param epsg todo inherits
 #' @param ncores todo inherits
 #'
@@ -223,7 +223,7 @@ comp_reock <- function(shp, plans, epsg = 3857, ncores = 1) {
 #'
 #' @examples
 #' # todo example
-comp_ch <- function(shp, plans, epsg = 3857, ncores = 1) {
+comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
@@ -264,8 +264,8 @@ comp_ch <- function(shp, plans, epsg = 3857, ncores = 1) {
 
 #' Calculate Length Width Compactness
 #'
-#' @param shp todo inherits
 #' @param plans todo inherits
+#' @param shp todo inherits
 #' @param epsg todo inherits
 #' @param ncores todo inherits
 #'
@@ -275,7 +275,7 @@ comp_ch <- function(shp, plans, epsg = 3857, ncores = 1) {
 #'
 #' @examples
 #' # todo example
-comp_lw <- function(shp, plans, epsg = 3857, ncores = 1) {
+comp_lw <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
@@ -313,8 +313,8 @@ comp_lw <- function(shp, plans, epsg = 3857, ncores = 1) {
 
 #' Calculate Boyce Clark Ratio
 #'
-#' @param shp todo inherits
 #' @param plans todo inherits
+#' @param shp todo inherits
 #' @param epsg todo inherits
 #' @param ncores todo inherits
 #'
@@ -324,7 +324,7 @@ comp_lw <- function(shp, plans, epsg = 3857, ncores = 1) {
 #'
 #' @examples
 #' # todo example
-comp_bc <- function(shp, plans, epsg = 3857, ncores = 1) {
+comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
@@ -378,8 +378,8 @@ comp_bc <- function(shp, plans, epsg = 3857, ncores = 1) {
 
 #' Calulate Fryer Holden Compactness
 #'
-#' @param shp todo inherits
 #' @param plans todo inherits
+#' @param shp todo inherits
 #' @param total_pop A numeric vector with the population for every observation.
 #' @param epsg todo inherits
 #' @param ncores todo inherits
@@ -390,7 +390,7 @@ comp_bc <- function(shp, plans, epsg = 3857, ncores = 1) {
 #'
 #' @examples
 #' # todo example
-comp_fh <- function(shp, plans, total_pop, epsg = 3857, ncores = 1) {
+comp_fh <- function(plans, shp, total_pop, epsg = 3857, ncores = 1) {
   shp <- planarize(shp, epsg)
   plans <- process_plans(plans)
   dists <- sort(unique(c(plans)))
@@ -412,3 +412,91 @@ comp_fh <- function(shp, plans, total_pop, epsg = 3857, ncores = 1) {
 
   rep(out, each = nd)
 }
+
+#' Calulate Edges Removed Compactness
+#'
+#' @param plans todo inherits
+#' @param shp todo inherits
+#' @param adj todo inherits
+#'
+#' @return numeric vector
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' # todo example
+comp_edges_rem <- function(plans, shp, adj) {
+  plans <- process_plans(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  if (missing(adj) & inherits(shp, 'redist_map')) {
+    adj <- shp[[attr(shp, 'adj_col')]]
+  } else if (missing(adj)) {
+    cli::cli_abort('`adj` missing and `shp` is not of class `redist_map`.')
+  }
+
+  n_removed(g = adj, districts = plans, n_distr = nd) %>%
+    rep(each = nd)
+}
+
+#' Calulate Fraction Kept Compactness
+#'
+#' @param plans todo inherits
+#' @param shp todo inherits
+#' @param adj todo inherits
+#'
+#' @return numeric vector
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' # todo example
+comp_frac_kept <- function(plans, shp, adj) {
+  plans <- process_plans(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  if (missing(adj) & inherits(shp, 'redist_map')) {
+    adj <- shp[[attr(shp, 'adj_col')]]
+  } else if (missing(adj)) {
+    cli::cli_abort('`adj` missing and `shp` is not of class `redist_map`.')
+  }
+  n_edge <- length(unlist(adj))
+
+  (1 - (n_removed(g = adj, districts = plans, n_distr = nd)/n_edge)) %>%
+    rep(each = nd)
+}
+
+#' Calulate Log Spanning Tree Compactness
+#'
+#' @param plans todo inherits
+#' @param shp todo inherits
+#' @param counties column name in shp containing counties
+#' @param adj todo inherits
+#'
+#' @return numeric vector
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' # todo example
+comp_log_st <- function(plans, shp, counties, adj) {
+
+  plans <- process_plans(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  counties <- rlang::eval_tidy(rlang::enquo(counties), shp)
+
+  if (missing(adj) & inherits(shp, 'redist_map')) {
+    adj <- shp[[attr(shp, 'adj_col')]]
+  } else if (missing(adj)) {
+    cli::cli_abort('`adj` missing and `shp` is not of class `redist_map`.')
+  }
+
+  log_st_map(g = adj, districts = plans, counties = counties, n_distr = nd) %>%
+    rep(each = nd)
+}
+
+

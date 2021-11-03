@@ -5,8 +5,8 @@
 \title{Calculate Polsby Popper Compactness}
 \usage{
 comp_polsby(
-  shp,
   plans,
+  shp,
   use_Rcpp,
   perim_path,
   perim_df,
@@ -15,9 +15,9 @@ comp_polsby(
 )
 }
 \arguments{
-\item{shp}{todo inherits}
-
 \item{plans}{todo inherits}
+
+\item{shp}{todo inherits}
 
 \item{use_Rcpp}{Logical. Use Rcpp?}
 
