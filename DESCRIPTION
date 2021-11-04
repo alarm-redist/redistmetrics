@@ -27,3 +27,5 @@ Imports:
     rlang
 URL: https://alarm-redist.github.io/rict/, https::/github.com/alarm-redist/rict/
 BugReports: https://github.com/alarm-redist/rict/issues
+Depends: 
+    R (>= 2.10)
