@@ -4,14 +4,16 @@
 \alias{compet_talisman}
 \title{Compute Talismanic Redistricting Competitiveness Metric}
 \usage{
-compet_talisman(plans, rvote, dvote, alpha = 1, beta = 1)
+compet_talisman(plans, shp, rvote, dvote, alpha = 1, beta = 1)
 }
 \arguments{
-\item{plans}{todo inherits}
+\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{rvote}{todo inherits}
+\item{shp}{redist_map object or tibble with sf geometry column}
 
-\item{dvote}{todo inherits}
+\item{rvote}{unqouted name of column in shp with group population}
+
+\item{dvote}{unqouted name of column in shp with total population}
 
 \item{alpha}{Numeric scaling value}
 

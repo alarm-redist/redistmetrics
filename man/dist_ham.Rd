@@ -7,9 +7,9 @@
 dist_ham(plans, ncores = 1)
 }
 \arguments{
-\item{plans}{todo inherits}
+\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{ncores}{todo inherits}
+\item{ncores}{numeric. Number of cores to use. Default is 1.}
 }
 \value{
 matrix of plan distances

@@ -7,13 +7,13 @@
 seg_dissim(plans, shp, group_pop, total_pop)
 }
 \arguments{
-\item{plans}{todo inherits}
+\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{shp}{todo inherits}
+\item{shp}{redist_map object or tibble with sf geometry column}
 
-\item{group_pop}{todo inherits}
+\item{group_pop}{unqouted name of column in shp with group population}
 
-\item{total_pop}{todo inherits}
+\item{total_pop}{unqouted name of column in shp with total population}
 }
 \value{
 numeric vector

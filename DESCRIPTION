@@ -25,7 +25,9 @@ Imports:
     magrittr,
     dplyr,
     rlang
-URL: https://alarm-redist.github.io/rict/, https::/github.com/alarm-redist/rict/
+URL: https://alarm-redist.github.io/rict/,
+    https::/github.com/alarm-redist/rict/,
+    https://alarm-redist.github.io/rict
 BugReports: https://github.com/alarm-redist/rict/issues
 Depends: 
     R (>= 2.10)

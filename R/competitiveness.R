@@ -1,10 +1,12 @@
 #' Compute Talismanic Redistricting Competitiveness Metric
 #'
-#' @param plans todo inherits
-#' @param rvote todo inherits
-#' @param dvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar rvote TRUE
+#' @templateVar dvote TRUE
 #' @param alpha Numeric scaling value
 #' @param beta Numeric scaling value
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -12,7 +14,11 @@
 #'
 #' @examples
 #' # todo examples
-compet_talisman <- function(plans, rvote, dvote, alpha = 1, beta = 1) {
+compet_talisman <- function(plans, shp, rvote, dvote, alpha = 1, beta = 1) {
+
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+
   # process objects ----
   plans <- process_plans(plans)
   nd <- length(unique(plans[, 1]))

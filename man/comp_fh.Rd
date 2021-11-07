@@ -7,15 +7,15 @@
 comp_fh(plans, shp, total_pop, epsg = 3857, ncores = 1)
 }
 \arguments{
-\item{plans}{todo inherits}
+\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{shp}{todo inherits}
+\item{shp}{redist_map object or tibble with sf geometry column}
 
 \item{total_pop}{A numeric vector with the population for every observation.}
 
-\item{epsg}{todo inherits}
+\item{epsg}{numeric EPSG code to planarize to. Default is 3857.}
 
-\item{ncores}{todo inherits}
+\item{ncores}{TRUE}
 }
 \value{
 numeric vector

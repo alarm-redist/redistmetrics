@@ -1,9 +1,10 @@
 #' Compute Dissimilarity Index
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param group_pop todo inherits
-#' @param total_pop todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar group_pop TRUE
+#' @templateVar total_pop TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export

@@ -1,8 +1,9 @@
 #' Calculate Variation of Information Distances
 #'
-#' @param plans todo inherits
-#' @param total_pop A numeric vector with the population for every observation.
-#' @param ncores todo inherits
+#' @templateVar plans TRUE
+#' @templateVar total_pop TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return matrix of plan distances
 #' @export
@@ -46,8 +47,9 @@ dist_info <- function(plans, total_pop, ncores = 1) {
 
 #' Calculate Hamming Distances
 #'
-#' @param plans todo inherits
-#' @param ncores todo inherits
+#' @templateVar plans TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return matrix of plan distances
 #' @export
@@ -82,8 +84,9 @@ dist_ham <- function(plans, ncores = 1) {
 
 #' Calculate Euclidean Distances
 #'
-#' @param plans todo inherits
-#' @param ncores todo inherits
+#' @templateVar plans TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return matrix of plan distances
 #' @export
@@ -118,8 +121,9 @@ dist_euc <- function(plans, ncores = 1) {
 
 #' Calculate Manhattan Distances
 #'
-#' @param plans todo inherits
-#' @param ncores todo inherits
+#' @templateVar plans TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return matrix of plan distances
 #' @export

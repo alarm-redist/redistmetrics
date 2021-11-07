@@ -7,11 +7,11 @@
 dist_info(plans, total_pop, ncores = 1)
 }
 \arguments{
-\item{plans}{todo inherits}
+\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{total_pop}{A numeric vector with the population for every observation.}
+\item{total_pop}{unqouted name of column in shp with total population}
 
-\item{ncores}{todo inherits}
+\item{ncores}{numeric. Number of cores to use. Default is 1.}
 }
 \value{
 matrix of plan distances

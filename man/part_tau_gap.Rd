@@ -7,11 +7,11 @@
 part_tau_gap(plans, dvote, rvote, tau = 1)
 }
 \arguments{
-\item{plans}{todo inherits}
+\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{dvote}{todo inherits}
+\item{dvote}{unqouted name of column in shp with total population}
 
-\item{rvote}{todo inherits}
+\item{rvote}{unqouted name of column in shp with group population}
 
 \item{tau}{A non-negative numeric for calculating Tau Gap. Defaults to 1.}
 }

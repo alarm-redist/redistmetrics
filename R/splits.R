@@ -1,8 +1,9 @@
 #' Compute Number of Administrative Units Split
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param admin todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar admin TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -27,9 +28,10 @@ splits_admin <- function(plans, shp, admin) {
 
 #' Compute Number of Sub-Administrative Units Split More than Once
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param sub_admin todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar sub_admin TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -59,9 +61,10 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
 
 #' Compute Number of Administrative Units Split More than Once
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param admin todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar admin TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export

@@ -7,13 +7,13 @@
 comp_bc(plans, shp, epsg = 3857, ncores = 1)
 }
 \arguments{
-\item{plans}{todo inherits}
+\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{shp}{todo inherits}
+\item{shp}{redist_map object or tibble with sf geometry column}
 
-\item{epsg}{todo inherits}
+\item{epsg}{numeric EPSG code to planarize to. Default is 3857.}
 
-\item{ncores}{todo inherits}
+\item{ncores}{numeric. Number of cores to use. Default is 1.}
 }
 \value{
 numeric vector

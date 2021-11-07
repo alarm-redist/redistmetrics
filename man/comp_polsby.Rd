@@ -15,9 +15,9 @@ comp_polsby(
 )
 }
 \arguments{
-\item{plans}{todo inherits}
+\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{shp}{todo inherits}
+\item{shp}{redist_map object or tibble with sf geometry column}
 
 \item{use_Rcpp}{Logical. Use Rcpp?}
 
@@ -25,9 +25,9 @@ comp_polsby(
 
 \item{perim_df}{tibble of perimeters from \code{prep_perims()}}
 
-\item{epsg}{todo inherits}
+\item{epsg}{numeric EPSG code to planarize to. Default is 3857.}
 
-\item{ncores}{todo inherits}
+\item{ncores}{numeric. Number of cores to use. Default is 1.}
 }
 \value{
 numeric vector

@@ -1,9 +1,10 @@
 #' Calculate Partisan Bias
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
 #' @param v vote share to calculate bias at. Numeric. Default is 0.5.
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -35,9 +36,10 @@ part_bias <- function(plans, dvote, rvote, v = 0.5) {
 
 #' Calculate Democratic Seats
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -70,9 +72,10 @@ part_dseats <- function(plans, dvote, rvote) {
 
 #' Calculate Democratic Vote Share
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -102,9 +105,10 @@ part_dvs <- function(plans, dvote, rvote) {
 
 #' Calculate Efficiency Gap
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -136,9 +140,10 @@ part_egap <- function(plans, dvote, rvote) {
 
 #' Calculate Efficiency Gap (Equal Population Assumption)
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -170,10 +175,11 @@ part_egap_ep <- function(plans, dvote, rvote) {
 
 #' Calculate Tau Gap
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
 #' @param tau A non-negative numeric for calculating Tau Gap. Defaults to 1.
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -205,9 +211,10 @@ part_tau_gap <- function(plans, dvote, rvote, tau = 1) {
 
 #' Calculate Mean Median Score
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -238,10 +245,11 @@ part_mean_median <- function(plans, dvote, rvote) {
 
 #' Calculate Declination
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
 #' @param normalize Default is FALSE. Translate score to an angle?
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -279,11 +287,12 @@ part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
 
 #' Calculate Responsiveness
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
 #' @param v vote share to calculate bias at. Numeric. Default is 0.5.
 #' @param bandwidth Defaults to 0.01. A value between 0 and 1 for the step size to estimate the slope.
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -315,9 +324,10 @@ part_resp <- function(plans, dvote, rvote, v, bandwidth = FALSE) {
 
 #' Calculate Lopsided Wins
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -349,9 +359,10 @@ part_lopsided_wins <- function(plans, dvote, rvote) {
 
 #' Calculate Ranked Margin Deviation
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -382,9 +393,10 @@ part_rmd <- function(plans, dvote, rvote) {
 
 #' Calculate Smoothed Seat Count Deviation
 #'
-#' @param plans todo inherits
-#' @param dvote todo inherits
-#' @param rvote todo inherits
+#' @templateVar plans TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export

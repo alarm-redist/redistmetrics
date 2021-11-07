@@ -30,4 +30,4 @@ reference:
 - title: Misc.
   desc: "Remaining tools that don't fit into other categories"
 - contents:
-  - lacks_concepts(c("partisan", "compactness", "splits", "competitiveness", "segregation"))
+  - lacks_concepts(c("partisan", "compactness", "splits", "competitiveness", "distances", "segregation"))

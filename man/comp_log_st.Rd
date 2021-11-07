@@ -7,13 +7,13 @@
 comp_log_st(plans, shp, counties, adj)
 }
 \arguments{
-\item{plans}{todo inherits}
+\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{shp}{todo inherits}
+\item{shp}{redist_map object or tibble with sf geometry column}
 
 \item{counties}{column name in shp containing counties}
 
-\item{adj}{todo inherits}
+\item{adj}{zero-indexed adjacency list. Not required if \code{redist_map} supplied to \code{shp}.}
 }
 \value{
 numeric vector

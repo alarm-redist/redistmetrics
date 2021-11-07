@@ -1,12 +1,13 @@
 #' Calculate Polsby Popper Compactness
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @param use_Rcpp Logical. Use Rcpp?
 #' @param perim_path path to perimeter tibble saved by `prep_perims()`
 #' @param perim_df tibble of perimeters from `prep_perims()`
-#' @param epsg todo inherits
-#' @param ncores todo inherits
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -80,13 +81,14 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
 
 #' Calculate Schwartzberg Compactness
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @param use_Rcpp Logical. Use Rcpp?
 #' @param perim_path path to perimeter tibble saved by `prep_perims()`
 #' @param perim_df tibble of perimeters from `prep_perims()`
-#' @param epsg todo inherits
-#' @param ncores todo inherits
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -160,10 +162,11 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
 
 #' Calculate Reock Compactness
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param epsg todo inherits
-#' @param ncores todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -212,10 +215,11 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
 #' Calculate Convex Hull Compactness
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param epsg todo inherits
-#' @param ncores todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -264,10 +268,11 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 
 #' Calculate Length Width Compactness
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param epsg todo inherits
-#' @param ncores todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -313,10 +318,11 @@ comp_lw <- function(plans, shp, epsg = 3857, ncores = 1) {
 
 #' Calculate Boyce Clark Ratio
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param epsg todo inherits
-#' @param ncores todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -378,11 +384,12 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
 
 #' Calulate Fryer Holden Compactness
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @param total_pop A numeric vector with the population for every observation.
-#' @param epsg todo inherits
-#' @param ncores todo inherits
+#' @templateVar epsg TRUE
+#' @param ncores TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -415,9 +422,10 @@ comp_fh <- function(plans, shp, total_pop, epsg = 3857, ncores = 1) {
 
 #' Calulate Edges Removed Compactness
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param adj todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar adj TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -442,9 +450,10 @@ comp_edges_rem <- function(plans, shp, adj) {
 
 #' Calulate Fraction Kept Compactness
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
-#' @param adj todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar adj TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
@@ -470,10 +479,11 @@ comp_frac_kept <- function(plans, shp, adj) {
 
 #' Calulate Log Spanning Tree Compactness
 #'
-#' @param plans todo inherits
-#' @param shp todo inherits
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @param counties column name in shp containing counties
-#' @param adj todo inherits
+#' @templateVar adj TRUE
+#' @template template
 #'
 #' @return numeric vector
 #' @export
