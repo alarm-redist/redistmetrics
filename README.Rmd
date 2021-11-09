@@ -13,21 +13,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-# rict
+# redistmetrics
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/alarm-redist/rict/workflows/R-CMD-check/badge.svg)](https://github.com/alarm-redist/rict/actions)
+[![R-CMD-check](https://github.com/alarm-redist/redistmetrics/workflows/R-CMD-check/badge.svg)](https://github.com/alarm-redist/redistmetrics/actions)
 <!-- badges: end -->
 
-`rict` is a member of the `redistverse`, which is a family of R packages by the ALARM Project. `rict` provides the backend for the computation of summary statistics for a redistricting plan. It provides a more direct access point to use methods in `redist` without requiring `redist` objects.
+`redistmetrics` is a member of the `redistverse`, which is a family of R packages by the ALARM Project. `redistmetrics` provides the backend for the computation of summary statistics for a redistricting plan. It provides a more direct access point to use methods in `redist` without requiring `redist` objects.
 
 ## Installation
 
-You can install the development version of rict from [GitHub](https://github.com/) with:
+You can install the development version of redistmetrics from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("alarm-redist/rict")
+devtools::install_github("alarm-redist/redistmetrics")
 ```
 
 ## Example
@@ -35,7 +35,7 @@ devtools::install_github("alarm-redist/rict")
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(rict)
+library(redistmetrics)
 ## basic example code
 ```
 

@@ -1,0 +1,27 @@
+---
+title: "Using `redistmetrics`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using `redistmetrics`}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+#library(rict)
+```
+
+```{r}
+data(maine)
+
+tf <- fs::te
+
+```
+

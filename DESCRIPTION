@@ -1,4 +1,4 @@
-Package: rict
+Package: redistmetrics
 Title: Redistricting Metrics
 Version: 0.0.0.9000
 Authors@R: c(
@@ -31,3 +31,7 @@ URL: https://alarm-redist.github.io/rict/,
 BugReports: https://github.com/alarm-redist/rict/issues
 Depends: 
     R (>= 2.10)
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

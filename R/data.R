@@ -1,11 +1,11 @@
-#' Maine Election and Demographic Data
+#' New Hampshire Election and Demographic Data
 #'
 #' This data set contains demographic, election, and geographic information for
-#' the 209 voting tabulation districts in Maine in 2020.
+#' the 326 voting tabulation districts in New Hampshire in 2020.
 #'
-#' @name maine
-#' @usage data("maine")
-#' @format A tibble with 209 and 41 columns
+#' @name new_hampshire
+#' @usage data("new_hampshire")
+#' @format A tibble with 326 and 45 columns
 #' - GEOID20: 2020 VTD GEOID
 #' - state: state name
 #' - county: county name
@@ -28,16 +28,20 @@
 #' - vap_nhpi: Native Hawaiian and Pacific Islander, not Hispanic voting-age population
 #' - vap_other: other race, not Hispanic voting-age population
 #' - vap_two: multi-race, not Hispanic voting-age population
-#' - pre_16_dem_cli: Votes for Democratic president 2016
 #' - pre_16_rep_tru: Votes for Republican president 2016
-#' - uss_18_dem_rin: Votes for Democratic senate 2018
-#' - uss_18_rep_bra: Votes for Republican senate 2018
-#' - gov_18_dem_mil: Votes for Democratic governor 2018
-#' - gov_18_rep_moo: Votes for Republican governor 2018
+#' - pre_16_dem_cli: Votes for Democratic president 2016
+#' - uss_16_rep_ayo: Votes for Republican senate 2016
+#' - uss_16_dem_has: Votes for Democratic senate 2016
+#' - gov_16_rep_sun: Votes for Republican governor 2016
+#' - gov_16_dem_van: Votes for Democratic governor 2016
+#' - gov_18_rep_sun: Votes for Republican governor 2018
+#' - gov_18_dem_kel: Votes for Democratic governor 2018
 #' - pre_20_dem_bid: Votes for Democratic president 2020
-#' - pre_20_rep_tru: Votes for Democratic president 2020
-#' - uss_20_dem_gid: Votes for Democratic senate 2020
-#' - uss_20_rep_col: Votes for Democratic senate 2020
+#' - pre_20_rep_tru: Votes for Republican president 2020
+#' - uss_20_dem_sha: Votes for Democratic senate 2020
+#' - uss_20_rep_mes: Votes for Republican senate 2020
+#' - gov_20_dem_fel: Votes for Democratic governor 2020
+#' - gov_20_rep_sun: Votes for Republican governor 2020
 #' - arv_16: Average Republican vote 2016
 #' - adv_16: Average Democratic vote 2016
 #' - arv_18: Average Republican vote 2018
@@ -64,6 +68,6 @@
 #' @md
 #' @concept data
 #' @examples
-#' data(maine)
+#' data(new_hampshire)
 #'
 NULL

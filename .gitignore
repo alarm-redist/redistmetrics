@@ -39,3 +39,4 @@ rsconnect/
 # i386
 src-i386/
 docs
+inst/doc
