@@ -2,114 +2,114 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 polsbypopper <- function(from, to, area, perimeter, dm, nd) {
-    .Call(`_rict_polsbypopper`, from, to, area, perimeter, dm, nd)
+    .Call(`_redistmetrics_polsbypopper`, from, to, area, perimeter, dm, nd)
 }
 
 schwartzberg <- function(from, to, area, perimeter, dm, nd) {
-    .Call(`_rict_schwartzberg`, from, to, area, perimeter, dm, nd)
+    .Call(`_redistmetrics_schwartzberg`, from, to, area, perimeter, dm, nd)
 }
 
 talisman <- function(dvs, nd, alpha = 1, beta = 1) {
-    .Call(`_rict_talisman`, dvs, nd, alpha, beta)
+    .Call(`_redistmetrics_talisman`, dvs, nd, alpha, beta)
 }
 
 contiguity <- function(adj, group) {
-    .Call(`_rict_contiguity`, adj, group)
+    .Call(`_redistmetrics_contiguity`, adj, group)
 }
 
 hamming <- function(v, m) {
-    .Call(`_rict_hamming`, v, m)
+    .Call(`_redistmetrics_hamming`, v, m)
 }
 
 minkowski <- function(v, m, p) {
-    .Call(`_rict_minkowski`, v, m, p)
+    .Call(`_redistmetrics_minkowski`, v, m, p)
 }
 
 log_st_map <- function(g, districts, counties, n_distr) {
-    .Call(`_rict_log_st_map`, g, districts, counties, n_distr)
+    .Call(`_redistmetrics_log_st_map`, g, districts, counties, n_distr)
 }
 
 n_removed <- function(g, districts, n_distr) {
-    .Call(`_rict_n_removed`, g, districts, n_distr)
+    .Call(`_redistmetrics_n_removed`, g, districts, n_distr)
 }
 
 agg_p2d <- function(dm, vote, nd) {
-    .Call(`_rict_agg_p2d`, dm, vote, nd)
+    .Call(`_redistmetrics_agg_p2d`, dm, vote, nd)
 }
 
 dseats <- function(dm, dcounts, rcounts, nd) {
-    .Call(`_rict_dseats`, dm, dcounts, rcounts, nd)
+    .Call(`_redistmetrics_dseats`, dm, dcounts, rcounts, nd)
 }
 
 dseatsDVS <- function(dvs) {
-    .Call(`_rict_dseatsDVS`, dvs)
+    .Call(`_redistmetrics_dseatsDVS`, dvs)
 }
 
 DVS <- function(dcounts, rcounts) {
-    .Call(`_rict_DVS`, dcounts, rcounts)
+    .Call(`_redistmetrics_DVS`, dcounts, rcounts)
 }
 
 effgapEP <- function(dvs, dseat_vec, nd) {
-    .Call(`_rict_effgapEP`, dvs, dseat_vec, nd)
+    .Call(`_redistmetrics_effgapEP`, dvs, dseat_vec, nd)
 }
 
 effgap <- function(dcounts, rcounts, totvote) {
-    .Call(`_rict_effgap`, dcounts, rcounts, totvote)
+    .Call(`_redistmetrics_effgap`, dcounts, rcounts, totvote)
 }
 
 taugap <- function(tau, dvs, dseat_vec, nd) {
-    .Call(`_rict_taugap`, tau, dvs, dseat_vec, nd)
+    .Call(`_redistmetrics_taugap`, tau, dvs, dseat_vec, nd)
 }
 
 meanmedian <- function(dvs) {
-    .Call(`_rict_meanmedian`, dvs)
+    .Call(`_redistmetrics_meanmedian`, dvs)
 }
 
 bias <- function(dvs, nd) {
-    .Call(`_rict_bias`, dvs, nd)
+    .Call(`_redistmetrics_bias`, dvs, nd)
 }
 
 declination <- function(dvs, dseat_vec, nd) {
-    .Call(`_rict_declination`, dvs, dseat_vec, nd)
+    .Call(`_redistmetrics_declination`, dvs, dseat_vec, nd)
 }
 
 lopsidedwins <- function(dvs, dseat_vec, nd) {
-    .Call(`_rict_lopsidedwins`, dvs, dseat_vec, nd)
+    .Call(`_redistmetrics_lopsidedwins`, dvs, dseat_vec, nd)
 }
 
 responsiveness <- function(dvs, v, nd, bandwidth = .01) {
-    .Call(`_rict_responsiveness`, dvs, v, nd, bandwidth)
+    .Call(`_redistmetrics_responsiveness`, dvs, v, nd, bandwidth)
 }
 
 biasatv <- function(dvs, v, nd) {
-    .Call(`_rict_biasatv`, dvs, v, nd)
+    .Call(`_redistmetrics_biasatv`, dvs, v, nd)
 }
 
 RankedMarginalDev <- function(dvs) {
-    .Call(`_rict_RankedMarginalDev`, dvs)
+    .Call(`_redistmetrics_RankedMarginalDev`, dvs)
 }
 
 smoothseat <- function(dvs, nd) {
-    .Call(`_rict_smoothseat`, dvs, nd)
+    .Call(`_redistmetrics_smoothseat`, dvs, nd)
 }
 
 segregationcalc <- function(distmat, grouppop, fullpop) {
-    .Call(`_rict_segregationcalc`, distmat, grouppop, fullpop)
+    .Call(`_redistmetrics_segregationcalc`, distmat, grouppop, fullpop)
 }
 
 splits <- function(dm, community, nd, max_split) {
-    .Call(`_rict_splits`, dm, community, nd, max_split)
+    .Call(`_redistmetrics_splits`, dm, community, nd, max_split)
 }
 
 dist_cty_splits <- function(dm, community, nd) {
-    .Call(`_rict_dist_cty_splits`, dm, community, nd)
+    .Call(`_redistmetrics_dist_cty_splits`, dm, community, nd)
 }
 
 var_info_mat <- function(m, i, pop) {
-    .Call(`_rict_var_info_mat`, m, i, pop)
+    .Call(`_redistmetrics_var_info_mat`, m, i, pop)
 }
 
 var_info_vec <- function(m, ref, pop) {
-    .Call(`_rict_var_info_vec`, m, ref, pop)
+    .Call(`_redistmetrics_var_info_vec`, m, ref, pop)
 }
 

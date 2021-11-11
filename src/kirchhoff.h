@@ -2,7 +2,7 @@
 #define KIRCHHOFF_H
 
 #include <RcppArmadillo.h>
-#include "rict_types.h"
+#include "redistmetrics_types.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
