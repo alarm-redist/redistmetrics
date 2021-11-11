@@ -25,10 +25,10 @@ Imports:
     magrittr,
     dplyr,
     rlang
-URL: https://alarm-redist.github.io/rict/,
-    https::/github.com/alarm-redist/rict/,
-    https://alarm-redist.github.io/rict
-BugReports: https://github.com/alarm-redist/rict/issues
+URL: https://alarm-redist.github.io/redistmetrics/,
+    https::/github.com/alarm-redist/redistmetrics/,
+    https://alarm-redist.github.io/redistmetrics
+BugReports: https://github.com/alarm-redist/redistmetrics/issues
 Depends: 
     R (>= 2.10)
 Suggests: 
