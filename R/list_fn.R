@@ -11,7 +11,7 @@
 #' @examples
 #' list_fn('part')
 list_fn <- function(prefix) {
-  fns <- utils::lsf.str('package:rict')
+  fns <- utils::lsf.str('package:redistmetrics')
   fns[startsWith(fns, prefix)]
 }
 

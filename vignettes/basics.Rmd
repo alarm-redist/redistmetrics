@@ -15,13 +15,11 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-#library(rict)
+library(redistmetrics)
 ```
 
 ```{r}
-data(maine)
 
-tf <- fs::te
 
 ```
 

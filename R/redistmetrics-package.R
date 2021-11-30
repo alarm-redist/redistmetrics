@@ -1,5 +1,5 @@
 ## usethis namespace: start
-#' @useDynLib rict, .registration = TRUE
+#' @useDynLib redistmetrics, .registration = TRUE
 ## usethis namespace: end
 NULL
 
