@@ -89,7 +89,7 @@ NumericVector effgap(IntegerMatrix dcounts, IntegerMatrix rcounts, int totvote){
   }
 
   IntegerVector netwaste(dcounts.ncol());
-  netwaste = colSums(dwaste) - colSums(rwaste);
+  netwaste = colSums(rwaste) - colSums(dwaste);
 
   for(int i = 0; i < netwaste.size(); i++){
     eg[i] = netwaste[i]/(double)totvote;
