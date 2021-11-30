@@ -12,10 +12,10 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-LinkingTo: 
+LinkingTo:
     Rcpp,
     RcppArmadillo
-Imports: 
+Imports:
     sf,
     Rcpp,
     lwgeom,
@@ -26,12 +26,11 @@ Imports:
     dplyr,
     rlang
 URL: https://alarm-redist.github.io/redistmetrics/,
-    https::/github.com/alarm-redist/redistmetrics/,
-    https://alarm-redist.github.io/redistmetrics
+    https::/github.com/alarm-redist/redistmetrics/
 BugReports: https://github.com/alarm-redist/redistmetrics/issues
-Depends: 
+Depends:
     R (>= 2.10)
-Suggests: 
+Suggests:
     rmarkdown,
     knitr
 VignetteBuilder: knitr
