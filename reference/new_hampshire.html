@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate Length Width Compactness — comp_lw • redistmetrics</title>
+<title>New Hampshire Election and Demographic Data — new_hampshire • redistmetrics</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Calculate Length Width Compactness — comp_lw" />
-<meta property="og:description" content="Calculate Length Width Compactness" />
+<meta property="og:title" content="New Hampshire Election and Demographic Data — new_hampshire" />
+<meta property="og:description" content="This data set contains demographic, election, and geographic information for
+the 326 voting tabulation districts in New Hampshire in 2020." />
 
 
 
@@ -123,44 +124,82 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate Length Width Compactness</h1>
-    <small class="dont-index">Source: <a href='https://github.com/alarm-redist/redistmetrics/blob/master/R/compactness.R'><code>R/compactness.R</code></a></small>
-    <div class="hidden name"><code>comp_lw.Rd</code></div>
+    <h1>New Hampshire Election and Demographic Data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/alarm-redist/redistmetrics/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>new_hampshire.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculate Length Width Compactness</p>
+    <p>This data set contains demographic, election, and geographic information for
+the 326 voting tabulation districts in New Hampshire in 2020.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>comp_lw</span><span class='op'>(</span><span class='va'>plans</span>, <span class='va'>shp</span>, epsg <span class='op'>=</span> <span class='fl'>3857</span>, ncores <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"new_hampshire"</span><span class='op'>)</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>plans</th>
-      <td><p>redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan</p></td>
-    </tr>
-    <tr>
-      <th>shp</th>
-      <td><p>redist_map object or tibble with sf geometry column</p></td>
-    </tr>
-    <tr>
-      <th>epsg</th>
-      <td><p>numeric EPSG code to planarize to. Default is 3857.</p></td>
-    </tr>
-    <tr>
-      <th>ncores</th>
-      <td><p>numeric. Number of cores to use. Default is 1.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>numeric vector</p>
+    <p>A tibble with 326 and 45 columns</p><ul>
+<li><p>GEOID20: 2020 VTD GEOID</p></li>
+<li><p>state: state name</p></li>
+<li><p>county: county name</p></li>
+<li><p>vtd: VTD portion of GEOID</p></li>
+<li><p>pop: total population</p></li>
+<li><p>pop_hisp: Hispanic population</p></li>
+<li><p>pop_white: White, not Hispanic population</p></li>
+<li><p>pop_black: Black, not Hispanic population</p></li>
+<li><p>pop_aian: American Indian and Alaska Native, not Hispanic population</p></li>
+<li><p>pop_asian: Asian, not Hispanic population</p></li>
+<li><p>pop_nhpi: Native Hawaiian and Pacific Islander, not Hispanic population</p></li>
+<li><p>pop_other: other race, not Hispanic population</p></li>
+<li><p>pop_two: multi-race, not Hispanic population</p></li>
+<li><p>vap: total voting-age population</p></li>
+<li><p>vap_hisp: Hispanic voting-age population</p></li>
+<li><p>vap_white: White, not Hispanic voting-age population</p></li>
+<li><p>vap_black: Black, not Hispanic voting-age population</p></li>
+<li><p>vap_aian: American Indian and Alaska Native, not Hispanic voting-age population</p></li>
+<li><p>vap_asian: Asian, not Hispanic voting-age population</p></li>
+<li><p>vap_nhpi: Native Hawaiian and Pacific Islander, not Hispanic voting-age population</p></li>
+<li><p>vap_other: other race, not Hispanic voting-age population</p></li>
+<li><p>vap_two: multi-race, not Hispanic voting-age population</p></li>
+<li><p>pre_16_rep_tru: Votes for Republican president 2016</p></li>
+<li><p>pre_16_dem_cli: Votes for Democratic president 2016</p></li>
+<li><p>uss_16_rep_ayo: Votes for Republican senate 2016</p></li>
+<li><p>uss_16_dem_has: Votes for Democratic senate 2016</p></li>
+<li><p>gov_16_rep_sun: Votes for Republican governor 2016</p></li>
+<li><p>gov_16_dem_van: Votes for Democratic governor 2016</p></li>
+<li><p>gov_18_rep_sun: Votes for Republican governor 2018</p></li>
+<li><p>gov_18_dem_kel: Votes for Democratic governor 2018</p></li>
+<li><p>pre_20_dem_bid: Votes for Democratic president 2020</p></li>
+<li><p>pre_20_rep_tru: Votes for Republican president 2020</p></li>
+<li><p>uss_20_dem_sha: Votes for Democratic senate 2020</p></li>
+<li><p>uss_20_rep_mes: Votes for Republican senate 2020</p></li>
+<li><p>gov_20_dem_fel: Votes for Democratic governor 2020</p></li>
+<li><p>gov_20_rep_sun: Votes for Republican governor 2020</p></li>
+<li><p>arv_16: Average Republican vote 2016</p></li>
+<li><p>adv_16: Average Democratic vote 2016</p></li>
+<li><p>arv_18: Average Republican vote 2018</p></li>
+<li><p>adv_18: Average Democratic vote 2018</p></li>
+<li><p>arv_20: Average Republican vote 2020</p></li>
+<li><p>adv_20: Average Democratic vote 2020</p></li>
+<li><p>nrv: Normal Republican vote</p></li>
+<li><p>ndv: Normal Democratic vote</p></li>
+<li><p>geometry: sf geometry</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Voting and Election Science Team, 2020, "2020 Precinct-Level Election Results",
+<a href='https://doi.org/10.7910/DVN/K7760H'>https://doi.org/10.7910/DVN/K7760H</a>, Harvard Dataverse, V23</p>
+<p>Voting and Election Science Team, 2018, "2016 Precinct-Level Election Results",
+<a href='https://doi.org/10.7910/DVN/NH5S2I'>https://doi.org/10.7910/DVN/NH5S2I</a>, Harvard Dataverse, V71</p>
+<p>Voting and Election Science Team, 2019, "2018 Precinct-Level Election Results",
+<a href='https://doi.org/10.7910/DVN/UBKYRU'>https://doi.org/10.7910/DVN/UBKYRU</a>, Harvard Dataverse, V48</p>
+<p>Kenny &amp; McCartan (2021, Aug. 10). ALARM Project: 2020 Redistricting Data Files.
+Retrieved from <a href='https://github.com/alarm-redist/census-2020/'>https://github.com/alarm-redist/census-2020/</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='co'># todo example</span></span>
+    <pre class="examples"><span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>new_hampshire</span><span class='op'>)</span></span>
 <span class='r-in'></span>
 </pre>
   </div>
