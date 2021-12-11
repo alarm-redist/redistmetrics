@@ -1,10 +1,10 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
   basics: basics.html
-last_built: 2021-11-30T21:55Z
+last_built: 2021-12-11T05:50Z
 urls:
-  reference: https://alarm-redist.github.io/redistmetrics//reference
-  article: https://alarm-redist.github.io/redistmetrics//articles
+  reference: https://alarm-redist.github.io/redistmetrics/reference
+  article: https://alarm-redist.github.io/redistmetrics/articles
 
