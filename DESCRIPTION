@@ -24,7 +24,8 @@ Imports:
     doParallel,
     magrittr,
     dplyr,
-    rlang
+    rlang,
+    geos
 URL: https://alarm-redist.github.io/redistmetrics/,
     https::/github.com/alarm-redist/redistmetrics/
 BugReports: https://github.com/alarm-redist/redistmetrics/issues

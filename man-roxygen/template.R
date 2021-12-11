@@ -9,3 +9,4 @@
 #' <%=ifelse(exists("dvote") && dvote, "@param dvote unqouted name of column in shp with total population", "") %>
 #' <%=ifelse(exists("admin") && admin, "@param admin unqouted name of column in shp with numeric identifiers for administrative units", "") %>
 #' <%=ifelse(exists("sub_admin") && sub_admin, "@param sub_admin unqouted name of column in shp with numeric identifiers for subsidiary administrative units", "") %>
+#' <%=ifelse(exists("inc") && inc, "@param inc unqouted name of logical column in shp indicating where incumbents live", "") %>

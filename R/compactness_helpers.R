@@ -15,10 +15,11 @@ planarize <- function(shp, epsg = 3857) {
 #'
 #' Replaces `redist.prep.polsbypopper`
 #'
-#' @param shp todo inherits
-#' @param epsg todo inherits
-#' @param perim_path A path to save an rds
-#' @param ncores todo inherits
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar perim_path A path to save an rds
+#' @templateVar ncores TRUE
+#' @template template
 #'
 #' @return tibble of perimeters and lengths
 #' @export
@@ -32,22 +33,19 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
   }
 
   shp <- planarize(shp, epsg)
+  shp <- geos::as_geos_geometry(shp)
+  shp_col <- geos::geos_make_collection(shp)
 
-  suppressMessages(alist <- sf::st_relate(shp, pattern = "F***T****"))
+  alist <- geox_relate_pattern_mat(shp, pattern = "F***T****")
 
-
-  #alist <- lapply(adj, function(x){x+1L})
-  invalid <- which(!sf::st_is_valid(shp))
-  sf::st_geometry(shp[invalid,]) <- sf::st_geometry(sf::st_buffer(shp[invalid,],0))
-
-  if (sf::st_is_longlat(shp)) {
-    perim <- sum(sf::st_length(sf::st_cast(united, "MULTILINESTRING")))
-  } else {
-    suppressWarnings(perims <- lwgeom::st_perimeter(shp))
+  invalid <- which(!geos::geos_is_valid(shp))
+  for (i in seq_along(invalid)) {
+    shp[[invalid[i]]] <- geos::geos_buffer(shp[[invalid[i]]],0)
   }
 
+  perims <- geos::geos_length(shp)
 
-  nc <- min(ncores, ncol(plans))
+  nc <- min(ncores, length(shp))
   if (nc == 1) {
     `%oper%` <- foreach::`%do%`
   } else {
@@ -57,13 +55,18 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
     on.exit(parallel::stopCluster(cl))
   }
 
-  perim_adj_df <- foreach::foreach(from = 1:length(alist), .combine = 'rbind', .packages = c('sf', 'rict')) %oper% {
-    suppressWarnings(lines <- sf::st_intersection(shp[from,], shp[alist[[from]],]))
-    l_lines <- sf::st_length(lines)
+  perim_adj_df <- foreach::foreach(from = 1:length(alist), .combine = 'rbind', .packages = c('sf', 'redistmetrics')) %oper% {
+    x <- geos::geos_geometry_n(shp_col, from)
+    y <- geos::geos_geometry_n(shp_col, alist[[from]])
+    l <- geos::geos_intersects_matrix(x, y) %>% unlist()
+    l_lines <- sapply(seq_along(l), function(i) {
+      geos::geos_length(geos::geos_intersection(x, y[[l[[i]]]]))
+    })
+
     if(length(alist[[from]] > 0)){
       data.frame(origin = from,
                  touching = alist[[from]],
-                 edge = as.vector(l_lines))
+                 edge = l_lines)
     } else {
       data.frame(origin = from, touching = NA, edge = -1)
     }
@@ -76,7 +79,6 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
   perim_adj_df <- perim_adj_df %>%
     dplyr::filter(edge > 0) %>%
     rbind(perim_adj_island)
-
 
   adj_boundary_lengths <- perim_adj_df %>%
     dplyr::group_by(origin) %>%
