@@ -7,13 +7,11 @@
 prep_perims(shp, epsg = 3857, perim_path, ncores = 1)
 }
 \arguments{
-\item{shp}{todo inherits}
+\item{shp}{redist_map object or tibble with sf geometry column}
 
-\item{epsg}{todo inherits}
+\item{epsg}{numeric EPSG code to planarize to. Default is 3857.}
 
-\item{perim_path}{A path to save an rds}
-
-\item{ncores}{todo inherits}
+\item{ncores}{numeric. Number of cores to use. Default is 1.}
 }
 \value{
 tibble of perimeters and lengths

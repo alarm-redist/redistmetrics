@@ -12,10 +12,6 @@ inc_pairs(plans, shp, inc)
 \item{shp}{redist_map object or tibble with sf geometry column}
 
 \item{inc}{unqouted name of logical column in shp indicating where incumbents live}
-
-\item{epsg}{numeric EPSG code to planarize to. Default is 3857.}
-
-\item{ncores}{numeric. Number of cores to use. Default is 1.}
 }
 \value{
 
