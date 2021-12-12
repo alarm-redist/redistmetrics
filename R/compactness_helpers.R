@@ -17,7 +17,7 @@ planarize <- function(shp, epsg = 3857) {
 #'
 #' @templateVar shp TRUE
 #' @templateVar epsg TRUE
-#' @templateVar perim_path A path to save an rds
+#' @param perim_path A path to save an rds
 #' @templateVar ncores TRUE
 #' @template template
 #'

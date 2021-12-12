@@ -11,6 +11,8 @@ prep_perims(shp, epsg = 3857, perim_path, ncores = 1)
 
 \item{epsg}{numeric EPSG code to planarize to. Default is 3857.}
 
+\item{perim_path}{A path to save an rds}
+
 \item{ncores}{numeric. Number of cores to use. Default is 1.}
 }
 \value{

@@ -14,7 +14,7 @@ inc_pairs(plans, shp, inc)
 \item{inc}{unqouted name of logical column in shp indicating where incumbents live}
 }
 \value{
-
+vector of number of incumbents paired
 }
 \description{
 Count Incumbent Pairings

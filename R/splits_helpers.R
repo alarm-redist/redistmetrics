@@ -4,7 +4,7 @@
 #'
 #' @param x vector to match
 #'
-#' @return
+#' @return vector of matches
 #' @noRd
 #'
 #' @examples
