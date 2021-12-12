@@ -27,8 +27,7 @@ planarize <- function(shp, epsg = 3857) {
 #' @examples
 #' # todo example
 prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
-
-  if(missing(shp)){
+  if (missing(shp)) {
     cli::cli_abort('Please provide an argument to `shp`.')
   }
 
@@ -36,11 +35,11 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
   shp <- geos::as_geos_geometry(shp)
   shp_col <- geos::geos_make_collection(shp)
 
-  alist <- geox_relate_pattern_mat(shp, pattern = "F***T****")
+  alist <- geox_relate_pattern_mat(shp, pattern = 'F***T****')
 
   invalid <- which(!geos::geos_is_valid(shp))
   for (i in seq_along(invalid)) {
-    shp[[invalid[i]]] <- geos::geos_buffer(shp[[invalid[i]]],0)
+    shp[[invalid[i]]] <- geos::geos_buffer(shp[[invalid[i]]], 0)
   }
 
   perims <- geos::geos_length(shp)
@@ -63,14 +62,15 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
       geos::geos_length(geos::geos_intersection(x, y[[l[[i]]]]))
     })
 
-    if(length(alist[[from]] > 0)){
-      data.frame(origin = from,
-                 touching = alist[[from]],
-                 edge = l_lines)
+    if (length(alist[[from]] > 0)) {
+      data.frame(
+        origin = from,
+        touching = alist[[from]],
+        edge = l_lines
+      )
     } else {
       data.frame(origin = from, touching = NA, edge = -1)
     }
-
   }
 
   perim_adj_island <- perim_adj_df %>%
@@ -83,19 +83,23 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
   adj_boundary_lengths <- perim_adj_df %>%
     dplyr::group_by(origin) %>%
     dplyr::summarize(perim_adj = sum(edge)) %>%
-    dplyr::mutate(perim_full = as.numeric(perims),
-           perim_boundary = perim_full - perim_adj,
-           X1 = -1) %>%
+    dplyr::mutate(
+      perim_full = as.numeric(perims),
+      perim_boundary = perim_full - perim_adj,
+      X1 = -1
+    ) %>%
     dplyr::filter(perim_boundary > .001) %>%
     dplyr::select(X1, origin, perim_boundary) %>%
     dplyr::rename(origin = X1, touching = origin, edge = perim_boundary)
 
   perim_df <- dplyr::bind_rows(perim_adj_df, adj_boundary_lengths) %>%
     dplyr::arrange(origin, touching) %>%
-    dplyr::filter(!is.na(touching))# %>% filter(touching > origin)
+    dplyr::filter(!is.na(touching)) # %>% filter(touching > origin)
 
-  if(!missing(perim_path)){
-    try(expr = { saveRDS(object = perim_df, file = perim_path) }, silent = TRUE)
+  if (!missing(perim_path)) {
+    try(expr = {
+      saveRDS(object = perim_df, file = perim_path)
+    }, silent = TRUE)
   }
 
   perim_df

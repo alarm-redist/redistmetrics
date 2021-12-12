@@ -71,7 +71,6 @@
 #' @concept data
 #' @examples
 #' data(nh)
-#'
 NULL
 
 #' New Hampshire Election and Demographic Data as a `redist_map`
@@ -147,7 +146,6 @@ NULL
 #' @concept data
 #' @examples
 #' data(nh_map)
-#'
 NULL
 
 #' Redistricting Plans for New Hampshire as `redist_plans`
@@ -167,7 +165,6 @@ NULL
 #' @concept data
 #' @examples
 #' data(nh_plans)
-#'
 NULL
 
 #' Redistricting Plans for New Hampshire as `matrix`
@@ -184,5 +181,4 @@ NULL
 #' @concept data
 #' @examples
 #' data(nh_m)
-#'
 NULL

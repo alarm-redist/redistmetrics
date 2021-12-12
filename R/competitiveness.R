@@ -15,7 +15,6 @@
 #' @examples
 #' # todo examples
 compet_talisman <- function(plans, shp, rvote, dvote, alpha = 1, beta = 1) {
-
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
 

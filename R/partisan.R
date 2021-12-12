@@ -13,15 +13,14 @@
 #' @examples
 #' # todo example
 part_bias <- function(plans, dvote, rvote, v = 0.5) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -48,15 +47,14 @@ part_bias <- function(plans, dvote, rvote, v = 0.5) {
 #' @examples
 #' # todo example
 part_dseats <- function(plans, dvote, rvote) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -84,15 +82,14 @@ part_dseats <- function(plans, dvote, rvote) {
 #' @examples
 #' # todo example
 part_dvs <- function(plans, dvote, rvote) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -117,15 +114,14 @@ part_dvs <- function(plans, dvote, rvote) {
 #' @examples
 #' # todo example
 part_egap <- function(plans, dvote, rvote) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -152,15 +148,14 @@ part_egap <- function(plans, dvote, rvote) {
 #' @examples
 #' # todo example
 part_egap_ep <- function(plans, dvote, rvote) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -188,15 +183,14 @@ part_egap_ep <- function(plans, dvote, rvote) {
 #' @examples
 #' # todo example
 part_tau_gap <- function(plans, dvote, rvote, tau = 1) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -223,15 +217,14 @@ part_tau_gap <- function(plans, dvote, rvote, tau = 1) {
 #' @examples
 #' # todo example
 part_mean_median <- function(plans, dvote, rvote) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -258,15 +251,14 @@ part_mean_median <- function(plans, dvote, rvote) {
 #' @examples
 #' # todo example
 part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -279,7 +271,7 @@ part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
   dec <- declination(dvs = dvs, dseat_vec = dseat_vec, nd = nd)
 
   if (normalize) {
-    dec <- atan(dec)/log(nd)
+    dec <- atan(dec) / log(nd)
   }
 
   rep(dec, each = nd)
@@ -301,15 +293,14 @@ part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
 #' @examples
 #' # todo example
 part_resp <- function(plans, dvote, rvote, v, bandwidth = FALSE) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -336,15 +327,14 @@ part_resp <- function(plans, dvote, rvote, v, bandwidth = FALSE) {
 #' @examples
 #' # todo example
 part_lopsided_wins <- function(plans, dvote, rvote) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -371,15 +361,14 @@ part_lopsided_wins <- function(plans, dvote, rvote) {
 #' @examples
 #' # todo example
 part_rmd <- function(plans, dvote, rvote) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 
@@ -405,15 +394,14 @@ part_rmd <- function(plans, dvote, rvote) {
 #' @examples
 #' # todo example
 part_sscd <- function(plans, dvote, rvote) {
-
   plans <- process_plans(plans)
-  if(any(is.na(dvote))){
+  if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
-  if(length(rvote) != nrow(plans)){
+  if (length(rvote) != nrow(plans)) {
     stop('`rvote` length and `plans` rows are not equal.')
   }
-  if(length(dvote) != nrow(plans)){
+  if (length(dvote) != nrow(plans)) {
     stop('`dvote` length and `plans` rows are not equal.')
   }
 

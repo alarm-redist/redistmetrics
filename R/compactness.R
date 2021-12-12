@@ -40,36 +40,37 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
   if (missing(use_Rcpp)) {
     use_Rcpp <- ncol(plans) > 8 || !missing(perim_path) || !missing(perim_df)
   }
-  if(missing(perim_path) & missing(perim_df)) {
+  if (missing(perim_path) & missing(perim_df)) {
     perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
   }
 
   # calculate ----
   areas <- sf::st_area(shp)
   if (use_Rcpp) {
-    splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans/nc)*V)[1:(n_plans*V)]) %>%
+    splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
     result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('sf', 'rict')) %oper% {
-      polsbypopper(from = perim_df$origin, to = perim_df$touching, area = areas,
-                   perimeter = perim_df$edge, dm = splits[[map]], nd = nd)
-
+      polsbypopper(
+        from = perim_df$origin, to = perim_df$touching, area = areas,
+        perimeter = perim_df$edge, dm = splits[[map]], nd = nd
+      )
     }
   } else {
     result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('sf', 'lwgeom')) %oper% {
       ret <- vector('numeric', nd)
 
       for (i in 1:nd) {
-        united <- suppressMessages(sf::st_union(shp[plans[, map] == dists[i],]))
+        united <- suppressMessages(sf::st_union(shp[plans[, map] == dists[i], ]))
         area <- sum(areas[plans[, map] == dists[i]])
 
-        if(is.null(sf::st_crs(united$EPSG)) || is.na(sf::st_is_longlat(united))){
-          perim <- sum(sf::st_length(sf::st_cast(sf::st_cast(united, 'POLYGON'),'LINESTRING')))
+        if (is.null(sf::st_crs(united$EPSG)) || is.na(sf::st_is_longlat(united))) {
+          perim <- sum(sf::st_length(sf::st_cast(sf::st_cast(united, 'POLYGON'), 'LINESTRING')))
         } else {
-          perim <- sum(sf::st_length(sf::st_cast(united, "MULTILINESTRING")))
+          perim <- sum(sf::st_length(sf::st_cast(united, 'MULTILINESTRING')))
         }
 
-        ret[i] <- 4*pi*(area)/(perim)^2
+        ret[i] <- 4 * pi * (area) / (perim)^2
       }
 
       ret
@@ -121,36 +122,37 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
   if (missing(use_Rcpp)) {
     use_Rcpp <- ncol(plans) > 8 || !missing(perim_path) || !missing(perim_df)
   }
-  if(missing(perim_path) & missing(perim_df)) {
+  if (missing(perim_path) & missing(perim_df)) {
     perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
   }
 
   # calculate ----
   areas <- sf::st_area(shp)
   if (use_Rcpp) {
-    splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans/nc)*V)[1:(n_plans*V)]) %>%
+    splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
     result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('sf', 'rict')) %oper% {
-      schwartzberg(from = perim_df$origin, to = perim_df$touching, area = areas,
-                   perimeter = perim_df$edge, dm = splits[[map]], nd = nd)
-
+      schwartzberg(
+        from = perim_df$origin, to = perim_df$touching, area = areas,
+        perimeter = perim_df$edge, dm = splits[[map]], nd = nd
+      )
     }
   } else {
     result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('sf', 'lwgeom')) %oper% {
       ret <- vector('numeric', nd)
 
       for (i in 1:nd) {
-        united <- suppressMessages(sf::st_union(shp[plans[, map] == dists[i],]))
+        united <- suppressMessages(sf::st_union(shp[plans[, map] == dists[i], ]))
         area <- sum(areas[plans[, map] == dists[i]])
 
-        if(is.null(sf::st_crs(united$EPSG)) || is.na(sf::st_is_longlat(united))){
-          perim <- sum(sf::st_length(sf::st_cast(sf::st_cast(united, 'POLYGON'),'LINESTRING')))
+        if (is.null(sf::st_crs(united$EPSG)) || is.na(sf::st_is_longlat(united))) {
+          perim <- sum(sf::st_length(sf::st_cast(sf::st_cast(united, 'POLYGON'), 'LINESTRING')))
         } else {
-          perim <- sum(sf::st_length(sf::st_cast(united, "MULTILINESTRING")))
+          perim <- sum(sf::st_length(sf::st_cast(united, 'MULTILINESTRING')))
         }
 
-        ret[i] <- perim/(2*pi*sqrt(area/pi))
+        ret[i] <- perim / (2 * pi * sqrt(area / pi))
       }
 
       ret
@@ -357,23 +359,25 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
     for (i in 1:nd) {
       united <- sf::st_union(shp[plans[, map] == dists[i], ])
       suppressWarnings(center <- sf::st_centroid(united))
-      suppressMessages(suppressWarnings(if(!sf::st_within(united,center,sparse=FALSE)[[1]]){
+      suppressMessages(suppressWarnings(if (!sf::st_within(united, center, sparse = FALSE)[[1]]) {
         suppressWarnings(center <- sf::st_point_on_surface(united))
       }))
       center <- sf::st_coordinates(center)
       bbox <- sf::st_bbox(united)
-      max_dist <- sqrt((bbox$ymax-bbox$ymin)^2+(bbox$xmax-bbox$xmin)^2)
+      max_dist <- sqrt((bbox$ymax - bbox$ymin)^2 + (bbox$xmax - bbox$xmin)^2)
       sf::st_crs(united) <- NA
 
-      x_list <- center[1] + max_dist*cos(seq(0,15)*pi/8)
-      y_list <- center[2] + max_dist*sin(seq(0,15)*pi/8)
+      x_list <- center[1] + max_dist * cos(seq(0, 15) * pi / 8)
+      y_list <- center[2] + max_dist * sin(seq(0, 15) * pi / 8)
       radials <- rep(NA_real_, 16)
-      for(angle in 1:16){
-        line <- data.frame(x = c(x_list[angle],center[1]), y = c(y_list[angle], center[2])) %>%
-          sf::st_as_sf(coords = c('x','y'))  %>% sf::st_coordinates() %>% sf::st_linestring()
+      for (angle in 1:16) {
+        line <- data.frame(x = c(x_list[angle], center[1]), y = c(y_list[angle], center[2])) %>%
+          sf::st_as_sf(coords = c('x', 'y')) %>%
+          sf::st_coordinates() %>%
+          sf::st_linestring()
         radials[angle] <- max(0, stats::dist(sf::st_intersection(line, united)))
       }
-      out[i] <- 1 - (sum(abs(radials/sum(radials)*100-6.25))/200)
+      out[i] <- 1 - (sum(abs(radials / sum(radials) * 100 - 6.25)) / 200)
     }
 
     out
@@ -473,7 +477,7 @@ comp_frac_kept <- function(plans, shp, adj) {
   }
   n_edge <- length(unlist(adj))
 
-  (1 - (n_removed(g = adj, districts = plans, n_distr = nd)/n_edge)) %>%
+  (1 - (n_removed(g = adj, districts = plans, n_distr = nd) / n_edge)) %>%
     rep(each = nd)
 }
 
@@ -492,7 +496,6 @@ comp_frac_kept <- function(plans, shp, adj) {
 #' @examples
 #' # todo example
 comp_log_st <- function(plans, shp, counties, adj) {
-
   plans <- process_plans(plans)
   dists <- sort(unique(c(plans)))
   nd <- length(dists)
@@ -508,5 +511,3 @@ comp_log_st <- function(plans, shp, counties, adj) {
   log_st_map(g = adj, districts = plans, counties = counties, n_distr = nd) %>%
     rep(each = nd)
 }
-
-

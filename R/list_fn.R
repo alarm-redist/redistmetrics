@@ -18,4 +18,3 @@ list_fn <- function(prefix) {
 list_args <- function(fn) {
   names(formals(fn))
 }
-

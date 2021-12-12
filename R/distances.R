@@ -35,7 +35,7 @@ dist_info <- function(plans, total_pop, ncores = 1) {
     cli::cli_abort('Length of `total_pop` does not match the number of rows in `plans`.')
   }
 
-  vi <- foreach::foreach(map = 1:ncol(plans), .combine = "cbind") %oper% {
+  vi <- foreach::foreach(map = 1:ncol(plans), .combine = 'cbind') %oper% {
     var_info_mat(plans, map - 1, total_pop)
   }
   colnames(vi) <- NULL
@@ -74,8 +74,8 @@ dist_ham <- function(plans, ncores = 1) {
   }
 
 
-  ham <- foreach::foreach(map = 1:ncol(plans), .combine = "cbind") %oper% {
-    hamming(v = plans[,map], m = plans)
+  ham <- foreach::foreach(map = 1:ncol(plans), .combine = 'cbind') %oper% {
+    hamming(v = plans[, map], m = plans)
   }
   colnames(ham) <- NULL
 
@@ -111,8 +111,8 @@ dist_euc <- function(plans, ncores = 1) {
   }
 
 
-  euc <- foreach::foreach(map = 1:ncol(plans), .combine = "cbind") %oper% {
-    minkowski(v = plans[,map], m = plans, p = 2)
+  euc <- foreach::foreach(map = 1:ncol(plans), .combine = 'cbind') %oper% {
+    minkowski(v = plans[, map], m = plans, p = 2)
   }
   colnames(euc) <- NULL
 
@@ -148,8 +148,8 @@ dist_man <- function(plans, ncores = 1) {
   }
 
 
-  man <- foreach::foreach(map = 1:ncol(plans), .combine = "cbind") %oper% {
-    minkowski(v = plans[,map], m = plans, p = 1)
+  man <- foreach::foreach(map = 1:ncol(plans), .combine = 'cbind') %oper% {
+    minkowski(v = plans[, map], m = plans, p = 1)
   }
   colnames(man) <- NULL
 
