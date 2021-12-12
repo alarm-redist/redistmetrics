@@ -76,7 +76,16 @@
     <loc>https://alarm-redist.github.io/redistmetrics/reference/list_fn.html</loc>
   </url>
   <url>
-    <loc>https://alarm-redist.github.io/redistmetrics/reference/new_hampshire.html</loc>
+    <loc>https://alarm-redist.github.io/redistmetrics/reference/nh.html</loc>
+  </url>
+  <url>
+    <loc>https://alarm-redist.github.io/redistmetrics/reference/nh_m.html</loc>
+  </url>
+  <url>
+    <loc>https://alarm-redist.github.io/redistmetrics/reference/nh_map.html</loc>
+  </url>
+  <url>
+    <loc>https://alarm-redist.github.io/redistmetrics/reference/nh_plans.html</loc>
   </url>
   <url>
     <loc>https://alarm-redist.github.io/redistmetrics/reference/part_bias.html</loc>
