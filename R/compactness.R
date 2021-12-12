@@ -40,8 +40,12 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
   if (missing(use_Rcpp)) {
     use_Rcpp <- ncol(plans) > 8 || !missing(perim_path) || !missing(perim_df)
   }
-  if (missing(perim_path) & missing(perim_df)) {
-    perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
+  if (missing(perim_df)) {
+    if (missing(perim_path)) {
+      perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
+    } else {
+      perim_df <- readRDS(perim_path)
+    }
   }
 
   # calculate ----
@@ -50,7 +54,7 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
     splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
-    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('sf', 'rict')) %oper% {
+    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('sf', 'redistmetrics')) %oper% {
       polsbypopper(
         from = perim_df$origin, to = perim_df$touching, area = areas,
         perimeter = perim_df$edge, dm = splits[[map]], nd = nd
@@ -122,8 +126,12 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
   if (missing(use_Rcpp)) {
     use_Rcpp <- ncol(plans) > 8 || !missing(perim_path) || !missing(perim_df)
   }
-  if (missing(perim_path) & missing(perim_df)) {
-    perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
+  if (missing(perim_df)) {
+    if (missing(perim_path)) {
+      perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
+    } else {
+      perim_df <- readRDS(perim_path)
+    }
   }
 
   # calculate ----
@@ -132,7 +140,7 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
     splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
-    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('sf', 'rict')) %oper% {
+    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('sf', 'redistmetrics')) %oper% {
       schwartzberg(
         from = perim_df$origin, to = perim_df$touching, area = areas,
         perimeter = perim_df$edge, dm = splits[[map]], nd = nd
@@ -152,7 +160,7 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
           perim <- sum(sf::st_length(sf::st_cast(united, 'MULTILINESTRING')))
         }
 
-        ret[i] <- perim / (2 * pi * sqrt(area / pi))
+        ret[i] <- 1 / (perim / (2 * pi * sqrt(area / pi)))
       }
 
       ret
@@ -495,12 +503,17 @@ comp_frac_kept <- function(plans, shp, adj) {
 #'
 #' @examples
 #' # todo example
-comp_log_st <- function(plans, shp, counties, adj) {
+comp_log_st <- function(plans, shp, counties = NULL, adj) {
   plans <- process_plans(plans)
   dists <- sort(unique(c(plans)))
   nd <- length(dists)
 
   counties <- rlang::eval_tidy(rlang::enquo(counties), shp)
+  if (is.null(counties)) {
+    counties <- rep(1L, nrow(shp))
+  } else {
+    counties <- make_id(counties)
+  }
 
   if (missing(adj) & inherits(shp, 'redist_map')) {
     adj <- shp[[attr(shp, 'adj_col')]]

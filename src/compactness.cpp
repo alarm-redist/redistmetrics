@@ -82,7 +82,7 @@ NumericMatrix schwartzberg(IntegerVector from,
     }
 
     dist_peri2 = sqrt(dist_peri);
-    ret(_,c) = 0.5 * dist_peri / sqrt(pi * dist_area);
+    ret(_,c) = 1 / (0.5 * dist_peri / sqrt(pi * dist_area));
   }
 
   return ret;

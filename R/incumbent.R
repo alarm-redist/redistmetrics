@@ -20,5 +20,5 @@ inc_pairs <- function(plans, shp, inc) {
 
   m <- plans[inc, ]
 
-  rep(sum(inc) - apply(m, 2, \(x) length(unique(x))), each = nd)
+  rep(sum(inc) - apply(m, 2, function(x) length(unique(x))), each = nd)
 }
