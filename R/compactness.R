@@ -48,11 +48,13 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
   if (missing(use_Rcpp)) {
     use_Rcpp <- ncol(plans) > 8 || !missing(perim_path) || !missing(perim_df)
   }
-  if (missing(perim_df)) {
-    if (missing(perim_path)) {
-      perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
-    } else {
-      perim_df <- readRDS(perim_path)
+  if (use_Rcpp) {
+    if (missing(perim_df)) {
+      if (missing(perim_path)) {
+        perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
+      } else {
+        perim_df <- readRDS(perim_path)
+      }
     }
   }
 
@@ -138,11 +140,13 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
   if (missing(use_Rcpp)) {
     use_Rcpp <- ncol(plans) > 8 || !missing(perim_path) || !missing(perim_df)
   }
-  if (missing(perim_df)) {
-    if (missing(perim_path)) {
-      perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
-    } else {
-      perim_df <- readRDS(perim_path)
+  if (use_Rcpp) {
+    if (missing(perim_df)) {
+      if (missing(perim_path)) {
+        perim_df <- prep_perims(shp = shp, epsg = epsg, ncores = ncores)
+      } else {
+        perim_df <- readRDS(perim_path)
+      }
     }
   }
 
@@ -346,7 +350,7 @@ comp_lw <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   shp <- geos::as_geos_geometry(shp)
   # compute ----
-  bboxes <- as.matrix(geos::geos_envelope_rct(nh))
+  bboxes <- as.matrix(geos::geos_envelope_rct(shp))
   result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind') %oper% {
     out <- numeric(nd)
     for (i in 1:nd) {
@@ -408,7 +412,7 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
   }
 
   # compute ----
-  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('sf')) %oper% {
+  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('geos')) %oper% {
     out <- numeric(nd)
 
     for (i in 1:nd) {
@@ -514,7 +518,7 @@ comp_edges_rem <- function(plans, shp, adj) {
   if (missing(adj) & inherits(shp, 'redist_map')) {
     adj <- shp[[attr(shp, 'adj_col')]]
   } else if (missing(adj)) {
-    cli::cli_abort('`adj` missing and `shp` is not of class `redist_map`.')
+    cli::cli_abort('{.arg adj} missing and {.arg shp} is not a {.cls redist_map}.')
   }
 
   n_removed(g = adj, districts = plans, n_distr = nd) %>%
@@ -549,7 +553,7 @@ comp_frac_kept <- function(plans, shp, adj) {
   if (missing(adj) & inherits(shp, 'redist_map')) {
     adj <- shp[[attr(shp, 'adj_col')]]
   } else if (missing(adj)) {
-    cli::cli_abort('`adj` missing and `shp` is not of class `redist_map`.')
+    cli::cli_abort('{.arg adj} missing and {.arg shp} is not a {.cls redist_map}.')
   }
   n_edge <- length(unlist(adj))
 
@@ -593,7 +597,7 @@ comp_log_st <- function(plans, shp, counties = NULL, adj) {
   if (missing(adj) & inherits(shp, 'redist_map')) {
     adj <- shp[[attr(shp, 'adj_col')]]
   } else if (missing(adj)) {
-    cli::cli_abort('`adj` missing and `shp` is not of class `redist_map`.')
+    cli::cli_abort('{.arg adj} missing and {.arg shp} is not a {.cls redist_map}.')
   }
 
   log_st_map(g = adj, districts = plans, counties = counties, n_distr = nd) %>%

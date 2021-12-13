@@ -26,7 +26,7 @@ splits_admin <- function(plans, shp, admin) {
   # prep admin ----
   admin <- rlang::eval_tidy(rlang::enquo(admin), data = shp)
   if (is.null(admin)) {
-    cli::cli_abort('`admin` not found in `shp`.')
+    cli::cli_abort('{.arg admin} not found in {.arg shp}.')
   }
   admin <- make_id(admin)
 
@@ -64,7 +64,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
   # prep admin ----
   sub_admin <- rlang::eval_tidy(rlang::enquo(sub_admin), data = shp)
   if (is.null(sub_admin)) {
-    cli::cli_abort('`admin` not found in `shp`.')
+    cli::cli_abort('{.arg sub_admin} not found in {.arg shp}.')
   }
 
   plans <- plans[!is.na(sub_admin), , drop = FALSE]
@@ -105,7 +105,7 @@ splits_multi <- function(plans, shp, admin) {
   # prep admin ----
   admin <- rlang::eval_tidy(rlang::enquo(admin), data = shp)
   if (is.null(admin)) {
-    cli::cli_abort('`admin` not found in `shp`.')
+    cli::cli_abort('{.arg admin} not found in {.arg shp}.')
   }
   admin <- make_id(admin)
 

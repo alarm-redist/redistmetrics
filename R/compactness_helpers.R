@@ -30,7 +30,7 @@ planarize <- function(shp, epsg = 3857) {
 #'
 prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
   if (missing(shp)) {
-    cli::cli_abort('Please provide an argument to `shp`.')
+    cli::cli_abort('Please provide an argument to {.arg shp}.')
   }
 
   shp <- planarize(shp, epsg)

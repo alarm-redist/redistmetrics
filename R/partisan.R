@@ -27,13 +27,16 @@ part_bias <- function(plans, shp, dvote, rvote, v = 0.5) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
 
@@ -73,13 +76,16 @@ part_dseats <- function(plans, shp, dvote, rvote) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
 
@@ -120,13 +126,16 @@ part_dvs <- function(plans, shp, dvote, rvote) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))
@@ -164,13 +173,16 @@ part_egap <- function(plans, shp, dvote, rvote) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))
@@ -210,13 +222,16 @@ part_egap_ep <- function(plans, shp, dvote, rvote) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))
@@ -257,13 +272,16 @@ part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))
@@ -304,13 +322,16 @@ part_mean_median <- function(plans, shp, dvote, rvote) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))
@@ -350,13 +371,16 @@ part_decl <- function(plans, shp, dvote, rvote, normalize = FALSE) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))
@@ -404,13 +428,16 @@ part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = FALSE) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))
@@ -450,13 +477,16 @@ part_lopsided_wins <- function(plans, shp, dvote, rvote) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))
@@ -496,13 +526,16 @@ part_rmd <- function(plans, shp, dvote, rvote) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))
@@ -541,13 +574,16 @@ part_sscd <- function(plans, shp, dvote, rvote) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
   if (any(is.na(dvote))) {
-    stop('NA value in argument to `dvote`.')
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
-    stop('`rvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
   }
   if (length(dvote) != nrow(plans)) {
-    stop('`dvote` length and `plans` rows are not equal.')
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
   }
 
   nd <- length(unique(plans[, 1]))

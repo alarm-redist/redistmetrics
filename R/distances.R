@@ -37,11 +37,11 @@ dist_info <- function(plans, shp, total_pop, ncores = 1) {
   }
 
   if (is.null(total_pop)) {
-    cli::cli_warn('`total_pop` not provided, using default of equal population.')
+    cli::cli_warn('{.arg total_pop} not provided, using default of equal population.')
     total_pop <- rep(1, nrow(plans))
   }
   if (length(total_pop) != nrow(plans)) {
-    cli::cli_abort('Length of `total_pop` does not match the number of rows in `plans`.')
+    cli::cli_abort('Length of {.arg total_pop} does not match the number of rows in {.arg plans}.')
   }
 
   vi <- foreach::foreach(map = 1:ncol(plans), .combine = 'cbind') %oper% {
