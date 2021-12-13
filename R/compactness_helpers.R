@@ -25,7 +25,9 @@ planarize <- function(shp, epsg = 3857) {
 #' @export
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' prep_perims(nh)
+#'
 prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
   if (missing(shp)) {
     cli::cli_abort('Please provide an argument to `shp`.')
@@ -54,10 +56,11 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
     on.exit(parallel::stopCluster(cl))
   }
 
-  perim_adj_df <- foreach::foreach(from = 1:length(alist), .combine = 'rbind', .packages = c('sf', 'redistmetrics')) %oper% {
+  perim_adj_df <- foreach::foreach(from = 1:length(alist), .combine = 'rbind',
+                                   .packages = c('sf', 'redistmetrics')) %oper% {
     x <- geos::geos_geometry_n(shp_col, from)
     y <- geos::geos_geometry_n(shp_col, alist[[from]])
-    l <- geos::geos_intersects_matrix(x, y) %>% unlist()
+    l <- geos::geos_intersects_matrix(x, y) %>% unlist() %>% sort()
     l_lines <- sapply(seq_along(l), function(i) {
       geos::geos_length(geos::geos_intersection(x, y[[l[[i]]]]))
     })
