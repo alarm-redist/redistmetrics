@@ -31,7 +31,7 @@ reference:
   desc: "Functions to assess incumbent pairings"
 - contents:
   - has_concept("incumbent")
--title: Example Data
+- title: Example Data
   desc: "Data on New Hampshire for Examples"
 - contents:
   - has_concept("data")
