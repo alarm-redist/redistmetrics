@@ -2,7 +2,7 @@
 % Please edit documentation in R/compactness.R
 \name{comp_edges_rem}
 \alias{comp_edges_rem}
-\title{Calulate Edges Removed Compactness}
+\title{Calculate Edges Removed Compactness}
 \usage{
 comp_edges_rem(plans, shp, adj)
 }
@@ -17,7 +17,7 @@ comp_edges_rem(plans, shp, adj)
 numeric vector
 }
 \description{
-Calulate Edges Removed Compactness
+Calculate Edges Removed Compactness
 }
 \examples{
 data(nh)

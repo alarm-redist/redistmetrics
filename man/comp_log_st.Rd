@@ -2,7 +2,7 @@
 % Please edit documentation in R/compactness.R
 \name{comp_log_st}
 \alias{comp_log_st}
-\title{Calulate Log Spanning Tree Compactness}
+\title{Calculate Log Spanning Tree Compactness}
 \usage{
 comp_log_st(plans, shp, counties = NULL, adj)
 }
@@ -19,7 +19,7 @@ comp_log_st(plans, shp, counties = NULL, adj)
 numeric vector
 }
 \description{
-Calulate Log Spanning Tree Compactness
+Calculate Log Spanning Tree Compactness
 }
 \examples{
 data(nh)

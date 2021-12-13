@@ -98,3 +98,43 @@ test_that("comp_schwartz works", {
   e <- c(0.429529393063737, 0.423842621480028, 0.482117722710907, 0.39783950420637)
   expect_equal(a, e, tolerance = 1e-4)
 })
+
+test_that("comp_skew works", {
+  a <- comp_skew(nh$r_2020, shp = nh)
+  e <- c(0.36402209494403, 0.248128587411723)
+  expect_equal(a, e, tolerance = 1e-4)
+
+  a <- comp_skew(nh_m[, 1:2], shp = nh)
+  e <- c(0.263679073419614, 0.229286979436919, 0.36402209494403, 0.248128587411723)
+  expect_equal(a, e, tolerance = 1e-4)
+})
+
+test_that("comp_box_reock works", {
+  a <- comp_box_reock(nh$r_2020, shp = nh)
+  e <- c(0.576944055725403, 0.419626003015816)
+  expect_equal(a, e, tolerance = 1e-4)
+
+  a <- comp_box_reock(nh_m[, 1:2], shp = nh)
+  e <- c(0.535437589538158, 0.488120784522778, 0.576944055725403, 0.419626003015816)
+  expect_equal(a, e, tolerance = 1e-4)
+})
+
+test_that("comp_y_sym works", {
+  a <- comp_y_sym(nh$r_2020, shp = nh)
+  e <- c(0.730781251478271, 0.434613580171782)
+  expect_equal(a, e, tolerance = 1e-4)
+
+  a <- comp_y_sym(nh_m[, 1:2], shp = nh)
+  e <- c(0.683273577465276, 0.470804111893866, 0.730781251478271, 0.434613580171782)
+  expect_equal(a, e, tolerance = 1e-4)
+})
+
+test_that("comp_x_sym works", {
+  a <- comp_x_sym(nh$r_2020, shp = nh)
+  e <- c(0.699596108300562, 0.343637149393331)
+  expect_equal(a, e, tolerance = 1e-4)
+
+  a <- comp_x_sym(nh_m[, 1:2], shp = nh)
+  e <- c(0.560213275968141, 0.474006808670672, 0.699596108300562, 0.343637149393331)
+  expect_equal(a, e, tolerance = 1e-4)
+})

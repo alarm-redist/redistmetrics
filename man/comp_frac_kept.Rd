@@ -2,7 +2,7 @@
 % Please edit documentation in R/compactness.R
 \name{comp_frac_kept}
 \alias{comp_frac_kept}
-\title{Calulate Fraction Kept Compactness}
+\title{Calculate Fraction Kept Compactness}
 \usage{
 comp_frac_kept(plans, shp, adj)
 }
@@ -17,7 +17,7 @@ comp_frac_kept(plans, shp, adj)
 numeric vector
 }
 \description{
-Calulate Fraction Kept Compactness
+Calculate Fraction Kept Compactness
 }
 \examples{
 data(nh)

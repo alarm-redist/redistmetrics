@@ -27,5 +27,11 @@ geox_union <- function(x) {
 }
 
 geox_coordinates <- function(x) {
-  c(geos::geos_x(x), geos::geos_y(x))
+  cbind(geos::geos_x(x), geos::geos_y(x))
+}
+
+
+geox_sub_centroid <- function(coordinates, areas, idx) {
+  c(stats::weighted.mean(coordinates[idx, 1], areas[idx]),
+    stats::weighted.mean(coordinates[idx, 2], areas[idx]))
 }

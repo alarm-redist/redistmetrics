@@ -442,7 +442,7 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
   c(result)
 }
 
-#' Calulate Fryer Holden Compactness
+#' Calculate Fryer Holden Compactness
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
@@ -490,7 +490,7 @@ comp_fh <- function(plans, shp, total_pop, epsg = 3857, ncores = 1) {
   rep(out, each = nd)
 }
 
-#' Calulate Edges Removed Compactness
+#' Calculate Edges Removed Compactness
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
@@ -525,7 +525,7 @@ comp_edges_rem <- function(plans, shp, adj) {
     rep(each = nd)
 }
 
-#' Calulate Fraction Kept Compactness
+#' Calculate Fraction Kept Compactness
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
@@ -561,7 +561,7 @@ comp_frac_kept <- function(plans, shp, adj) {
     rep(each = nd)
 }
 
-#' Calulate Log Spanning Tree Compactness
+#' Calculate Log Spanning Tree Compactness
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
@@ -602,4 +602,323 @@ comp_log_st <- function(plans, shp, counties = NULL, adj) {
 
   log_st_map(g = adj, districts = plans, counties = counties, n_distr = nd) %>%
     rep(each = nd)
+}
+
+#' Calculate Skew Compactness
+#'
+#' Skew is defined as the ratio of the radii of the largest inscribed circle with
+#' the smallest bounding circle. Scores are bounded between 0 and 1, where 1 is
+#' most compact.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
+#'
+#' @return numeric vector
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' #' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_skew(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' \donttest{
+#' # slower, beware!
+#' comp_skew(plans = nh_m[, 3:5], shp = nh)
+#' }
+comp_skew <- function(plans, shp, epsg = 3857, ncores = 1) {
+
+  # process objects ----
+  shp <- planarize(shp, epsg)
+  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(nc, setup_strategy = 'sequential', methods = FALSE)
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  # compute ----
+  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('geos')) %oper% {
+    out <- numeric(nd)
+
+    for (i in 1:nd) {
+      united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
+      w <- sqrt(geos::geos_area(geos::geos_maximum_inscribed_crc(united, tolerance = 0.01)))
+      l <- sqrt(geos::geos_area(geos::geos_minimum_bounding_circle(united)))
+      out[i] <- w / l
+    }
+
+    out
+  }
+
+  c(result)
+}
+
+#' Calculate Box Reock Compactness
+#'
+#' Box reock is the ratio of the area of the district by the area of the minimum
+#' bounding box (of any rotation). Scores are bounded between 0 and 1, where 1 is
+#' most compact.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
+#'
+#' @return numeric vector
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' #' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_box_reock(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' \donttest{
+#' # slower, beware!
+#' comp_box_reock(plans = nh_m[, 3:5], shp = nh)
+#' }
+comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
+
+  # process objects ----
+  shp <- planarize(shp, epsg)
+  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(nc, setup_strategy = 'sequential', methods = FALSE)
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  # compute ----
+
+  areas <- geos::geos_area(shp)
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+    ret <- vector('numeric', nd)
+
+    for (i in 1:nd) {
+      united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
+      area <- sum(areas[plans[, map] == dists[i]])
+
+      mbc <- geos::geos_area(geos::geos_minimum_rotated_rectangle(united))
+      ret[i] <- area / mbc
+    }
+
+    ret
+  }
+
+  out
+}
+
+#' Calculate Y Symmetry Compactness
+#'
+#' Y symmetry is the overlapping area of a shape and its projection over the
+#' y-axis.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
+#'
+#' @return numeric vector
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' #' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_y_sym(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' \donttest{
+#' # slower, beware!
+#' comp_y_sym(plans = nh_m[, 3:5], shp = nh)
+#' }
+#'
+comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
+
+  # process objects ----
+  shp <- planarize(shp, epsg) %>% sf::st_geometry()
+  epsg <- sf::st_crs(shp)$epsg
+  # shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(nc, setup_strategy = 'sequential', methods = FALSE)
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  # compute ----
+
+  areas <- geos::geos_area(shp)
+  coords <- geox_coordinates(geos::geos_centroid(shp))
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+    ret <- vector('numeric', nd)
+
+    for (i in 1:nd) {
+      w_prec <- which(plans[, map] == dists[i])
+      # find centroid
+      cent <- geox_sub_centroid(coords, areas, w_prec)
+
+      # center at 0, 0
+      #coords_ctr <- coords[w_prec, ] - cent
+      # need to do affine transformations in sf for now?
+      shp_ctr <- sf::st_union(shp[w_prec] - cent)
+      shp_refl <- sf::st_coordinates(shp_ctr)[, 1:2]
+      shp_refl[, 1] <- shp_refl[, 1] * -1
+      shp_refl <- sf::st_sfc(sf::st_polygon(list(shp_refl)))
+
+
+      # Reflect over x = 0 and make shapes
+      # the idea, but needs to be the actual shapes, not the centers:
+      #refl_united <- geox_union(geos::geos_make_polygon(x = coords_ctr[, 1] * -1,
+      #                                                  y = coords_ctr[, 2],
+      #                                                  crs = epsg))
+      # united <- geox_union(geos::geos_make_polygon(x = coords_ctr[, 1],
+      #                                                  y = coords_ctr[, 2],
+      #                                                  crs = epsg))
+
+      # Intersect
+      #ovlap <- geos::geos_intersection(united, refl_united)
+      ovlap <- geos::geos_intersection(shp_ctr, shp_refl)
+
+      # Compute area
+      ret[i] <- sum(geos::geos_area(ovlap)) / sum(areas[w_prec])
+    }
+
+    ret
+  }
+
+  out
+}
+
+#' Calculate X Symmetry Compactness
+#'
+#' X symmetry is the overlapping area of a shape and its projection over the
+#' x-axis.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
+#'
+#' @return numeric vector
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' #' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_x_sym(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' \donttest{
+#' # slower, beware!
+#' comp_x_sym(plans = nh_m[, 3:5], shp = nh)
+#' }
+#'
+comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
+
+  # process objects ----
+  shp <- planarize(shp, epsg) %>% sf::st_geometry()
+  epsg <- sf::st_crs(shp)$epsg
+  # shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(nc, setup_strategy = 'sequential', methods = FALSE)
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  # compute ----
+
+  areas <- geos::geos_area(shp)
+  coords <- geox_coordinates(geos::geos_centroid(shp))
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+    ret <- vector('numeric', nd)
+
+    for (i in 1:nd) {
+      w_prec <- which(plans[, map] == dists[i])
+      # find centroid
+      cent <- geox_sub_centroid(coords, areas, w_prec)
+
+      # center at 0, 0
+      #coords_ctr <- coords[w_prec, ] - cent
+      # need to do affine transformations in sf for now?
+      shp_ctr <- sf::st_union(shp[w_prec] - cent)
+      shp_refl <- sf::st_coordinates(shp_ctr)[, 1:2]
+      shp_refl[, 2] <- shp_refl[, 2] * -1
+      shp_refl <- sf::st_sfc(sf::st_polygon(list(shp_refl)))
+
+
+      # Reflect over y = 0 and make shapes
+      # the idea, but needs to be the actual shapes, not the centers:
+      #refl_united <- geox_union(geos::geos_make_polygon(x = coords_ctr[, 1] * -1,
+      #                                                  y = coords_ctr[, 2],
+      #                                                  crs = epsg))
+      # united <- geox_union(geos::geos_make_polygon(x = coords_ctr[, 1],
+      #                                                  y = coords_ctr[, 2],
+      #                                                  crs = epsg))
+
+      # Intersect
+      #ovlap <- geos::geos_intersection(united, refl_united)
+      ovlap <- geos::geos_intersection(shp_ctr, shp_refl)
+
+      # Compute area
+      ret[i] <- sum(geos::geos_area(ovlap)) / sum(areas[w_prec])
+    }
+
+    ret
+  }
+
+  out
 }
