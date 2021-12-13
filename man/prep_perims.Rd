@@ -22,5 +22,7 @@ tibble of perimeters and lengths
 Replaces \code{redist.prep.polsbypopper}
 }
 \examples{
-# todo example
+data(nh)
+prep_perims(nh)
+
 }

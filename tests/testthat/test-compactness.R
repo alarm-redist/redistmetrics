@@ -10,11 +10,11 @@ test_that("comp_polsby works", {
 
 test_that("comp_bc works", {
   a <- comp_bc(plans = nh$r_2020, shp = nh)
-  e <- c(0.791791725419428, 0.794266688087315)
+  e <- c(0.792135014565373, 0.833023452308662)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- comp_bc(plans = nh_m[, 1:2], shp = nh)
-  e <- c(0.807631070639584, 0.685591994347308, 0.791791725419428, 0.794266688087315)
+  e <- c(0.817730679839768, 0.705558754903565, 0.792135014565373, 0.833023452308662)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
@@ -81,11 +81,11 @@ test_that("comp_lw works", {
 
 test_that("comp_reock works", {
   a <- comp_reock(nh$r_2020, shp = nh)
-  e <- c(0.441816713563015, 0.24872412382805)
+  e <- c(0.444465285671442, 0.250215157908113)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- comp_reock(nh_m[, 1:2], shp = nh)
-  e <- c(0.300681795337424, 0.233310287757562, 0.441816713563015, 0.24872412382805)
+  e <- c(0.302484301653267, 0.234708920045101, 0.444465285671442, 0.250215157908113)
   expect_equal(a, e, tolerance = 1e-4)
 })
 

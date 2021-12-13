@@ -26,6 +26,7 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
 
   # process objects ----
   shp <- planarize(shp, epsg)
+  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -56,30 +57,26 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
   }
 
   # calculate ----
-  areas <- sf::st_area(shp)
+  areas <- geos::geos_area(shp)
   if (use_Rcpp) {
     splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
-    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('sf', 'redistmetrics')) %oper% {
+    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('redistmetrics')) %oper% {
       polsbypopper(
         from = perim_df$origin, to = perim_df$touching, area = areas,
         perimeter = perim_df$edge, dm = splits[[map]], nd = nd
       )
     }
   } else {
-    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('sf', 'lwgeom')) %oper% {
+    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
       ret <- vector('numeric', nd)
 
       for (i in 1:nd) {
-        united <- suppressMessages(sf::st_union(shp[plans[, map] == dists[i], ]))
+        united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
         area <- sum(areas[plans[, map] == dists[i]])
 
-        if (is.null(sf::st_crs(united$EPSG)) || is.na(sf::st_is_longlat(united))) {
-          perim <- sum(sf::st_length(sf::st_cast(sf::st_cast(united, 'POLYGON'), 'LINESTRING')))
-        } else {
-          perim <- sum(sf::st_length(sf::st_cast(united, 'MULTILINESTRING')))
-        }
+          perim <- sum(geos::geos_length(united))
 
         ret[i] <- 4 * pi * (area) / (perim)^2
       }
@@ -119,6 +116,7 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
 
   # process objects ----
   shp <- planarize(shp, epsg)
+  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -149,30 +147,26 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
   }
 
   # calculate ----
-  areas <- sf::st_area(shp)
+  areas <- geos::geos_area(shp)
   if (use_Rcpp) {
     splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
-    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('sf', 'redistmetrics')) %oper% {
+    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('redistmetrics')) %oper% {
       schwartzberg(
         from = perim_df$origin, to = perim_df$touching, area = areas,
         perimeter = perim_df$edge, dm = splits[[map]], nd = nd
       )
     }
   } else {
-    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('sf', 'lwgeom')) %oper% {
+    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
       ret <- vector('numeric', nd)
 
       for (i in 1:nd) {
-        united <- suppressMessages(sf::st_union(shp[plans[, map] == dists[i], ]))
+        united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
         area <- sum(areas[plans[, map] == dists[i]])
 
-        if (is.null(sf::st_crs(united$EPSG)) || is.na(sf::st_is_longlat(united))) {
-          perim <- sum(sf::st_length(sf::st_cast(sf::st_cast(united, 'POLYGON'), 'LINESTRING')))
-        } else {
-          perim <- sum(sf::st_length(sf::st_cast(united, 'MULTILINESTRING')))
-        }
+        perim <- sum(geos::geos_length(united))
 
         ret[i] <- 1 / (perim / (2 * pi * sqrt(area / pi)))
       }
@@ -209,6 +203,7 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
+  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -226,15 +221,15 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
   }
 
   # compute ----
-  areas <- sf::st_area(shp)
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('sf', 'lwgeom')) %oper% {
+  areas <- geos::geos_area(shp)
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
-      united <- sf::st_union(shp[plans[, map] == dists[i], ])
+      united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
       area <- sum(areas[plans[, map] == dists[i]])
 
-      mbc <- sf::st_area(lwgeom::st_minimum_bounding_circle(united))
+      mbc <- geos::geos_area(geos::geos_minimum_bounding_circle(united))
       ret[i] <- area / mbc
     }
 
@@ -269,6 +264,7 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
+  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -286,15 +282,15 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
   }
 
   # compute ----
-  areas <- sf::st_area(shp)
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('sf', 'lwgeom')) %oper% {
+  areas <- geos::geos_area(shp)
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
-      united <- sf::st_union(shp[plans[, map] == dists[i], ])
+      united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
       area <- sum(areas[plans[, map] == dists[i]])
 
-      cvh <- sf::st_area(sf::st_convex_hull(united))
+      cvh <- geos::geos_area(geos::geos_convex_hull(united))
       ret[i] <- area / cvh
     }
 
@@ -348,14 +344,15 @@ comp_lw <- function(plans, shp, epsg = 3857, ncores = 1) {
     on.exit(parallel::stopCluster(cl))
   }
 
+  shp <- geos::as_geos_geometry(shp)
   # compute ----
-  bboxes <- as.data.frame(do.call(rbind, lapply(sf::st_geometry(shp), sf::st_bbox)))
-  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('sf')) %oper% {
+  bboxes <- as.matrix(geos::geos_envelope_rct(nh))
+  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind') %oper% {
     out <- numeric(nd)
     for (i in 1:nd) {
       idx <- plans[, map] == dists[i]
-      xdiff <- max(bboxes$xmax[idx]) - min(bboxes$xmin[idx])
-      ydiff <- max(bboxes$ymax[idx]) - min(bboxes$ymin[idx])
+      xdiff <- max(bboxes[idx, 3]) - min(bboxes[idx, 1])
+      ydiff <- max(bboxes[idx, 4]) - min(bboxes[idx, 2])
       out[i] <- if (xdiff < ydiff) xdiff / ydiff else ydiff / xdiff
     }
     out
@@ -392,6 +389,8 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
+  epsg <- sf::st_crs(shp)$epsg
+  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -413,25 +412,22 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
     out <- numeric(nd)
 
     for (i in 1:nd) {
-      united <- sf::st_union(shp[plans[, map] == dists[i], ])
-      suppressWarnings(center <- sf::st_centroid(united))
-      suppressMessages(suppressWarnings(if (!sf::st_within(united, center, sparse = FALSE)[[1]]) {
-        suppressWarnings(center <- sf::st_point_on_surface(united))
-      }))
-      center <- sf::st_coordinates(center)
-      bbox <- sf::st_bbox(united)
-      max_dist <- sqrt((bbox$ymax - bbox$ymin)^2 + (bbox$xmax - bbox$xmin)^2)
-      sf::st_crs(united) <- NA
+      united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
+      center <- geos::geos_centroid(united)
+      if (!geos::geos_within(united, center)) {
+        center <- geos::geos_point_on_surface(united)
+      }
+      center <- geox_coordinates(center)
+      bbox <- as.numeric(geos::geos_envelope_rct(united))
+      max_dist <- sqrt((bbox[4] - bbox[2])^2 + (bbox[3] - bbox[1])^2)
 
       x_list <- center[1] + max_dist * cos(seq(0, 15) * pi / 8)
       y_list <- center[2] + max_dist * sin(seq(0, 15) * pi / 8)
       radials <- rep(NA_real_, 16)
       for (angle in 1:16) {
-        line <- data.frame(x = c(x_list[angle], center[1]), y = c(y_list[angle], center[2])) %>%
-          sf::st_as_sf(coords = c('x', 'y')) %>%
-          sf::st_coordinates() %>%
-          sf::st_linestring()
-        radials[angle] <- max(0, stats::dist(sf::st_intersection(line, united)))
+        line <- geos::geos_make_linestring(x = c(x_list[angle], center[1]), c(y_list[angle], center[2]),
+                                           crs = epsg)
+        radials[angle] <- max(0, geos::geos_length(geos::geos_intersection(line, united)))
       }
       out[i] <- 1 - (sum(abs(radials / sum(radials) * 100 - 6.25)) / 200)
     }
@@ -459,7 +455,7 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' data(nh)
 #' data(nh_m)
 #' # For a single plan:
-#' comp_fh(plans = nh$r_2020, shp = nh, pop)
+#' comp_fh(plans = nh$r_2020, shp = nh, total_pop = pop)
 #'
 #' # Or many plans:
 #' comp_fh(plans = nh_m[, 3:5], shp = nh, pop)
@@ -472,10 +468,11 @@ comp_fh <- function(plans, shp, total_pop, epsg = 3857, ncores = 1) {
 
   total_pop <- rlang::eval_tidy(rlang::enquo(total_pop), shp)
 
+  shp <- geos::as_geos_geometry(shp)
 
-  centroids <- sf::st_geometry(sf::st_centroid(shp))
-  dist_sqr <- sf::st_distance(centroids, centroids)^2
-  pop <- total_pop * t(matrix(rep(total_pop, nrow(shp)), nrow(shp)))
+  centroids <- geos::geos_centroid(shp)
+  dist_sqr <- geox_distance_mat(centroids)^2
+  pop <- total_pop * t(matrix(rep(total_pop, length(shp)), length(shp)))
   fh <- pop * dist_sqr
   out <- apply(plans, 2, function(x) {
     sum(vapply(1:nd, function(i) {

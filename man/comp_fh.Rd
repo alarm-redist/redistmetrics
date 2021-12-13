@@ -27,7 +27,7 @@ Calulate Fryer Holden Compactness
 data(nh)
 data(nh_m)
 # For a single plan:
-comp_fh(plans = nh$r_2020, shp = nh, pop)
+comp_fh(plans = nh$r_2020, shp = nh, total_pop = pop)
 
 # Or many plans:
 comp_fh(plans = nh_m[, 3:5], shp = nh, pop)
