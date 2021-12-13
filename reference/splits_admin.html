@@ -82,7 +82,15 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># todo examples</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_m</span><span class="op">)</span></span>
+<span class="r-in"><span class="co"># For a single plan:</span></span>
+<span class="r-in"><span class="fu">splits_admin</span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 6</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Or many plans:</span></span>
+<span class="r-in"><span class="fu">splits_admin</span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, shp <span class="op">=</span> <span class="va">nh</span>, admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 4 4 4 5 5</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
