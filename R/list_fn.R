@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-#' list_fn('part')
+#' list_fn('part_')
 list_fn <- function(prefix) {
   fns <- utils::lsf.str('package:redistmetrics')
   fns[startsWith(fns, prefix)]

@@ -24,6 +24,13 @@ numeric vector
 Calculate Tau Gap
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+part_tau_gap(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+
+# Or many plans:
+part_tau_gap(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+
 }
 \concept{partisan}

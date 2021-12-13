@@ -18,6 +18,13 @@ matrix of plan distances
 Calculate Manhattan Distances
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan (distance is trivial, 0):
+dist_man(plans = nh$r_2020)
+
+# Or many plans:
+dist_man(plans = nh_m[, 3:5])
+
 }
 \concept{distances}

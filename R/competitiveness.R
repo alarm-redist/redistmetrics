@@ -13,7 +13,14 @@
 #' @concept competitiveness
 #'
 #' @examples
-#' # todo examples
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' compet_talisman(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' compet_talisman(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 compet_talisman <- function(plans, shp, rvote, dvote, alpha = 1, beta = 1) {
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)

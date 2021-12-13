@@ -22,6 +22,16 @@ numeric vector
 Calculate Length Width Compactness
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+comp_lw(plans = nh$r_2020, shp = nh)
+
+# Or many plans:
+\donttest{
+# slower, beware!
+comp_lw(plans = nh_m[, 3:5], shp = nh)
+}
+
 }
 \concept{compactness}

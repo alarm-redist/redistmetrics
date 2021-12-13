@@ -22,6 +22,13 @@ matrix of plan distances
 Calculate Variation of Information Distances
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan (distance is trivial, 0):
+dist_info(plans = nh$r_2020, shp = nh, total_pop = pop)
+
+# Or many plans:
+dist_info(plans = nh_m[, 3:5], shp = nh, total_pop = pop)
+
 }
 \concept{distances}

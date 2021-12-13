@@ -22,6 +22,14 @@ numeric vector
 Calculate Mean Median Score
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# zero for the two district case:
+# For a single plan:
+part_mean_median(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+
+# Or many plans:
+part_mean_median(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+
 }
 \concept{partisan}

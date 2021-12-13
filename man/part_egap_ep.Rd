@@ -22,6 +22,13 @@ numeric vector
 Calculate Efficiency Gap (Equal Population Assumption)
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+part_egap_ep(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+
+# Or many plans:
+part_egap_ep(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+
 }
 \concept{partisan}

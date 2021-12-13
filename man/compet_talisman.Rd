@@ -26,6 +26,13 @@ numeric vector
 Compute Talismanic Redistricting Competitiveness Metric
 }
 \examples{
-# todo examples
+data(nh)
+data(nh_m)
+# For a single plan:
+compet_talisman(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+
+# Or many plans:
+compet_talisman(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+
 }
 \concept{competitiveness}

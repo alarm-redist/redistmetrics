@@ -22,6 +22,13 @@ numeric vector
 Calulate Log Spanning Tree Compactness
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+comp_log_st(plans = nh$r_2020, shp = nh, counties = county, adj = nh$adj)
+
+# Or many plans:
+comp_log_st(plans = nh_m[, 3:5], shp = nh, counties = county, adj = nh$adj)
+
 }
 \concept{compactness}

@@ -20,6 +20,13 @@ numeric vector
 Calulate Fraction Kept Compactness
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+comp_frac_kept(plans = nh$r_2020, shp = nh, nh$adj)
+
+# Or many plans:
+comp_frac_kept(plans = nh_m[, 3:5], shp = nh, nh$adj)
+
 }
 \concept{compactness}

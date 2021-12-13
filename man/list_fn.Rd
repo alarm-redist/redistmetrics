@@ -17,5 +17,5 @@ This package uses prefixes for each function that correspond to the type of meas
 This function returns the functions
 }
 \examples{
-list_fn('part')
+list_fn('part_')
 }

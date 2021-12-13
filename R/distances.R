@@ -11,7 +11,14 @@
 #' @concept distances
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan (distance is trivial, 0):
+#' dist_info(plans = nh$r_2020, shp = nh, total_pop = pop)
+#'
+#' # Or many plans:
+#' dist_info(plans = nh_m[, 3:5], shp = nh, total_pop = pop)
+#'
 dist_info <- function(plans, shp, total_pop, ncores = 1) {
 
   # process objects ----
@@ -58,7 +65,14 @@ dist_info <- function(plans, shp, total_pop, ncores = 1) {
 #' @concept distances
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan (distance is trivial, 0):
+#' dist_ham(plans = nh$r_2020)
+#'
+#' # Or many plans:
+#' dist_ham(plans = nh_m[, 3:5])
+#'
 dist_ham <- function(plans, ncores = 1) {
 
   # process objects ----
@@ -95,7 +109,14 @@ dist_ham <- function(plans, ncores = 1) {
 #' @concept distances
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan (distance is trivial, 0):
+#' dist_euc(plans = nh$r_2020)
+#'
+#' # Or many plans:
+#' dist_euc(plans = nh_m[, 3:5])
+#'
 dist_euc <- function(plans, ncores = 1) {
 
   # process objects ----
@@ -132,7 +153,14 @@ dist_euc <- function(plans, ncores = 1) {
 #' @concept distances
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan (distance is trivial, 0):
+#' dist_man(plans = nh$r_2020)
+#'
+#' # Or many plans:
+#' dist_man(plans = nh_m[, 3:5])
+#'
 dist_man <- function(plans, ncores = 1) {
 
   # process objects ----

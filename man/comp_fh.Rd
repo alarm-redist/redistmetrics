@@ -24,6 +24,13 @@ numeric vector
 Calulate Fryer Holden Compactness
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+comp_fh(plans = nh$r_2020, shp = nh, pop)
+
+# Or many plans:
+comp_fh(plans = nh_m[, 3:5], shp = nh, pop)
+
 }
 \concept{compactness}

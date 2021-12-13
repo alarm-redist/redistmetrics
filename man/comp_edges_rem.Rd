@@ -20,6 +20,13 @@ numeric vector
 Calulate Edges Removed Compactness
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+comp_edges_rem(plans = nh$r_2020, shp = nh, nh$adj)
+
+# Or many plans:
+comp_edges_rem(plans = nh_m[, 3:5], shp = nh, nh$adj)
+
 }
 \concept{compactness}

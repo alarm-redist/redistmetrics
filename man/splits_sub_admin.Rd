@@ -20,6 +20,13 @@ numeric vector
 Compute Number of Sub-Administrative Units Split
 }
 \examples{
-# todo examples
+data(nh)
+data(nh_m)
+# For a single plan:
+splits_sub_admin(plans = nh$r_2020, shp = nh, sub_admin = county)
+
+# Or many plans:
+splits_sub_admin(plans = nh_m[, 3:5], shp = nh, sub_admin = county)
+
 }
 \concept{splits}

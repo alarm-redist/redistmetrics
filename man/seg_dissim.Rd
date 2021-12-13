@@ -22,6 +22,13 @@ numeric vector
 Compute Dissimilarity Index
 }
 \examples{
-# todo examples
+data(nh)
+data(nh_m)
+# For a single plan:
+seg_dissim(plans = nh$r_2020, shp = nh, group_pop = vap_hisp, total_pop = vap)
+
+# Or many plans:
+seg_dissim(plans = nh_m[, 3:5], shp = nh, group_pop = vap_hisp, total_pop = vap)
+
 }
 \concept{segregation}

@@ -20,6 +20,13 @@ numeric vector
 Compute Number of Administrative Units Split More than Once
 }
 \examples{
-# todo examples
+data(nh)
+data(nh_m)
+# For a single plan:
+splits_multi(plans = nh$r_2020, shp = nh, admin = county)
+
+# Or many plans:
+splits_multi(plans = nh_m[, 3:5], shp = nh, admin = county)
+
 }
 \concept{splits}

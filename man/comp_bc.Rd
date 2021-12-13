@@ -22,6 +22,16 @@ numeric vector
 Calculate Boyce Clark Ratio
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+comp_bc(plans = nh$r_2020, shp = nh)
+
+# Or many plans:
+\donttest{
+# slower, beware!
+comp_bc(plans = nh_m[, 3:5], shp = nh)
+}
+
 }
 \concept{compactness}

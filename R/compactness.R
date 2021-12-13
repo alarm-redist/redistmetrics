@@ -14,7 +14,14 @@
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_polsby(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' comp_polsby(plans = nh_m[, 3:5], shp = nh)
+#'
 comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857, ncores = 1) {
 
   # process objects ----
@@ -100,7 +107,14 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_schwartz(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' comp_schwartz(plans = nh_m[, 3:5], shp = nh)
+#'
 comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857, ncores = 1) {
 
   # process objects ----
@@ -183,7 +197,14 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_reock(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' comp_reock(plans = nh_m[, 3:5], shp = nh)
+#'
 comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
@@ -236,7 +257,14 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_ch(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' comp_ch(plans = nh_m[, 3:5], shp = nh)
+#'
 comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
@@ -289,7 +317,17 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_lw(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' \donttest{
+#' # slower, beware!
+#' comp_lw(plans = nh_m[, 3:5], shp = nh)
+#' }
+#'
 comp_lw <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
@@ -339,7 +377,17 @@ comp_lw <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_bc(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' \donttest{
+#' # slower, beware!
+#' comp_bc(plans = nh_m[, 3:5], shp = nh)
+#' }
+#'
 comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
@@ -408,12 +456,21 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_fh(plans = nh$r_2020, shp = nh, pop)
+#'
+#' # Or many plans:
+#' comp_fh(plans = nh_m[, 3:5], shp = nh, pop)
+#'
 comp_fh <- function(plans, shp, total_pop, epsg = 3857, ncores = 1) {
   shp <- planarize(shp, epsg)
   plans <- process_plans(plans)
   dists <- sort(unique(c(plans)))
   nd <- length(dists)
+
+  total_pop <- rlang::eval_tidy(rlang::enquo(total_pop), shp)
 
 
   centroids <- sf::st_geometry(sf::st_centroid(shp))
@@ -444,7 +501,14 @@ comp_fh <- function(plans, shp, total_pop, epsg = 3857, ncores = 1) {
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_edges_rem(plans = nh$r_2020, shp = nh, nh$adj)
+#'
+#' # Or many plans:
+#' comp_edges_rem(plans = nh_m[, 3:5], shp = nh, nh$adj)
+#'
 comp_edges_rem <- function(plans, shp, adj) {
   plans <- process_plans(plans)
   dists <- sort(unique(c(plans)))
@@ -472,7 +536,14 @@ comp_edges_rem <- function(plans, shp, adj) {
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_frac_kept(plans = nh$r_2020, shp = nh, nh$adj)
+#'
+#' # Or many plans:
+#' comp_frac_kept(plans = nh_m[, 3:5], shp = nh, nh$adj)
+#'
 comp_frac_kept <- function(plans, shp, adj) {
   plans <- process_plans(plans)
   dists <- sort(unique(c(plans)))
@@ -502,7 +573,14 @@ comp_frac_kept <- function(plans, shp, adj) {
 #' @concept compactness
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_log_st(plans = nh$r_2020, shp = nh, counties = county, adj = nh$adj)
+#'
+#' # Or many plans:
+#' comp_log_st(plans = nh_m[, 3:5], shp = nh, counties = county, adj = nh$adj)
+#'
 comp_log_st <- function(plans, shp, counties = NULL, adj) {
   plans <- process_plans(plans)
   dists <- sort(unique(c(plans)))

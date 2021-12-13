@@ -12,7 +12,14 @@
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_bias(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_bias(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_bias <- function(plans, shp, dvote, rvote, v = 0.5) {
 
   plans <- process_plans(plans)
@@ -51,7 +58,14 @@ part_bias <- function(plans, shp, dvote, rvote, v = 0.5) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_dseats(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_dseats(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_dseats <- function(plans, shp, dvote, rvote) {
 
   plans <- process_plans(plans)
@@ -91,7 +105,14 @@ part_dseats <- function(plans, shp, dvote, rvote) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_dvs(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_dvs(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_dvs <- function(plans, shp, dvote, rvote) {
 
   plans <- process_plans(plans)
@@ -128,7 +149,14 @@ part_dvs <- function(plans, shp, dvote, rvote) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_egap(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_egap(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_egap <- function(plans, shp, dvote, rvote) {
 
   plans <- process_plans(plans)
@@ -167,7 +195,14 @@ part_egap <- function(plans, shp, dvote, rvote) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_egap_ep(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_egap_ep(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_egap_ep <- function(plans, shp, dvote, rvote) {
 
   plans <- process_plans(plans)
@@ -207,7 +242,14 @@ part_egap_ep <- function(plans, shp, dvote, rvote) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_tau_gap(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_tau_gap(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
 
   plans <- process_plans(plans)
@@ -246,7 +288,15 @@ part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # zero for the two district case:
+#' # For a single plan:
+#' part_mean_median(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_mean_median(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_mean_median <- function(plans, shp, dvote, rvote) {
 
   plans <- process_plans(plans)
@@ -285,7 +335,14 @@ part_mean_median <- function(plans, shp, dvote, rvote) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_decl(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_decl(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_decl <- function(plans, shp, dvote, rvote, normalize = FALSE) {
 
   plans <- process_plans(plans)
@@ -332,7 +389,14 @@ part_decl <- function(plans, shp, dvote, rvote, normalize = FALSE) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_resp(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_resp(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = FALSE) {
 
   plans <- process_plans(plans)
@@ -371,7 +435,14 @@ part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = FALSE) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_lopsided_wins(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_lopsided_wins(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_lopsided_wins <- function(plans, shp, dvote, rvote) {
 
   plans <- process_plans(plans)
@@ -410,7 +481,14 @@ part_lopsided_wins <- function(plans, shp, dvote, rvote) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_rmd(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_rmd(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_rmd <- function(plans, shp, dvote, rvote) {
 
   plans <- process_plans(plans)
@@ -448,7 +526,14 @@ part_rmd <- function(plans, shp, dvote, rvote) {
 #' @concept partisan
 #'
 #' @examples
-#' # todo example
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_sscd(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_sscd(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
 part_sscd <- function(plans, shp, dvote, rvote) {
 
   plans <- process_plans(plans)

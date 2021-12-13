@@ -22,6 +22,13 @@ numeric vector
 Calculate Convex Hull Compactness
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+comp_ch(plans = nh$r_2020, shp = nh)
+
+# Or many plans:
+comp_ch(plans = nh_m[, 3:5], shp = nh)
+
 }
 \concept{compactness}

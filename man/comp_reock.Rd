@@ -22,6 +22,13 @@ numeric vector
 Calculate Reock Compactness
 }
 \examples{
-# todo example
+data(nh)
+data(nh_m)
+# For a single plan:
+comp_reock(plans = nh$r_2020, shp = nh)
+
+# Or many plans:
+comp_reock(plans = nh_m[, 3:5], shp = nh)
+
 }
 \concept{compactness}
