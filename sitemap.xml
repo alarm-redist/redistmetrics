@@ -28,6 +28,9 @@
     <loc>https://alarm-redist.github.io/redistmetrics/reference/comp_bc.html</loc>
   </url>
   <url>
+    <loc>https://alarm-redist.github.io/redistmetrics/reference/comp_box_reock.html</loc>
+  </url>
+  <url>
     <loc>https://alarm-redist.github.io/redistmetrics/reference/comp_ch.html</loc>
   </url>
   <url>
@@ -53,6 +56,15 @@
   </url>
   <url>
     <loc>https://alarm-redist.github.io/redistmetrics/reference/comp_schwartz.html</loc>
+  </url>
+  <url>
+    <loc>https://alarm-redist.github.io/redistmetrics/reference/comp_skew.html</loc>
+  </url>
+  <url>
+    <loc>https://alarm-redist.github.io/redistmetrics/reference/comp_x_sym.html</loc>
+  </url>
+  <url>
+    <loc>https://alarm-redist.github.io/redistmetrics/reference/comp_y_sym.html</loc>
   </url>
   <url>
     <loc>https://alarm-redist.github.io/redistmetrics/reference/compet_talisman.html</loc>
