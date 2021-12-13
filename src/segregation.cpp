@@ -17,7 +17,7 @@ NumericVector segregationcalc(NumericMatrix distmat,
   double d = (double)1 / (2 * T * P * (1 - P));
 
   // Get the number of unique plans
-  NumericVector cd1 = distmat(_,1);
+  NumericVector cd1 = distmat(_, 0);
   arma::vec cdVec1 = as<arma::vec> (cd1);
   arma::vec cdLabs = arma::unique(cdVec1);
 

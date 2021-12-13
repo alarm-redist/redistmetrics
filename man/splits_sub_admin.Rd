@@ -2,7 +2,7 @@
 % Please edit documentation in R/splits.R
 \name{splits_sub_admin}
 \alias{splits_sub_admin}
-\title{Compute Number of Sub-Administrative Units Split More than Once}
+\title{Compute Number of Sub-Administrative Units Split}
 \usage{
 splits_sub_admin(plans, shp, sub_admin)
 }
@@ -17,7 +17,7 @@ splits_sub_admin(plans, shp, sub_admin)
 numeric vector
 }
 \description{
-Compute Number of Sub-Administrative Units Split More than Once
+Compute Number of Sub-Administrative Units Split
 }
 \examples{
 # todo examples

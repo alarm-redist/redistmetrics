@@ -1,6 +1,7 @@
 #' Calculate Variation of Information Distances
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar total_pop TRUE
 #' @templateVar ncores TRUE
 #' @template template
@@ -11,10 +12,11 @@
 #'
 #' @examples
 #' # todo example
-dist_info <- function(plans, total_pop, ncores = 1) {
+dist_info <- function(plans, shp, total_pop, ncores = 1) {
 
   # process objects ----
   plans <- process_plans(plans)
+  total_pop <- rlang::eval_tidy(rlang::enquo(total_pop), shp)
 
   # set up parallel ----
   nc <- min(ncores, ncol(plans))

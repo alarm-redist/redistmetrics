@@ -4,7 +4,7 @@
 \alias{comp_log_st}
 \title{Calulate Log Spanning Tree Compactness}
 \usage{
-comp_log_st(plans, shp, counties, adj)
+comp_log_st(plans, shp, counties = NULL, adj)
 }
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}

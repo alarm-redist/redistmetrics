@@ -9,7 +9,7 @@ process_plans <- function(plans) {
     plans <- as.matrix(plans)
   }
   if (any(is.na(plans))) {
-    cli::cli_abort('NA value in argument to {.arg plans}.')
+    cli::cli_abort('{.val NA} in argument to {.arg plans}.')
   }
   plans
 }

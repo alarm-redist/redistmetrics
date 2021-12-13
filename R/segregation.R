@@ -15,6 +15,7 @@
 seg_dissim <- function(plans, shp, group_pop, total_pop) {
   # process inputs ----
   plans <- process_plans(plans)
+  nd <- length(unique(plans[, 1]))
   group_pop <- rlang::eval_tidy(rlang::enquo(group_pop), data = shp)
   total_pop <- rlang::eval_tidy(rlang::enquo(total_pop), data = shp)
   if (is.null(group_pop)) {
@@ -24,5 +25,6 @@ seg_dissim <- function(plans, shp, group_pop, total_pop) {
     cli::cli_abort('`total_pop` not found in `shp`.')
   }
 
-  segregationcalc(plans, group_pop, total_pop)
+  segregationcalc(plans, group_pop, total_pop) %>%
+    rep(each = nd)
 }

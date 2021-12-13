@@ -4,10 +4,12 @@
 \alias{part_tau_gap}
 \title{Calculate Tau Gap}
 \usage{
-part_tau_gap(plans, dvote, rvote, tau = 1)
+part_tau_gap(plans, shp, dvote, rvote, tau = 1)
 }
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+
+\item{shp}{redist_map object or tibble with sf geometry column}
 
 \item{dvote}{unqouted name of column in shp with total population}
 

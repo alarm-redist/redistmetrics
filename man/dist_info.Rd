@@ -4,10 +4,12 @@
 \alias{dist_info}
 \title{Calculate Variation of Information Distances}
 \usage{
-dist_info(plans, total_pop, ncores = 1)
+dist_info(plans, shp, total_pop, ncores = 1)
 }
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+
+\item{shp}{redist_map object or tibble with sf geometry column}
 
 \item{total_pop}{unqouted name of column in shp with total population}
 

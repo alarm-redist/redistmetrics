@@ -4,10 +4,12 @@
 \alias{part_resp}
 \title{Calculate Responsiveness}
 \usage{
-part_resp(plans, dvote, rvote, v, bandwidth = FALSE)
+part_resp(plans, shp, dvote, rvote, v = 0.5, bandwidth = FALSE)
 }
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+
+\item{shp}{redist_map object or tibble with sf geometry column}
 
 \item{dvote}{unqouted name of column in shp with total population}
 

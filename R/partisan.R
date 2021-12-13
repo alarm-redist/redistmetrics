@@ -1,6 +1,7 @@
 #' Calculate Partisan Bias
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @param v vote share to calculate bias at. Numeric. Default is 0.5.
@@ -12,8 +13,12 @@
 #'
 #' @examples
 #' # todo example
-part_bias <- function(plans, dvote, rvote, v = 0.5) {
+part_bias <- function(plans, shp, dvote, rvote, v = 0.5) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -36,6 +41,7 @@ part_bias <- function(plans, dvote, rvote, v = 0.5) {
 #' Calculate Democratic Seats
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @template template
@@ -46,8 +52,12 @@ part_bias <- function(plans, dvote, rvote, v = 0.5) {
 #'
 #' @examples
 #' # todo example
-part_dseats <- function(plans, dvote, rvote) {
+part_dseats <- function(plans, shp, dvote, rvote) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -71,6 +81,7 @@ part_dseats <- function(plans, dvote, rvote) {
 #' Calculate Democratic Vote Share
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @template template
@@ -81,8 +92,12 @@ part_dseats <- function(plans, dvote, rvote) {
 #'
 #' @examples
 #' # todo example
-part_dvs <- function(plans, dvote, rvote) {
+part_dvs <- function(plans, shp, dvote, rvote) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -103,6 +118,7 @@ part_dvs <- function(plans, dvote, rvote) {
 #' Calculate Efficiency Gap
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @template template
@@ -113,8 +129,12 @@ part_dvs <- function(plans, dvote, rvote) {
 #'
 #' @examples
 #' # todo example
-part_egap <- function(plans, dvote, rvote) {
+part_egap <- function(plans, shp, dvote, rvote) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -137,6 +157,7 @@ part_egap <- function(plans, dvote, rvote) {
 #' Calculate Efficiency Gap (Equal Population Assumption)
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @template template
@@ -147,8 +168,12 @@ part_egap <- function(plans, dvote, rvote) {
 #'
 #' @examples
 #' # todo example
-part_egap_ep <- function(plans, dvote, rvote) {
+part_egap_ep <- function(plans, shp, dvote, rvote) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -171,6 +196,7 @@ part_egap_ep <- function(plans, dvote, rvote) {
 #' Calculate Tau Gap
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @param tau A non-negative numeric for calculating Tau Gap. Defaults to 1.
@@ -182,8 +208,12 @@ part_egap_ep <- function(plans, dvote, rvote) {
 #'
 #' @examples
 #' # todo example
-part_tau_gap <- function(plans, dvote, rvote, tau = 1) {
+part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -206,6 +236,7 @@ part_tau_gap <- function(plans, dvote, rvote, tau = 1) {
 #' Calculate Mean Median Score
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @template template
@@ -216,8 +247,12 @@ part_tau_gap <- function(plans, dvote, rvote, tau = 1) {
 #'
 #' @examples
 #' # todo example
-part_mean_median <- function(plans, dvote, rvote) {
+part_mean_median <- function(plans, shp, dvote, rvote) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -239,6 +274,7 @@ part_mean_median <- function(plans, dvote, rvote) {
 #' Calculate Declination
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @param normalize Default is FALSE. Translate score to an angle?
@@ -250,8 +286,12 @@ part_mean_median <- function(plans, dvote, rvote) {
 #'
 #' @examples
 #' # todo example
-part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
+part_decl <- function(plans, shp, dvote, rvote, normalize = FALSE) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -280,6 +320,7 @@ part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
 #' Calculate Responsiveness
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @param v vote share to calculate bias at. Numeric. Default is 0.5.
@@ -292,8 +333,12 @@ part_decl <- function(plans, dvote, rvote, normalize = FALSE) {
 #'
 #' @examples
 #' # todo example
-part_resp <- function(plans, dvote, rvote, v, bandwidth = FALSE) {
+part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = FALSE) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -316,6 +361,7 @@ part_resp <- function(plans, dvote, rvote, v, bandwidth = FALSE) {
 #' Calculate Lopsided Wins
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @template template
@@ -326,8 +372,12 @@ part_resp <- function(plans, dvote, rvote, v, bandwidth = FALSE) {
 #'
 #' @examples
 #' # todo example
-part_lopsided_wins <- function(plans, dvote, rvote) {
+part_lopsided_wins <- function(plans, shp, dvote, rvote) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -350,6 +400,7 @@ part_lopsided_wins <- function(plans, dvote, rvote) {
 #' Calculate Ranked Margin Deviation
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @template template
@@ -360,8 +411,12 @@ part_lopsided_wins <- function(plans, dvote, rvote) {
 #'
 #' @examples
 #' # todo example
-part_rmd <- function(plans, dvote, rvote) {
+part_rmd <- function(plans, shp, dvote, rvote) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }
@@ -383,6 +438,7 @@ part_rmd <- function(plans, dvote, rvote) {
 #' Calculate Smoothed Seat Count Deviation
 #'
 #' @templateVar plans TRUE
+#' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
 #' @template template
@@ -393,8 +449,12 @@ part_rmd <- function(plans, dvote, rvote) {
 #'
 #' @examples
 #' # todo example
-part_sscd <- function(plans, dvote, rvote) {
+part_sscd <- function(plans, shp, dvote, rvote) {
+
   plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
   if (any(is.na(dvote))) {
     stop('NA value in argument to `dvote`.')
   }

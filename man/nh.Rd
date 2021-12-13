@@ -65,7 +65,6 @@ the 326 voting tabulation districts in New Hampshire in 2020.
 }
 \examples{
 data(nh)
-
 }
 \references{
 Voting and Election Science Team, 2020, "2020 Precinct-Level Election Results",

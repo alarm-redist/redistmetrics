@@ -14,6 +14,7 @@
 splits_admin <- function(plans, shp, admin) {
   # prep inputs ----
   plans <- process_plans(plans)
+  nd <- length(unique(plans[, 1]))
 
   # prep admin ----
   admin <- rlang::eval_tidy(rlang::enquo(admin), data = shp)
@@ -23,10 +24,11 @@ splits_admin <- function(plans, shp, admin) {
   admin <- make_id(admin)
 
   # run splits with max_split = 1 ----
-  splits(plans - 1, community = admin - 1, length(unique(plans[, 1])), 1)
+  splits(plans - 1, community = admin - 1, nd, 1) %>%
+    rep(each = nd)
 }
 
-#' Compute Number of Sub-Administrative Units Split More than Once
+#' Compute Number of Sub-Administrative Units Split
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
@@ -43,6 +45,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
 
   # prep inputs ----
   plans <- process_plans(plans)
+  nd <- length(unique(plans[, 1]))
 
   # prep admin ----
   sub_admin <- rlang::eval_tidy(rlang::enquo(sub_admin), data = shp)
@@ -50,13 +53,14 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
     cli::cli_abort('`admin` not found in `shp`.')
   }
 
-  plans <- plans[!is.na(sub_admin), ]
+  plans <- plans[!is.na(sub_admin), , drop = FALSE]
   sub_admin <- sub_admin[!is.na(sub_admin)]
 
   sub_admin <- make_id(sub_admin)
 
   # run splits with max_split = 2 ----
-  splits(plans - 1, community = sub_admin - 1, length(unique(plans[, 1])), 2)
+  splits(plans - 1, community = sub_admin - 1, nd, 1) %>%
+    rep(each = nd)
 }
 
 #' Compute Number of Administrative Units Split More than Once
@@ -75,6 +79,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
 splits_multi <- function(plans, shp, admin) {
   # prep inputs ----
   plans <- process_plans(plans)
+  nd <- length(unique(plans[, 1]))
 
   # prep admin ----
   admin <- rlang::eval_tidy(rlang::enquo(admin), data = shp)
@@ -84,5 +89,6 @@ splits_multi <- function(plans, shp, admin) {
   admin <- make_id(admin)
 
   # run splits with max_split = 2 ----
-  splits(plans - 1, community = admin - 1, length(unique(plans[, 1])), 2)
+  splits(plans - 1, community = admin - 1, nd, 2) %>%
+    rep(each = nd)
 }

@@ -16,6 +16,5 @@ a population tolerance of 0.05\%.
 }
 \examples{
 data(nh_m)
-
 }
 \concept{data}

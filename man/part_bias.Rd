@@ -4,10 +4,12 @@
 \alias{part_bias}
 \title{Calculate Partisan Bias}
 \usage{
-part_bias(plans, dvote, rvote, v = 0.5)
+part_bias(plans, shp, dvote, rvote, v = 0.5)
 }
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+
+\item{shp}{redist_map object or tibble with sf geometry column}
 
 \item{dvote}{unqouted name of column in shp with total population}
 
