@@ -31,7 +31,11 @@ reference:
   desc: "Functions to assess incumbent pairings"
 - contents:
   - has_concept("incumbent")
+-title: Example Data
+  desc: "Data on New Hampshire for Examples"
+- contents:
+  - has_concept("data")
 - title: Misc.
   desc: "Remaining tools that don't fit into other categories"
 - contents:
-  - lacks_concepts(c("partisan", "compactness", "splits", "competitiveness", "distances", "segregation", "incumbent"))
+  - lacks_concepts(c("partisan", "compactness", "splits", "competitiveness", "distances", "segregation", "incumbent", "data"))

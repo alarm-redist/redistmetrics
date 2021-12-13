@@ -11,6 +11,7 @@
 #' @examples
 #' by_plan(letters)
 #' by_plan(rep(letters, each = 2))
+#'
 by_plan <- function(x) {
   reps <- unique(rle(x)$lengths)
   if (length(reps) == 1) {
