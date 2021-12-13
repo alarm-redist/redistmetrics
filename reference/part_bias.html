@@ -63,13 +63,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">part_bias</span><span class="op">(</span><span class="va">plans</span>, <span class="va">dvote</span>, <span class="va">rvote</span>, v <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">part_bias</span><span class="op">(</span><span class="va">plans</span>, <span class="va">shp</span>, <span class="va">dvote</span>, <span class="va">rvote</span>, v <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>plans</dt>
 <dd><p>redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan</p></dd>
+<dt>shp</dt>
+<dd><p>redist_map object or tibble with sf geometry column</p></dd>
 <dt>dvote</dt>
 <dd><p>unqouted name of column in shp with total population</p></dd>
 <dt>rvote</dt>
