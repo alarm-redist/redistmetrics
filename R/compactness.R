@@ -880,37 +880,45 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
   }
 
   # compute ----
-
   areas <- geos::geos_area(shp)
   coords <- geox_coordinates(geos::geos_centroid(shp))
+
+  ## experimental:
+  #all_pts <- wk::wk_coords(shp)
+
   out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
       w_prec <- which(plans[, map] == dists[i])
+
+      # # experimental:
+      # w_feat <- which(all_pts$feature_id %in% w_prec)
       # find centroid
       cent <- geox_sub_centroid(coords, areas, w_prec)
 
       # center at 0, 0
-      #coords_ctr <- coords[w_prec, ] - cent
-      # need to do affine transformations in sf for now?
       shp_ctr <- sf::st_union(shp[w_prec] - cent)
       shp_refl <- sf::st_coordinates(shp_ctr)[, 1:2]
       shp_refl[, 2] <- shp_refl[, 2] * -1
       shp_refl <- sf::st_sfc(sf::st_polygon(list(shp_refl)))
 
-
-      # Reflect over y = 0 and make shapes
-      # the idea, but needs to be the actual shapes, not the centers:
-      #refl_united <- geox_union(geos::geos_make_polygon(x = coords_ctr[, 1] * -1,
-      #                                                  y = coords_ctr[, 2],
-      #                                                  crs = epsg))
-      # united <- geox_union(geos::geos_make_polygon(x = coords_ctr[, 1],
-      #                                                  y = coords_ctr[, 2],
-      #                                                  crs = epsg))
+      # # experimental:
+      # # center at 0,0
+      # shp_ctr <- geox_union(geos::geos_make_valid(geos::geos_make_polygon(
+      #   x = all_pts$x[w_feat] - cent[1], y = all_pts$y[w_feat] - cent[2],
+      #   feature_id = all_pts$feature_id[w_feat], ring_id = all_pts$ring_id[w_feat],
+      #   crs = epsg
+      # )))
+      #
+      # # center at 0,0 and reflect
+      # shp_refl <- geox_union(geos::geos_make_valid(geos::geos_make_polygon(
+      #   x = all_pts$x[w_feat] - cent[1], y = -1 * (all_pts$y[w_feat] - cent[2]),
+      #   feature_id = all_pts$feature_id[w_feat], ring_id = all_pts$ring_id[w_feat],
+      #   crs = epsg
+      # )))
 
       # Intersect
-      #ovlap <- geos::geos_intersection(united, refl_united)
       ovlap <- geos::geos_intersection(shp_ctr, shp_refl)
 
       # Compute area

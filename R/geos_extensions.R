@@ -35,3 +35,17 @@ geox_sub_centroid <- function(coordinates, areas, idx) {
   c(stats::weighted.mean(coordinates[idx, 1], areas[idx]),
     stats::weighted.mean(coordinates[idx, 2], areas[idx]))
 }
+
+# geox_point_list <- function(x) {
+#   x <- geos::as_geos_geometry(x)
+#   pts <- lapply(seq_along(x), function(i) {
+#     geos::geos_unnest(geos::geos_boundary(x[[i]]), keep_multi = FALSE)
+#   })
+#   n_pts <- lapply(pts, function(y) geos::geos_num_coordinates(y))
+#   lapply(seq_along(pts), function(i){
+#     lapply(seq_along(n_pts[[i]]), function(n) {
+#       inner_pt <- geos::geos_point_n(pts[[i]][n], 1:n_pts[[i]][n])
+#       cbind(geos::geos_x(inner_pt), geos::geos_y(inner_pt))
+#     })
+#   })
+# }
