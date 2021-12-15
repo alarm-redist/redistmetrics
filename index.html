@@ -82,23 +82,83 @@
 </h1></div>
 <!-- badges: start -->
 
-<p><code>redistmetrics</code> is a member of the <code>redistverse</code>, which is a family of R packages by the ALARM Project. <code>redistmetrics</code> provides the backend for the computation of summary statistics for a redistricting plan. It provides a more direct access point to use methods in <code>redist</code> without requiring <code>redist</code> objects.</p>
+<p><code>redistmetrics</code> is one of the R packages developed and maintained by the <a href="https://alarm-redist.github.io/" class="external-link">ALARM Project</a>. <code>redistmetrics</code> provides the back-end for the computation of summary statistics for a redistricting plan. It provides a more direct access point to use methods in <code>redist</code> without requiring <code>redist</code> objects.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of redistmetrics from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install the development version of redistmetrics from <a href="https://github.com/alarm-redist/redistmetrics" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"alarm-redist/redistmetrics"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">'remotes'</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'remotes'</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'alarm-redist/redistmetrics'</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>This is a basic example which shows you how to solve a common problem:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span>
-<span class="co">## basic example code</span></code></pre></div>
-<p>TODO (lots of todos! Use <code>redist</code> only for now!)</p>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span></code></pre></div>
+<p><code>redistmetrics</code> offers support for 4 common input types and has examples of each, all based on New Hampshire:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
+<p>This example is based on <code><a href="reference/comp_polsby.html">comp_polsby()</a></code> for the Polsby Popper compactness, but <code><a href="reference/comp_polsby.html">comp_polsby()</a></code> can be substituted for any implemented measure!</p>
+<div class="section level4">
+<h4 id="single-plan">Single Plan:<a class="anchor" aria-label="anchor" href="#single-plan"></a>
+</h4>
+<p>For a single plan, we can pass the single plan to the input. We also pass an argument to <code>shp</code> which takes in an <code>sf</code> dataframe. <code>r_2020</code> here is the Republican proposal for New Hampshire’s congressional districts.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/comp_polsby.html">comp_polsby</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.2324375 0.1582763</span></code></pre></div>
+<p>The output here is a numeric vector, where each entry is the output for a district. The first district here has a compactness of about 0.23 and the second district has a compactness of about 0.16.</p>
+<p>Now, if you’re redistricting in R, we recommend using the R package <code>redist</code>. In which case, you would have a <code>redist_map</code> object.</p>
+<p>We can load an example here with:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_map</span><span class="op">)</span></code></pre></div>
+<p>For redist maps, the workflow is identical!</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/comp_polsby.html">comp_polsby</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_map</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.2324375 0.1582763</span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="multiple-plans">Multiple Plans:<a class="anchor" aria-label="anchor" href="#multiple-plans"></a>
+</h4>
+<p>For multiple plans, we can pass either a matrix of plans or a <code>redist_plans</code> object to plans. We will still need <code>nh</code> or <code>nh_map</code> to provide the shapes.</p>
+<p>If we have a matrix, we can compare with <code>nh_m</code> a matrix of plans, where each column indicates a plan.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_m</span><span class="op">)</span></code></pre></div>
+<p>From there, the process is nearly identical. Here we compute the Polsby Popper compactness for the first two columns:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/comp_polsby.html">comp_polsby</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.1844955 0.1796426 0.2324375 0.1582763</span></code></pre></div>
+<p>Now we got 4 outputs: 1 for each district x 2 for each plan x 2 plans.</p>
+<p>If we are using <code>redist</code>, we likely have a <code>redist_plans</code> object which hides the matrix as an attribute to give a more familiar tidy workflow. With that, we can do a very similar process:</p>
+<p>First, we load the plans object (included as an example):</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_plans</span><span class="op">)</span></code></pre></div>
+<p>The benefit of using a <code>redist_plans</code> object is that we can cleanly <code>mutate</code> into it using the <code>.</code> shortcut:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: 'dplyr'</span>
+<span class="co">#&gt; The following objects are masked from 'package:stats':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     filter, lag</span>
+<span class="co">#&gt; The following objects are masked from 'package:base':</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     intersect, setdiff, setequal, union</span>
+<span class="va">nh_plans</span> <span class="op">&lt;-</span> <span class="va">nh_plans</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>polsby <span class="op">=</span> <span class="fu"><a href="reference/comp_polsby.html">comp_polsby</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">.</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Linking to GEOS 3.9.1, GDAL 3.2.1, PROJ 7.2.1</span></code></pre></div>
+<p>Now our values are cleanly held in the <code>redist_plans</code> object:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nh_plans</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 x 4</span>
+<span class="co">#&gt;   draw   district total_pop polsby</span>
+<span class="co">#&gt;   &lt;fct&gt;     &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 d_2020        1    688739  0.184</span>
+<span class="co">#&gt; 2 d_2020        2    688790  0.180</span>
+<span class="co">#&gt; 3 r_2020        1    688676  0.232</span>
+<span class="co">#&gt; 4 r_2020        2    688853  0.158</span>
+<span class="co">#&gt; 5 1             1    688961  0.235</span>
+<span class="co">#&gt; 6 1             2    688568  0.349</span></code></pre></div>
+</div>
 </div>
 </div>
   </div>
