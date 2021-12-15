@@ -338,16 +338,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// dist_cty_splits
-IntegerMatrix dist_cty_splits(IntegerMatrix dm, IntegerVector community, int nd);
-RcppExport SEXP _redistmetrics_dist_cty_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP) {
+// distr_cty_splits
+IntegerMatrix distr_cty_splits(IntegerMatrix dm, IntegerVector community, int nd);
+RcppExport SEXP _redistmetrics_distr_cty_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type community(communitySEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
-    rcpp_result_gen = Rcpp::wrap(dist_cty_splits(dm, community, nd));
+    rcpp_result_gen = Rcpp::wrap(distr_cty_splits(dm, community, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// admin_splits_count
+IntegerMatrix admin_splits_count(IntegerMatrix dm, IntegerVector admin);
+RcppExport SEXP _redistmetrics_admin_splits_count(SEXP dmSEXP, SEXP adminSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type admin(adminSEXP);
+    rcpp_result_gen = Rcpp::wrap(admin_splits_count(dm, admin));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -404,7 +416,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_smoothseat", (DL_FUNC) &_redistmetrics_smoothseat, 2},
     {"_redistmetrics_segregationcalc", (DL_FUNC) &_redistmetrics_segregationcalc, 3},
     {"_redistmetrics_splits", (DL_FUNC) &_redistmetrics_splits, 4},
-    {"_redistmetrics_dist_cty_splits", (DL_FUNC) &_redistmetrics_dist_cty_splits, 3},
+    {"_redistmetrics_distr_cty_splits", (DL_FUNC) &_redistmetrics_distr_cty_splits, 3},
+    {"_redistmetrics_admin_splits_count", (DL_FUNC) &_redistmetrics_admin_splits_count, 2},
     {"_redistmetrics_var_info_mat", (DL_FUNC) &_redistmetrics_var_info_mat, 3},
     {"_redistmetrics_var_info_vec", (DL_FUNC) &_redistmetrics_var_info_vec, 3},
     {NULL, NULL, 0}

@@ -101,8 +101,12 @@ splits <- function(dm, community, nd, max_split) {
     .Call(`_redistmetrics_splits`, dm, community, nd, max_split)
 }
 
-dist_cty_splits <- function(dm, community, nd) {
-    .Call(`_redistmetrics_dist_cty_splits`, dm, community, nd)
+distr_cty_splits <- function(dm, community, nd) {
+    .Call(`_redistmetrics_distr_cty_splits`, dm, community, nd)
+}
+
+admin_splits_count <- function(dm, admin) {
+    .Call(`_redistmetrics_admin_splits_count`, dm, admin)
 }
 
 var_info_mat <- function(m, i, pop) {

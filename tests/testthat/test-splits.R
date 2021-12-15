@@ -27,3 +27,16 @@ test_that("splits_multi works", {
   e <- c(0L, 0L, 0L, 0L)
   expect_equal(a, e, tolerance = 1e-4)
 })
+
+test_that("splits_count works", {
+  a <- splits_count(nh$r_2020, nh, county)
+  e <- structure(c(1L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L),
+                 .Dim = c(10L, 1L))
+  expect_equal(a, e, tolerance = 1e-4)
+
+  a <- splits_count(nh_m[, 1:2], nh, county)
+  e <- structure(c(2L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 1L,
+                   1L, 2L, 2L, 2L, 2L, 2L, 1L),
+                 .Dim = c(10L, 2L))
+  expect_equal(a, e, tolerance = 1e-4)
+})
