@@ -26,26 +26,159 @@ data(nh)
 
 For illustration purposes, we utilize what is often called the "normal Democratic vote" `ndv` and the "normal Republican vote" `nrv` which are the averages of the recent elections by party. For most purposes beyond basic description, you would want to compute these scores for several elections and then average the scores.
 
-## Democratic Seats
+This is a brief introduction to the measures included in the package. For a more thorough, yet still friendly introduction, we recommend [Katz, King, and Rosenblatt (2020)](https://gking.harvard.edu/files/gking/files/theoretical_foundations_and_empirical_evaluations_of_partisan_fairness_in_districtbased_democracies.pdf)F.
 
-## Democratic Vote Share
+### Democratic Seats
 
-## Partisan Bias
+Democratic seats is the number of seats that Democrats would win under fixed Democratic and Republican votes.
 
-## Declination
+All scores are between 0 and the number of districts.
 
-## Mean-Median Score
+Democratic seats can be computed with:
 
-## Lopside Wins
+```{r}
+part_dseats(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
 
-## Responsiveness
 
-## Efficiency Gap
+### Democratic Vote Share
 
-## Efficiency Gap (Equal Population)
+The Democratic vote share is the vote share by district under fixed Democratic and Republican votes.
 
-## Tau Gap
+All scores range from 0 to 1, where a higher proportion indicates a more Democratic voters in a district relative to Republican voters.
 
-## Smoothed Seat Count Deviation
+The Democratic vote share can be computed with:
 
-## Ranked Marginal Deviation
+```{r}
+part_dvs(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+
+### Partisan Bias
+
+Partisan bias is the deviation from partisan symmetry at a voteshare $v$.
+
+Positive scores indicate bias in favor of Republicans, while negative scores indicate bias in favor of Democrats. Scores are in the range of -1 to 1.
+
+Partisan Bias can be computed with:
+
+```{r}
+part_dvs(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+The argument $v$ can be set for any value in $0$ to $1$ and is $0.5$ by default.
+
+### Responsiveness
+
+Responsiveness describes the slope of the implied seats-votes curve by an election. A higher score implies that a districting plan is more likely to change given a change in vote distribution.
+
+Responsiveness can be computed with:
+
+```{r}
+part_resp(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+The argument $v$ can be set for any value in $0$ to $1$ and is $0.5$ by default.
+
+### Declination
+
+The declination describes the difference in the angle of two line through ordered an ordered scatter plot of Democratic and Republican votes, where one line is fit to each. 
+
+The normalized declination can take on values from -1 to 1, where a negative score indicates a pro-Democratic bias and positive score indicates a pro-Republican bias. When not normalized, the scores are not bounded in the same way, but the negative and positive interpretations stay the same.
+
+Declination can be computed with:
+
+```{r}
+part_decl(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+By default, declination is not normalized to an angle, but can be by setting `normalize = TRUE`.
+
+### Mean-Median Score
+
+The Mean Median Score is the difference between the mean Democratic vote share and the median Democratic district. This means that a negative score is in favor of Democrats and a positive score is in favor of Republicans. The score can range from -1 to 1. 
+
+The Mean-Median score can be computed with:
+
+```{r}
+part_mean_median(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+### Lopsided Wins
+
+The Lopsided Wins score indicates if a party tends to win by a larger margin than the other party. A negative score indicates a pro-Democratic bias, whereas a positive score indicates a pro-Republican bias. Scores can rance from -1 to 1.
+
+The Lopsided Wins score can be computed with:
+
+```{r}
+part_lop_wins(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+The output of this can be used for a t-test.
+
+### Efficiency Gap
+
+The Efficiency Gap describes the difference in wasted votes by a party. Wasted votes are those which don't lead to a win (votes from the party lost that district) and those which weren't necessary for a win (the excess votes above 50% + 1 vote by the party that won the district). These are normalized by the votes for the party, leading to a score between -1 and 1. A negative score indicates a pro-Democratic bias, whereas a positive score inidcates a pro-Republican bias.
+
+The Efficiency Gap can be computed with:
+
+```{r}
+part_egap(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+### Efficiency Gap (Equal Population)
+
+This is the efficiency gap, with the assumption that parties have equal voter turnout and population. The scale is the same as for the regular efficiency gap, where all scores are between -1 and 1, with negative implying pro-Democratic bias and positive implying pro-Republican bias.
+
+The Efficiency Gap (Equal Population) can be computed with:
+
+```{r}
+part_egap_ep(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+### Tau Gap
+
+The $\tau$ gap is a generalization of the efficiency gap. When $\tau = 1$, it is exactly twice the efficiency gap. The $\tau$ parameter is a weighting parameter which describes how wasted votes should be weighted.
+
+The $\tau$ Gap can be computed with:
+
+```{r}
+part_tau_gap(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+The default is `tau = 1`.
+
+### Smoothed Seat Count Deviation
+
+The Smoothed Seat Count Deviation offers an interpolation between seats when describing the number of seats won by a party. This can be added to the Democratic seats to describe the smoothed seat count. 
+
+As such, values are between 0 and 1, where 0 favors Republicans and 1 favors Democrats.
+
+The Smoothed Seat Count Deviation can be computed with:
+
+```{r}
+part_sscd(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+### Ranked Marginal Deviation
+
+The Ranked Marginal Deviation is also known as the Gerrymandering Index. Given a set of plans, we can first order them by Democratic percent in each seat. The Ranked Marginal Deviation is the square root of the sum of the squared distances between the average Democratic percent in each seat and the Democratic percent in a given plan.
+
+As such, it is sensitive to the plans inputted. Here we use the `nh_m` data described in the "Using `redistmetrics`" vignette, which contains 2 reference plans and 50 simulated plans.
+
+```{r}
+data(nh_m)
+part_rmd(plans = nh_m, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+This score is intended for comparison, which we can display as a plot such as:
+```{r}
+library(ggplot2)
+dplyr::tibble(rmd = part_rmd(plans = nh_m, shp = nh, dvote = ndv, rvote = nrv),
+              plan = rep(colnames(nh_m), each = 2)) %>% 
+  ggplot() +
+  geom_histogram(aes(x = rmd, fill = plan), bins = 50) + 
+  theme_bw()
+```
+
+In this (small) set of simulations, the Democratic 2020 proposal is more similar to the simulated plans than the Republican 2020 proposal.

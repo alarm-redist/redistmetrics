@@ -465,12 +465,12 @@ part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = FALSE) {
 #' data(nh)
 #' data(nh_m)
 #' # For a single plan:
-#' part_lopsided_wins(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#' part_lop_wins(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
 #'
 #' # Or many plans:
-#' part_lopsided_wins(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#' part_lop_wins(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 #'
-part_lopsided_wins <- function(plans, shp, dvote, rvote) {
+part_lop_wins <- function(plans, shp, dvote, rvote) {
 
   plans <- process_plans(plans)
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)

@@ -57,12 +57,12 @@ test_that("part_egap_ep works", {
   expect_equal(a, e, tolerance = 1e-4)
 })
 
-test_that("part_lopsided_wins works", {
-  a <- part_lopsided_wins(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
+test_that("part_lop_wins works", {
+  a <- part_lop_wins(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
   e <- c(0.0762476614030061, 0.0762476614030061)
   expect_equal(a, e, tolerance = 1e-4)
 
-  a <- part_lopsided_wins(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
+  a <- part_lop_wins(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
   e <- c(NaN, NaN, 0.0762476614030061, 0.0762476614030061)
   expect_equal(a, e, tolerance = 1e-4)
 })
