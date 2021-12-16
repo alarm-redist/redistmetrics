@@ -68,6 +68,7 @@ Functions in `redistmetrics` use common prefixes to indicate their usage. The pr
  - `splits_`: administrative split measures
  - `seg_`: segregation measures (currently limited in scope)
  - `inc_`: incumbent pairing measures (currently limited in scope)
+ - `compet_`: competitiveness measures (currently limited in scope)
  
 With these, we can pick a measure that we'd like to compute, say the Reock compactness, via `comp_reock()`. The major arguments are then the `plans`, or what the redistricting plan is, and the `shp`, which is the geography that the district is based on. Notably, `comp_` functions also typically take an `epsg` argument which has the goal of converting the object to a projected map. This allows for more accurate measurement by more correctly describing the relative location of points on a map.
 
