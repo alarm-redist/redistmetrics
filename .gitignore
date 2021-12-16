@@ -40,3 +40,5 @@ rsconnect/
 src-i386/
 docs
 inst/doc
+/doc/
+/Meta/
