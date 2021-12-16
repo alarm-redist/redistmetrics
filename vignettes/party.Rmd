@@ -1,0 +1,19 @@
+---
+title: "Measures of Partisan Advantage"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Measures of Partisan Advantage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(redistmetrics)
+```

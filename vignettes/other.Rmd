@@ -1,0 +1,19 @@
+---
+title: "Other Measures"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Other Measures}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(redistmetrics)
+```
