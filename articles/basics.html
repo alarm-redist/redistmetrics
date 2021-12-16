@@ -129,64 +129,7 @@
 <p>Given some data set where the districts are indicated, we can begin to compute measures.</p>
 <p>We start with <code>nh</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt;       GEOID20 state         county    vtd  pop pop_hisp pop_white pop_black</span>
-<span class="co">#&gt; 1 33001ALTO01    NH Belknap County ALTO01 5894       67      5538        14</span>
-<span class="co">#&gt; 2 33001BARN01    NH Belknap County BARN01 4915       82      4568        13</span>
-<span class="co">#&gt; 3 33001BELM01    NH Belknap County BELM01 7314      146      6747        24</span>
-<span class="co">#&gt; 4 33001CENT01    NH Belknap County CENT01 1040        9       984         8</span>
-<span class="co">#&gt; 5 33001GILF01    NH Belknap County GILF01 7699      153      7184        21</span>
-<span class="co">#&gt; 6 33001GILM01    NH Belknap County GILM01 3945       45      3667        12</span>
-<span class="co">#&gt;   pop_aian pop_asian pop_nhpi pop_other pop_two  vap vap_hisp vap_white</span>
-<span class="co">#&gt; 1       13        43        0        28     191 4942       43      4684</span>
-<span class="co">#&gt; 2        6        18        2        17     209 3919       50      3672</span>
-<span class="co">#&gt; 3        8        61        3        16     309 5858       87      5471</span>
-<span class="co">#&gt; 4        0         1        0         5      33  880        5       845</span>
-<span class="co">#&gt; 5       12        61        2        32     234 6365      102      6014</span>
-<span class="co">#&gt; 6        5        15        0        16     185 3165       20      2969</span>
-<span class="co">#&gt;   vap_black vap_aian vap_asian vap_nhpi vap_other vap_two pre_16_rep_tru</span>
-<span class="co">#&gt; 1        14       11        40        0        28     122         2213.5</span>
-<span class="co">#&gt; 2        13        4        18        2        11     149         1530.4</span>
-<span class="co">#&gt; 3        15        5        52        2        10     216         2179.2</span>
-<span class="co">#&gt; 4         8        0         0        0         5      17          379.6</span>
-<span class="co">#&gt; 5        16       11        38        1        25     158         2555.6</span>
-<span class="co">#&gt; 6         7        5        12        0        11     141         1327.5</span>
-<span class="co">#&gt;   pre_16_dem_cli uss_16_rep_ayo uss_16_dem_has gov_16_rep_sun gov_16_dem_van</span>
-<span class="co">#&gt; 1         1159.7         2215.8         1200.7         2177.8         1171.3</span>
-<span class="co">#&gt; 2          933.6         1465.1         1042.5         1464.7         1026.5</span>
-<span class="co">#&gt; 3         1266.9         1996.6         1496.6         2033.1         1405.3</span>
-<span class="co">#&gt; 4          334.5          390.2          339.0          405.3          317.3</span>
-<span class="co">#&gt; 5         2006.0         2544.1         2104.2         2600.8         1945.4</span>
-<span class="co">#&gt; 6          784.7         1236.0          894.2         1235.9          863.3</span>
-<span class="co">#&gt;   gov_18_rep_sun gov_18_dem_kel pre_20_dem_bid pre_20_rep_tru uss_20_dem_sha</span>
-<span class="co">#&gt; 1         1942.8          751.1         1447.8         2433.8         1608.0</span>
-<span class="co">#&gt; 2         1257.1          706.2         1161.3         1709.2         1320.5</span>
-<span class="co">#&gt; 3         1807.8          855.4         1602.1         2351.4         1866.5</span>
-<span class="co">#&gt; 4          393.2          234.9          396.0          430.0          411.5</span>
-<span class="co">#&gt; 5         2342.6         1423.8         2545.4         2797.6         2761.4</span>
-<span class="co">#&gt; 6         1111.4          590.4         1015.7         1417.2         1146.1</span>
-<span class="co">#&gt;   uss_20_rep_mes gov_20_dem_fel gov_20_rep_sun arv_16 adv_16 arv_18 adv_18</span>
-<span class="co">#&gt; 1         2229.2          762.7         3110.6 2202.4 1177.2 1942.8  751.1</span>
-<span class="co">#&gt; 2         1537.8          669.0         2196.3 1486.8 1000.9 1257.1  706.2</span>
-<span class="co">#&gt; 3         2010.6          810.8         3114.8 2069.6 1389.6 1807.8  855.4</span>
-<span class="co">#&gt; 4          399.8          232.8          583.4  391.7  330.3  393.2  234.9</span>
-<span class="co">#&gt; 5         2517.5         1392.8         3862.7 2566.9 2018.5 2342.6 1423.8</span>
-<span class="co">#&gt; 6         1256.9          619.3         1800.6 1266.5  847.4 1111.4  590.4</span>
-<span class="co">#&gt;   arv_20 adv_20    nrv    ndv r_2020 d_2020                              adj</span>
-<span class="co">#&gt; 1 2591.2 1272.9 2331.9 1157.3      1      1         1, 295, 5, 34, 32, 4, 28</span>
-<span class="co">#&gt; 2 1814.5 1050.3 1594.4  979.9      1      1                   308, 231, 5, 0</span>
-<span class="co">#&gt; 3 2492.2 1426.5 2213.4 1329.1      1      1          5, 228, 15, 14, 8, 9, 4</span>
-<span class="co">#&gt; 4  471.1  346.7  425.9  323.7      1      2                  13, 12, 126, 28</span>
-<span class="co">#&gt; 5 3059.3 2233.2 2745.9 2025.6      1      1 5, 2, 6, 12, 0, 9, 10, 7, 11, 28</span>
-<span class="co">#&gt; 6 1491.5  927.0 1340.8  844.8      1      1             204, 1, 226, 2, 0, 4</span>
-<span class="co">#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      geometry</span>
-<span class="co">#&gt; 1                                                                                     1069782.9, 1070541.4, 1085720.5, 1092486.8, 1100543.0, 1105599.0, 1108093.5, 1117890.2, 1110482.6, 1113673.6, 1117745.9, 1119176.2, 1086691.2, 1090737.5, 1080216.9, 1076919.2, 1073784.2, 1078019.9, 1077443.7, 1072759.4, 1069782.9, 411576.5, 410842.4, 396977.4, 390735.7, 388360.0, 383211.9, 386365.4, 379070.0, 370305.0, 346654.5, 319519.8, 312068.2, 334947.9, 340815.0, 347949.7, 368078.1, 388368.4, 388099.9, 393344.9, 393820.6, 411576.5</span>
-<span class="co">#&gt; 2                                                                                                                                                                                                                                                                                                                                                                                           1068737.4, 1086691.2, 1119176.2, 1110234.5, 1106449.9, 1098922.3, 1068737.4, 308704.3, 334947.9, 312068.2, 300730.8, 294816.8, 286392.6, 308704.3</span>
-<span class="co">#&gt; 3                                                                                                                                                                                                                   1025739.0, 1028301.3, 1032565.8, 1042054.6, 1042843.3, 1055885.7, 1049874.5, 1038055.6, 1036122.3, 1015383.2, 1019693.9, 1018979.6, 1023175.0, 1022720.8, 1025739.0, 365450.2, 375769.4, 371342.0, 366038.3, 367377.4, 357757.7, 349977.4, 333022.0, 332194.0, 347132.5, 352998.3, 356484.3, 359171.8, 361829.6, 365450.2</span>
-<span class="co">#&gt; 4                                                                                                                                                                                                                                                                                                                            1006801.6, 1022671.0, 1019917.7, 1044227.0, 1038666.1, 1033925.5, 1021935.8, 1016010.1, 1012984.3, 1006801.6, 434442.1, 436597.3, 459621.8, 435828.1, 432534.8, 436925.7, 425360.8, 424402.9, 425383.3, 434442.1</span>
-<span class="co">#&gt; 5 1040918.4, 1042309.4, 1045241.2, 1046993.9, 1041144.5, 1044276.0, 1051587.4, 1059553.0, 1063781.3, 1069616.8, 1069782.9, 1072759.4, 1077443.7, 1078019.9, 1073784.2, 1076919.2, 1057445.8, 1055885.7, 1042843.3, 1042054.6, 1043464.3, 1040857.0, 1041576.4, 1039472.9, 1040918.4, 383201.6, 389267.6, 388807.5, 402234.2, 407523.7, 409077.9, 408409.4, 415154.3, 415514.0, 411731.1, 411576.5, 393820.6, 393344.9, 388099.9, 388368.4, 368078.1, 359945.4, 357757.7, 367377.4, 366038.3, 372062.9, 372329.8, 375382.9, 377639.6, 383201.6</span>
-<span class="co">#&gt; 6                                                                                                                                                                                                                                                                                  1036122.3, 1038055.6, 1049874.5, 1055885.7, 1057445.8, 1076919.2, 1080216.9, 1090737.5, 1086691.2, 1068737.4, 1040507.3, 1036122.3, 332194.0, 333022.0, 349977.4, 357757.7, 359945.4, 368078.1, 347949.7, 340815.0, 334947.9, 308704.3, 329052.6, 332194.0</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
 <p>Functions in <code>redistmetrics</code> use common prefixes to indicate their usage. The prefixes in the current version are:</p>
 <ul>
 <li>
@@ -219,7 +162,7 @@
           rvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_rep_tru</span>, dvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_dem_bid</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/by_plan.html">by_plan</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] -0.08174456</span></code></pre></div>
-<p>FOr more information, view the other vignettes or the <a href="https://alarm-redist.github.io/redistmetrics/index.html">package website</a>.</p>
+<p>For more information, view the other vignettes or the <a href="https://alarm-redist.github.io/redistmetrics/index.html">package website</a>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
