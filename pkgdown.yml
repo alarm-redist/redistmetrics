@@ -3,7 +3,11 @@ pkgdown: 2.0.1
 pkgdown_sha: ~
 articles:
   basics: basics.html
-last_built: 2021-12-16T02:51Z
+  compactness: compactness.html
+  other: other.html
+  party: party.html
+  splits: splits.html
+last_built: 2021-12-16T02:54Z
 urls:
   reference: https://alarm-redist.github.io/redistmetrics/reference
   article: https://alarm-redist.github.io/redistmetrics/articles
