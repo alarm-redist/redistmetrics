@@ -58,7 +58,6 @@ We start with `nh`:
 
 ```{r}
 data(nh)
-head(nh)
 ```
 
 Functions in `redistmetrics` use common prefixes to indicate their usage. The prefixes in the current version are:
@@ -96,4 +95,4 @@ part_egap(plans = nh$r_2020, shp = nh,
   by_plan()
 ```
 
-FOr more information, view the other vignettes or the [package website](https://alarm-redist.github.io/redistmetrics/index.html).
+For more information, view the other vignettes or the [package website](https://alarm-redist.github.io/redistmetrics/index.html).
