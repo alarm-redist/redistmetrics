@@ -14,12 +14,86 @@ knitr::opts_chunk$set(
 )
 ```
 
+`redistmetrics` provides an interface for computing common redistricting measures and metrics. This covers the range of compactness measures, partisan gerrymandering metrics, county splits, and more. The goal is to provide a flexible and friendly (to existing R users) implementation of scores which are often used in academic research, litigation, public projects, and journalism. This package began as a set of functions in [`redist`](https://cran.r-project.org/web/packages/redist/index.html). While those features will remain, this package should offer friendlier examples by separating out measures into their own functions.
+
+The package is developed and maintained by the [ALARM Project](https://alarm-redist.github.io/), the ALgorithm-Assisted Redistricting Methodology Project,a research project under the direction of Kosuke Imai. The code in this package was developed by Christopher T. Kenny, Cory McCartan, and Ben Fifield. When using the package, please cite the package using the following:
+
+```{r}
+citation('redistmetrics')
+```
+
+## Installation
+
+The package is fully open source and can be installed from GitHub:
+
+```{r, eval = FALSE}
+if (!requireNamespace('remotes')) {
+  install.packages('remotes')
+}
+
+remotes::install_github('alarm-redist/redistmetrics)
+```
+
+Once installed, the package can be loaded with:
 ```{r setup}
 library(redistmetrics)
 ```
 
+For example purposes, we include data about New Hampshire's political geography and demographics. The following data is included:
+
+ - `nh`: a `tibble` with geographic data, an adjacency graph, past electoral data, 2020 Census demographics, and two proposed NH redistricting plans
+ - `nh_m`: a matrix of 52 redistricting plans, where the first two are the proposed plans in `nh` and the next 50 are simulated alternative plans
+ 
+For users of `redist`, we also provide example data using `redist` objects, which offer some desirable features available via `redist`:
+ - `nh_map`: a `redist_map` version of `nh`
+ - `nh_plans`: a `redist_plans` version of `nh_plans`
+
+Each of these can be loaded with the `data()` function.
+
+## Running your first measure
+
+Given some data set where the districts are indicated, we can begin to compute measures.
+
+We start with `nh`:
+
 ```{r}
-
-
+data(nh)
+head(nh)
 ```
 
+Functions in `redistmetrics` use common prefixes to indicate their usage. The prefixes in the current version are:
+
+ - `comp_`: compactness measures
+ - `part_`: partisan measures
+ - `dist_`: distance-between-plan measures
+ - `splits_`: administrative split measures
+ - `seg_`: segregation measures (currently limited in scope)
+ - `inc_`: incumbent pairing measures (currently limited in scope)
+ 
+With these, we can pick a measure that we'd like to compute, say the Reock compactness, via `comp_reock()`. The major arguments are then the `plans`, or what the redistricting plan is, and the `shp`, which is the geography that the district is based on. Notably, `comp_` functions also typically take an `epsg` argument which has the goal of converting the object to a projected map. This allows for more accurate measurement by more correctly describing the relative location of points on a map.
+
+```{r}
+comp_reock(plans = nh$r_2020, shp = nh)
+```
+
+
+The output here is two Reock scores, the first being for the first district and the second for the second.
+
+We can similar look at a partisan score, perhaps the efficiency gap, via `part_egap()`. This takes additional arguments. As before, it wants the `plans` defining the assignment to districts, along with a `shp` object, which just contains the next two columns: `rvote` (votes for Republicans) and `dvote` (votes for Democrats).
+
+```{r}
+part_egap(plans = nh$r_2020, shp = nh, 
+          rvote = nh$pre_20_rep_tru, dvote = nh$pre_20_dem_bid)
+```
+
+As the variable names suggest, we compute the Efficiency Gap using 2020 presidential data. Now, because the Efficiency Gap is defined for a plan, rather than by district, it is repeated here for each district for consistency. 
+
+If you want a plan-level metric to not be repeated, you can pipe through to `by_plan`.
+
+```{r}
+part_egap(plans = nh$r_2020, shp = nh, 
+          rvote = nh$pre_20_rep_tru, dvote = nh$pre_20_dem_bid) %>% 
+  by_plan()
+```
+
+FOr more information, view the other vignettes or the [package website](https://alarm-redist.github.io/redistmetrics/index.html).
