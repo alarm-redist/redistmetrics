@@ -2,7 +2,7 @@
 % Please edit documentation in R/partisan.R
 \name{part_rmd}
 \alias{part_rmd}
-\title{Calculate Ranked Margin Deviation}
+\title{Calculate Ranked Marginal Deviation}
 \usage{
 part_rmd(plans, shp, dvote, rvote)
 }
@@ -19,7 +19,7 @@ part_rmd(plans, shp, dvote, rvote)
 numeric vector
 }
 \description{
-Calculate Ranked Margin Deviation
+Calculate Ranked Marginal Deviation
 }
 \examples{
 data(nh)

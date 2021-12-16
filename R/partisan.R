@@ -498,7 +498,7 @@ part_lopsided_wins <- function(plans, shp, dvote, rvote) {
   rep(lopsidedwins(dvs = dvs, dseat_vec = dseat_vec, nd = nd), each = nd)
 }
 
-#' Calculate Ranked Margin Deviation
+#' Calculate Ranked Marginal Deviation
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE

@@ -14,6 +14,38 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+There are hundreds of different measures of partisan advantage, most typically attempting to descibe "partisan symmetry". This vignette introduces some of the most common and most important measures of partisan advantage. See the vignette "Using `redistmetrics`" for the bare-bones of the package. 
+
+We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data, `rvote` and `dvote` for any two party votes, and the `plans` argument can be swpaped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object).  
+
 ```{r setup}
 library(redistmetrics)
+data(nh)
 ```
+
+For illustration purposes, we utilize what is often called the "normal Democratic vote" `ndv` and the "normal Republican vote" `nrv` which are the averages of the recent elections by party. For most purposes beyond basic description, you would want to compute these scores for several elections and then average the scores.
+
+## Democratic Seats
+
+## Democratic Vote Share
+
+## Partisan Bias
+
+## Declination
+
+## Mean-Median Score
+
+## Lopside Wins
+
+## Responsiveness
+
+## Efficiency Gap
+
+## Efficiency Gap (Equal Population)
+
+## Tau Gap
+
+## Smoothed Seat Count Deviation
+
+## Ranked Marginal Deviation
