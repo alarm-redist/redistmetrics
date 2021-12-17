@@ -114,10 +114,10 @@ The normalized declination can take on values from -1 to 1, where a negative sco
 
 Formally, this can be written as:
 
-$$\textrm{Declination} = 2 * \frac{\textrm{atan}\big(\frac{\bar{D}_{\textrm{voteshare}_D} - 0.5}{\textrm{Seats}_D(\textrm{voteshare}_D)}\big) - 
-\textrm{atan}\big(\frac{0.5 - \bar{R}_{(\textrm{voteshare}_D)}}{1 - (\textrm{voteshare}_D)}\big)}{\pi}$$
+$$\textrm{Declination} = 2 * \frac{\textrm{atan}\big(\frac{\bar{D}_{\textrm{voteshare}_D} - 0.5}{\textrm{S}_D(\textrm{voteshare}_D)}\big) - 
+\textrm{atan}\big(\frac{0.5 - \bar{R}_{(\textrm{voteshare}_D)}}{1 - S_D(\textrm{voteshare}_D)}\big)}{\pi}$$
 
-introducing $\bar{D}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Democratic-won districts and $\bar{R}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Republican-won districts.
+introducing $\bar{D}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Democratic-won districts and $\bar{R}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Republican-won districts. $S_D$ is the Democratic seat share.
 
 Declination can be computed with:
 
@@ -139,9 +139,11 @@ The correction is applied by default to better allow for comparison across state
 
 ## Simplified Declination
 
-An simplified formulation of the declination is sometimes used to avoid using normalizing constants and arctangents. This instead looks at the difference in means:
+An simplified formulation of the declination is sometimes used to avoid using normalizing constants and arctangents. This instead looks at the difference in means of wins over the seat proportions:
 
-$$\textrm{Simplified Declination} =  \frac{\bar{D}_{\textrm{voteshare}_D} - 0.5}{\textrm{Seats}_D(\textrm{voteshare}_D)} - \frac{0.5 - \bar{R}_{(\textrm{voteshare}_D)}}{1 - (\textrm{voteshare}_D)}$$
+$$\textrm{Simplified Declination} =  \frac{\bar{D}_{\textrm{voteshare}_D} - 0.5}{\textrm{S}_D(\textrm{voteshare}_D)} - \frac{0.5 - \bar{R}_{\textrm{voteshare}_D}}{1 - S_D(\textrm{voteshare}_D)}$$
+
+with $\bar{D}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Democratic-won districts and $\bar{R}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Republican-won districts. $S_D$ is the Democratic seat share.
 
 As in the declination, a negative score indicates a pro-Democratic bias and positive score indicates a pro-Republican bias.
 
@@ -153,6 +155,10 @@ part_decl_simple(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 
 The Mean Median Score is the difference between the mean Democratic vote share and the median Democratic district. This means that a negative score is in favor of Democrats and a positive score is in favor of Republicans. The score can range from -1 to 1. 
 
+Formally, this can be written as:
+
+$$\textrm{Mean-Median} = \textrm{mean}(\textrm{voteshare}_D) - \textrm{median}(\textrm{voteshare}_D)$$
+
 The Mean-Median score can be computed with:
 
 ```{r}
@@ -161,7 +167,13 @@ part_mean_median(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 
 ### Lopsided Wins
 
-The Lopsided Wins score indicates if a party tends to win by a larger margin than the other party. A negative score indicates a pro-Democratic bias, whereas a positive score indicates a pro-Republican bias. Scores can rance from -1 to 1.
+The Lopsided Wins score indicates if a party tends to win by a larger margin than the other party. A negative score indicates a pro-Democratic bias, whereas a positive score indicates a pro-Republican bias. Scores can range from -1 to 1.
+
+Formally, this can be written as:
+
+$$\textrm{Lopsided Wins} =  \bar{D}_{\textrm{voteshare}_D} - (1 - \bar{R}_{\textrm{voteshare}_D})$$
+
+with $\bar{D}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Democratic-won districts and $\bar{R}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Republican-won districts.
 
 The Lopsided Wins score can be computed with:
 
@@ -175,6 +187,25 @@ The output of this can be used for a t-test.
 
 The Efficiency Gap describes the difference in wasted votes by a party. Wasted votes are those which don't lead to a win (votes from the party lost that district) and those which weren't necessary for a win (the excess votes above 50% + 1 vote by the party that won the district). These are normalized by the votes for the party, leading to a score between -1 and 1. A negative score indicates a pro-Democratic bias, whereas a positive score inidcates a pro-Republican bias.
 
+Formally, this can be written as:
+
+$$\textrm{Efficiency Gap} = \frac{W_R - W_D}{n_{votes}}$$
+
+with $W_R$ as the wasted votes by Republicans and $W_D$ as the wasted votes by Democrats and $n_{votes}$ are the total votes.
+
+Wasted votes can be formalized as:
+
+$$ W_D = 
+
+\left\{
+\begin{array}{ll}
+      n_{\textrm{votes}_D} -( \textrm{floor}(\frac{n_\textrm{votes}}{2}) + 1) & \textrm{if  voteshare}_D > 0.5 \\
+      n_{\textrm{votes}_D} & \textrm{if  voteshare}_D < 0.5\\
+\end{array} 
+\right. $$ 
+
+Republican wasted votes are defined analogously.
+
 The Efficiency Gap can be computed with:
 
 ```{r}
@@ -185,6 +216,11 @@ part_egap(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 
 This is the efficiency gap, with the assumption that parties have equal voter turnout and population. The scale is the same as for the regular efficiency gap, where all scores are between -1 and 1, with negative implying pro-Democratic bias and positive implying pro-Republican bias.
 
+Formally, this can be written as:
+
+$$ \textrm{Efficiency Gap (Eq. Pop.)} = -2 * \textrm{voteshare}_D + S_D + 0.5$$
+with $S_D$ as the seat share for Democrats.
+
 The Efficiency Gap (Equal Population) can be computed with:
 
 ```{r}
@@ -194,6 +230,15 @@ part_egap_ep(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 ### Tau Gap
 
 The $\tau$ gap is a generalization of the efficiency gap. When $\tau = 1$, it is exactly twice the efficiency gap. The $\tau$ parameter is a weighting parameter which describes how wasted votes should be weighted.
+
+Formally, this can be written as:
+
+$$ \tau\textrm{-Gap} = \frac{w_{D,\tau} - w_{R,\tau} }{w_{D,\tau} + w_{R,\tau}}$$
+where 
+
+$$w_{D, \tau} = \sum_{d = 1}^{n_\textrm{dists}} \frac{1}{\tau + 1} (2 * voteshare_D - 1)^{\tau + 1}) $$ 
+
+and $w_R$ is defined analogously.
 
 The $\tau$ Gap can be computed with:
 
@@ -209,6 +254,11 @@ The Smoothed Seat Count Deviation offers an interpolation between seats when des
 
 As such, values are between 0 and 1, where 0 favors Republicans and 1 favors Democrats.
 
+Formally, this is written as:
+
+$$\textrm{SSCD} = \frac{0.5 - \min(D_\textrm{voteshare}_D )}{(1 - \max(R_\textrm{voteshare}_D )) - (1 - \min(D_\textrm{voteshare}_D))}$$
+where $D_\textrm{voteshare}_D$ is the Democratic vote share in Democratic-won districts and $R_\textrm{voteshare}_D$ is the Democratic vote share in Republican-won districts.
+
 The Smoothed Seat Count Deviation can be computed with:
 
 ```{r}
@@ -218,6 +268,13 @@ part_sscd(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 ### Ranked Marginal Deviation
 
 The Ranked Marginal Deviation is also known as the Gerrymandering Index. Given a set of plans, we can first order them by Democratic percent in each seat. The Ranked Marginal Deviation is the square root of the sum of the squared distances between the average Democratic percent in each seat and the Democratic percent in a given plan.
+
+Formally, this can be written as:
+
+$$\textrm{Ranked Marginal Deviation} = \sum_{d = 1}^{n_\textrm{dists}} \textrm{voteshare}^s_{D}(d) - \overline{\textrm{voteshare}^s_{D}(d)}$$
+
+where $\textrm{voteshare}^s_{D}(d)$ is the $s$orted Democratic voteshare in district $d$ and \overline{\textrm{voteshare}^s_{D}(d)} is the average of those across plans.
+
 
 As such, it is sensitive to the plans inputted. Here we use the `nh_m` data described in the "Using `redistmetrics`" vignette, which contains 2 reference plans and 50 simulated plans.
 

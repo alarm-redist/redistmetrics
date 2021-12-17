@@ -28,7 +28,16 @@ data(nh)
 
 ### Talismanic Compactness
 
-This is a measure which offers a balance between competitiveness across the state and competitiveness within inidividual districts.
+This is a measure which offers a balance between competitiveness across the state and competitiveness within individual districts.
+
+Formally, this can be written as:
+
+$$\textrm{Talismanic Competitiveness} = T_p (1 + \alpha T_e)\beta$$
+
+where 
+
+$$ T_p = \frac{1}{n_d} * \sum_{k=1}^{n_\textrm{dists}} \big|\frac12 - \textrm{voteshare}_D\big|$$
+$$ |\frac{n_\textrm{dists} - Seats_D}{n_\textrm{dists}}-\frac12| $$
 
 Talismanic Compactness can be computed with
 
@@ -43,6 +52,13 @@ where `nrv` and `ndv` are averages of votes. (In general, you want to compute th
 ### Dissimilarity
 
 Dissimilarity describes how similar the demographic proportions in districts are to the total state population's demographics.
+
+Formally, this can be written as:
+
+$$ \textrm{Dissimilarity} =  \sum_{i = 1}^{n_\textrm{dists}} \frac{(t_d |g_d - G|)}{2T*G(1 - G)}$$
+
+for a group population proportion in district $d$, $g_d$, total population in district $d$, $t_d$, a group population proportion in a state $G$, and total population in the state $T$.
+
 
 Dissimilarity can be computed with:
 
