@@ -13,6 +13,9 @@
     <loc>https://alarm-redist.github.io/redistmetrics/articles/compactness.html</loc>
   </url>
   <url>
+    <loc>https://alarm-redist.github.io/redistmetrics/articles/distances.html</loc>
+  </url>
+  <url>
     <loc>https://alarm-redist.github.io/redistmetrics/articles/index.html</loc>
   </url>
   <url>
@@ -133,7 +136,7 @@
     <loc>https://alarm-redist.github.io/redistmetrics/reference/part_egap_ep.html</loc>
   </url>
   <url>
-    <loc>https://alarm-redist.github.io/redistmetrics/reference/part_lopsided_wins.html</loc>
+    <loc>https://alarm-redist.github.io/redistmetrics/reference/part_lop_wins.html</loc>
   </url>
   <url>
     <loc>https://alarm-redist.github.io/redistmetrics/reference/part_mean_median.html</loc>

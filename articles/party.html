@@ -7,12 +7,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="redistmetrics">
 <title>Measures of Partisan Advantage • redistmetrics</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Measures of Partisan Advantage">
 <meta property="og:description" content="redistmetrics">
+<meta property="og:image" content="https://alarm-redist.github.io/redistmetrics/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -43,6 +50,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/basics.html">Using `redistmetrics`</a>
     <a class="dropdown-item" href="../articles/compactness.html">Measures of Compactness</a>
+    <a class="dropdown-item" href="../articles/distances.html">Measures of Plan Distance</a>
     <a class="dropdown-item" href="../articles/other.html">Other Measures</a>
     <a class="dropdown-item" href="../articles/party.html">Measures of Partisan Advantage</a>
     <a class="dropdown-item" href="../articles/splits.html">Measures of Administrative Splits</a>
@@ -71,7 +79,7 @@
 </nav><div class="container template-article">
 <script src="party_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Measures of Partisan Advantage</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Measures of Partisan Advantage</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/alarm-redist/redistmetrics/blob/HEAD/vignettes/party.Rmd" class="external-link"><code>vignettes/party.Rmd</code></a></small>
@@ -86,56 +94,157 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
 <p>For illustration purposes, we utilize what is often called the “normal Democratic vote” <code>ndv</code> and the “normal Republican vote” <code>nrv</code> which are the averages of the recent elections by party. For most purposes beyond basic description, you would want to compute these scores for several elections and then average the scores.</p>
-<div class="section level2">
-<h2 id="democratic-seats">Democratic Seats<a class="anchor" aria-label="anchor" href="#democratic-seats"></a>
-</h2>
+<p>This is a brief introduction to the measures included in the package. For a more thorough, yet still friendly introduction, we recommend <a href="https://gking.harvard.edu/files/gking/files/theoretical_foundations_and_empirical_evaluations_of_partisan_fairness_in_districtbased_democracies.pdf" class="external-link">Katz, King, and Rosenblatt (2020)</a>F.</p>
+<div class="section level3">
+<h3 id="democratic-seats">Democratic Seats<a class="anchor" aria-label="anchor" href="#democratic-seats"></a>
+</h3>
+<p>Democratic seats is the number of seats that Democrats would win under fixed Democratic and Republican votes.</p>
+<p>All scores are between 0 and the number of districts.</p>
+<p>Democratic seats can be computed with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_dseats.html">part_dseats</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] 1 1</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="democratic-vote-share">Democratic Vote Share<a class="anchor" aria-label="anchor" href="#democratic-vote-share"></a>
-</h2>
+<div class="section level3">
+<h3 id="democratic-vote-share">Democratic Vote Share<a class="anchor" aria-label="anchor" href="#democratic-vote-share"></a>
+</h3>
+<p>The Democratic vote share is the vote share by district under fixed Democratic and Republican votes.</p>
+<p>All scores range from 0 to 1, where a higher proportion indicates a more Democratic voters in a district relative to Republican voters.</p>
+<p>The Democratic vote share can be computed with:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_dvs.html">part_dvs</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.4387424 0.5378594</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="partisan-bias">Partisan Bias<a class="anchor" aria-label="anchor" href="#partisan-bias"></a>
-</h2>
+<div class="section level3">
+<h3 id="partisan-bias">Partisan Bias<a class="anchor" aria-label="anchor" href="#partisan-bias"></a>
+</h3>
+<p>Partisan bias is the deviation from partisan symmetry at a voteshare <span class="math inline">\(v\)</span>.</p>
+<p>Positive scores indicate bias in favor of Republicans, while negative scores indicate bias in favor of Democrats. Scores are in the range of -1 to 1.</p>
+<p>Partisan Bias can be computed with:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_dvs.html">part_dvs</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.4387424 0.5378594</span></code></pre></div>
+<p>The argument <span class="math inline">\(v\)</span> can be set for any value in <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> and is <span class="math inline">\(0.5\)</span> by default.</p>
 </div>
-<div class="section level2">
-<h2 id="declination">Declination<a class="anchor" aria-label="anchor" href="#declination"></a>
-</h2>
+<div class="section level3">
+<h3 id="responsiveness">Responsiveness<a class="anchor" aria-label="anchor" href="#responsiveness"></a>
+</h3>
+<p>Responsiveness describes the slope of the implied seats-votes curve by an election. A higher score implies that a districting plan is more likely to change given a change in vote distribution.</p>
+<p>Responsiveness can be computed with:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_resp.html">part_resp</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] NaN NaN</span></code></pre></div>
+<p>The argument <span class="math inline">\(v\)</span> can be set for any value in <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> and is <span class="math inline">\(0.5\)</span> by default.</p>
 </div>
-<div class="section level2">
-<h2 id="mean-median-score">Mean-Median Score<a class="anchor" aria-label="anchor" href="#mean-median-score"></a>
-</h2>
+<div class="section level3">
+<h3 id="declination">Declination<a class="anchor" aria-label="anchor" href="#declination"></a>
+</h3>
+<p>The declination describes the difference in the angle of two line through ordered an ordered scatter plot of Democratic and Republican votes, where one line is fit to each.</p>
+<p>The normalized declination can take on values from -1 to 1, where a negative score indicates a pro-Democratic bias and positive score indicates a pro-Republican bias. When not normalized, the scores are not bounded in the same way, but the negative and positive interpretations stay the same.</p>
+<p>Declination can be computed with:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_decl.html">part_decl</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] -0.04679648 -0.04679648</span></code></pre></div>
+<p>By default, declination is not normalized to an angle, but can be by setting <code>normalize = TRUE</code>.</p>
 </div>
-<div class="section level2">
-<h2 id="lopside-wins">Lopside Wins<a class="anchor" aria-label="anchor" href="#lopside-wins"></a>
-</h2>
+<div class="section level3">
+<h3 id="mean-median-score">Mean-Median Score<a class="anchor" aria-label="anchor" href="#mean-median-score"></a>
+</h3>
+<p>The Mean Median Score is the difference between the mean Democratic vote share and the median Democratic district. This means that a negative score is in favor of Democrats and a positive score is in favor of Republicans. The score can range from -1 to 1.</p>
+<p>The Mean-Median score can be computed with:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_mean_median.html">part_mean_median</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0 0</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="responsiveness">Responsiveness<a class="anchor" aria-label="anchor" href="#responsiveness"></a>
-</h2>
+<div class="section level3">
+<h3 id="lopsided-wins">Lopsided Wins<a class="anchor" aria-label="anchor" href="#lopsided-wins"></a>
+</h3>
+<p>The Lopsided Wins score indicates if a party tends to win by a larger margin than the other party. A negative score indicates a pro-Democratic bias, whereas a positive score indicates a pro-Republican bias. Scores can rance from -1 to 1.</p>
+<p>The Lopsided Wins score can be computed with:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_lop_wins.html">part_lop_wins</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] -0.02339824 -0.02339824</span></code></pre></div>
+<p>The output of this can be used for a t-test.</p>
 </div>
-<div class="section level2">
-<h2 id="efficiency-gap">Efficiency Gap<a class="anchor" aria-label="anchor" href="#efficiency-gap"></a>
-</h2>
+<div class="section level3">
+<h3 id="efficiency-gap">Efficiency Gap<a class="anchor" aria-label="anchor" href="#efficiency-gap"></a>
+</h3>
+<p>The Efficiency Gap describes the difference in wasted votes by a party. Wasted votes are those which don’t lead to a win (votes from the party lost that district) and those which weren’t necessary for a win (the excess votes above 50% + 1 vote by the party that won the district). These are normalized by the votes for the party, leading to a score between -1 and 1. A negative score indicates a pro-Democratic bias, whereas a positive score inidcates a pro-Republican bias.</p>
+<p>The Efficiency Gap can be computed with:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_egap.html">part_egap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.02007106 0.02007106</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="efficiency-gap-equal-population">Efficiency Gap (Equal Population)<a class="anchor" aria-label="anchor" href="#efficiency-gap-equal-population"></a>
-</h2>
+<div class="section level3">
+<h3 id="efficiency-gap-equal-population">Efficiency Gap (Equal Population)<a class="anchor" aria-label="anchor" href="#efficiency-gap-equal-population"></a>
+</h3>
+<p>This is the efficiency gap, with the assumption that parties have equal voter turnout and population. The scale is the same as for the regular efficiency gap, where all scores are between -1 and 1, with negative implying pro-Democratic bias and positive implying pro-Republican bias.</p>
+<p>The Efficiency Gap (Equal Population) can be computed with:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_egap_ep.html">part_egap_ep</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.02339824 0.02339824</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="tau-gap">Tau Gap<a class="anchor" aria-label="anchor" href="#tau-gap"></a>
-</h2>
+<div class="section level3">
+<h3 id="tau-gap">Tau Gap<a class="anchor" aria-label="anchor" href="#tau-gap"></a>
+</h3>
+<p>The <span class="math inline">\(\tau\)</span> gap is a generalization of the efficiency gap. When <span class="math inline">\(\tau = 1\)</span>, it is exactly twice the efficiency gap. The <span class="math inline">\(\tau\)</span> parameter is a weighting parameter which describes how wasted votes should be weighted.</p>
+<p>The <span class="math inline">\(\tau\)</span> Gap can be computed with:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_tau_gap.html">part_tau_gap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.009276655 0.009276655</span></code></pre></div>
+<p>The default is <code>tau = 1</code>.</p>
 </div>
-<div class="section level2">
-<h2 id="smoothed-seat-count-deviation">Smoothed Seat Count Deviation<a class="anchor" aria-label="anchor" href="#smoothed-seat-count-deviation"></a>
-</h2>
+<div class="section level3">
+<h3 id="smoothed-seat-count-deviation">Smoothed Seat Count Deviation<a class="anchor" aria-label="anchor" href="#smoothed-seat-count-deviation"></a>
+</h3>
+<p>The Smoothed Seat Count Deviation offers an interpolation between seats when describing the number of seats won by a party. This can be added to the Democratic seats to describe the smoothed seat count.</p>
+<p>As such, values are between 0 and 1, where 0 favors Republicans and 1 favors Democrats.</p>
+<p>The Smoothed Seat Count Deviation can be computed with:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/part_sscd.html">part_sscd</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.3819666 0.3819666</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="ranked-marginal-deviation">Ranked Marginal Deviation<a class="anchor" aria-label="anchor" href="#ranked-marginal-deviation"></a>
-</h2>
+<div class="section level3">
+<h3 id="ranked-marginal-deviation">Ranked Marginal Deviation<a class="anchor" aria-label="anchor" href="#ranked-marginal-deviation"></a>
+</h3>
+<p>The Ranked Marginal Deviation is also known as the Gerrymandering Index. Given a set of plans, we can first order them by Democratic percent in each seat. The Ranked Marginal Deviation is the square root of the sum of the squared distances between the average Democratic percent in each seat and the Democratic percent in a given plan.</p>
+<p>As such, it is sensitive to the plans inputted. Here we use the <code>nh_m</code> data described in the “Using <code>redistmetrics</code>” vignette, which contains 2 reference plans and 50 simulated plans.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_m</span><span class="op">)</span>
+<span class="fu"><a href="../reference/part_rmd.html">part_rmd</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
+<span class="co">#&gt;   [1]  0.428370470  0.428370470 24.235421388 24.235421388  2.552997871</span>
+<span class="co">#&gt;   [6]  2.552997871  1.809043831  1.809043831  1.429493267  1.429493267</span>
+<span class="co">#&gt;  [11]  0.014890062  0.014890062  0.126809872  0.126809872  0.318627988</span>
+<span class="co">#&gt;  [16]  0.318627988  0.242831249  0.242831249  0.373011020  0.373011020</span>
+<span class="co">#&gt;  [21]  0.361538434  0.361538434  0.148772309  0.148772309  1.429493267</span>
+<span class="co">#&gt;  [26]  1.429493267  0.242831249  0.242831249  1.327300472  1.327300472</span>
+<span class="co">#&gt;  [31]  0.014890062  0.014890062  0.484450127  0.484450127  1.809043831</span>
+<span class="co">#&gt;  [36]  1.809043831  0.510055158  0.510055158  0.838740617  0.838740617</span>
+<span class="co">#&gt;  [41]  0.816550318  0.816550318  0.484450127  0.484450127  4.300606277</span>
+<span class="co">#&gt;  [46]  4.300606277  0.350729311  0.350729311  1.095627372  1.095627372</span>
+<span class="co">#&gt;  [51]  0.510055158  0.510055158  0.006126619  0.006126619  0.816550318</span>
+<span class="co">#&gt;  [56]  0.816550318  0.510055158  0.510055158  0.411542635  0.411542635</span>
+<span class="co">#&gt;  [61]  0.210448284  0.210448284  0.407899710  0.407899710  0.981914177</span>
+<span class="co">#&gt;  [66]  0.981914177  0.126809872  0.126809872  0.433177164  0.433177164</span>
+<span class="co">#&gt;  [71]  2.715473150  2.715473150  0.014890062  0.014890062  1.281220886</span>
+<span class="co">#&gt;  [76]  1.281220886  0.574561053  0.574561053  0.484450127  0.484450127</span>
+<span class="co">#&gt;  [81]  0.406901915  0.406901915  0.008658526  0.008658526  0.008658526</span>
+<span class="co">#&gt;  [86]  0.008658526  0.361538434  0.361538434  0.350729311  0.350729311</span>
+<span class="co">#&gt;  [91]  0.466205978  0.466205978  1.315020633  1.315020633  1.315020633</span>
+<span class="co">#&gt;  [96]  1.315020633  0.466205978  0.466205978  0.805815516  0.805815516</span>
+<span class="co">#&gt; [101]  2.613608371  2.613608371  1.281220886  1.281220886</span></code></pre></div>
+<p>This score is intended for comparison, which we can display as a plot such as:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
+<span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>rmd <span class="op">=</span> <span class="fu"><a href="../reference/part_rmd.html">part_rmd</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>,
+              plan <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">nh_m</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rmd</span>, fill <span class="op">=</span> <span class="va">plan</span><span class="op">)</span>, bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="party_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p>In this (small) set of simulations, the Democratic 2020 proposal is more similar to the simulated plans than the Republican 2020 proposal.</p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
-    </nav></aside>
+  </main>
 </div>
 
 
