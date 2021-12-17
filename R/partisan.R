@@ -348,7 +348,8 @@ part_mean_median <- function(plans, shp, dvote, rvote) {
 #' @templateVar shp TRUE
 #' @templateVar dvote TRUE
 #' @templateVar rvote TRUE
-#' @param normalize Default is FALSE. Translate score to an angle?
+#' @param normalize Default is TRUE Translate score to an angle?
+#' @param adjust Default is TRUE. Applies a correction to increase cross-size comparison.
 #' @template template
 #'
 #' @return numeric vector
@@ -364,7 +365,7 @@ part_mean_median <- function(plans, shp, dvote, rvote) {
 #' # Or many plans:
 #' part_decl(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 #'
-part_decl <- function(plans, shp, dvote, rvote, normalize = FALSE) {
+part_decl <- function(plans, shp, dvote, rvote, normalize = TRUE, adjust = TRUE) {
 
   plans <- process_plans(plans)
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
@@ -389,14 +390,69 @@ part_decl <- function(plans, shp, dvote, rvote, normalize = FALSE) {
   dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
-  dec <- declination(dvs = dvs, dseat_vec = dseat_vec, nd = nd)
+  dec <- declination_angle(dvs = dvs, dseat_vec = dseat_vec, nd = nd)
 
   if (normalize) {
-    dec <- atan(2 * dec) / log(nd)
+    dec <- 2 * dec / pi
+  }
+
+  if (adjust) {
+    dec <- dec * log(nd) / 2
   }
 
   rep(dec, each = nd)
 }
+
+#' Calculate Simplified Declination
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template
+#'
+#' @return numeric vector
+#' @export
+#' @concept partisan
+#'
+#' @examples
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_decl_simple(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_decl_simple(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
+part_decl_simple <- function(plans, shp, dvote, rvote) {
+
+  plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
+  if (any(is.na(dvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
+  }
+  if (length(rvote) != nrow(plans)) {
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
+  }
+  if (length(dvote) != nrow(plans)) {
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
+  }
+
+  nd <- length(unique(plans[, 1]))
+  rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
+  dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
+  dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
+  dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
+
+  declination_simple(dvs = dvs, dseat_vec = dseat_vec, nd = nd) %>%
+    rep(each = nd)
+}
+
 
 #' Calculate Responsiveness
 #'

@@ -7,12 +7,23 @@ test_that("part_bias works", {
   e <- c(0, 0, 0, 0)
   expect_equal(a, e, tolerance = 1e-4)
 })
+
 test_that("part_decl works", {
   a <- part_decl(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.152495322806012, 0.152495322806012)
+  e <- c(0.0332938444163178, 0.0332938444163178)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_decl(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
+  e <- c(NaN, NaN, 0.0332938444163178, 0.0332938444163178)
+  expect_equal(a, e, tolerance = 1e-4)
+})
+
+test_that("part_decl_simple works", {
+  a <- part_decl_simple(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
+  e <- c(0.152495322806012, 0.152495322806012)
+  expect_equal(a, e, tolerance = 1e-4)
+
+  a <- part_decl_simple(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
   e <- c(NaN, NaN, 0.152495322806012, 0.152495322806012)
   expect_equal(a, e, tolerance = 1e-4)
 })

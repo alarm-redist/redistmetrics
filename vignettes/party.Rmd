@@ -108,15 +108,16 @@ part_resp(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv, bandwidth = 0.1
 
 ### Declination
 
-The declination describes the difference in the angle of two line through ordered an ordered scatter plot of Democratic and Republican votes, where one line is fit to each. 
+The declination describes the difference in the angle of two line through ordered an ordered scatter plot of Democratic and Republican votes, where one line is fit to the center of mass for each. 
 
-The normalized declination can take on values from -1 to 1, where a negative score indicates a pro-Democratic bias and positive score indicates a pro-Republican bias. When not normalized, the scores are not bounded in the same way, but the negative and positive interpretations stay the same.
+The normalized declination can take on values from -1 to 1, where a negative score indicates a pro-Democratic bias and positive score indicates a pro-Republican bias. The declination is not defined when one party wins all seats. When not normalized, the scores are in radians, and the negative and positive interpretations stay the same.
 
 Formally, this can be written as:
 
-$$\textrm{Declination} =  \frac{\bar{D}_{\textrm{voteshare}_D} - 0.5}{\textrm{Seats}_D(\textrm{voteshare}_D)} - \frac{0.5 - \bar{R}_{(\textrm{voteshare}_D)}}{1 - (\textrm{voteshare}_D)}$$
+$$\textrm{Declination} = 2 * \frac{\textrm{atan}\big(\frac{\bar{D}_{\textrm{voteshare}_D} - 0.5}{\textrm{Seats}_D(\textrm{voteshare}_D)}\big) - 
+\textrm{atan}\big(\frac{0.5 - \bar{R}_{(\textrm{voteshare}_D)}}{1 - (\textrm{voteshare}_D)}\big)}{\pi}$$
 
-introducing $\bar{D}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Democratic-won districts and $\bar{R}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Republican-won districts
+introducing $\bar{D}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Democratic-won districts and $\bar{R}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Republican-won districts.
 
 Declination can be computed with:
 
@@ -124,13 +125,29 @@ Declination can be computed with:
 part_decl(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 ```
 
-By default, declination is not normalized to an angle, but can be by setting `normalize = TRUE`.
+By default, declination is normalized to a fraction of an angle, via the `normalization` argument. Setting `normalization = FALSE` returns a variant of the declination in radians:
 
-The normalization takes the form:
+$$\textrm{Declination}^r = \textrm{atan}\big(\frac{\bar{D}_{\textrm{voteshare}_D} - 0.5}{\textrm{Seats}_D(\textrm{voteshare}_D)}\big) - 
+\textrm{atan}\big(\frac{0.5 - \bar{R}_{(\textrm{voteshare}_D)}}{1 - (\textrm{voteshare}_D)}\big)$$
 
-$$Declination^* = \frac{\textrm{atan}(\textrm{Declination})}{\log(n_{dists})}$$
 
+An additional adjustment can be applied which takes the form:
 
+$$\textrm{Declination}^* = \textrm{Declination}*\frac{\log(n_{dists})}{2}$$
+
+The correction is applied by default to better allow for comparison across states, though these comparisons should be made cautiously, as always.
+
+## Simplified Declination
+
+An simplified formulation of the declination is sometimes used to avoid using normalizing constants and arctangents. This instead looks at the difference in means:
+
+$$\textrm{Simplified Declination} =  \frac{\bar{D}_{\textrm{voteshare}_D} - 0.5}{\textrm{Seats}_D(\textrm{voteshare}_D)} - \frac{0.5 - \bar{R}_{(\textrm{voteshare}_D)}}{1 - (\textrm{voteshare}_D)}$$
+
+As in the declination, a negative score indicates a pro-Democratic bias and positive score indicates a pro-Republican bias.
+
+```{r}
+part_decl_simple(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
 
 ### Mean-Median Score
 

@@ -69,8 +69,8 @@ bias <- function(dvs, nd) {
     .Call(`_redistmetrics_bias`, dvs, nd)
 }
 
-declination <- function(dvs, dseat_vec, nd) {
-    .Call(`_redistmetrics_declination`, dvs, dseat_vec, nd)
+declination_simple <- function(dvs, dseat_vec, nd) {
+    .Call(`_redistmetrics_declination_simple`, dvs, dseat_vec, nd)
 }
 
 declination_angle <- function(dvs, dseat_vec, nd) {

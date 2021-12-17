@@ -155,7 +155,7 @@ NumericVector bias(NumericMatrix dvs, int nd){
 }
 
 // [[Rcpp::export]]
-NumericVector declination(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
+NumericVector declination_simple(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
   NumericVector Dwin = NumericVector(dvs.ncol());
   NumericVector Rwin = NumericVector(dvs.ncol());
 
