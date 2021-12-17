@@ -99,7 +99,11 @@
 <div class="section level3">
 <h3 id="talismanic-compactness">Talismanic Compactness<a class="anchor" aria-label="anchor" href="#talismanic-compactness"></a>
 </h3>
-<p>This is a measure which offers a balance between competitiveness across the state and competitiveness within inidividual districts.</p>
+<p>This is a measure which offers a balance between competitiveness across the state and competitiveness within individual districts.</p>
+<p>Formally, this can be written as:</p>
+<p><span class="math display">\[\textrm{Talismanic Competitiveness} = T_p (1 + \alpha T_e)\beta\]</span></p>
+<p>where</p>
+<p><span class="math display">\[ T_p = \frac{1}{n_d} * \sum_{k=1}^{n_\textrm{dists}} \big|\frac12 - \textrm{voteshare}_D\big|\]</span> <span class="math display">\[ |\frac{n_\textrm{dists} - Seats_D}{n_\textrm{dists}}-\frac12| \]</span></p>
 <p>Talismanic Compactness can be computed with</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/compet_talisman.html">compet_talisman</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span>
@@ -114,6 +118,9 @@
 <h3 id="dissimilarity">Dissimilarity<a class="anchor" aria-label="anchor" href="#dissimilarity"></a>
 </h3>
 <p>Dissimilarity describes how similar the demographic proportions in districts are to the total state population’s demographics.</p>
+<p>Formally, this can be written as:</p>
+<p><span class="math display">\[ \textrm{Dissimilarity} =  \sum_{i = 1}^{n_\textrm{dists}} \frac{(t_d |g_d - G|)}{2T*G(1 - G)}\]</span></p>
+<p>for a group population proportion in district <span class="math inline">\(d\)</span>, <span class="math inline">\(g_d\)</span>, total population in district <span class="math inline">\(d\)</span>, <span class="math inline">\(t_d\)</span>, a group population proportion in a state <span class="math inline">\(G\)</span>, and total population in the state <span class="math inline">\(T\)</span>.</p>
 <p>Dissimilarity can be computed with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/seg_dissim.html">seg_dissim</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, group_pop <span class="op">=</span> <span class="va">pop_black</span>, total_pop <span class="op">=</span> <span class="va">pop</span><span class="op">)</span>

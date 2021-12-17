@@ -62,7 +62,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">part_decl</span><span class="op">(</span><span class="va">plans</span>, <span class="va">shp</span>, <span class="va">dvote</span>, <span class="va">rvote</span>, normalize <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">part_decl</span><span class="op">(</span><span class="va">plans</span>, <span class="va">shp</span>, <span class="va">dvote</span>, <span class="va">rvote</span>, normalize <span class="op">=</span> <span class="cn">TRUE</span>, adjust <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,11 +76,18 @@
 <dt>rvote</dt>
 <dd><p>unqouted name of column in shp with group population</p></dd>
 <dt>normalize</dt>
-<dd><p>Default is FALSE. Translate score to an angle?</p></dd>
+<dd><p>Default is TRUE Translate score to an angle?</p></dd>
+<dt>adjust</dt>
+<dd><p>Default is TRUE. Applies a correction to increase cross-size comparison.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>numeric vector</p>
+    </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    <p>Gregory S. Warrington. 2018. "Quantifying Gerrymandering Using the Vote Distribution."
+Election Law Journal: Rules, Politics, and Policy. Pp. 39-57.http://doi.org/10.1089/elj.2017.0447</p>
     </div>
 
     <div class="section level2">
@@ -89,11 +96,12 @@
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_m</span><span class="op">)</span></span>
 <span class="r-in"><span class="co"># For a single plan:</span></span>
 <span class="r-in"><span class="fu">part_decl</span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.04679648 -0.04679648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.01022275 -0.01022275</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Or many plans:</span></span>
 <span class="r-in"><span class="fu">part_decl</span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.05236926 -0.05236926 -0.04490268 -0.04490268 -0.05106782 -0.05106782</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.011520745 -0.011520745 -0.009882304 -0.009882304 -0.011240794</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [6] -0.011240794</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
