@@ -26,7 +26,7 @@ data(nh)
 
 For illustration purposes, we utilize what is often called the "normal Democratic vote" `ndv` and the "normal Republican vote" `nrv` which are the averages of the recent elections by party. For most purposes beyond basic description, you would want to compute these scores for several elections and then average the scores.
 
-This is a brief introduction to the measures included in the package. For a more thorough, yet still friendly introduction, we recommend [Katz, King, and Rosenblatt (2020)](https://gking.harvard.edu/files/gking/files/theoretical_foundations_and_empirical_evaluations_of_partisan_fairness_in_districtbased_democracies.pdf)F.
+This is a brief introduction to the measures included in the package. For a more thorough, yet still friendly introduction, we recommend [Katz, King, and Rosenblatt (2020)](https://gking.harvard.edu/files/gking/files/theoretical_foundations_and_empirical_evaluations_of_partisan_fairness_in_districtbased_democracies.pdf).
 
 ### Democratic Seats
 
