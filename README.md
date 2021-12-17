@@ -137,3 +137,6 @@ head(nh_plans)
 #> 5 1             1    688961  0.235
 #> 6 1             2    688568  0.349
 ```
+
+Detailed information on each measure are contained in the vignettes and
+references are contained in the function documentation.

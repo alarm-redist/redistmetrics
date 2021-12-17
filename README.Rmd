@@ -106,3 +106,5 @@ Now our values are cleanly held in the `redist_plans` object:
 head(nh_plans)
 ```
 
+
+Detailed information on each measure are contained in the vignettes and references are contained in the function documentation.
