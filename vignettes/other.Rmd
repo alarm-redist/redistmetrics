@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 Redistricting is problem with many, many dimensions. This vignette introduces some useful measures related to redistricting, but with smaller categories. See the vignette "Using `redistmetrics`" for the bare-bones of the package. 
 
-We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data, `rvote` and `dvote` for any two party votes, `black_pop` for any group population, `pop` for the total population, and the `plans` argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object).  
+We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data, `rvote` and `dvote` for any two party votes, `pop_black` for any group population, `pop` for the total population, and the `plans` argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object).  
 
 ```{r setup}
 library(redistmetrics)
@@ -47,7 +47,7 @@ Dissimilarity describes how similar the demographic proportions in districts are
 Dissimilarity can be computed with:
 
 ```{r}
-seg_dissim(plans = nh$r_2020, shp = nh, group_pop = black_pop, total_pop = pop)
+seg_dissim(plans = nh$r_2020, shp = nh, group_pop = pop_black, total_pop = pop)
 ```
 
 ## Incumbents
