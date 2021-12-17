@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 
-There are hundreds of different measures of partisan advantage, most typically attempting to descibe "partisan symmetry". This vignette introduces some of the most common and most important measures of partisan advantage. See the vignette "Using `redistmetrics`" for the bare-bones of the package. 
+There are hundreds of different measures of partisan advantage, most typically attempting to describe "partisan symmetry". This vignette introduces some of the most common and most important measures of partisan advantage. See the vignette "Using `redistmetrics`" for the bare-bones of the package. 
 
 We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data, `rvote` and `dvote` for any two party votes, and the `plans` argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object).  
 

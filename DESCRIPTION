@@ -7,7 +7,7 @@ Authors@R: c(
     person("Cory", "McCartan", email = "cmccartan@g.harvard.edu", role = "aut"),
     person("Ben", "Fifield", email = "benfifield@gmail.com", role = "aut"),
     person("Kosuke", "Imai", email = "imai@harvard.edu", role = "aut"))
-Description: Measures and metrics for scoring redistricting plans. These functions provide key analysis functions for the 'redist' package while also providing more direct access to tools useful for non-simulation analyses.
+Description: Reliable and flexible tools for scoring redistricting plans using common measures and metrics. These functions provide key direct access to tools useful for non-simulation analyses of redistricting plans. Tools are designed to work with the 'redist' package seamlessly.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true

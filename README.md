@@ -16,7 +16,13 @@ methods in `redist` without requiring `redist` objects.
 
 ## Installation
 
-You can install the development version of redistmetrics from
+You can install the stable version of `redistmetrics` from CRAN with:
+
+``` r
+install.packages('redistmetrics')
+```
+
+You can install the development version of `redistmetrics` from
 [GitHub](https://github.com/alarm-redist/redistmetrics) with:
 
 ``` r

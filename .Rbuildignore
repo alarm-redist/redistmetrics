@@ -10,3 +10,4 @@ man-roxygen
 ^dev$
 ^doc$
 ^Meta$
+^cran-comments\.md$

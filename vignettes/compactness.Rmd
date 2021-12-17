@@ -190,7 +190,7 @@ comp_bc(plans = nh$r_2020, shp = nh)
 
 ### Fryer Holden Compactness
 
-Fryer-Holden describes the person-distance achived by the plan. Individual scores do not carry much meaning and are intended to be normalized by the minimal possible score, which can be difficult to compute. Given the population of each redistricting unit $P_i$ and the distance between two units $D_{ij}$, then for any district $k$, we compute the score as the squared distance between the people in unit $i$ and $j$.
+Fryer-Holden describes the person-distance achieved by the plan. Individual scores do not carry much meaning and are intended to be normalized by the minimal possible score, which can be difficult to compute. Given the population of each redistricting unit $P_i$ and the distance between two units $D_{ij}$, then for any district $k$, we compute the score as the squared distance between the people in unit $i$ and $j$.
 
 Formally, the numerator can be written as:
 

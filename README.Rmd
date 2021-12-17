@@ -23,7 +23,13 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-You can install the development version of redistmetrics from [GitHub](https://github.com/alarm-redist/redistmetrics) with:
+You can install the stable version of `redistmetrics` from CRAN with:
+``` r
+install.packages('redistmetrics')
+```
+
+
+You can install the development version of `redistmetrics` from [GitHub](https://github.com/alarm-redist/redistmetrics) with:
 
 ``` r
 if (!requireNamespace('remotes')) install.packages('remotes')

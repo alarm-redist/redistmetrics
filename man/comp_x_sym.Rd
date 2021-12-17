@@ -37,7 +37,7 @@ comp_x_sym(plans = nh_m[, 3:5], shp = nh)
 }
 \references{
 Aaron Kaufman, Gary King, and Mayya Komisarchik. 2021.
-How to Measure Legislative District COmpactness If You Only Know it When You See It.
+How to Measure Legislative District Compactness If You Only Know it When You See It.
 American Journal of Political Science. 65, 3. Pp. 533-550.
 }
 \concept{compactness}
