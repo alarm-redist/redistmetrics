@@ -45,7 +45,7 @@ Secondarily, we are often interested in how many municipalities are split by a p
 The number of sub-administrative splits can be computed with:
 
 ```{r}
-splits_sub_admin(plans = nh$r_2020, shp = nh, admin = county)
+splits_sub_admin(plans = nh$r_2020, shp = nh, sub_admin = county)
 ```
 
 (Often you would not check `county` here, but instead some unit smaller than a county.)
