@@ -33,6 +33,7 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
     cli::cli_abort('Please provide an argument to {.arg shp}.')
   }
 
+  shp <- dplyr::ungroup(shp)
   shp <- planarize(shp, epsg)
   shp <- geos::as_geos_geometry(shp)
   shp_col <- geos::geos_make_collection(shp)
