@@ -88,8 +88,13 @@
 
     
     
+<p>This vignette introduces some of the most common measures of administrative splits. These functions are designed around common concerns generalized to keeping together “political subdivisions”. See the vignette “Using <code>redistmetrics</code>” for the bare-bones of the package.</p>
+<p>We first load the <code>redistmetrics</code> package and data from New Hampshire. For any function, the <code>shp</code> argument can be swapped out for your data, <code>county</code> for your administrative unit, and the <code>plans</code> argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a <code>redist_plans</code> object).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
+<p>For illustration purposes, we utilize what is often called the “normal Democratic vote” <code>ndv</code> and the “normal Republican vote” <code>nrv</code> which are the averages of the recent elections by party. For most purposes beyond basic description, you would want to compute these scores for several elections and then average the scores.</p>
+<p>This is a brief introduction to the measures included in the package. For a more thorough, yet still friendly introduction, we recommend <a href="https://gking.harvard.edu/files/gking/files/theoretical_foundations_and_empirical_evaluations_of_partisan_fairness_in_districtbased_democracies.pdf" class="external-link">Katz, King, and Rosenblatt (2020)</a>.</p>
   </main>
 </div>
 
