@@ -1,0 +1,14 @@
+citHeader("To cite redistmetrics in publications use:")
+
+citEntry(entry = "misc",
+	 title = "{redistmetrics}: Redistricting Metrics",
+	 author = personList(as.person("Christopher T. Kenny"), as.person("Cory McCartan"), as.person("Ben Fifield"),
+	 as.person("Kosuke Imai")),
+	 howpublished = "Available at The Comprehensive R Archive Network (CRAN)",
+	 year = "2021",
+	 url = "https://CRAN.R-project.org/package=redistmetrics",
+	 textVersion = paste(" Christopher T. Kenny, Cory McCartan, Ben Fifield, and Kosuke Imai (2021).",
+	 	             "redistmetrics: Redistricting Metrics.",
+			     "Available at The Comprehensive R Archive Network (CRAN).",
+			     "URL https://CRAN.R-project.org/package=redistmetrics.")
+)
