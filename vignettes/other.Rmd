@@ -14,8 +14,63 @@ knitr::opts_chunk$set(
 )
 ```
 
+Redistricting is problem with many, many dimensions. This vignette introduces some useful measures related to redistricting, but with smaller categories. See the vignette "Using `redistmetrics`" for the bare-bones of the package. 
+
+We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data, `rvote` and `dvote` for any two party votes, `black_pop` for any group population, `pop` for the total population, and the `plans` argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object).  
+
 ```{r setup}
 library(redistmetrics)
+data(nh)
+```
+
+
+## Competitiveness
+
+### Talismanic Compactness
+
+This is a measure which offers a balance between competitiveness across the state and competitiveness within inidividual districts.
+
+Talismanic Compactness can be computed with
+
+```{r}
+compet_talisman(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+```
+
+where `nrv` and `ndv` are averages of votes. (In general, you want to compute these scores over many elections and average them.)
+
+## Segregation
+
+### Dissimilarity
+
+Dissimilarity describes how similar the demographic proportions in districts are to the total state population's demographics.
+
+Dissimilarity can be computed with:
+
+```{r}
+seg_dissim(plans = nh$r_2020, shp = nh, group_pop = black_pop, total_pop = pop)
+```
+
+## Incumbents
+
+### Incumbent Pairings
+
+We compute incumbent pairings as the number of incumbents who are placed into a district with other incumbents beyond those allowed. Formally, this is:
+
+$$\textrm{Inc. Pairs} = \sum_{d = 1}^{\textrm{ndists}}\max(0, n^{(d)}_{inc} - 1)$$
+
+We do not have incumbent data included for New Hampshire. As such, we create fake incumbent data.
+
+```{r}
+fake_inc <- rep(FALSE, nrow(nh))
+fake_inc[c(1, 2)] <- TRUE
+```
+
+This would indicate that there are only incumbents in the first two rows of the data.
+
+Incumbent pairings can be computed with:
+
+```{r}
+inc_pairs(plans = nh$r_2020, shp = nh, inc = fake_inc)
 ```
 
 

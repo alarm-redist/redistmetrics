@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 There are dozens of measures of compactness. This vignette introduces some of the most common and most important measures of compactness. See the vignette "Using `redistmetrics`" for the bare-bones of the package. 
 
-We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data and the `plans` argument can be swpaped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object).  
+We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data and the `plans` argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object).  
 
 ```{r setup}
 library(redistmetrics)

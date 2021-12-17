@@ -14,6 +14,63 @@ knitr::opts_chunk$set(
 )
 ```
 
+This vignette introduces some of the most common measures of some basic measures of the distance between plans. This offers a quick look at how similar or different a pair of plans are. See the vignette "Using `redistmetrics`" for the bare-bones of the package. 
+
+We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data, `pop` for your population, and the `plans` argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object). 
+
 ```{r setup}
 library(redistmetrics)
+data(nh)
 ```
+
+Note that, when computing distance between plans, you always want to provide more than one plan. For that reason, we will also load `nh_m`, a matrix of plans for New Hampshire.
+
+```{r}
+data(nh_m)
+
+nh_m <- nh_m[, 1:4]
+```
+
+We subset it to its first four columns (the first four plans).
+
+## Variation of Information
+
+The recommended distance between plans is the variation of information. This considers the distance between plans by looking at the joint distributions of people across plans.
+
+The Variation of Information can be computed with:
+
+```{r}
+dist_info(plans = nh_m, shp = nh, total_pop = pop)
+```
+
+## Hamming Distance
+
+The Hamming distance is a simpler metric which just considers how many units are assigned to different districts between pairs of plans. 
+
+The Hamming distance can be computed with:
+
+```{r}
+dist_ham(plans = nh_m)
+```
+
+
+## Manhattan Distance
+
+The Manhattan distance measures how many "blocks" you would need to move to get between plans. This is most useful in MCMC contexts, rather than general contexts. 
+
+The Manhattan distance can be computed with:
+
+```{r}
+dist_man(plans = nh_m)
+```
+
+## Euclidean Distance
+
+The Euclidean distance measures the square root of the summed distances you would need to move to get between plans. This is most useful in MCMC contexts, rather than general contexts. 
+
+The Euclidean distance can be computed with:
+
+```{r}
+dist_euc(plans = nh_m)
+```
+
