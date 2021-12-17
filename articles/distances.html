@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">redistmetrics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,9 +88,71 @@
 
     
     
+<p>This vignette introduces some of the most common measures of some basic measures of the distance between plans. This offers a quick look at how similar or different a pair of plans are. See the vignette “Using <code>redistmetrics</code>” for the bare-bones of the package.</p>
+<p>We first load the <code>redistmetrics</code> package and data from New Hampshire. For any function, the <code>shp</code> argument can be swapped out for your data, <code>pop</code> for your population, and the <code>plans</code> argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a <code>redist_plans</code> object).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span></code></pre></div>
-  </main>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
+<p>Note that, when computing distance between plans, you always want to provide more than one plan. For that reason, we will also load <code>nh_m</code>, a matrix of plans for New Hampshire.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_m</span><span class="op">)</span>
+
+<span class="va">nh_m</span> <span class="op">&lt;-</span> <span class="va">nh_m</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<p>We subset it to its first four columns (the first four plans).</p>
+<div class="section level2">
+<h2 id="variation-of-information">Variation of Information<a class="anchor" aria-label="anchor" href="#variation-of-information"></a>
+</h2>
+<p>The recommended distance between plans is the variation of information. This considers the distance between plans by looking at the joint distributions of people across plans.</p>
+<p>The Variation of Information can be computed with:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/dist_info.html">dist_info</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span>, shp <span class="op">=</span> <span class="va">nh</span>, total_pop <span class="op">=</span> <span class="va">pop</span><span class="op">)</span>
+<span class="co">#&gt;          [,1]     [,2]     [,3]     [,4]</span>
+<span class="co">#&gt; [1,] 0.000000 1.170495 1.381331 1.241767</span>
+<span class="co">#&gt; [2,] 1.170495 0.000000 1.250428 1.339492</span>
+<span class="co">#&gt; [3,] 1.381331 1.250428 0.000000 1.211885</span>
+<span class="co">#&gt; [4,] 1.241767 1.339492 1.211885 0.000000</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="hamming-distance">Hamming Distance<a class="anchor" aria-label="anchor" href="#hamming-distance"></a>
+</h2>
+<p>The Hamming distance is a simpler metric which just considers how many units are assigned to different districts between pairs of plans.</p>
+<p>The Hamming distance can be computed with:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/dist_ham.html">dist_ham</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span><span class="op">)</span>
+<span class="co">#&gt;      [,1] [,2] [,3] [,4]</span>
+<span class="co">#&gt; [1,]    0   76  190  211</span>
+<span class="co">#&gt; [2,]   76    0  240  177</span>
+<span class="co">#&gt; [3,]  190  240    0  233</span>
+<span class="co">#&gt; [4,]  211  177  233    0</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="manhattan-distance">Manhattan Distance<a class="anchor" aria-label="anchor" href="#manhattan-distance"></a>
+</h2>
+<p>The Manhattan distance measures how many “blocks” you would need to move to get between plans. This is most useful in MCMC contexts, rather than general contexts.</p>
+<p>The Manhattan distance can be computed with:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/dist_man.html">dist_man</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span><span class="op">)</span>
+<span class="co">#&gt;      [,1] [,2] [,3] [,4]</span>
+<span class="co">#&gt; [1,]    0   76  190  211</span>
+<span class="co">#&gt; [2,]   76    0  240  177</span>
+<span class="co">#&gt; [3,]  190  240    0  233</span>
+<span class="co">#&gt; [4,]  211  177  233    0</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="euclidean-distance">Euclidean Distance<a class="anchor" aria-label="anchor" href="#euclidean-distance"></a>
+</h2>
+<p>The Euclidean distance measures the square root of the summed distances you would need to move to get between plans. This is most useful in MCMC contexts, rather than general contexts.</p>
+<p>The Euclidean distance can be computed with:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/dist_euc.html">dist_euc</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span><span class="op">)</span>
+<span class="co">#&gt;           [,1]      [,2]     [,3]     [,4]</span>
+<span class="co">#&gt; [1,]  0.000000  8.717798 13.78405 14.52584</span>
+<span class="co">#&gt; [2,]  8.717798  0.000000 15.49193 13.30413</span>
+<span class="co">#&gt; [3,] 13.784049 15.491933  0.00000 15.26434</span>
+<span class="co">#&gt; [4,] 14.525839 13.304135 15.26434  0.00000</span></code></pre></div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">redistmetrics</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,9 +88,59 @@
 
     
     
+<p>Redistricting is problem with many, many dimensions. This vignette introduces some useful measures related to redistricting, but with smaller categories. See the vignette “Using <code>redistmetrics</code>” for the bare-bones of the package.</p>
+<p>We first load the <code>redistmetrics</code> package and data from New Hampshire. For any function, the <code>shp</code> argument can be swapped out for your data, <code>rvote</code> and <code>dvote</code> for any two party votes, <code>pop_black</code> for any group population, <code>pop</code> for the total population, and the <code>plans</code> argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a <code>redist_plans</code> object).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span></code></pre></div>
-  </main>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
+<div class="section level2">
+<h2 id="competitiveness">Competitiveness<a class="anchor" aria-label="anchor" href="#competitiveness"></a>
+</h2>
+<div class="section level3">
+<h3 id="talismanic-compactness">Talismanic Compactness<a class="anchor" aria-label="anchor" href="#talismanic-compactness"></a>
+</h3>
+<p>This is a measure which offers a balance between competitiveness across the state and competitiveness within inidividual districts.</p>
+<p>Talismanic Compactness can be computed with</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/compet_talisman.html">compet_talisman</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.04955851 0.04955851</span></code></pre></div>
+<p>where <code>nrv</code> and <code>ndv</code> are averages of votes. (In general, you want to compute these scores over many elections and average them.)</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="segregation">Segregation<a class="anchor" aria-label="anchor" href="#segregation"></a>
+</h2>
+<div class="section level3">
+<h3 id="dissimilarity">Dissimilarity<a class="anchor" aria-label="anchor" href="#dissimilarity"></a>
+</h3>
+<p>Dissimilarity describes how similar the demographic proportions in districts are to the total state population’s demographics.</p>
+<p>Dissimilarity can be computed with:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/seg_dissim.html">seg_dissim</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, group_pop <span class="op">=</span> <span class="va">pop_black</span>, total_pop <span class="op">=</span> <span class="va">pop</span><span class="op">)</span>
+<span class="co">#&gt; [1] 0.0273714 0.0273714</span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="incumbents">Incumbents<a class="anchor" aria-label="anchor" href="#incumbents"></a>
+</h2>
+<div class="section level3">
+<h3 id="incumbent-pairings">Incumbent Pairings<a class="anchor" aria-label="anchor" href="#incumbent-pairings"></a>
+</h3>
+<p>We compute incumbent pairings as the number of incumbents who are placed into a district with other incumbents beyond those allowed. Formally, this is:</p>
+<p><span class="math display">\[\textrm{Inc. Pairs} = \sum_{d = 1}^{\textrm{ndists}}\max(0, n^{(d)}_{inc} - 1)\]</span></p>
+<p>We do not have incumbent data included for New Hampshire. As such, we create fake incumbent data.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fake_inc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span><span class="op">)</span>
+<span class="va">fake_inc</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></code></pre></div>
+<p>This would indicate that there are only incumbents in the first two rows of the data.</p>
+<p>Incumbent pairings can be computed with:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/inc_pairs.html">inc_pairs</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, inc <span class="op">=</span> <span class="va">fake_inc</span><span class="op">)</span>
+<span class="co">#&gt; [1] 1 1</span></code></pre></div>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
