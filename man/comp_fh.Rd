@@ -33,4 +33,8 @@ comp_fh(plans = nh$r_2020, shp = nh, total_pop = pop)
 comp_fh(plans = nh_m[, 3:5], shp = nh, pop)
 
 }
+\references{
+Fryer R, Holden R. 2011. Measuring the Compactness of Political Districting Plans.
+Journal of Law and Economics.
+}
 \concept{compactness}

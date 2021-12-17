@@ -35,4 +35,9 @@ compet_talisman(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
 compet_talisman(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 
 }
+\references{
+Wendy K. Tam Cho and Yan Y. Liu
+Toward a Talismanic Redistricting Tool.
+Election Law Journal. 15, 4. Pp. 351-366.
+}
 \concept{competitiveness}

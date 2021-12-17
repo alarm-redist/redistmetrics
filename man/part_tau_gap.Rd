@@ -33,4 +33,8 @@ part_tau_gap(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
 part_tau_gap(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 
 }
+\references{
+Gregory S. Warrington. 2018. "Quantifying Gerrymandering Using the Vote Distribution."
+Election Law Journal: Rules, Politics, and Policy. Pp. 39-57.http://doi.org/10.1089/elj.2017.0447
+}
 \concept{partisan}

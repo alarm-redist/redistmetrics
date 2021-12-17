@@ -35,4 +35,9 @@ part_resp(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
 part_resp(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 
 }
+\references{
+Jonathan N. Katz, Gary King, and Elizabeth Rosenblatt. 2020.
+Theoretical Foundations and Empirical Evaluations of Partisan Fairness in District-Based Democracies.
+American Political Science Review, 114, 1, Pp. 164-178.
+}
 \concept{partisan}

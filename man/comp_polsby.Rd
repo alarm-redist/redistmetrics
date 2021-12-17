@@ -45,4 +45,12 @@ comp_polsby(plans = nh$r_2020, shp = nh)
 comp_polsby(plans = nh_m[, 3:5], shp = nh)
 
 }
+\references{
+Cox, E. 1927. A Method of Assigning Numerical and Percentage Values to the
+Degree of Roundness of Sand Grains. Journal of Paleontology, 1(3), 179-183.
+
+Polsby, Daniel D., and Robert D. Popper. 1991. “The Third Criterion:
+Compactness as a procedural safeguard against partisan gerrymandering.”
+Yale Law & Policy Review 9 (2): 301–353.
+}
 \concept{compactness}

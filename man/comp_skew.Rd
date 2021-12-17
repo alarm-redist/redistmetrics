@@ -24,7 +24,7 @@ the smallest bounding circle. Scores are bounded between 0 and 1, where 1 is
 most compact.
 }
 \examples{
-#' data(nh)
+data(nh)
 data(nh_m)
 # For a single plan:
 comp_skew(plans = nh$r_2020, shp = nh)
@@ -34,5 +34,9 @@ comp_skew(plans = nh$r_2020, shp = nh)
 # slower, beware!
 comp_skew(plans = nh_m[, 3:5], shp = nh)
 }
+}
+\references{
+S.N. Schumm. 1963. Sinuosity of alluvial rivers on the Great Plains.
+Bulletin of the Geological Society of America, 74. 1089-1100.
 }
 \concept{compactness}

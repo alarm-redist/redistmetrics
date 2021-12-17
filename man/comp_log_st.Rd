@@ -31,4 +31,8 @@ comp_log_st(plans = nh$r_2020, shp = nh, counties = county, adj = nh$adj)
 comp_log_st(plans = nh_m[, 3:5], shp = nh, counties = county, adj = nh$adj)
 
 }
+\references{
+Cory McCartan and Kosuke Imai. 2020.
+Sequential Monte Carlo for Sampling Balanced and Compact Redistricting Plans.
+}
 \concept{compactness}

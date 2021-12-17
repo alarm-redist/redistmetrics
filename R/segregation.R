@@ -10,6 +10,10 @@
 #' @export
 #' @concept segregation
 #'
+#' @references
+#' Douglas Massey and Nancy Denton. 1987.
+#' The Dimensions of Social Segregation. Social Forces.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)

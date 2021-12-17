@@ -34,4 +34,8 @@ comp_lw(plans = nh_m[, 3:5], shp = nh)
 }
 
 }
+\references{
+Harris, Curtis C. 1964. “A scientific method of districting”.
+Behavioral Science 3(9), 219–225.
+}
 \concept{compactness}

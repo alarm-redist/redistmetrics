@@ -13,6 +13,14 @@
 #' @export
 #' @concept compactness
 #'
+#' @references
+#' Cox, E. 1927. A Method of Assigning Numerical and Percentage Values to the
+#' Degree of Roundness of Sand Grains. Journal of Paleontology, 1(3), 179-183.
+#'
+#' Polsby, Daniel D., and Robert D. Popper. 1991. “The Third Criterion:
+#' Compactness as a procedural safeguard against partisan gerrymandering.”
+#' Yale Law & Policy Review 9 (2): 301–353.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -105,6 +113,10 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
 #' @export
 #' @concept compactness
 #'
+#' @references
+#' Schwartzberg, Joseph E. 1966. Reapportionment, Gerrymanders, and the Notion
+#' of Compactness. Minnesota Law Review. 1701.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -193,6 +205,10 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
 #' @return numeric vector
 #' @export
 #' @concept compactness
+#'
+#' @references
+#' Reock, E. 1961. A Note: Measuring Compactness as a Requirement of Legislative
+#' Apportionment. Midwest Journal of Political Science, 5(1), 70-74.
 #'
 #' @examples
 #' data(nh)
@@ -316,6 +332,10 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @export
 #' @concept compactness
 #'
+#' @references
+#' Harris, Curtis C. 1964. “A scientific method of districting”.
+#' Behavioral Science 3(9), 219–225.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -376,6 +396,10 @@ comp_lw <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @return numeric vector
 #' @export
 #' @concept compactness
+#'
+#' @references
+#' Boyce, R., & Clark, W. 1964. The Concept of Shape in Geography.
+#' Geographical Review, 54(4), 561-572.
 #'
 #' @examples
 #' data(nh)
@@ -455,6 +479,10 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @export
 #' @concept compactness
 #'
+#' @references
+#' Fryer R, Holden R. 2011. Measuring the Compactness of Political Districting Plans.
+#' Journal of Law and Economics.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -501,6 +529,11 @@ comp_fh <- function(plans, shp, total_pop, epsg = 3857, ncores = 1) {
 #' @export
 #' @concept compactness
 #'
+#' @references
+#' Matthew P. Dube and Jesse Tyler Clark. 2016.
+#' Beyond the circle: Measuring district compactness using graph theory. In
+#' Annual Meeting of the Northeastern Political Science Association
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -535,6 +568,11 @@ comp_edges_rem <- function(plans, shp, adj) {
 #' @return numeric vector
 #' @export
 #' @concept compactness
+#'
+#' @references
+#' Matthew P. Dube and Jesse Tyler Clark. 2016.
+#' Beyond the circle: Measuring district compactness using graph theory. In
+#' Annual Meeting of the Northeastern Political Science Association
 #'
 #' @examples
 #' data(nh)
@@ -572,6 +610,10 @@ comp_frac_kept <- function(plans, shp, adj) {
 #' @return numeric vector
 #' @export
 #' @concept compactness
+#'
+#' @references
+#' Cory McCartan and Kosuke Imai. 2020.
+#' Sequential Monte Carlo for Sampling Balanced and Compact Redistricting Plans.
 #'
 #' @examples
 #' data(nh)
@@ -620,8 +662,12 @@ comp_log_st <- function(plans, shp, counties = NULL, adj) {
 #' @export
 #' @concept compactness
 #'
+#' @references
+#' S.N. Schumm. 1963. Sinuosity of alluvial rivers on the Great Plains.
+#' Bulletin of the Geological Society of America, 74. 1089-1100.
+#'
 #' @examples
-#' #' data(nh)
+#' data(nh)
 #' data(nh_m)
 #' # For a single plan:
 #' comp_skew(plans = nh$r_2020, shp = nh)
@@ -752,6 +798,11 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @export
 #' @concept compactness
 #'
+#' @references
+#' Aaron Kaufman, Gary King, and Mayya Komisarchik. 2021.
+#' How to Measure Legislative District COmpactness If You Only Know it When You See It.
+#' American Journal of Political Science. 65, 3. Pp. 533-550.
+#'
 #' @examples
 #' #' data(nh)
 #' data(nh_m)
@@ -844,6 +895,11 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @return numeric vector
 #' @export
 #' @concept compactness
+#'
+#' @references
+#' Aaron Kaufman, Gary King, and Mayya Komisarchik. 2021.
+#' How to Measure Legislative District COmpactness If You Only Know it When You See It.
+#' American Journal of Political Science. 65, 3. Pp. 533-550.
 #'
 #' @examples
 #' #' data(nh)

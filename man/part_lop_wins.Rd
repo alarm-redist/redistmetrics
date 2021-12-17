@@ -31,4 +31,8 @@ part_lop_wins(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
 part_lop_wins(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 
 }
+\references{
+Samuel S.-H. Wang. 2016. "Three Tests for Practical Evaluation of Partisan Gerrymandering."
+Stanford Law Review, 68, Pp. 1263 - 1321.
+}
 \concept{partisan}

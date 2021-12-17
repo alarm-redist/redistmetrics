@@ -31,4 +31,8 @@ seg_dissim(plans = nh$r_2020, shp = nh, group_pop = vap_hisp, total_pop = vap)
 seg_dissim(plans = nh_m[, 3:5], shp = nh, group_pop = vap_hisp, total_pop = vap)
 
 }
+\references{
+Douglas Massey and Nancy Denton. 1987.
+The Dimensions of Social Segregation. Social Forces.
+}
 \concept{segregation}

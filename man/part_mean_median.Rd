@@ -32,4 +32,9 @@ part_mean_median(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
 part_mean_median(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 
 }
+\references{
+Michael D. McDonald and Robin E. Best. 2015.
+Unfair Partisan Gerrymanders in Politics and Law: A Diagnostic Applied to Six Cases.
+Election Law Journal: Rules, Politics, and Policy. 14. 4. Pp. 312-330.
+}
 \concept{partisan}

@@ -31,4 +31,9 @@ part_rmd(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
 part_rmd(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 
 }
+\references{
+Gregory Herschlag, Han Sung Kang, Justin Luo, Christy Vaughn Graves, Sachet Bangia,
+Robert Ravier & Jonathan C. Mattingly (2020) Quantifying Gerrymandering in North Carolina,
+Statistics and Public Policy, 7:1, 30-38, DOI: 10.1080/2330443X.2020.1796400
+}
 \concept{partisan}

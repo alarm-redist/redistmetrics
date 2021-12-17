@@ -34,4 +34,8 @@ comp_bc(plans = nh_m[, 3:5], shp = nh)
 }
 
 }
+\references{
+Boyce, R., & Clark, W. 1964. The Concept of Shape in Geography.
+Geographical Review, 54(4), 561-572.
+}
 \concept{compactness}

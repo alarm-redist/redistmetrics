@@ -12,6 +12,11 @@
 #' @export
 #' @concept competitiveness
 #'
+#' @references
+#' Wendy K. Tam Cho and Yan Y. Liu
+#' Toward a Talismanic Redistricting Tool.
+#' Election Law Journal. 15, 4. Pp. 351-366.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)

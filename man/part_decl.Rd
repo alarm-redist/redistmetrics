@@ -4,7 +4,7 @@
 \alias{part_decl}
 \title{Calculate Declination}
 \usage{
-part_decl(plans, shp, dvote, rvote, normalize = FALSE)
+part_decl(plans, shp, dvote, rvote, normalize = TRUE, adjust = TRUE)
 }
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
@@ -15,7 +15,9 @@ part_decl(plans, shp, dvote, rvote, normalize = FALSE)
 
 \item{rvote}{unqouted name of column in shp with group population}
 
-\item{normalize}{Default is FALSE. Translate score to an angle?}
+\item{normalize}{Default is TRUE Translate score to an angle?}
+
+\item{adjust}{Default is TRUE. Applies a correction to increase cross-size comparison.}
 }
 \value{
 numeric vector
@@ -32,5 +34,9 @@ part_decl(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
 # Or many plans:
 part_decl(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 
+}
+\references{
+Gregory S. Warrington. 2018. "Quantifying Gerrymandering Using the Vote Distribution."
+Election Law Journal: Rules, Politics, and Policy. Pp. 39-57.http://doi.org/10.1089/elj.2017.0447
 }
 \concept{partisan}

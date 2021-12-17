@@ -11,6 +11,11 @@
 #' @export
 #' @concept partisan
 #'
+#' @references
+#' Jonathan N. Katz, Gary King, and Elizabeth Rosenblatt. 2020.
+#' Theoretical Foundations and Empirical Evaluations of Partisan Fairness in District-Based Democracies.
+#' American Political Science Review, 114, 1, Pp. 164-178.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -157,6 +162,11 @@ part_dvs <- function(plans, shp, dvote, rvote) {
 #' @export
 #' @concept partisan
 #'
+#' @references
+#' Nicholas O. Stephanopoulos. 2015.
+#' Partisan Gerrymandering and the Efficiency Gap.
+#' The University of Chicago Law Review, 82, Pp. 831-900.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -205,6 +215,11 @@ part_egap <- function(plans, shp, dvote, rvote) {
 #' @return numeric vector
 #' @export
 #' @concept partisan
+#'
+#' @references
+#' Nicholas O. Stephanopoulos. 2015.
+#' Partisan Gerrymandering and the Efficiency Gap.
+#' The University of Chicago Law Review, 82, Pp. 831-900.
 #'
 #' @examples
 #' data(nh)
@@ -256,6 +271,10 @@ part_egap_ep <- function(plans, shp, dvote, rvote) {
 #' @export
 #' @concept partisan
 #'
+#' @references
+#' Gregory S. Warrington. 2018. "Quantifying Gerrymandering Using the Vote Distribution."
+#' Election Law Journal: Rules, Politics, and Policy. Pp. 39-57.http://doi.org/10.1089/elj.2017.0447
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -304,6 +323,11 @@ part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
 #' @return numeric vector
 #' @export
 #' @concept partisan
+#'
+#' @references
+#' Michael D. McDonald and Robin E. Best. 2015.
+#' Unfair Partisan Gerrymanders in Politics and Law: A Diagnostic Applied to Six Cases.
+#' Election Law Journal: Rules, Politics, and Policy. 14. 4. Pp. 312-330.
 #'
 #' @examples
 #' data(nh)
@@ -355,6 +379,10 @@ part_mean_median <- function(plans, shp, dvote, rvote) {
 #' @return numeric vector
 #' @export
 #' @concept partisan
+#'
+#' @references
+#' Gregory S. Warrington. 2018. "Quantifying Gerrymandering Using the Vote Distribution."
+#' Election Law Journal: Rules, Politics, and Policy. Pp. 39-57.http://doi.org/10.1089/elj.2017.0447
 #'
 #' @examples
 #' data(nh)
@@ -415,6 +443,11 @@ part_decl <- function(plans, shp, dvote, rvote, normalize = TRUE, adjust = TRUE)
 #' @export
 #' @concept partisan
 #'
+#' @references
+#' Jonathan N. Katz, Gary King, and Elizabeth Rosenblatt. 2020.
+#' Theoretical Foundations and Empirical Evaluations of Partisan Fairness in District-Based Democracies.
+#' American Political Science Review, 114, 1, Pp. 164-178.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -468,6 +501,11 @@ part_decl_simple <- function(plans, shp, dvote, rvote) {
 #' @export
 #' @concept partisan
 #'
+#' @references
+#' Jonathan N. Katz, Gary King, and Elizabeth Rosenblatt. 2020.
+#' Theoretical Foundations and Empirical Evaluations of Partisan Fairness in District-Based Democracies.
+#' American Political Science Review, 114, 1, Pp. 164-178.
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -516,6 +554,10 @@ part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = 0.01) {
 #' @return numeric vector
 #' @export
 #' @concept partisan
+#'
+#' @references
+#' Samuel S.-H. Wang. 2016. "Three Tests for Practical Evaluation of Partisan Gerrymandering."
+#' Stanford Law Review, 68, Pp. 1263 - 1321.
 #'
 #' @examples
 #' data(nh)
@@ -566,6 +608,11 @@ part_lop_wins <- function(plans, shp, dvote, rvote) {
 #' @export
 #' @concept partisan
 #'
+#' @references
+#' Gregory Herschlag, Han Sung Kang, Justin Luo, Christy Vaughn Graves, Sachet Bangia,
+#' Robert Ravier & Jonathan C. Mattingly (2020) Quantifying Gerrymandering in North Carolina,
+#' Statistics and Public Policy, 7:1, 30-38, DOI: 10.1080/2330443X.2020.1796400
+#'
 #' @examples
 #' data(nh)
 #' data(nh_m)
@@ -613,6 +660,11 @@ part_rmd <- function(plans, shp, dvote, rvote) {
 #' @return numeric vector
 #' @export
 #' @concept partisan
+#'
+#' @references
+#' Gregory Herschlag, Han Sung Kang, Justin Luo, Christy Vaughn Graves, Sachet Bangia,
+#' Robert Ravier & Jonathan C. Mattingly (2020) Quantifying Gerrymandering in North Carolina,
+#' Statistics and Public Policy, 7:1, 30-38, DOI: 10.1080/2330443X.2020.1796400
 #'
 #' @examples
 #' data(nh)

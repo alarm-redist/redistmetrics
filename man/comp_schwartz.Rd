@@ -45,4 +45,8 @@ comp_schwartz(plans = nh$r_2020, shp = nh)
 comp_schwartz(plans = nh_m[, 3:5], shp = nh)
 
 }
+\references{
+Schwartzberg, Joseph E. 1966. Reapportionment, Gerrymanders, and the Notion
+of Compactness. Minnesota Law Review. 1701.
+}
 \concept{compactness}

@@ -31,4 +31,8 @@ comp_reock(plans = nh$r_2020, shp = nh)
 comp_reock(plans = nh_m[, 3:5], shp = nh)
 
 }
+\references{
+Reock, E. 1961. A Note: Measuring Compactness as a Requirement of Legislative
+Apportionment. Midwest Journal of Political Science, 5(1), 70-74.
+}
 \concept{compactness}

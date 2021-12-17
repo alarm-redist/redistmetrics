@@ -29,4 +29,9 @@ comp_frac_kept(plans = nh$r_2020, shp = nh, nh$adj)
 comp_frac_kept(plans = nh_m[, 3:5], shp = nh, nh$adj)
 
 }
+\references{
+Matthew P. Dube and Jesse Tyler Clark. 2016.
+Beyond the circle: Measuring district compactness using graph theory. In
+Annual Meeting of the Northeastern Political Science Association
+}
 \concept{compactness}

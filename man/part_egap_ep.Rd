@@ -31,4 +31,9 @@ part_egap_ep(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
 part_egap_ep(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 
 }
+\references{
+Nicholas O. Stephanopoulos. 2015.
+Partisan Gerrymandering and the Efficiency Gap.
+The University of Chicago Law Review, 82, Pp. 831-900.
+}
 \concept{partisan}
