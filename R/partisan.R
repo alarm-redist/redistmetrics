@@ -392,7 +392,7 @@ part_decl <- function(plans, shp, dvote, rvote, normalize = FALSE) {
   dec <- declination(dvs = dvs, dseat_vec = dseat_vec, nd = nd)
 
   if (normalize) {
-    dec <- atan(dec) / log(nd)
+    dec <- atan(2 * dec) / log(nd)
   }
 
   rep(dec, each = nd)
@@ -421,7 +421,7 @@ part_decl <- function(plans, shp, dvote, rvote, normalize = FALSE) {
 #' # Or many plans:
 #' part_resp(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
 #'
-part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = FALSE) {
+part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = 0.01) {
 
   plans <- process_plans(plans)
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)

@@ -248,6 +248,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// declination_angle
+NumericVector declination_angle(NumericMatrix dvs, IntegerVector dseat_vec, int nd);
+RcppExport SEXP _redistmetrics_declination_angle(SEXP dvsSEXP, SEXP dseat_vecSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type dseat_vec(dseat_vecSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(declination_angle(dvs, dseat_vec, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
 // lopsidedwins
 NumericVector lopsidedwins(NumericMatrix dvs, IntegerVector dseat_vec, int nd);
 RcppExport SEXP _redistmetrics_lopsidedwins(SEXP dvsSEXP, SEXP dseat_vecSEXP, SEXP ndSEXP) {
@@ -409,6 +422,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_meanmedian", (DL_FUNC) &_redistmetrics_meanmedian, 1},
     {"_redistmetrics_bias", (DL_FUNC) &_redistmetrics_bias, 2},
     {"_redistmetrics_declination", (DL_FUNC) &_redistmetrics_declination, 3},
+    {"_redistmetrics_declination_angle", (DL_FUNC) &_redistmetrics_declination_angle, 3},
     {"_redistmetrics_lopsidedwins", (DL_FUNC) &_redistmetrics_lopsidedwins, 3},
     {"_redistmetrics_responsiveness", (DL_FUNC) &_redistmetrics_responsiveness, 4},
     {"_redistmetrics_biasatv", (DL_FUNC) &_redistmetrics_biasatv, 3},

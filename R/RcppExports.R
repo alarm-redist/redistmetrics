@@ -73,6 +73,10 @@ declination <- function(dvs, dseat_vec, nd) {
     .Call(`_redistmetrics_declination`, dvs, dseat_vec, nd)
 }
 
+declination_angle <- function(dvs, dseat_vec, nd) {
+    .Call(`_redistmetrics_declination_angle`, dvs, dseat_vec, nd)
+}
+
 lopsidedwins <- function(dvs, dseat_vec, nd) {
     .Call(`_redistmetrics_lopsidedwins`, dvs, dseat_vec, nd)
 }

@@ -4,7 +4,7 @@
 \alias{part_resp}
 \title{Calculate Responsiveness}
 \usage{
-part_resp(plans, shp, dvote, rvote, v = 0.5, bandwidth = FALSE)
+part_resp(plans, shp, dvote, rvote, v = 0.5, bandwidth = 0.01)
 }
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}

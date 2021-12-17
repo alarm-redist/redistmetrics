@@ -28,17 +28,6 @@ For illustration purposes, we utilize what is often called the "normal Democrati
 
 This is a brief introduction to the measures included in the package. For a more thorough, yet still friendly introduction, we recommend [Katz, King, and Rosenblatt (2020)](https://gking.harvard.edu/files/gking/files/theoretical_foundations_and_empirical_evaluations_of_partisan_fairness_in_districtbased_democracies.pdf).
 
-### Democratic Seats
-
-Democratic seats is the number of seats that Democrats would win under fixed Democratic and Republican votes.
-
-All scores are between 0 and the number of districts.
-
-Democratic seats can be computed with:
-
-```{r}
-part_dseats(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
-```
 
 
 ### Democratic Vote Share
@@ -47,10 +36,31 @@ The Democratic vote share is the vote share by district under fixed Democratic a
 
 All scores range from 0 to 1, where a higher proportion indicates a more Democratic voters in a district relative to Republican voters.
 
+Formally, for each district, this can be written as:
+
+$$ \textrm{voteshare}_D = \sum_{i = 1}^{n_{\textrm{voters}}}  \frac{\mathbb{1}\{\textrm{vote}(i) == D\} }{\mathbb{1}\{\textrm{vote}(i) \in D, R\} }$$
+
 The Democratic vote share can be computed with:
 
 ```{r}
 part_dvs(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
+```
+
+
+### Democratic Seats
+
+Democratic seats is the number of seats that Democrats would win under fixed Democratic and Republican votes.
+
+All scores are between 0 and the number of districts.
+
+Formally, this can be written as:
+
+$$ \textrm{Seats}_D = \sum_{d = 1}^{n_\textrm{ndists}} \textrm{voteshare}_D > 0.5$$
+
+Democratic seats can be computed with:
+
+```{r}
+part_dseats(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 ```
 
 
@@ -60,17 +70,27 @@ Partisan bias is the deviation from partisan symmetry at a voteshare $v$.
 
 Positive scores indicate bias in favor of Republicans, while negative scores indicate bias in favor of Democrats. Scores are in the range of -1 to 1.
 
+Formally, this can be written as:
+
+$$\textrm{Partisan Bias} = \frac{\textrm{Seats}_D(\textrm{voteshare}_D) - (1 - \textrm{Seats}_D(1 - \textrm{voteshare}_D))}{2}$$
+
 Partisan Bias can be computed with:
 
 ```{r}
 part_dvs(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 ```
 
-The argument $v$ can be set for any value in $0$ to $1$ and is $0.5$ by default.
+The argument $v$ (for $\textrm{voteshare}_D$) can be set for any value in $0$ to $1$ and is $0.5$ by default.
 
 ### Responsiveness
 
 Responsiveness describes the slope of the implied seats-votes curve by an election. A higher score implies that a districting plan is more likely to change given a change in vote distribution.
+
+Formally, this can be written as:
+
+$$\textrm{Responsiveness} = \frac{\textrm{Seats}_D(\textrm{voteshare}_D + b) - \textrm{Seats}_D(\textrm{voteshare}_D - b)}{b}$$
+where $b$ is a user-specified bandwidth.
+
 
 Responsiveness can be computed with:
 
@@ -78,13 +98,25 @@ Responsiveness can be computed with:
 part_resp(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 ```
 
-The argument $v$ can be set for any value in $0$ to $1$ and is $0.5$ by default.
+The argument `v` can be set for any value in $0$ to $1$ and is $0.5$ and the `bandwidth` is $0.1$ by default.
+
+Note that the responsiveness can be very sensitive to `bandwidth`. For example, in the above we get values of 0. If we widen the `bandwidth`, the results change drastically!
+
+```{r}
+part_resp(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv, bandwidth = 0.1)
+```
 
 ### Declination
 
 The declination describes the difference in the angle of two line through ordered an ordered scatter plot of Democratic and Republican votes, where one line is fit to each. 
 
 The normalized declination can take on values from -1 to 1, where a negative score indicates a pro-Democratic bias and positive score indicates a pro-Republican bias. When not normalized, the scores are not bounded in the same way, but the negative and positive interpretations stay the same.
+
+Formally, this can be written as:
+
+$$\textrm{Declination} =  \frac{\bar{D}_{\textrm{voteshare}_D} - 0.5}{\textrm{Seats}_D(\textrm{voteshare}_D)} - \frac{0.5 - \bar{R}_{(\textrm{voteshare}_D)}}{1 - (\textrm{voteshare}_D)}$$
+
+introducing $\bar{D}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Democratic-won districts and $\bar{R}_{\textrm{voteshare}_D}$ as the average Democratic voteshare in Republican-won districts
 
 Declination can be computed with:
 
@@ -93,6 +125,12 @@ part_decl(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 ```
 
 By default, declination is not normalized to an angle, but can be by setting `normalize = TRUE`.
+
+The normalization takes the form:
+
+$$Declination^* = \frac{\textrm{atan}(\textrm{Declination})}{\log(n_{dists})}$$
+
+
 
 ### Mean-Median Score
 

@@ -79,11 +79,17 @@ test_that("part_mean_median works", {
 
 test_that("part_resp works", {
   a <- part_resp(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru, v = 0.5)
-  e <- c(NaN, NaN)
+  e <- c(0, 0)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_resp(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(NaN, NaN, NaN, NaN)
+  e <- c(0, 0, 0, 0)
+  expect_equal(a, e, tolerance = 1e-4)
+
+
+  a <- part_resp(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru,
+                 bandwidth = 0.05)
+  e <- c(20, 20, 0, 0)
   expect_equal(a, e, tolerance = 1e-4)
 })
 

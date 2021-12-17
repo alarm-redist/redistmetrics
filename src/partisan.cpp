@@ -168,7 +168,7 @@ NumericVector declination(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
       }
     }
   }
-  for(int i =0; i < Dwin.size(); i++){
+  for(int i = 0; i < Dwin.size(); i++){
     Dwin(i) = Dwin(i)/dseat_vec(i);
     Rwin(i) = Rwin(i)/(nd-dseat_vec(i));
   }
@@ -176,6 +176,30 @@ NumericVector declination(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
   NumericVector dseatshare = (NumericVector)dseat_vec/(double)nd;
 
   return ((Dwin-.5)/dseatshare)-((0.5-Rwin)/(1-dseatshare));
+}
+
+// [[Rcpp::export]]
+NumericVector declination_angle(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
+  NumericVector Dwin = NumericVector(dvs.ncol());
+  NumericVector Rwin = NumericVector(dvs.ncol());
+
+  for(int c = 0; c < dvs.ncol(); c++){
+    for(int r = 0; r < dvs.nrow(); r++){
+      if(dvs(r,c) >= .5){
+        Dwin(c) += dvs(r,c);
+      } else{
+        Rwin(c) += dvs(r,c);
+      }
+    }
+  }
+  for(int i = 0; i < Dwin.size(); i++){
+    Dwin(i) = Dwin(i)/dseat_vec(i);
+    Rwin(i) = Rwin(i)/(nd-dseat_vec(i));
+  }
+
+  NumericVector dseatshare = (NumericVector)dseat_vec/(double)nd;
+
+  return atan((Dwin - .5)/dseatshare) - atan((0.5 - Rwin)/(1 - dseatshare));
 }
 
 // [[Rcpp::export]]
