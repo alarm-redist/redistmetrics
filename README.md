@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# redistmetrics
+# redistmetrics <a href="https://alarm-redist.github.io/redistmetrics/"><img src="man/figures/logo.png" align="right" height="132" /></a>
 
 <!-- badges: start -->
 
