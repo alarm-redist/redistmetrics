@@ -262,6 +262,25 @@
 <span class="co">#&gt; [1] -Inf -Inf</span></code></pre></div>
 </div>
 </div>
+<div class="section level1">
+<h1 id="general-notes-on-speed">General Notes on Speed<a class="anchor" aria-label="anchor" href="#general-notes-on-speed"></a>
+</h1>
+<p>Compactness scores can be slow to compute, especially when comparing 1000s of plans with thousands of geographic units. Some basic recommendations:</p>
+<ul>
+<li>Avoid computing with block-level data where possible. Precincts or voter tabulation districts tend to be 1/100th of the units and compute much faster</li>
+<li>Use <code>rmapshaper::ms_simplify()</code> to simplify if a small degree of accuracy loss is acceptable</li>
+<li>Pre-compute <code><a href="../reference/prep_perims.html">prep_perims()</a></code> once and save the output if relying on Polsby-Popper for more than a single plan.</li>
+</ul>
+<p>A rough ordering of speeds to compute:</p>
+<ol style="list-style-type: decimal">
+<li>Scores based on adjacency (Log Spanning Tree, Edges Removed, Fraction Kept)</li>
+<li>Scores with Rcpp implementations with <code>useRcpp = TRUE</code> (Polsby-Popper and Schwartzberg)</li>
+<li>Scores that can pre-process geographic operations (Fryer-Holden, Length-Width)</li>
+<li>Scores that can utilize pre-computed areas (Box Reock, Reock, Convex Hull)</li>
+<li>Scores that require multiple plan-level geographic computations (Skew, X-Symmetry, Y-Symmetry)</li>
+<li>Scores that that require creating many new geographic objects per plan (Boyce-Clark)</li>
+</ol>
+</div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
