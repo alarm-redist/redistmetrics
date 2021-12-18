@@ -11,3 +11,4 @@ man-roxygen
 ^doc$
 ^Meta$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
