@@ -76,7 +76,6 @@ jobs:
       
       - name: Install spatial dependencies
         run: |
-          rm '/usr/local/bin/gfortran'
           brew install gdal proj
 
       - uses: r-lib/actions/setup-r@v1
