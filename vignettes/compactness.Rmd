@@ -265,7 +265,7 @@ Compactness scores can be slow to compute, especially when comparing 1000s of pl
 A rough ordering of speeds to compute:
 
 1. Scores based on adjacency (Log Spanning Tree, Edges Removed, Fraction Kept)
-2. Scores with Rcpp implementations with `useRcpp = TRUE` (Polsby-Popper and Schwartzberg)
+2. Scores with Rcpp implementations with `useRcpp = TRUE` (Polsby-Popper, Schwartzberg)
 3. Scores that can pre-process geographic operations (Fryer-Holden, Length-Width)
 4. Scores that can utilize pre-computed areas (Box Reock, Reock, Convex Hull)
 5. Scores that require multiple plan-level geographic computations (Skew, X-Symmetry, Y-Symmetry)
