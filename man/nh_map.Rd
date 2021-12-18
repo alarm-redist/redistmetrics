@@ -68,13 +68,13 @@ data(nh_map)
 }
 \references{
 Voting and Election Science Team, 2020, "2020 Precinct-Level Election Results",
-\url{https://doi.org/10.7910/DVN/K7760H}, Harvard Dataverse, V23
+\url{doi:10.7910/DVN/K7760H}, Harvard Dataverse, V23
 
 Voting and Election Science Team, 2018, "2016 Precinct-Level Election Results",
-\url{https://doi.org/10.7910/DVN/NH5S2I}, Harvard Dataverse, V71
+\url{doi:10.7910/DVN/NH5S2I}, Harvard Dataverse, V71
 
 Voting and Election Science Team, 2019, "2018 Precinct-Level Election Results",
-\url{https://doi.org/10.7910/DVN/UBKYRU}, Harvard Dataverse, V48
+\url{doi:10.7910/DVN/UBKYRU}, Harvard Dataverse, V48
 
 Kenny & McCartan (2021, Aug. 10). ALARM Project: 2020 Redistricting Data Files.
 Retrieved from \url{https://github.com/alarm-redist/census-2020/}
