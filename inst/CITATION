@@ -6,9 +6,9 @@ citEntry(entry = "misc",
 	 as.person("Kosuke Imai")),
 	 howpublished = "Available at The Comprehensive R Archive Network (CRAN)",
 	 year = "2021",
-	 url = "https://CRAN.R-project.org/package=redistmetrics",
+	 url = "https://github.com/alarm-redist/redistmetrics",
 	 textVersion = paste(" Christopher T. Kenny, Cory McCartan, Ben Fifield, and Kosuke Imai (2021).",
 	 	             "redistmetrics: Redistricting Metrics.",
 			     "Available at The Comprehensive R Archive Network (CRAN).",
-			     "URL https://CRAN.R-project.org/package=redistmetrics.")
+			     "URL https://github.com/alarm-redist/redistmetrics.")
 )
