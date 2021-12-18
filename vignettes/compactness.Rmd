@@ -253,3 +253,20 @@ Log Spanning Tree compactness can be computed with:
 comp_log_st(plans = nh$r_2020, shp = nh, adj = nh$adj, counties = county)
 ```
 
+
+# General Notes on Speed
+
+Compactness scores can be slow to compute, especially when comparing 1000s of plans with thousands of geographic units. Some basic recommendations:
+
+- Avoid computing with block-level data where possible. Precincts or voter tabulation districts tend to be 1/100th of the units and compute much faster
+- Use `rmapshaper::ms_simplify()` to simplify if a small degree of accuracy loss is acceptable
+- Pre-compute `prep_perims()` once and save the output if relying on Polsby-Popper for more than a single plan.
+
+A rough ordering of speeds to compute:
+
+1. Scores based on adjacency (Log Spanning Tree, Edges Removed, Fraction Kept)
+2. Scores with Rcpp implementations with `useRcpp = TRUE` (Polsby-Popper and Schwartzberg)
+3. Scores that can pre-process geographic operations (Fryer-Holden, Length-Width)
+4. Scores that can utilize pre-computed areas (Box Reock, Reock, Convex Hull)
+5. Scores that require multiple plan-level geographic computations (Skew, X-Symmetry, Y-Symmetry)
+6. Scores that that require creating many new geographic objects per plan (Boyce-Clark)
