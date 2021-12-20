@@ -29,7 +29,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">redistmetrics</a>
 
@@ -206,7 +206,7 @@
 </h3>
 <p>Boyce-Clark compactness looks at the distance from the interior center of the shape to 16 evenly spaced radials. The interior center of the shape is defined as the centroid if that is within the shape. If it is not within the shape, we define it using a central point on its surface (using <code><a href="https://paleolimbot.github.io/geos/reference/geos_centroid.html" class="external-link">geos::geos_point_on_surface()</a></code>). With those radials, we compute the distances <span class="math inline">\(d_{r_i}\)</span> for each of the <span class="math inline">\(i = 1:16\)</span> (for the recommended <span class="math inline">\(n = 16\)</span>) radials and look at the mean absolute deviation.</p>
 <p>Formally, it can be written as:</p>
-<p><span class="math display">\[\textrm{Boyce-Clark} = \sum_{i=1}^{16}\abs{\frac{r_{i}}{\sum_{i=1}^{16} r_i} * 100 - \frac{100}{n}}\]</span> Scores range from 0 to <span class="math inline">\(\infty\)</span>, where 0 is the most compact and <span class="math inline">\(\infty\)</span> is the least compact.</p>
+<p><span class="math display">\[\textrm{Boyce-Clark} = \sum_{i=1}^{16}\big|\frac{r_{i}}{\sum_{i=1}^{16} r_i} * 100 - \frac{100}{n}\big|\]</span> Scores range from 0 to <span class="math inline">\(\infty\)</span>, where 0 is the most compact and <span class="math inline">\(\infty\)</span> is the least compact.</p>
 <p>Boyce-Clark compactness can be computed with:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_bc.html">comp_bc</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
@@ -232,7 +232,7 @@
 </h3>
 <p>Edges Removed compactness describes the number of edges that have to be removed from an adjacency graph to draw a district. Inuitively, the edges between redistricting units which are in districts are removed. This correlates to Polsby-Popper compactness. For a given adjacency graph <span class="math inline">\(a\)</span>, we can write out the number of edges as <span class="math inline">\(E(a)\)</span> and consider the edges removed for a plan <span class="math inline">\(\pi\)</span>.</p>
 <p>Formally, this is then written as:</p>
-<p><span class="math display">\[ Edges Removed = E(a) - E_\pi(a)\]</span> Larger scores are less compact.</p>
+<p><span class="math display">\[ \textrm{Edges Removed} = E(a) - E_\pi(a)\]</span> Larger scores are less compact.</p>
 <p>Edges-Removed compactness can be computed with:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_edges_rem.html">comp_edges_rem</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span>
@@ -243,7 +243,7 @@
 </h3>
 <p>Fraction Kept compactness describes the fraction of edges that have to be kept when an adjacency graph is cut to form a district. This is rescaling of Edges Removed Compactness for more consistent interpretation. For a given adjacency graph <span class="math inline">\(a\)</span>, we can write out the number of edges as <span class="math inline">\(E(a)\)</span> and consider the edges removed for a plan <span class="math inline">\(\pi\)</span>.</p>
 <p>Formally, this is then written as:</p>
-<p><span class="math display">\[ Fraction Kept = \frac{E(a) - E_\pi(a)}{E(a)}\]</span> Scores range from 0 to 1 where 0 is least compact and 1 is most compact.</p>
+<p><span class="math display">\[ \textrm{Fraction Kept} = \frac{E(a) - E_\pi(a)}{E(a)}\]</span> Scores range from 0 to 1 where 0 is least compact and 1 is most compact.</p>
 <p>Fraction Kept compactness can be computed with:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_frac_kept.html">comp_frac_kept</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span>
@@ -254,7 +254,7 @@
 </h3>
 <p>For a given adjacency graph, we can consider some set of spanning trees that can be drawn from it. The number of such spanning trees <span class="math inline">\(n_st\)</span> can be constrained more meaningfully by first drawing spanning trees within districts, which describes the compactness component of the Sequential Monte Carlo (McCartan and Imai 2020) algorithm.</p>
 <p>Formally, it can be written as:</p>
-<p><span class="math display">\[ Log Spanning Tree = \textrm{log}(n_st)\]</span></p>
+<p><span class="math display">\[ \textrm{Log Spanning Tree} = \textrm{log}(n_st)\]</span></p>
 <p>A larger number of log spanning trees is more compact.</p>
 <p>Log Spanning Tree compactness can be computed with:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">

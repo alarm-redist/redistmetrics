@@ -29,7 +29,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">redistmetrics</a>
 
@@ -249,7 +249,7 @@
 <p>The Smoothed Seat Count Deviation offers an interpolation between seats when describing the number of seats won by a party. This can be added to the Democratic seats to describe the smoothed seat count.</p>
 <p>As such, values are between 0 and 1, where 0 favors Republicans and 1 favors Democrats.</p>
 <p>Formally, this is written as:</p>
-<p><span class="math display">\[\textrm{SSCD} = \frac{0.5 - \min(D_\textrm{voteshare}_D )}{(1 - \max(R_\textrm{voteshare}_D )) - (1 - \min(D_\textrm{voteshare}_D))}\]</span> where <span class="math inline">\(D_\textrm{voteshare}_D\)</span> is the Democratic vote share in Democratic-won districts and <span class="math inline">\(R_\textrm{voteshare}_D\)</span> is the Democratic vote share in Republican-won districts.</p>
+<p><span class="math display">\[\textrm{SSCD} = \frac{0.5 - \min(D_{\textrm{voteshare}_D} )}{(1 - \max(R_{\textrm{voteshare}_D} )) - (1 - \min(D_{\textrm{voteshare}_D}))}\]</span> where <span class="math inline">\(D_\textrm{voteshare}_D\)</span> is the Democratic vote share in Democratic-won districts and <span class="math inline">\(R_\textrm{voteshare}_D\)</span> is the Democratic vote share in Republican-won districts.</p>
 <p>The Smoothed Seat Count Deviation can be computed with:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/part_sscd.html">part_sscd</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>

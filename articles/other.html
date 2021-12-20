@@ -29,7 +29,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-dark"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">redistmetrics</a>
 
@@ -103,7 +103,7 @@
 <p>Formally, this can be written as:</p>
 <p><span class="math display">\[\textrm{Talismanic Competitiveness} = T_p (1 + \alpha T_e)\beta\]</span></p>
 <p>where</p>
-<p><span class="math display">\[ T_p = \frac{1}{n_d} * \sum_{k=1}^{n_\textrm{dists}} \big|\frac12 - \textrm{voteshare}_D\big|\]</span> <span class="math display">\[ |\frac{n_\textrm{dists} - Seats_D}{n_\textrm{dists}}-\frac12| \]</span></p>
+<p><span class="math display">\[ T_p = \frac{1}{n_d} * \sum_{k=1}^{n_\textrm{dists}} \big|\frac12 - \textrm{voteshare}_D\big|\]</span> <span class="math display">\[ T_e =  |\frac{n_\textrm{dists} - Seats_D}{n_\textrm{dists}}-\frac12| \]</span></p>
 <p>Talismanic Compactness can be computed with</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/compet_talisman.html">compet_talisman</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span>
@@ -134,7 +134,7 @@
 <h3 id="incumbent-pairings">Incumbent Pairings<a class="anchor" aria-label="anchor" href="#incumbent-pairings"></a>
 </h3>
 <p>We compute incumbent pairings as the number of incumbents who are placed into a district with other incumbents beyond those allowed. Formally, this is:</p>
-<p><span class="math display">\[\textrm{Inc. Pairs} = \sum_{d = 1}^{\textrm{ndists}}\max(0, n^{(d)}_{inc} - 1)\]</span></p>
+<p><span class="math display">\[\textrm{Inc. Pairs} = \sum_{d = 1}^{\textrm{ndists}}\max(0, ~n^{(d)}_{inc} - 1)\]</span></p>
 <p>We do not have incumbent data included for New Hampshire. As such, we create fake incumbent data.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fake_inc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span><span class="op">)</span>
