@@ -37,7 +37,7 @@ $$\textrm{Talismanic Competitiveness} = T_p (1 + \alpha T_e)\beta$$
 where 
 
 $$ T_p = \frac{1}{n_d} * \sum_{k=1}^{n_\textrm{dists}} \big|\frac12 - \textrm{voteshare}_D\big|$$
-$$ |\frac{n_\textrm{dists} - Seats_D}{n_\textrm{dists}}-\frac12| $$
+$$ T_e =  |\frac{n_\textrm{dists} - Seats_D}{n_\textrm{dists}}-\frac12| $$
 
 Talismanic Compactness can be computed with
 
@@ -72,7 +72,7 @@ seg_dissim(plans = nh$r_2020, shp = nh, group_pop = pop_black, total_pop = pop)
 
 We compute incumbent pairings as the number of incumbents who are placed into a district with other incumbents beyond those allowed. Formally, this is:
 
-$$\textrm{Inc. Pairs} = \sum_{d = 1}^{\textrm{ndists}}\max(0, n^{(d)}_{inc} - 1)$$
+$$\textrm{Inc. Pairs} = \sum_{d = 1}^{\textrm{ndists}}\max(0, ~n^{(d)}_{inc} - 1)$$
 
 We do not have incumbent data included for New Hampshire. As such, we create fake incumbent data.
 

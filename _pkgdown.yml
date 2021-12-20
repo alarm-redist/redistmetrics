@@ -2,6 +2,8 @@ url: https://alarm-redist.github.io/redistmetrics/
 template:
   bootstrap: 5
   bootswatch: yeti
+navbar:
+  bg: dark
 reference:
 - title: Partisan Bias Calculations
   desc: "Functions to calulate partisan bias measures"

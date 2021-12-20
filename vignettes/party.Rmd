@@ -256,7 +256,7 @@ As such, values are between 0 and 1, where 0 favors Republicans and 1 favors Dem
 
 Formally, this is written as:
 
-$$\textrm{SSCD} = \frac{0.5 - \min(D_\textrm{voteshare}_D )}{(1 - \max(R_\textrm{voteshare}_D )) - (1 - \min(D_\textrm{voteshare}_D))}$$
+$$\textrm{SSCD} = \frac{0.5 - \min(D_{\textrm{voteshare}_D} )}{(1 - \max(R_{\textrm{voteshare}_D} )) - (1 - \min(D_{\textrm{voteshare}_D}))}$$
 where $D_\textrm{voteshare}_D$ is the Democratic vote share in Democratic-won districts and $R_\textrm{voteshare}_D$ is the Democratic vote share in Republican-won districts.
 
 The Smoothed Seat Count Deviation can be computed with:

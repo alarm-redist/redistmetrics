@@ -179,7 +179,7 @@ Boyce-Clark compactness looks at the distance from the interior center of the sh
 
 Formally, it can be written as:
 
-$$\textrm{Boyce-Clark} = \sum_{i=1}^{16}\abs{\frac{r_{i}}{\sum_{i=1}^{16} r_i} * 100 - \frac{100}{n}}$$
+$$\textrm{Boyce-Clark} = \sum_{i=1}^{16}\big|\frac{r_{i}}{\sum_{i=1}^{16} r_i} * 100 - \frac{100}{n}\big|$$
 Scores range from 0 to $\infty$, where 0 is the most compact and $\infty$ is the least compact.
 
 Boyce-Clark compactness can be computed with:
@@ -213,7 +213,7 @@ Edges Removed compactness describes the number of edges that have to be removed 
 
 Formally, this is then written as:
 
-$$ Edges Removed = E(a) - E_\pi(a)$$
+$$ \textrm{Edges Removed} = E(a) - E_\pi(a)$$
 Larger scores are less compact.
 
 Edges-Removed compactness can be computed with:
@@ -228,7 +228,7 @@ Fraction Kept compactness describes the fraction of edges that have to be kept w
 
 Formally, this is then written as:
 
-$$ Fraction Kept = \frac{E(a) - E_\pi(a)}{E(a)}$$
+$$ \textrm{Fraction Kept} = \frac{E(a) - E_\pi(a)}{E(a)}$$
 Scores range from 0 to 1 where 0 is least compact and 1 is most compact.
 
 Fraction Kept compactness can be computed with:
@@ -243,7 +243,7 @@ For a given adjacency graph, we can consider some set of spanning trees that can
 
 Formally, it can be written as:
 
-$$ Log Spanning Tree = \textrm{log}(n_st)$$
+$$ \textrm{Log Spanning Tree} = \textrm{log}(n_st)$$
 
 A larger number of log spanning trees is more compact.
 

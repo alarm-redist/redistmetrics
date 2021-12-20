@@ -9,7 +9,7 @@ part_decl(plans, shp, dvote, rvote, normalize = TRUE, adjust = TRUE)
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{shp}{redist_map object or tibble with sf geometry column}
+\item{shp}{redist_map object, tibble, or data frame containing other columns}
 
 \item{dvote}{unqouted name of column in shp with total population}
 

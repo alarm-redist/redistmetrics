@@ -1,0 +1,12 @@
+#' <%=ifelse(exists("plans") && plans, "@param plans redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan", "") %>
+#' <%=ifelse(exists("shp") && shp, "@param shp redist_map object, tibble, or data frame containing other columns", "") %>
+#' <%=ifelse(exists("group_pop") && group_pop, "@param group_pop unqouted name of column in shp with group population", "") %>
+#' <%=ifelse(exists("total_pop") && total_pop, "@param total_pop unqouted name of column in shp with total population", "") %>
+#' <%=ifelse(exists("epsg") && epsg, "@param epsg numeric EPSG code to planarize to. Default is 3857.", "") %>
+#' <%=ifelse(exists("ncores") && ncores, "@param ncores numeric. Number of cores to use. Default is 1.", "") %>
+#' <%=ifelse(exists("adj") && adj, "@param adj zero-indexed adjacency list. Not required if \\code{redist_map} supplied to \\code{shp}.", "") %>
+#' <%=ifelse(exists("rvote") && rvote, "@param rvote unqouted name of column in shp with group population", "") %>
+#' <%=ifelse(exists("dvote") && dvote, "@param dvote unqouted name of column in shp with total population", "") %>
+#' <%=ifelse(exists("admin") && admin, "@param admin unqouted name of column in shp with numeric identifiers for administrative units", "") %>
+#' <%=ifelse(exists("sub_admin") && sub_admin, "@param sub_admin unqouted name of column in shp with numeric identifiers for subsidiary administrative units", "") %>
+#' <%=ifelse(exists("inc") && inc, "@param inc unqouted name of logical column in shp indicating where incumbents live", "") %>
