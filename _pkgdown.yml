@@ -4,6 +4,20 @@ template:
   bootswatch: yeti
 navbar:
   bg: dark
+  components:
+    articles:
+     text: Articles
+     menu:
+     - text: Measures of Partisan Advantage
+       href: articles/party.html
+     - text: Measures of Compactness
+       href: articles/compactness.html
+     - text: Measures of Administrative Splits
+       href: articles/splits.html
+     - text: Measures of Plan Distance
+       href: articles/distances.html
+     - text: Other Measures
+       href: articles/other.html
 reference:
 - title: Partisan Bias Calculations
   desc: "Functions to calulate partisan bias measures"
