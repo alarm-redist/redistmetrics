@@ -1,6 +1,6 @@
 url: https://alarm-redist.github.io/redistmetrics/
 template:
-  bootstrap: 5
+  bootstrap: 3
   bootswatch: yeti
 navbar:
   bg: dark
