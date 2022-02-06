@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">redistmetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
       </span>
     </div>
 
@@ -117,21 +117,21 @@
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
 <p>The New Hampshire proposed Republican plan looks like:</p>
 <p><img src="compactness_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
-<div class="section level1">
-<h1 id="area-based-compactness">Area-Based Compactness<a class="anchor" aria-label="anchor" href="#area-based-compactness"></a>
-</h1>
 <div class="section level2">
-<h2 id="polsby-popper-compactness">Polsby-Popper Compactness<a class="anchor" aria-label="anchor" href="#polsby-popper-compactness"></a>
+<h2 id="area-based-compactness">Area-Based Compactness<a class="anchor" aria-label="anchor" href="#area-based-compactness"></a>
 </h2>
+<div class="section level3">
+<h3 id="polsby-popper-compactness">Polsby-Popper Compactness<a class="anchor" aria-label="anchor" href="#polsby-popper-compactness"></a>
+</h3>
 <p>Polsby-Popper is proportional to the ratio of a districts area (<span class="math inline">\(A_D\)</span>) and its perimeter (<span class="math inline">\(P_D\)</span>). Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{Polsby-Popper} = 4\pi\frac{A_D}{P_D}\]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>Polsby-Popper compactness can be computed with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_polsby.html">comp_polsby</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.2324375 0.1582763</span></code></pre></div>
-<div class="section level3">
-<h3 id="schwartzberg-compactness">Schwartzberg Compactness<a class="anchor" aria-label="anchor" href="#schwartzberg-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="schwartzberg-compactness">Schwartzberg Compactness<a class="anchor" aria-label="anchor" href="#schwartzberg-compactness"></a>
+</h4>
 <p>Schwartzberg Compactness is similar to Polsby-Popper compactness and is also based on the comparison of a district’s perimeter (<span class="math inline">\(P_D\)</span>) to its area (<span class="math inline">\(A_D\)</span>). Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{Schwartzberg} = \frac{1}{\frac{P_D}{2\pi\sqrt{A_D/\pi}}}\]</span></p>
 <p>Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
@@ -140,9 +140,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_schwartz.html">comp_schwartz</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.4821177 0.3978395</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="reock-compactness">Reock Compactness<a class="anchor" aria-label="anchor" href="#reock-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="reock-compactness">Reock Compactness<a class="anchor" aria-label="anchor" href="#reock-compactness"></a>
+</h4>
 <p>Reock compactness compares the area of the district (<span class="math inline">\(A_D\)</span>) to the area of the minimum bounding circle (<span class="math inline">\(A_{MBC}\)</span>).</p>
 <p>Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{Reock} = \frac{A_D}{A_{MBC}} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
@@ -151,9 +151,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_reock.html">comp_reock</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.4444653 0.2502152</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="box-reock-compactness">Box Reock Compactness<a class="anchor" aria-label="anchor" href="#box-reock-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="box-reock-compactness">Box Reock Compactness<a class="anchor" aria-label="anchor" href="#box-reock-compactness"></a>
+</h4>
 <p>Box Reock compactness compares the area of the district (<span class="math inline">\(A_D\)</span>) to the area of the minimum bounding rectangle (<span class="math inline">\(A_{MBR}\)</span>).</p>
 <p>Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{Box Reock} = \frac{A_D}{A_{MBR}} \]</span></p>
@@ -163,9 +163,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_box_reock.html">comp_box_reock</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.5769441 0.4196260</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="convex-hull-compactness">Convex Hull Compactness<a class="anchor" aria-label="anchor" href="#convex-hull-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="convex-hull-compactness">Convex Hull Compactness<a class="anchor" aria-label="anchor" href="#convex-hull-compactness"></a>
+</h4>
 <p>Convex Hull compactness compares the area of the district (<span class="math inline">\(A_D\)</span>) to the area of the convex hull (<span class="math inline">\(A_{CV}\)</span>).</p>
 <p>Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{Convex Hull} = \frac{A_D}{A_{CV}} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
@@ -174,9 +174,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_ch.html">comp_ch</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.6763964 0.6626738</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="skew-compactness">Skew Compactness<a class="anchor" aria-label="anchor" href="#skew-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="skew-compactness">Skew Compactness<a class="anchor" aria-label="anchor" href="#skew-compactness"></a>
+</h4>
 <p>Skew compactness compares the area of the maximum inscribed circle (<span class="math inline">\(A_{MIC}\)</span>) to the area of the minimum bounding circle (<span class="math inline">\(A_{MBC}\)</span>).</p>
 <p>Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{Skew} = \frac{A_{MIC}}{A_{MBC}} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
@@ -185,9 +185,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_skew.html">comp_skew</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.3640221 0.2481286</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="x-symmetry-compactness">X-Symmetry Compactness<a class="anchor" aria-label="anchor" href="#x-symmetry-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="x-symmetry-compactness">X-Symmetry Compactness<a class="anchor" aria-label="anchor" href="#x-symmetry-compactness"></a>
+</h4>
 <p>X-Symmetry compactness compares the area of the intersection of a district reflected over its x-axis (<span class="math inline">\(A(I(D, D^{X}))\)</span>) to the area of the district (<span class="math inline">\(A_D\)</span>).</p>
 <p>Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{X-Symmetry} = \frac{A(I(D, D^{X}))}{A_D} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
@@ -196,9 +196,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_x_sym.html">comp_x_sym</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.6995961 0.3436371</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="y-symmetry-compactness">Y-Symmetry Compactness<a class="anchor" aria-label="anchor" href="#y-symmetry-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="y-symmetry-compactness">Y-Symmetry Compactness<a class="anchor" aria-label="anchor" href="#y-symmetry-compactness"></a>
+</h4>
 <p>Y-Symmetry compactness compares the area of the intersection of a district reflected over its y-axis (<span class="math inline">\(A(I(D, D^{Y}))\)</span>) to the area of the district (<span class="math inline">\(A_D\)</span>).</p>
 <p>Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{Y-Symmetry} = \frac{A(I(D, D^{Y}))}{A_D} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
@@ -209,12 +209,12 @@
 </div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="distance-based-compactness">Distance-Based Compactness<a class="anchor" aria-label="anchor" href="#distance-based-compactness"></a>
-</h1>
-<div class="section level3">
-<h3 id="length-width-compactness">Length-Width Compactness<a class="anchor" aria-label="anchor" href="#length-width-compactness"></a>
-</h3>
+<div class="section level2">
+<h2 id="distance-based-compactness">Distance-Based Compactness<a class="anchor" aria-label="anchor" href="#distance-based-compactness"></a>
+</h2>
+<div class="section level4">
+<h4 id="length-width-compactness">Length-Width Compactness<a class="anchor" aria-label="anchor" href="#length-width-compactness"></a>
+</h4>
 <p>Length-Width compactness compares the width and the length of a district. Given a bounding box for a district (the rectangle which surrounds a district, with top and bottom parallel to the equator and sides orthogonal to the equator), the width (<span class="math inline">\(W\)</span>) is defined as the shorter side of that box and the length (<span class="math inline">\(L\)</span>) as the longer side of that box.</p>
 <p>Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{Length-Width} = \frac{Width}{Length} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
@@ -223,9 +223,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_lw.html">comp_lw</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.9161576 0.5223455</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="boyce-clark-compactness">Boyce-Clark Compactness<a class="anchor" aria-label="anchor" href="#boyce-clark-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="boyce-clark-compactness">Boyce-Clark Compactness<a class="anchor" aria-label="anchor" href="#boyce-clark-compactness"></a>
+</h4>
 <p>Boyce-Clark compactness looks at the distance from the interior center of the shape to 16 evenly spaced radials. The interior center of the shape is defined as the centroid if that is within the shape. If it is not within the shape, we define it using a central point on its surface (using <code><a href="https://paleolimbot.github.io/geos/reference/geos_centroid.html" class="external-link">geos::geos_point_on_surface()</a></code>). With those radials, we compute the distances <span class="math inline">\(d_{r_i}\)</span> for each of the <span class="math inline">\(i = 1:16\)</span> (for the recommended <span class="math inline">\(n = 16\)</span>) radials and look at the mean absolute deviation.</p>
 <p>Formally, it can be written as:</p>
 <p><span class="math display">\[\textrm{Boyce-Clark} = \sum_{i=1}^{16}\big|\frac{r_{i}}{\sum_{i=1}^{16} r_i} * 100 - \frac{100}{n}\big|\]</span> Scores range from 0 to <span class="math inline">\(\infty\)</span>, where 0 is the most compact and <span class="math inline">\(\infty\)</span> is the least compact.</p>
@@ -234,9 +234,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_bc.html">comp_bc</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.7921350 0.8330235</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="fryer-holden-compactness">Fryer Holden Compactness<a class="anchor" aria-label="anchor" href="#fryer-holden-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="fryer-holden-compactness">Fryer Holden Compactness<a class="anchor" aria-label="anchor" href="#fryer-holden-compactness"></a>
+</h4>
 <p>Fryer-Holden describes the person-distance achieved by the plan. Individual scores do not carry much meaning and are intended to be normalized by the minimal possible score, which can be difficult to compute. Given the population of each redistricting unit <span class="math inline">\(P_i\)</span> and the distance between two units <span class="math inline">\(D_{ij}\)</span>, then for any district <span class="math inline">\(k\)</span>, we compute the score as the squared distance between the people in unit <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>.</p>
 <p>Formally, the numerator can be written as:</p>
 <p><span class="math display">\[\sum_{k = 1}^{n_d} = \sum_{i \in k} \sum{j \in k} P_iP_jD_{ij}^2\]</span> Smaller scores are more compact. When used with a denominator, a score of 1 is most compact and higher scores are less compact.</p>
@@ -246,12 +246,12 @@
 <span class="co">#&gt; [1] 5.374691e+22 5.374691e+22</span></code></pre></div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="adjacency-based-compactness">Adjacency-Based Compactness<a class="anchor" aria-label="anchor" href="#adjacency-based-compactness"></a>
-</h1>
-<div class="section level3">
-<h3 id="edges-removed-compactness">Edges-Removed Compactness<a class="anchor" aria-label="anchor" href="#edges-removed-compactness"></a>
-</h3>
+<div class="section level2">
+<h2 id="adjacency-based-compactness">Adjacency-Based Compactness<a class="anchor" aria-label="anchor" href="#adjacency-based-compactness"></a>
+</h2>
+<div class="section level4">
+<h4 id="edges-removed-compactness">Edges-Removed Compactness<a class="anchor" aria-label="anchor" href="#edges-removed-compactness"></a>
+</h4>
 <p>Edges Removed compactness describes the number of edges that have to be removed from an adjacency graph to draw a district. Inuitively, the edges between redistricting units which are in districts are removed. This correlates to Polsby-Popper compactness. For a given adjacency graph <span class="math inline">\(a\)</span>, we can write out the number of edges as <span class="math inline">\(E(a)\)</span> and consider the edges removed for a plan <span class="math inline">\(\pi\)</span>.</p>
 <p>Formally, this is then written as:</p>
 <p><span class="math display">\[ \textrm{Edges Removed} = E(a) - E_\pi(a)\]</span> Larger scores are less compact.</p>
@@ -260,9 +260,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_edges_rem.html">comp_edges_rem</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span>
 <span class="co">#&gt; [1] 73 73</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="fraction-kept-compactness">Fraction Kept Compactness<a class="anchor" aria-label="anchor" href="#fraction-kept-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="fraction-kept-compactness">Fraction Kept Compactness<a class="anchor" aria-label="anchor" href="#fraction-kept-compactness"></a>
+</h4>
 <p>Fraction Kept compactness describes the fraction of edges that have to be kept when an adjacency graph is cut to form a district. This is rescaling of Edges Removed Compactness for more consistent interpretation. For a given adjacency graph <span class="math inline">\(a\)</span>, we can write out the number of edges as <span class="math inline">\(E(a)\)</span> and consider the edges removed for a plan <span class="math inline">\(\pi\)</span>.</p>
 <p>Formally, this is then written as:</p>
 <p><span class="math display">\[ \textrm{Fraction Kept} = \frac{E(a) - E_\pi(a)}{E(a)}\]</span> Scores range from 0 to 1 where 0 is least compact and 1 is most compact.</p>
@@ -271,9 +271,9 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/comp_frac_kept.html">comp_frac_kept</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span>
 <span class="co">#&gt; [1] 0.9584755 0.9584755</span></code></pre></div>
 </div>
-<div class="section level3">
-<h3 id="log-spanning-tree-compactness">Log Spanning Tree Compactness<a class="anchor" aria-label="anchor" href="#log-spanning-tree-compactness"></a>
-</h3>
+<div class="section level4">
+<h4 id="log-spanning-tree-compactness">Log Spanning Tree Compactness<a class="anchor" aria-label="anchor" href="#log-spanning-tree-compactness"></a>
+</h4>
 <p>For a given adjacency graph, we can consider some set of spanning trees that can be drawn from it. The number of such spanning trees <span class="math inline">\(n_st\)</span> can be constrained more meaningfully by first drawing spanning trees within districts, which describes the compactness component of the Sequential Monte Carlo (McCartan and Imai 2020) algorithm.</p>
 <p>Formally, it can be written as:</p>
 <p><span class="math display">\[ \textrm{Log Spanning Tree} = \textrm{log}(n_st)\]</span></p>
@@ -284,9 +284,9 @@
 <span class="co">#&gt; [1] -Inf -Inf</span></code></pre></div>
 </div>
 </div>
-<div class="section level1">
-<h1 id="general-notes-on-speed">General Notes on Speed<a class="anchor" aria-label="anchor" href="#general-notes-on-speed"></a>
-</h1>
+<div class="section level2">
+<h2 id="general-notes-on-speed">General Notes on Speed<a class="anchor" aria-label="anchor" href="#general-notes-on-speed"></a>
+</h2>
 <p>Compactness scores can be slow to compute, especially when comparing 1000s of plans with thousands of geographic units. Some basic recommendations:</p>
 <ul>
 <li>Avoid computing with block-level data where possible. Precincts or voter tabulation districts tend to be 1/100th of the units and compute much faster</li>
@@ -322,7 +322,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
