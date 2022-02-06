@@ -34,7 +34,7 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -72,14 +72,16 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
     splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
-    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('redistmetrics')) %oper% {
+    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('redistmetrics'),
+                               .export = 'polsbypopper') %oper% {
       polsbypopper(
         from = perim_df$origin, to = perim_df$touching, area = areas,
         perimeter = perim_df$edge, dm = splits[[map]], nd = nd
       )
     }
   } else {
-    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos', 'redistmetrics'),
+                               .export = 'geox_union') %oper% {
       ret <- vector('numeric', nd)
 
       for (i in 1:nd) {
@@ -130,7 +132,7 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -168,14 +170,16 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
     splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
-    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('redistmetrics')) %oper% {
+    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('redistmetrics'),
+                               .export = 'schwartzberg') %oper% {
       schwartzberg(
         from = perim_df$origin, to = perim_df$touching, area = areas,
         perimeter = perim_df$edge, dm = splits[[map]], nd = nd
       )
     }
   } else {
-    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+                               .export = 'geox_union') %oper% {
       ret <- vector('numeric', nd)
 
       for (i in 1:nd) {
@@ -223,7 +227,7 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -242,7 +246,8 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # compute ----
   areas <- geos::geos_area(shp)
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+                          .export = 'geox_union') %oper% {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
@@ -284,7 +289,7 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -303,7 +308,8 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # compute ----
   areas <- geos::geos_area(shp)
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+                          .export = 'geox_union') %oper% {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
@@ -418,7 +424,7 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
   # process objects ----
   shp <- planarize(shp, epsg)
   epsg <- sf::st_crs(shp)$epsg
-  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -436,7 +442,8 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
   }
 
   # compute ----
-  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('geos')) %oper% {
+  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('geos'),
+                             .export = c('geox_union', 'geox_coordinates')) %oper% {
     out <- numeric(nd)
 
     for (i in 1:nd) {
@@ -681,7 +688,7 @@ comp_skew <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -699,7 +706,8 @@ comp_skew <- function(plans, shp, epsg = 3857, ncores = 1) {
   }
 
   # compute ----
-  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('geos')) %oper% {
+  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('geos'),
+                             .export = 'geox_union') %oper% {
     out <- numeric(nd)
 
     for (i in 1:nd) {
@@ -746,7 +754,7 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -766,7 +774,8 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
   # compute ----
 
   areas <- geos::geos_area(shp)
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+                          .export = 'geox_union') %oper% {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
@@ -820,7 +829,7 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
   # process objects ----
   shp <- planarize(shp, epsg) %>% sf::st_geometry()
   epsg <- sf::st_crs(shp)$epsg
-  # shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  # shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -841,7 +850,8 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   areas <- geos::geos_area(shp)
   coords <- geox_coordinates(geos::geos_centroid(shp))
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+                          .export = c('geox_union', 'geox_sub_centroid')) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
@@ -918,7 +928,7 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
   # process objects ----
   shp <- planarize(shp, epsg) %>% sf::st_geometry()
   epsg <- sf::st_crs(shp)$epsg
-  # shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  # shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -942,7 +952,8 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
   ## experimental:
   #all_pts <- wk::wk_coords(shp)
 
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos')) %oper% {
+  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+                          .export = c('geox_union', 'geox_sub_centroid')) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
