@@ -31,7 +31,7 @@ splits_admin <- function(plans, shp, admin) {
   admin <- make_id(admin)
 
   # run splits with max_split = 1 ----
-  splits(plans - 1, community = admin - 1, nd, 1) %>%
+  splits(reindex(plans, nd) - 1, community = admin - 1, nd, 1) %>%
     rep(each = nd)
 }
 
@@ -73,7 +73,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
   sub_admin <- make_id(sub_admin)
 
   # run splits with max_split = 2 ----
-  splits(plans - 1, community = sub_admin - 1, nd, 1) %>%
+  splits(reindex(plans, nd) - 1, community = sub_admin - 1, nd, 1) %>%
     rep(each = nd)
 }
 
@@ -110,7 +110,7 @@ splits_multi <- function(plans, shp, admin) {
   admin <- make_id(admin)
 
   # run splits with max_split = 2 ----
-  splits(plans - 1, community = admin - 1, nd, 2) %>%
+  splits(reindex(plans, nd) - 1, community = admin - 1, nd, 2) %>%
     rep(each = nd)
 }
 

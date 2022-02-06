@@ -1,7 +1,7 @@
 Package: redistmetrics
 Title: Redistricting Metrics
-Version: 1.0.0
-Date: 2021-12-17
+Version: 1.0.1
+Date: 2022-02-06
 Authors@R: c(
     person("Christopher T.", "Kenny", email = "christopherkenny@fas.harvard.edu", role = c("aut", "cre")),
     person("Cory", "McCartan", email = "cmccartan@g.harvard.edu", role = "aut"),

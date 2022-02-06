@@ -50,6 +50,11 @@ part_bias <- function(plans, shp, dvote, rvote, v = 0.5) {
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
+  cli::cli_inform(
+    '{.pkg redistmetrics} 1.0.0 has partisan bias direction reversed. Positive is now pro-Republican bias.',
+    .frequency = 'once', .frequency_id = 'part_bias'
+  )
+
   rep(biasatv(dvs = dvs, v = v, nd = nd), each = nd)
 }
 

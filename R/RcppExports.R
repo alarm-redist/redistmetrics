@@ -65,10 +65,6 @@ meanmedian <- function(dvs) {
     .Call(`_redistmetrics_meanmedian`, dvs)
 }
 
-bias <- function(dvs, nd) {
-    .Call(`_redistmetrics_bias`, dvs, nd)
-}
-
 declination_simple <- function(dvs, dseat_vec, nd) {
     .Call(`_redistmetrics_declination_simple`, dvs, dseat_vec, nd)
 }
@@ -95,6 +91,10 @@ RankedMarginalDev <- function(dvs) {
 
 smoothseat <- function(dvs, nd) {
     .Call(`_redistmetrics_smoothseat`, dvs, nd)
+}
+
+reindex <- function(dm, nd) {
+    .Call(`_redistmetrics_reindex`, dm, nd)
 }
 
 segregationcalc <- function(distmat, grouppop, fullpop) {

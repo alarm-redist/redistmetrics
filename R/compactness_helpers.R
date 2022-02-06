@@ -4,7 +4,9 @@ planarize <- function(shp, epsg = 3857) {
     if (!is.null(sf::st_crs(shp)) & !is.null(epsg) & !isFALSE(epsg)) {
       shp <- sf::st_transform(shp, epsg)
     } else {
-      cli::cli_warn('Planarizing skipped.')
+      if (!isFALSE(epsg)) {
+        cli::cli_warn('Planarizing skipped.')
+      }
     }
   }
 

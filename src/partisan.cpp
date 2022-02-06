@@ -137,22 +137,6 @@ NumericVector meanmedian(NumericMatrix dvs){
   mm = colMeans(dvs) - med;
   return mm;
 }
-// [[Rcpp::export]]
-NumericVector bias(NumericMatrix dvs, int nd){
-  NumericVector sw = .5 - colMeans(dvs);
-  NumericMatrix dvs_sw =  clone(dvs);
-  for(int c = 0; c < dvs_sw.ncol(); c++){
-    for(int r = 0; r < dvs_sw.nrow(); r++){
-      dvs_sw(r,c) += sw(c);
-    }
-  }
-
-  IntegerVector newseats = dseatsDVS(dvs_sw);
-  NumericVector seatshare = (NumericVector) newseats/nd;
-  NumericVector bias = seatshare - 0.5;
-
-  return bias;
-}
 
 // [[Rcpp::export]]
 NumericVector declination_simple(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
@@ -262,7 +246,7 @@ NumericVector biasatv(NumericMatrix dvs, double v, int nd){
   NumericVector seat_dshift = (NumericVector)dseatsDVS(dvs_dshift)/(double)nd;
   NumericVector seat_rshift = 1.0 - (NumericVector)dseatsDVS(dvs_rshift)/(double)nd;
 
-  return (seat_dshift - seat_rshift)/2;
+  return (seat_rshift - seat_dshift)/2;
 }
 
 // [[Rcpp::export]]
