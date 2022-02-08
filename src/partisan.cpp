@@ -65,7 +65,7 @@ NumericVector effgapEP(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
   for(int s = 0; s < dseat_vec.size(); s++){
     eg(s) = -2*V[s] + S[s] + .5;
   }
-  return eg;
+  return -1.0 * eg;
 }
 
 // [[Rcpp::export]]
@@ -89,7 +89,7 @@ NumericVector effgap(IntegerMatrix dcounts, IntegerMatrix rcounts, int totvote){
   }
 
   IntegerVector netwaste(dcounts.ncol());
-  netwaste = colSums(rwaste) - colSums(dwaste);
+  netwaste = colSums(dwaste) - colSums(rwaste);
 
   for(int i = 0; i < netwaste.size(); i++){
     eg[i] = netwaste[i]/(double)totvote;
