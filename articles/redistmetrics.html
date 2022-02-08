@@ -187,14 +187,14 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/part_egap.html">part_egap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, 
           rvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_rep_tru</span>, dvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_dem_bid</span><span class="op">)</span>
-<span class="co">#&gt; [1] -0.08174456 -0.08174456</span></code></pre></div>
+<span class="co">#&gt; [1] 0.08174456 0.08174456</span></code></pre></div>
 <p>As the variable names suggest, we compute the Efficiency Gap using 2020 presidential data. Now, because the Efficiency Gap is defined for a plan, rather than by district, it is repeated here for each district for consistency.</p>
 <p>If you want a plan-level metric to not be repeated, you can pipe through to <code>by_plan</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/part_egap.html">part_egap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, 
           rvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_rep_tru</span>, dvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_dem_bid</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/by_plan.html">by_plan</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] -0.08174456</span></code></pre></div>
+<span class="co">#&gt; [1] 0.08174456</span></code></pre></div>
 <p>For more information, view the other vignettes or the <a href="https://alarm-redist.github.io/redistmetrics/index.html">package website</a>.</p>
 </div>
   </div>
