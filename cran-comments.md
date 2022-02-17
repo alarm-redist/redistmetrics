@@ -8,6 +8,8 @@
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* This is a new release.
+## Additional Notes
+
+* On the original submission, we were asked if there is a reference to add to the description. This package covers a large number of different measures common to redistricting. There is currently no publication which covers more than a few of each.
