@@ -50,21 +50,21 @@ test_that("part_dvs works", {
 
 test_that("part_egap works", {
   a <- part_egap(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(-0.0817445550640845, -0.0817445550640845)
+  e <- c(0.0817445550640845, 0.0817445550640845)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_egap(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.42490548281868, 0.42490548281868, -0.0817445550640845, -0.0817445550640845)
+  e <- c(-0.42490548281868, -0.42490548281868, 0.0817445550640845, 0.0817445550640845)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
 test_that("part_egap_ep works", {
   a <- part_egap_ep(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(-0.0762476614030061, -0.0762476614030061)
+  e <- c(0.0762476614030061, 0.0762476614030061)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_egap_ep(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.424977486779193, 0.424977486779193, -0.0762476614030061, -0.0762476614030061)
+  e <- c(-0.424977486779193, -0.424977486779193, 0.0762476614030061, 0.0762476614030061)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
