@@ -1,6 +1,7 @@
 # redistmetrics 1.0.1
 
-* Fixes bug where `part_bias()` was reversed in sign.
+* Reverses `part_bias()` sign so positive is pro-Republican bias.
+* Reverses `part_egap()` and `part_egap_ep()` sign so positive is pro-Republican bias.
 * Fixes bug where `splits_admin()` plans input needed to be sequentially numbered (#10).
 * Allows planarizing warnings to be silenced when `epsg = FALSE` (#11).
 * Makes `ncores` argument work for compactness functions.

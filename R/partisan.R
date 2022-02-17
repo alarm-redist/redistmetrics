@@ -51,7 +51,7 @@ part_bias <- function(plans, shp, dvote, rvote, v = 0.5) {
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
   cli::cli_inform(
-    '{.pkg redistmetrics} 1.0.0 has partisan bias direction reversed. Positive is now pro-Republican bias.',
+    '{.pkg redistmetrics} 1.0.1 reverses partisan bias direction. Positive is now pro-Republican bias.',
     .frequency = 'once', .frequency_id = 'part_bias'
   )
 
@@ -205,6 +205,10 @@ part_egap <- function(plans, shp, dvote, rvote) {
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
 
+  cli::cli_inform(
+    '{.pkg redistmetrics} 1.0.1 reverses efficiency gap direction. Positive is now pro-Republican bias.',
+    .frequency = 'once', .frequency_id = 'part_egap'
+  )
 
   rep(effgap(dcounts = dcounts, rcounts = rcounts, totvote = totvote), each = nd)
 }
@@ -259,6 +263,11 @@ part_egap_ep <- function(plans, shp, dvote, rvote) {
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
   dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
+
+  cli::cli_inform(
+    '{.pkg redistmetrics} 1.0.1 reverses efficiency gap direction. Positive is now pro-Republican bias.',
+    .frequency = 'once', .frequency_id = 'part_egap'
+  )
 
   rep(effgapEP(dvs = dvs, dseat_vec = dseat_vec, nd = nd), each = nd)
 }
