@@ -38,7 +38,7 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
   shp <- dplyr::ungroup(shp)
   shp <- planarize(shp, epsg)
   shp <- geos::as_geos_geometry(shp)
-  shp_col <- geos::geos_make_collection(shp)
+  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
 
   alist <- geox_relate_pattern_mat(shp, pattern = 'F***T****')
 

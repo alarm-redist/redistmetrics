@@ -1,4 +1,7 @@
 # redistmetrics 1.0.1
+* Makes `ncores` argument work for `prep_polsby()`.
+
+# redistmetrics 1.0.1
 
 * Reverses `part_bias()` sign so positive is pro-Republican bias.
 * Reverses `part_egap()` and `part_egap_ep()` sign so positive is pro-Republican bias.
