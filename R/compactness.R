@@ -34,7 +34,11 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  if (ncores > 1) {
+    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  } else {
+    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  }
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -132,7 +136,11 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  if (ncores > 1) {
+    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  } else {
+    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  }
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -227,7 +235,11 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  if (ncores > 1) {
+    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  } else {
+    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  }
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -289,7 +301,11 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  if (ncores > 1) {
+    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  } else {
+    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  }
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -424,7 +440,11 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
   # process objects ----
   shp <- planarize(shp, epsg)
   epsg <- sf::st_crs(shp)$epsg
-  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  if (ncores > 1) {
+    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  } else {
+    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  }
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -688,7 +708,11 @@ comp_skew <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  if (ncores > 1) {
+    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  } else {
+    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  }
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))
@@ -754,7 +778,11 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  if (ncores > 1) {
+    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  } else {
+    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  }
   plans <- process_plans(plans)
   n_plans <- ncol(plans)
   dists <- sort(unique(c(plans)))

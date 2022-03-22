@@ -1,5 +1,6 @@
-# redistmetrics 1.0.1
+# redistmetrics 1.0.2
 * Makes `ncores` argument work for `prep_polsby()`.
+* Speed improvements for compactness functions in serial.
 
 # redistmetrics 1.0.1
 
