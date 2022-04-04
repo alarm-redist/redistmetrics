@@ -2,7 +2,7 @@
 using namespace Rcpp;
 
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 NumericMatrix polsbypopper(IntegerVector from,
                            IntegerVector to,
                            NumericVector area,
@@ -45,7 +45,7 @@ NumericMatrix polsbypopper(IntegerVector from,
   return ret;
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 NumericMatrix schwartzberg(IntegerVector from,
                           IntegerVector to,
                           NumericVector area,

@@ -9,7 +9,7 @@ compet_talisman(plans, shp, rvote, dvote, alpha = 1, beta = 1)
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{shp}{redist_map object or tibble with sf geometry column}
+\item{shp}{redist_map object, tibble, or data frame containing other columns}
 
 \item{rvote}{unqouted name of column in shp with group population}
 

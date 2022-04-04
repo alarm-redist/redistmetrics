@@ -138,8 +138,7 @@ NumericVector meanmedian(NumericMatrix dvs){
   return mm;
 }
 
-// [[Rcpp::export(rng = false)]]
-NumericVector declination_simple(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
+std::pair<NumericVector,NumericVector> decl_components(NumericMatrix dvs, IntegerVector dseat_vec, int nd) {
   NumericVector Dwin = NumericVector(dvs.ncol());
   NumericVector Rwin = NumericVector(dvs.ncol());
 
@@ -159,12 +158,24 @@ NumericVector declination_simple(NumericMatrix dvs, IntegerVector dseat_vec, int
 
   NumericVector dseatshare = (NumericVector)dseat_vec/(double)nd;
 
-  return ((Dwin-.5)/dseatshare)-((0.5-Rwin)/(1-dseatshare));
+  std::pair<NumericVector, NumericVector> out = {
+    (Dwin - 0.5) / dseatshare,
+    (0.5 - Rwin) / (1 - dseatshare)
+  };
+
+  return out;
+}
+
+// [[Rcpp::export(rng = false)]]
+NumericVector declination_simple(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
+  std::pair<NumericVector, NumericVector> res = decl_components(dvs, dseat_vec, nd);
+  return res.first - res.second;
 }
 
 // [[Rcpp::export(rng = false)]]
 NumericVector declination_angle(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
-  return atan(declination_simple(dvs, dseat_vec, nd));
+  std::pair<NumericVector, NumericVector> res = decl_components(dvs, dseat_vec, nd);
+  return atan(res.first) - atan(res.second);
 }
 
 // [[Rcpp::export(rng = false)]]

@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 NumericVector talisman(NumericMatrix dvs, double nd, double alpha = 1, double beta = 1) {
   NumericVector comp(dvs.ncol());
   double Tp, Te, Br, curr;
@@ -19,8 +19,8 @@ NumericVector talisman(NumericMatrix dvs, double nd, double alpha = 1, double be
     }
     Te = fabs(Br/nd - 0.5);
     Tp = Tp/nd;
-    
-    comp(c) = Tp * (1.0 + alpha * Te); 
+
+    comp(c) = Tp * (1.0 + alpha * Te);
   }
   comp = comp * beta;
   return comp;

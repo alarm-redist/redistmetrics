@@ -14,7 +14,7 @@ using namespace arma;
  * `districts` should have each column be a map
  */
 // TESTED
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 NumericVector log_st_map(const Graph &g, const arma::umat &districts,
                          const arma::uvec &counties, int n_distr);
 
@@ -36,7 +36,7 @@ double log_st_contr(const Graph &g, const umat &districts, const uvec &counties,
  * Compute the number of edges removed
  */
 // TESTED
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 NumericVector n_removed(const Graph &g, const arma::umat &districts, int n_distr);
 
 #endif

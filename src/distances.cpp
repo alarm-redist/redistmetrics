@@ -1,7 +1,7 @@
 #include <RcppArmadillo.h>
 using namespace Rcpp;
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 IntegerVector hamming(IntegerVector v, IntegerMatrix m) {
   int ham = 0, i = 0, c = 0;
   IntegerVector result(m.ncol());
@@ -18,7 +18,7 @@ IntegerVector hamming(IntegerVector v, IntegerMatrix m) {
 }
 
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 NumericVector minkowski(IntegerVector v, IntegerMatrix m, int p) {
   double mink = 0.0, diff;
   int i = 0, c = 0;

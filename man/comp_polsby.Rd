@@ -19,7 +19,8 @@ comp_polsby(
 
 \item{shp}{redist_map object or tibble with sf geometry column}
 
-\item{use_Rcpp}{Logical. Use Rcpp?}
+\item{use_Rcpp}{If \code{TRUE} (the default for more than 8 plans), precompute boundaries
+shared by each pair of units and use them to quickly compute the compactness score.}
 
 \item{perim_path}{path to perimeter tibble saved by \code{prep_perims()}}
 

@@ -36,7 +36,6 @@ namespace redistmetrics {
         }
         RObject rcpp_result_gen;
         {
-            RNGScope RCPP_rngScope_gen;
             rcpp_result_gen = p_splits(Shield<SEXP>(Rcpp::wrap(dm)), Shield<SEXP>(Rcpp::wrap(community)), Shield<SEXP>(Rcpp::wrap(nd)), Shield<SEXP>(Rcpp::wrap(max_split)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
@@ -57,7 +56,6 @@ namespace redistmetrics {
         }
         RObject rcpp_result_gen;
         {
-            RNGScope RCPP_rngScope_gen;
             rcpp_result_gen = p_distr_cty_splits(Shield<SEXP>(Rcpp::wrap(dm)), Shield<SEXP>(Rcpp::wrap(community)), Shield<SEXP>(Rcpp::wrap(nd)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
@@ -78,7 +76,6 @@ namespace redistmetrics {
         }
         RObject rcpp_result_gen;
         {
-            RNGScope RCPP_rngScope_gen;
             rcpp_result_gen = p_admin_splits_count(Shield<SEXP>(Rcpp::wrap(dm)), Shield<SEXP>(Rcpp::wrap(admin)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))

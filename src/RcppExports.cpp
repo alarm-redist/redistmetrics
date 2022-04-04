@@ -21,7 +21,6 @@ NumericMatrix polsbypopper(IntegerVector from, IntegerVector to, NumericVector a
 RcppExport SEXP _redistmetrics_polsbypopper(SEXP fromSEXP, SEXP toSEXP, SEXP areaSEXP, SEXP perimeterSEXP, SEXP dmSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type from(fromSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type to(toSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type area(areaSEXP);
@@ -37,7 +36,6 @@ NumericMatrix schwartzberg(IntegerVector from, IntegerVector to, NumericVector a
 RcppExport SEXP _redistmetrics_schwartzberg(SEXP fromSEXP, SEXP toSEXP, SEXP areaSEXP, SEXP perimeterSEXP, SEXP dmSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type from(fromSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type to(toSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type area(areaSEXP);
@@ -53,7 +51,6 @@ NumericVector talisman(NumericMatrix dvs, double nd, double alpha, double beta);
 RcppExport SEXP _redistmetrics_talisman(SEXP dvsSEXP, SEXP ndSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     Rcpp::traits::input_parameter< double >::type nd(ndSEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
@@ -67,7 +64,6 @@ IntegerVector contiguity(List adj, IntegerVector group);
 RcppExport SEXP _redistmetrics_contiguity(SEXP adjSEXP, SEXP groupSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type adj(adjSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type group(groupSEXP);
     rcpp_result_gen = Rcpp::wrap(contiguity(adj, group));
@@ -79,7 +75,6 @@ IntegerVector hamming(IntegerVector v, IntegerMatrix m);
 RcppExport SEXP _redistmetrics_hamming(SEXP vSEXP, SEXP mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type v(vSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type m(mSEXP);
     rcpp_result_gen = Rcpp::wrap(hamming(v, m));
@@ -91,7 +86,6 @@ NumericVector minkowski(IntegerVector v, IntegerMatrix m, int p);
 RcppExport SEXP _redistmetrics_minkowski(SEXP vSEXP, SEXP mSEXP, SEXP pSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type v(vSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type m(mSEXP);
     Rcpp::traits::input_parameter< int >::type p(pSEXP);
@@ -104,7 +98,6 @@ NumericVector log_st_map(const Graph& g, const arma::umat& districts, const arma
 RcppExport SEXP _redistmetrics_log_st_map(SEXP gSEXP, SEXP districtsSEXP, SEXP countiesSEXP, SEXP n_distrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Graph& >::type g(gSEXP);
     Rcpp::traits::input_parameter< const arma::umat& >::type districts(districtsSEXP);
     Rcpp::traits::input_parameter< const arma::uvec& >::type counties(countiesSEXP);
@@ -118,7 +111,6 @@ NumericVector n_removed(const Graph& g, const arma::umat& districts, int n_distr
 RcppExport SEXP _redistmetrics_n_removed(SEXP gSEXP, SEXP districtsSEXP, SEXP n_distrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const Graph& >::type g(gSEXP);
     Rcpp::traits::input_parameter< const arma::umat& >::type districts(districtsSEXP);
     Rcpp::traits::input_parameter< int >::type n_distr(n_distrSEXP);
@@ -131,7 +123,6 @@ IntegerMatrix agg_p2d(IntegerMatrix dm, IntegerVector vote, int nd);
 RcppExport SEXP _redistmetrics_agg_p2d(SEXP dmSEXP, SEXP voteSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type vote(voteSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
@@ -144,7 +135,6 @@ IntegerVector dseats(IntegerMatrix dm, IntegerMatrix dcounts, IntegerMatrix rcou
 RcppExport SEXP _redistmetrics_dseats(SEXP dmSEXP, SEXP dcountsSEXP, SEXP rcountsSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type dcounts(dcountsSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type rcounts(rcountsSEXP);
@@ -158,7 +148,6 @@ IntegerVector dseatsDVS(NumericMatrix dvs);
 RcppExport SEXP _redistmetrics_dseatsDVS(SEXP dvsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     rcpp_result_gen = Rcpp::wrap(dseatsDVS(dvs));
     return rcpp_result_gen;
@@ -169,7 +158,6 @@ NumericMatrix DVS(IntegerMatrix dcounts, IntegerMatrix rcounts);
 RcppExport SEXP _redistmetrics_DVS(SEXP dcountsSEXP, SEXP rcountsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dcounts(dcountsSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type rcounts(rcountsSEXP);
     rcpp_result_gen = Rcpp::wrap(DVS(dcounts, rcounts));
@@ -181,7 +169,6 @@ NumericVector effgapEP(NumericMatrix dvs, IntegerVector dseat_vec, int nd);
 RcppExport SEXP _redistmetrics_effgapEP(SEXP dvsSEXP, SEXP dseat_vecSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type dseat_vec(dseat_vecSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
@@ -194,7 +181,6 @@ NumericVector effgap(IntegerMatrix dcounts, IntegerMatrix rcounts, int totvote);
 RcppExport SEXP _redistmetrics_effgap(SEXP dcountsSEXP, SEXP rcountsSEXP, SEXP totvoteSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dcounts(dcountsSEXP);
     Rcpp::traits::input_parameter< IntegerMatrix >::type rcounts(rcountsSEXP);
     Rcpp::traits::input_parameter< int >::type totvote(totvoteSEXP);
@@ -207,7 +193,6 @@ NumericVector taugap(double tau, NumericMatrix dvs, IntegerVector dseat_vec, int
 RcppExport SEXP _redistmetrics_taugap(SEXP tauSEXP, SEXP dvsSEXP, SEXP dseat_vecSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type tau(tauSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type dseat_vec(dseat_vecSEXP);
@@ -221,7 +206,6 @@ NumericVector meanmedian(NumericMatrix dvs);
 RcppExport SEXP _redistmetrics_meanmedian(SEXP dvsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     rcpp_result_gen = Rcpp::wrap(meanmedian(dvs));
     return rcpp_result_gen;
@@ -232,7 +216,6 @@ NumericVector declination_simple(NumericMatrix dvs, IntegerVector dseat_vec, int
 RcppExport SEXP _redistmetrics_declination_simple(SEXP dvsSEXP, SEXP dseat_vecSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type dseat_vec(dseat_vecSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
@@ -245,7 +228,6 @@ NumericVector declination_angle(NumericMatrix dvs, IntegerVector dseat_vec, int 
 RcppExport SEXP _redistmetrics_declination_angle(SEXP dvsSEXP, SEXP dseat_vecSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type dseat_vec(dseat_vecSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
@@ -258,7 +240,6 @@ NumericVector lopsidedwins(NumericMatrix dvs, IntegerVector dseat_vec, int nd);
 RcppExport SEXP _redistmetrics_lopsidedwins(SEXP dvsSEXP, SEXP dseat_vecSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type dseat_vec(dseat_vecSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
@@ -271,7 +252,6 @@ NumericVector responsiveness(NumericMatrix dvs, double v, int nd, double bandwid
 RcppExport SEXP _redistmetrics_responsiveness(SEXP dvsSEXP, SEXP vSEXP, SEXP ndSEXP, SEXP bandwidthSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     Rcpp::traits::input_parameter< double >::type v(vSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
@@ -285,7 +265,6 @@ NumericVector biasatv(NumericMatrix dvs, double v, int nd);
 RcppExport SEXP _redistmetrics_biasatv(SEXP dvsSEXP, SEXP vSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     Rcpp::traits::input_parameter< double >::type v(vSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
@@ -298,7 +277,6 @@ NumericVector RankedMarginalDev(NumericMatrix dvs);
 RcppExport SEXP _redistmetrics_RankedMarginalDev(SEXP dvsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     rcpp_result_gen = Rcpp::wrap(RankedMarginalDev(dvs));
     return rcpp_result_gen;
@@ -309,7 +287,6 @@ NumericVector smoothseat(NumericMatrix dvs, int nd);
 RcppExport SEXP _redistmetrics_smoothseat(SEXP dvsSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type dvs(dvsSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
     rcpp_result_gen = Rcpp::wrap(smoothseat(dvs, nd));
@@ -321,7 +298,6 @@ IntegerMatrix reindex(IntegerMatrix dm, int nd);
 RcppExport SEXP _redistmetrics_reindex(SEXP dmSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
     rcpp_result_gen = Rcpp::wrap(reindex(dm, nd));
@@ -333,7 +309,6 @@ NumericVector segregationcalc(NumericMatrix distmat, NumericVector grouppop, Num
 RcppExport SEXP _redistmetrics_segregationcalc(SEXP distmatSEXP, SEXP grouppopSEXP, SEXP fullpopSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type distmat(distmatSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type grouppop(grouppopSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type fullpop(fullpopSEXP);
@@ -357,7 +332,6 @@ END_RCPP_RETURN_ERROR
 RcppExport SEXP _redistmetrics_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP) {
     SEXP rcpp_result_gen;
     {
-        Rcpp::RNGScope rcpp_rngScope_gen;
         rcpp_result_gen = PROTECT(_redistmetrics_splits_try(dmSEXP, communitySEXP, ndSEXP, max_splitSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
@@ -393,7 +367,6 @@ END_RCPP_RETURN_ERROR
 RcppExport SEXP _redistmetrics_distr_cty_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP) {
     SEXP rcpp_result_gen;
     {
-        Rcpp::RNGScope rcpp_rngScope_gen;
         rcpp_result_gen = PROTECT(_redistmetrics_distr_cty_splits_try(dmSEXP, communitySEXP, ndSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
@@ -428,7 +401,6 @@ END_RCPP_RETURN_ERROR
 RcppExport SEXP _redistmetrics_admin_splits_count(SEXP dmSEXP, SEXP adminSEXP) {
     SEXP rcpp_result_gen;
     {
-        Rcpp::RNGScope rcpp_rngScope_gen;
         rcpp_result_gen = PROTECT(_redistmetrics_admin_splits_count_try(dmSEXP, adminSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
@@ -454,7 +426,6 @@ NumericVector var_info_mat(IntegerMatrix m, int i, NumericVector pop);
 RcppExport SEXP _redistmetrics_var_info_mat(SEXP mSEXP, SEXP iSEXP, SEXP popSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type m(mSEXP);
     Rcpp::traits::input_parameter< int >::type i(iSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type pop(popSEXP);
@@ -467,7 +438,6 @@ NumericVector var_info_vec(IntegerMatrix m, IntegerVector ref, NumericVector pop
 RcppExport SEXP _redistmetrics_var_info_vec(SEXP mSEXP, SEXP refSEXP, SEXP popSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type m(mSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type ref(refSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type pop(popSEXP);

@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 IntegerVector contiguity(List adj, IntegerVector group) {
   IntegerVector choices = sort_unique(group);
   IntegerVector conncomp(group.size());
@@ -14,10 +14,10 @@ IntegerVector contiguity(List adj, IntegerVector group) {
     if(conncomp(i) == 0){
       currgroup = group(i);
       idx = match(currgroup, choices)(0) - 1;
-      group_cc(idx) ++;  
+      group_cc(idx) ++;
       cc = group_cc(idx);
       conncomp(i) = cc;
-      
+
       temp = adj(i);
       reservoir = IntegerVector(0);
       s = 0;
@@ -26,9 +26,9 @@ IntegerVector contiguity(List adj, IntegerVector group) {
           reservoir.push_back(temp(j));
           conncomp(temp(j)) = cc;
           s++;
-        } 
+        }
       }
-      
+
       if(s > 0){
         r = 0;
         while(r < s){
@@ -38,14 +38,14 @@ IntegerVector contiguity(List adj, IntegerVector group) {
               reservoir.push_back(temp(j));
               conncomp(temp(j)) = cc;
               s++;
-            } 
+            }
           }
           r++;
         }
       }
     }
   }
-  
+
   return conncomp;
 }
 

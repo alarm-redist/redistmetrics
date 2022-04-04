@@ -9,7 +9,7 @@ inc_pairs(plans, shp, inc)
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{shp}{redist_map object or tibble with sf geometry column}
+\item{shp}{redist_map object, tibble, or data frame containing other columns}
 
 \item{inc}{unqouted name of logical column in shp indicating where incumbents live}
 }

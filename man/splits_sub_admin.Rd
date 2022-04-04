@@ -9,7 +9,7 @@ splits_sub_admin(plans, shp, sub_admin)
 \arguments{
 \item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
 
-\item{shp}{redist_map object or tibble with sf geometry column}
+\item{shp}{redist_map object, tibble, or data frame containing other columns}
 
 \item{sub_admin}{unqouted name of column in shp with numeric identifiers for subsidiary administrative units}
 }

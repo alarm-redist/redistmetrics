@@ -7,15 +7,13 @@ Authors@R: c(
     person("Cory", "McCartan", email = "cmccartan@g.harvard.edu", role = "aut"),
     person("Ben", "Fifield", email = "benfifield@gmail.com", role = "aut"),
     person("Kosuke", "Imai", email = "imai@harvard.edu", role = "aut"))
-Description: Reliable and flexible tools for scoring redistricting plans using common measures and metrics. These functions provide key direct access to tools useful for non-simulation analyses of redistricting plans, such as for measuring compactness or partisan fairness. Tools are designed to work with the 'redist' package seamlessly.
-License: GPL (>= 3)
-Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
-LinkingTo:
-    Rcpp,
-    RcppArmadillo
+Description: Reliable and flexible tools for scoring redistricting plans using 
+  common measures and metrics. These functions provide key direct access to 
+  tools useful for non-simulation analyses of redistricting plans, such as for 
+  measuring compactness or partisan fairness. Tools are designed to work with 
+  the 'redist' package seamlessly.
+Depends:
+    R (>= 2.10)
 Imports:
     sf,
     Rcpp,
@@ -27,15 +25,22 @@ Imports:
     rlang,
     geos,
     wk
-URL: https://alarm-redist.github.io/redistmetrics/,
-    https::/github.com/alarm-redist/redistmetrics/
-BugReports: https://github.com/alarm-redist/redistmetrics/issues
-Depends:
-    R (>= 2.10)
 Suggests:
     rmarkdown,
     knitr,
     testthat (>= 3.0.0),
     ggplot2
+LinkingTo:
+    Rcpp,
+    RcppArmadillo
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+SystemRequirements: C++11
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+URL: https://alarm-redist.github.io/redistmetrics/,
+    https::/github.com/alarm-redist/redistmetrics/
+BugReports: https://github.com/alarm-redist/redistmetrics/issues
 VignetteBuilder: knitr
 Config/testthat/edition: 3
