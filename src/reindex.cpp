@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 IntegerMatrix reindex(IntegerMatrix dm, int nd) {
   IntegerMatrix ordered(dm.nrow(), dm.ncol());
   IntegerVector dict = seq_len(nd);
