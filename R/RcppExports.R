@@ -121,3 +121,7 @@ var_info_vec <- function(m, ref, pop) {
     .Call(`_redistmetrics_var_info_vec`, m, ref, pop)
 }
 
+# Register entry points for exported C++ functions
+methods::setLoadAction(function(ns) {
+    .Call('_redistmetrics_RcppExport_registerCCallable', PACKAGE = 'redistmetrics')
+})

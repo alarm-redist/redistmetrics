@@ -1,7 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
-
+// [[Rcpp::interfaces(r, cpp)]]
 // [[Rcpp::export]]
 IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_split) {
   IntegerVector ret(dm.ncol());

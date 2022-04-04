@@ -2,8 +2,12 @@
 // Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #include "redistmetrics_types.h"
+#include "../inst/include/redistmetrics.h"
+#include "../inst/include/redistmetrics_types.h"
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
+#include <string>
+#include <set>
 
 using namespace Rcpp;
 
@@ -339,42 +343,111 @@ END_RCPP
 }
 // splits
 IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_split);
-RcppExport SEXP _redistmetrics_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP) {
+static SEXP _redistmetrics_splits_try(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type community(communitySEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
     Rcpp::traits::input_parameter< int >::type max_split(max_splitSEXP);
     rcpp_result_gen = Rcpp::wrap(splits(dm, community, nd, max_split));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _redistmetrics_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_redistmetrics_splits_try(dmSEXP, communitySEXP, ndSEXP, max_splitSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // distr_cty_splits
 IntegerMatrix distr_cty_splits(IntegerMatrix dm, IntegerVector community, int nd);
-RcppExport SEXP _redistmetrics_distr_cty_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP) {
+static SEXP _redistmetrics_distr_cty_splits_try(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type community(communitySEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
     rcpp_result_gen = Rcpp::wrap(distr_cty_splits(dm, community, nd));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _redistmetrics_distr_cty_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_redistmetrics_distr_cty_splits_try(dmSEXP, communitySEXP, ndSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // admin_splits_count
 IntegerMatrix admin_splits_count(IntegerMatrix dm, IntegerVector admin);
-RcppExport SEXP _redistmetrics_admin_splits_count(SEXP dmSEXP, SEXP adminSEXP) {
+static SEXP _redistmetrics_admin_splits_count_try(SEXP dmSEXP, SEXP adminSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type admin(adminSEXP);
     rcpp_result_gen = Rcpp::wrap(admin_splits_count(dm, admin));
     return rcpp_result_gen;
-END_RCPP
+END_RCPP_RETURN_ERROR
+}
+RcppExport SEXP _redistmetrics_admin_splits_count(SEXP dmSEXP, SEXP adminSEXP) {
+    SEXP rcpp_result_gen;
+    {
+        Rcpp::RNGScope rcpp_rngScope_gen;
+        rcpp_result_gen = PROTECT(_redistmetrics_admin_splits_count_try(dmSEXP, adminSEXP));
+    }
+    Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
+    if (rcpp_isInterrupt_gen) {
+        UNPROTECT(1);
+        Rf_onintr();
+    }
+    bool rcpp_isLongjump_gen = Rcpp::internal::isLongjumpSentinel(rcpp_result_gen);
+    if (rcpp_isLongjump_gen) {
+        Rcpp::internal::resumeJump(rcpp_result_gen);
+    }
+    Rboolean rcpp_isError_gen = Rf_inherits(rcpp_result_gen, "try-error");
+    if (rcpp_isError_gen) {
+        SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
+        UNPROTECT(1);
+        Rf_error(CHAR(rcpp_msgSEXP_gen));
+    }
+    UNPROTECT(1);
+    return rcpp_result_gen;
 }
 // var_info_mat
 NumericVector var_info_mat(IntegerMatrix m, int i, NumericVector pop);
@@ -401,6 +474,26 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(var_info_vec(m, ref, pop));
     return rcpp_result_gen;
 END_RCPP
+}
+
+// validate (ensure exported C++ functions exist before calling them)
+static int _redistmetrics_RcppExport_validate(const char* sig) { 
+    static std::set<std::string> signatures;
+    if (signatures.empty()) {
+        signatures.insert("IntegerVector(*splits)(IntegerMatrix,IntegerVector,int,int)");
+        signatures.insert("IntegerMatrix(*distr_cty_splits)(IntegerMatrix,IntegerVector,int)");
+        signatures.insert("IntegerMatrix(*admin_splits_count)(IntegerMatrix,IntegerVector)");
+    }
+    return signatures.find(sig) != signatures.end();
+}
+
+// registerCCallable (register entry points for exported C++ functions)
+RcppExport SEXP _redistmetrics_RcppExport_registerCCallable() { 
+    R_RegisterCCallable("redistmetrics", "_redistmetrics_splits", (DL_FUNC)_redistmetrics_splits_try);
+    R_RegisterCCallable("redistmetrics", "_redistmetrics_distr_cty_splits", (DL_FUNC)_redistmetrics_distr_cty_splits_try);
+    R_RegisterCCallable("redistmetrics", "_redistmetrics_admin_splits_count", (DL_FUNC)_redistmetrics_admin_splits_count_try);
+    R_RegisterCCallable("redistmetrics", "_redistmetrics_RcppExport_validate", (DL_FUNC)_redistmetrics_RcppExport_validate);
+    return R_NilValue;
 }
 
 static const R_CallMethodDef CallEntries[] = {
@@ -434,6 +527,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_admin_splits_count", (DL_FUNC) &_redistmetrics_admin_splits_count, 2},
     {"_redistmetrics_var_info_mat", (DL_FUNC) &_redistmetrics_var_info_mat, 3},
     {"_redistmetrics_var_info_vec", (DL_FUNC) &_redistmetrics_var_info_vec, 3},
+    {"_redistmetrics_RcppExport_registerCCallable", (DL_FUNC) &_redistmetrics_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}
 };
 
