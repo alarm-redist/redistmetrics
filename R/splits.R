@@ -3,7 +3,7 @@
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
 #' @templateVar admin TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return numeric vector
 #' @export
@@ -40,7 +40,7 @@ splits_admin <- function(plans, shp, admin) {
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
 #' @templateVar sub_admin TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return numeric vector
 #' @export
@@ -82,7 +82,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
 #' @templateVar admin TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return numeric vector
 #' @export
@@ -119,7 +119,7 @@ splits_multi <- function(plans, shp, admin) {
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
 #' @templateVar admin TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return numeric matrix
 #' @export

@@ -4,7 +4,7 @@
 #' @templateVar shp TRUE
 #' @templateVar total_pop TRUE
 #' @templateVar ncores TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return matrix of plan distances
 #' @export
@@ -58,7 +58,7 @@ dist_info <- function(plans, shp, total_pop, ncores = 1) {
 #'
 #' @templateVar plans TRUE
 #' @templateVar ncores TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return matrix of plan distances
 #' @export
@@ -102,7 +102,7 @@ dist_ham <- function(plans, ncores = 1) {
 #'
 #' @templateVar plans TRUE
 #' @templateVar ncores TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return matrix of plan distances
 #' @export
@@ -146,7 +146,7 @@ dist_euc <- function(plans, ncores = 1) {
 #'
 #' @templateVar plans TRUE
 #' @templateVar ncores TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return matrix of plan distances
 #' @export

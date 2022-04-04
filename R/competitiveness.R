@@ -6,7 +6,7 @@
 #' @templateVar dvote TRUE
 #' @param alpha Numeric scaling value
 #' @param beta Numeric scaling value
-#' @template template
+#' @template template_nosf
 #'
 #' @return numeric vector
 #' @export

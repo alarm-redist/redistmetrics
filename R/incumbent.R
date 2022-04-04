@@ -5,7 +5,7 @@
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
 #' @templateVar inc TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return vector of number of incumbents paired
 #' @export

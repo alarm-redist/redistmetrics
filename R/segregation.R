@@ -4,7 +4,7 @@
 #' @templateVar shp TRUE
 #' @templateVar group_pop TRUE
 #' @templateVar total_pop TRUE
-#' @template template
+#' @template template_nosf
 #'
 #' @return numeric vector
 #' @export
