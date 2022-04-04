@@ -2,7 +2,8 @@
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
-#' @param use_Rcpp Logical. Use Rcpp?
+#' @param use_Rcpp If `TRUE` (the default for more than 8 plans), precompute boundaries 
+#'   shared by each pair of units and use them to quickly compute the compactness score.
 #' @param perim_path path to perimeter tibble saved by `prep_perims()`
 #' @param perim_df tibble of perimeters from `prep_perims()`
 #' @templateVar epsg TRUE
