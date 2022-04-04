@@ -37,7 +37,7 @@ double var_info(IntegerVector m1, IntegerVector m2, NumericVector pop) {
  *
  * Only computes pairs (i, j) with j < i
  */
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 NumericVector var_info_mat(IntegerMatrix m, int i, NumericVector pop) {
     int N = m.ncol();
 
@@ -54,7 +54,7 @@ NumericVector var_info_mat(IntegerMatrix m, int i, NumericVector pop) {
  * `ref` is the plan we want to compute distances to
  * `pop` is population of precincts
  */
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 NumericVector var_info_vec(IntegerMatrix m, IntegerVector ref, NumericVector pop) {
     int N = m.ncol();
 
