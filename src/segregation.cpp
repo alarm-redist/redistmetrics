@@ -1,7 +1,7 @@
 #include <RcppArmadillo.h>
 using namespace Rcpp;
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 NumericVector segregationcalc(NumericMatrix distmat,
                               NumericVector grouppop,
                               NumericVector fullpop) {
