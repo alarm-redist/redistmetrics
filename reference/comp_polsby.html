@@ -96,7 +96,8 @@
 <dt>shp</dt>
 <dd><p>redist_map object or tibble with sf geometry column</p></dd>
 <dt>use_Rcpp</dt>
-<dd><p>Logical. Use Rcpp?</p></dd>
+<dd><p>If <code>TRUE</code> (the default for more than 8 plans), precompute boundaries
+shared by each pair of units and use them to quickly compute the compactness score.</p></dd>
 <dt>perim_path</dt>
 <dd><p>path to perimeter tibble saved by <code><a href="prep_perims.html">prep_perims()</a></code></p></dd>
 <dt>perim_df</dt>
