@@ -2,7 +2,7 @@
 using namespace Rcpp;
 
 // [[Rcpp::interfaces(r, cpp)]]
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_split) {
   IntegerVector ret(dm.ncol());
   IntegerVector com_name = sort_unique(community);
@@ -33,7 +33,7 @@ IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_
   return ret;
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 IntegerMatrix distr_cty_splits(IntegerMatrix dm, IntegerVector community, int nd) {
   IntegerMatrix ret(nd, dm.ncol());
   IntegerVector com_name = sort_unique(community);
@@ -56,7 +56,7 @@ IntegerMatrix distr_cty_splits(IntegerMatrix dm, IntegerVector community, int nd
   return ret;
 }
 
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 IntegerMatrix admin_splits_count(IntegerMatrix dm, IntegerVector admin) {
   IntegerVector com_name = sort_unique(admin);
   int asize = com_name.size();
