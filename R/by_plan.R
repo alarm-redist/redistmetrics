@@ -17,21 +17,21 @@
 by_plan <- function(x, ndists) {
   if (missing(ndists)) {
     reps <- unique(rle(x)$lengths)
-    ndists <- ifelse(length(reps) == 1, reps, min(apply(utils::combn(reps, 2), 2, gcd)))
+    ndists <- ifelse(length(reps) == 1, reps, Reduce(gcd, reps))
   }
 
   x[ndists * seq_len(length(x) / ndists)]
 }
 
 
-gcd <- function(x) {
-  big <- max(x)
-  small <- min(x)
+gcd <- function(x, y) {
+  big <- max(c(x, y))
+  small <- min(c(x, y))
   rem <- big %% small
 
   if (rem == 0) {
     return(small)
   }
 
-  gcd(c(small, rem))
+  gcd(small, rem)
 }
