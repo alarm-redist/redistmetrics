@@ -238,10 +238,6 @@
 <p>The Efficiency Gap can be computed with:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/part_egap.html">part_egap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; <span style="color: #0000BB;">redistmetrics</span> 1.0.1 reverses efficiency gap direction. Positive is now</span>
-<span class="co">#&gt; pro-Republican bias.</span>
-<span class="co">#&gt; <span style="color: #555555;">This message is displayed once per session.</span></span>
 <span class="co">#&gt; [1] -0.02007106 -0.02007106</span></code></pre></div>
 </div>
 <div class="section level3">
@@ -253,7 +249,6 @@
 <p>The Efficiency Gap (Equal Population) can be computed with:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/part_egap_ep.html">part_egap_ep</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
-<span class="co">#&gt; </span>
 <span class="co">#&gt; [1] -0.02339824 -0.02339824</span></code></pre></div>
 </div>
 <div class="section level3">
@@ -267,7 +262,11 @@
 <p>The <span class="math inline">\(\tau\)</span> Gap can be computed with:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/part_tau_gap.html">part_tau_gap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.009276655 0.009276655</span></code></pre></div>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; <span style="color: #0000BB;">redistmetrics</span> 1.0.2 reverses tau gap direction. Positive is now pro-Republican</span>
+<span class="co">#&gt; bias.</span>
+<span class="co">#&gt; <span style="color: #555555;">This message is displayed once per session.</span></span>
+<span class="co">#&gt; [1] -0.009276655 -0.009276655</span></code></pre></div>
 <p>The default is <code>tau = 1</code>.</p>
 </div>
 <div class="section level3">
