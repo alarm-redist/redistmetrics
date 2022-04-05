@@ -80,13 +80,16 @@ it returns <code>x</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">by_plan</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">by_plan</span><span class="op">(</span><span class="va">x</span>, <span class="va">ndists</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>summary statistic at the district level</p></dd>
+<dt>ndists</dt>
+<dd><p>numeric. Number of districts. Estimated as the gcd of the unique
+run length encodings if missing.</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
