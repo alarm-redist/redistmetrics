@@ -87,6 +87,46 @@ namespace redistmetrics {
         return Rcpp::as<IntegerMatrix >(rcpp_result_gen);
     }
 
+    inline NumericVector var_info_mat(IntegerMatrix m, int i, NumericVector pop) {
+        typedef SEXP(*Ptr_var_info_mat)(SEXP,SEXP,SEXP);
+        static Ptr_var_info_mat p_var_info_mat = NULL;
+        if (p_var_info_mat == NULL) {
+            validateSignature("NumericVector(*var_info_mat)(IntegerMatrix,int,NumericVector)");
+            p_var_info_mat = (Ptr_var_info_mat)R_GetCCallable("redistmetrics", "_redistmetrics_var_info_mat");
+        }
+        RObject rcpp_result_gen;
+        {
+            rcpp_result_gen = p_var_info_mat(Shield<SEXP>(Rcpp::wrap(m)), Shield<SEXP>(Rcpp::wrap(i)), Shield<SEXP>(Rcpp::wrap(pop)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector var_info_vec(IntegerMatrix m, IntegerVector ref, NumericVector pop) {
+        typedef SEXP(*Ptr_var_info_vec)(SEXP,SEXP,SEXP);
+        static Ptr_var_info_vec p_var_info_vec = NULL;
+        if (p_var_info_vec == NULL) {
+            validateSignature("NumericVector(*var_info_vec)(IntegerMatrix,IntegerVector,NumericVector)");
+            p_var_info_vec = (Ptr_var_info_vec)R_GetCCallable("redistmetrics", "_redistmetrics_var_info_vec");
+        }
+        RObject rcpp_result_gen;
+        {
+            rcpp_result_gen = p_var_info_vec(Shield<SEXP>(Rcpp::wrap(m)), Shield<SEXP>(Rcpp::wrap(ref)), Shield<SEXP>(Rcpp::wrap(pop)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
 }
 
 #endif // RCPP_redistmetrics_RCPPEXPORTS_H_GEN_

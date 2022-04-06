@@ -17,7 +17,9 @@ splits_count(plans, shp, admin)
 numeric matrix
 }
 \description{
-Count the Number of Splits in Each Administrative Unit
+Tallies the number of unique administrative unit-districts. An unsplit administrative
+unit will return an entry of 1, while each additional administrative unit-district
+adds 1.
 }
 \examples{
 data(nh)

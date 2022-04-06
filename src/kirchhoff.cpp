@@ -1,5 +1,5 @@
 #include "kirchhoff.h"
-
+// [[Rcpp::interfaces(r, cpp)]]
 /*
  * Compute the log number of spanning trees which could generate a given set of maps.
  * `districts` should have each column be a map
