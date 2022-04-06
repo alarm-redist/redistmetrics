@@ -5,7 +5,7 @@
 #include "redistmetrics_types.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
-
+// [[Rcpp::interfaces(r, cpp)]]
 using namespace Rcpp;
 using namespace arma;
 

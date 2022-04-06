@@ -27,6 +27,46 @@ namespace redistmetrics {
         }
     }
 
+    inline NumericVector log_st_map(const Graph& g, const arma::umat& districts, const arma::uvec& counties, int n_distr) {
+        typedef SEXP(*Ptr_log_st_map)(SEXP,SEXP,SEXP,SEXP);
+        static Ptr_log_st_map p_log_st_map = NULL;
+        if (p_log_st_map == NULL) {
+            validateSignature("NumericVector(*log_st_map)(const Graph&,const arma::umat&,const arma::uvec&,int)");
+            p_log_st_map = (Ptr_log_st_map)R_GetCCallable("redistmetrics", "_redistmetrics_log_st_map");
+        }
+        RObject rcpp_result_gen;
+        {
+            rcpp_result_gen = p_log_st_map(Shield<SEXP>(Rcpp::wrap(g)), Shield<SEXP>(Rcpp::wrap(districts)), Shield<SEXP>(Rcpp::wrap(counties)), Shield<SEXP>(Rcpp::wrap(n_distr)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
+    inline NumericVector n_removed(const Graph& g, const arma::umat& districts, int n_distr) {
+        typedef SEXP(*Ptr_n_removed)(SEXP,SEXP,SEXP);
+        static Ptr_n_removed p_n_removed = NULL;
+        if (p_n_removed == NULL) {
+            validateSignature("NumericVector(*n_removed)(const Graph&,const arma::umat&,int)");
+            p_n_removed = (Ptr_n_removed)R_GetCCallable("redistmetrics", "_redistmetrics_n_removed");
+        }
+        RObject rcpp_result_gen;
+        {
+            rcpp_result_gen = p_n_removed(Shield<SEXP>(Rcpp::wrap(g)), Shield<SEXP>(Rcpp::wrap(districts)), Shield<SEXP>(Rcpp::wrap(n_distr)));
+        }
+        if (rcpp_result_gen.inherits("interrupted-error"))
+            throw Rcpp::internal::InterruptedException();
+        if (Rcpp::internal::isLongjumpSentinel(rcpp_result_gen))
+            throw Rcpp::LongjumpException(rcpp_result_gen);
+        if (rcpp_result_gen.inherits("try-error"))
+            throw Rcpp::exception(Rcpp::as<std::string>(rcpp_result_gen).c_str());
+        return Rcpp::as<NumericVector >(rcpp_result_gen);
+    }
+
     inline IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_split) {
         typedef SEXP(*Ptr_splits)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_splits p_splits = NULL;
