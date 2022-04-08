@@ -126,10 +126,10 @@ test_that("part_sscd works", {
 
 test_that("part_tau_gap works", {
   a <- part_tau_gap(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(-0.028456858885723, -0.028456858885723)
+  e <- c(0.028456858885723, 0.028456858885723)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_tau_gap(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.98850776308525, 0.98850776308525, -0.028456858885723, -0.028456858885723)
+  e <- c(-0.98850776308525, -0.98850776308525, 0.028456858885723, 0.028456858885723)
   expect_equal(a, e, tolerance = 1e-4)
 })

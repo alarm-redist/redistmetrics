@@ -5,7 +5,7 @@
 #include "redistmetrics_types.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
-
+// [[Rcpp::interfaces(r, cpp)]]
 using namespace Rcpp;
 using namespace arma;
 
@@ -22,14 +22,14 @@ NumericVector log_st_map(const Graph &g, const arma::umat &districts,
  * Compute the log number of spanning trees for `district` intersect `county`
  */
 // TESTED
-double log_st_distr(const Graph &g, const umat &districts, const uvec &counties,
+inline double log_st_distr(const Graph &g, const umat &districts, const uvec &counties,
                     int idx, int district, int county);
 
 /*
  * Compute the log number of spanning trees for the contracted graph
  */
 // TESTED
-double log_st_contr(const Graph &g, const umat &districts, const uvec &counties,
+inline double log_st_contr(const Graph &g, const umat &districts, const uvec &counties,
                     int n_cty, int idx, int district);
 
 /*

@@ -4,10 +4,13 @@
 \alias{by_plan}
 \title{Shorten District by Plan vector}
 \usage{
-by_plan(x)
+by_plan(x, ndists)
 }
 \arguments{
 \item{x}{summary statistic at the district level}
+
+\item{ndists}{numeric. Number of districts. Estimated as the gcd of the unique
+run length encodings if missing.}
 }
 \value{
 x or plan level subset of x

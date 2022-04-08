@@ -122,7 +122,7 @@ NumericVector taugap(double tau, NumericMatrix dvs, IntegerVector dseat_vec, int
     dseat_share(i) = dseat_vec(i)/(double) nd;
   }
 
-  return -2*(temp +.5 - dseat_share);
+  return 2*(temp +.5 - dseat_share);
 }
 
 // [[Rcpp::export(rng = false)]]

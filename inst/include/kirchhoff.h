@@ -1,34 +1,20 @@
-#include "kirchhoff.h"
+#ifndef KIRCHHOFF_H
+#define KIRCHHOFF_H
 
-/*
- * Compute the log number of spanning trees which could generate a given set of maps.
- * `districts` should have each column be a map
- */
-// TESTED
-NumericVector log_st_map(const Graph &g, const umat &districts,
-                         const uvec &counties, int n_distr) {
-  int N = districts.n_cols;
-  int n_cty = max(counties);
-  NumericVector log_st(N);
-  for (int i = 0; i < N; i++) {
-    double accuml = 0;
-    for (int d = 1; d <= n_distr; d++) { // districts are 1-indexed
-      for (int j = 1; j <= n_cty; j++) {
-        accuml += log_st_distr(g, districts, counties, i, d, j);
-      }
-      accuml += log_st_contr(g, districts, counties, n_cty, i, d);
-    }
-    log_st(i) = accuml;
-  }
-  return log_st;
-}
+#include <RcppArmadillo.h>
+#include "redistmetrics_types.h"
+
+// [[Rcpp::depends(RcppArmadillo)]]
+using namespace Rcpp;
+using namespace arma;
+
 
 /*
  * Compute the log number of spanning trees for `district` intersect `county`
  */
 // TESTED
 inline double log_st_distr(const Graph &g, const umat &districts, const uvec &counties,
-                    int idx, int district, int county) {
+                           int idx, int district, int county) {
   int V = g.size();
   // number of precincts in this district
   int K = 0;
@@ -72,7 +58,7 @@ inline double log_st_distr(const Graph &g, const umat &districts, const uvec &co
  */
 // TESTED
 inline double log_st_contr(const Graph &g, const umat &districts, const uvec &counties,
-                    int n_cty, int idx, int district) {
+                           int n_cty, int idx, int district) {
   if (n_cty == 1) return 0;
   int V = g.size();
   // number of counties in this district
@@ -117,26 +103,4 @@ inline double log_st_contr(const Graph &g, const umat &districts, const uvec &co
 }
 
 
-/*
- * Compute the number of edges removed
- */
-// TESTED
-NumericVector n_removed(const Graph &g, const umat &districts, int n_distr) {
-  int V = g.size();
-  int N = districts.n_cols;
-  NumericVector n_rem(N);
-  for (int n = 0; n < N; n++) {
-    double removed = 0.0;
-    for (int i = 0; i < V; i++) {
-      int dist = districts(i, n);
-      std::vector<int> nbors = g[i];
-      int length = nbors.size();
-      for (int j = 0; j < length; j++) {
-        if (districts(nbors[j], n) != dist) removed += 1.0;
-      }
-    }
-    n_rem[n] = removed;
-  }
-
-  return n_rem/2;
-}
+#endif
