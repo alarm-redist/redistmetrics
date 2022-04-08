@@ -1,6 +1,8 @@
 # redistmetrics 1.0.2
 * Makes `ncores` argument work for `prep_polsby()`.
 * Speed improvements for compactness functions in serial.
+* C++ header-only interface for some functions
+* Relicense under MIT License
 
 # redistmetrics 1.0.1
 

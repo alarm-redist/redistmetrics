@@ -33,7 +33,7 @@ Suggests:
 LinkingTo:
     Rcpp,
     RcppArmadillo
-License: GPL (>= 3)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 SystemRequirements: C++11
