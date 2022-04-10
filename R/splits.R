@@ -152,3 +152,41 @@ splits_count <- function(plans, shp, admin) {
 
   admin_splits_count(plans, admin - 1)
 }
+
+#' Count the Total Splits in Each Plan
+#'
+#' Counts the total number of administrative splits.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar admin TRUE
+#' @template template_nosf
+#'
+#' @return numeric matrix
+#' @export
+#' @concept splits
+#'
+#' @examples
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' splits_total(plans = nh$r_2020, shp = nh, admin = county)
+#'
+#' # Or many plans:
+#' splits_total(plans = nh_m[, 3:5], shp = nh, admin = county)
+#'
+splits_total <- function(plans, shp, admin) {
+  # prep inputs ----
+  plans <- process_plans(plans)
+  nd <- length(unique(plans[, 1]))
+
+  # prep admin ----
+  admin <- rlang::eval_tidy(rlang::enquo(admin), data = shp)
+  if (is.null(admin)) {
+    cli::cli_abort('{.arg admin} not found in {.arg shp}.')
+  }
+  admin <- make_id(admin)
+
+  colSums(admin_splits_count(plans, admin - 1) - 1L) %>%
+    rep(each = nd)
+}
