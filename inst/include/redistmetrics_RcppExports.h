@@ -5,7 +5,6 @@
 #define RCPP_redistmetrics_RCPPEXPORTS_H_GEN_
 
 #include "redistmetrics_types.h"
-#include "redistmetrics_types.h"
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 
