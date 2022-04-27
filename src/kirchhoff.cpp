@@ -1,5 +1,5 @@
 #include "kirchhoff.h"
-#include "kirchhoff_inline.h"
+#include "../inst/include/kirchhoff_inline.h"
 
 /*
  * Compute the log number of spanning trees which could generate a given set of maps.
