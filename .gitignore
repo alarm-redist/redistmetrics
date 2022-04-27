@@ -42,3 +42,7 @@ docs
 inst/doc
 /doc/
 /Meta/
+
+# misc
+*.tmp
+*.o

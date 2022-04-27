@@ -20,21 +20,9 @@
 #' dist_info(plans = nh_m[, 3:5], shp = nh, total_pop = pop)
 #'
 dist_info <- function(plans, shp, total_pop, ncores = 1) {
-
   # process objects ----
   plans <- process_plans(plans)
   total_pop <- rlang::eval_tidy(rlang::enquo(total_pop), shp)
-
-  # set up parallel ----
-  nc <- min(ncores, ncol(plans))
-  if (nc == 1) {
-    `%oper%` <- foreach::`%do%`
-  } else {
-    `%oper%` <- foreach::`%dopar%`
-    cl <- parallel::makeCluster(nc, setup_strategy = 'sequential', methods = FALSE)
-    doParallel::registerDoParallel(cl)
-    on.exit(parallel::stopCluster(cl))
-  }
 
   if (is.null(total_pop)) {
     cli::cli_warn('{.arg total_pop} not provided, using default of equal population.')
@@ -44,14 +32,9 @@ dist_info <- function(plans, shp, total_pop, ncores = 1) {
     cli::cli_abort('Length of {.arg total_pop} does not match the number of rows in {.arg plans}.')
   }
 
-  vi <- foreach::foreach(map = 1:ncol(plans), .combine = 'cbind') %oper% {
-    var_info_mat(plans, map - 1, total_pop)
-  }
-  colnames(vi) <- NULL
-  # copy over other half of matrix; we only computed upper triangle
-  vi[lower.tri(vi)] <- t(vi)[lower.tri(vi)]
-
-  vi
+  if (ncores == 1) ncores = 0
+  n_distr = max(plans[, 1])
+  var_info_mat(plans, total_pop, n_distr, ncores)
 }
 
 #' Calculate Hamming Distances

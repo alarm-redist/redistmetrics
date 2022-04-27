@@ -2,7 +2,7 @@
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
-#' @param use_Rcpp If `TRUE` (the default for more than 8 plans), precompute boundaries 
+#' @param use_Rcpp If `TRUE` (the default for more than 8 plans), precompute boundaries
 #'   shared by each pair of units and use them to quickly compute the compactness score.
 #' @param perim_path path to perimeter tibble saved by `prep_perims()`
 #' @param perim_df tibble of perimeters from `prep_perims()`
@@ -582,8 +582,7 @@ comp_edges_rem <- function(plans, shp, adj) {
     cli::cli_abort('{.arg adj} missing and {.arg shp} is not a {.cls redist_map}.')
   }
 
-  n_removed(g = adj, districts = plans, n_distr = nd) %>%
-    rep(each = nd)
+  rep(n_removed(g = adj, districts = plans, n_distr = nd), each=nd)
 }
 
 #' Calculate Fraction Kept Compactness
@@ -623,8 +622,7 @@ comp_frac_kept <- function(plans, shp, adj) {
   }
   n_edge <- length(unlist(adj))
 
-  (1 - (n_removed(g = adj, districts = plans, n_distr = nd) / n_edge)) %>%
-    rep(each = nd)
+  rep(1 - (n_removed(g = adj, districts = plans, n_distr = nd) / n_edge), each=nd)
 }
 
 #' Calculate Log Spanning Tree Compactness
@@ -670,8 +668,7 @@ comp_log_st <- function(plans, shp, counties = NULL, adj) {
     cli::cli_abort('{.arg adj} missing and {.arg shp} is not a {.cls redist_map}.')
   }
 
-  log_st_map(g = adj, districts = plans, counties = counties, n_distr = nd) %>%
-    rep(each = nd)
+  rep(log_st_map(g = adj, districts = plans, counties = counties, n_distr = nd), each=nd)
 }
 
 #' Calculate Skew Compactness

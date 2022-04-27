@@ -113,12 +113,8 @@ admin_splits_count <- function(dm, admin) {
     .Call(`_redistmetrics_admin_splits_count`, dm, admin)
 }
 
-var_info_mat <- function(m, i, pop) {
-    .Call(`_redistmetrics_var_info_mat`, m, i, pop)
-}
-
-var_info_vec <- function(m, ref, pop) {
-    .Call(`_redistmetrics_var_info_vec`, m, ref, pop)
+var_info_mat <- function(m, pop, ndists, ncores) {
+    .Call(`_redistmetrics_var_info_mat`, m, pop, ndists, ncores)
 }
 
 # Register entry points for exported C++ functions

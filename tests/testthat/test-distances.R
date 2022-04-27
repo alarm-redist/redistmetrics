@@ -1,11 +1,10 @@
 test_that("dist_info works", {
   a <- dist_info(nh$r_2020, nh, pop)
-  e <- 0
+  e <- matrix(0)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- dist_info(nh_m[, 1:2], nh, pop)
-  e <- structure(c(0, 1.17049464100364, 1.17049464100364, 0),
-                 .Dim = c(2L, 2L), .Dimnames = list(NULL, NULL))
+  e <- matrix(c(0, 1.17049464100364, 1.17049464100364, 0), nrow=2)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
