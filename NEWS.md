@@ -6,6 +6,7 @@
 * Improves usability of `by_plan()` by allowing for measurements to be repeated. Instead of reducing the vector length only if every entry is repeated the same number of times, it does it by the greatest common divisor.
 * Corrects documentation indicating that some inputs need to have `sf` geometry when it is not used.
 * Relicense under MIT License
+* Adds `admin_splits_total()` to count total unique district-admins.
 
 # redistmetrics 1.0.1
 

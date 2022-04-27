@@ -1,5 +1,5 @@
-#ifndef KIRCHHOFF_H
-#define KIRCHHOFF_H
+#ifndef KIRCHHOFF_INLINE_H
+#define KIRCHHOFF_INLINE_H
 
 #include <RcppArmadillo.h>
 #include "redistmetrics_types.h"
