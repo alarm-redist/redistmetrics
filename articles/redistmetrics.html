@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">redistmetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -114,24 +114,24 @@
 <p><code>redistmetrics</code> provides an interface for computing common redistricting measures and metrics. This covers the range of compactness measures, partisan gerrymandering metrics, county splits, and more. The goal is to provide a flexible and friendly (to existing R users) implementation of scores which are often used in academic research, litigation, public projects, and journalism. This package began as a set of functions in <a href="https://CRAN.R-project.org/package=redist" class="external-link"><code>redist</code></a>. While those features will remain, this package should offer friendlier examples by separating out measures into their own functions.</p>
 <p>The package is developed and maintained by the <a href="https://alarm-redist.github.io" class="external-link">ALARM Project</a>, the ALgorithm-Assisted Redistricting Methodology Project,a research project under the direction of Kosuke Imai. The code in this package was developed by Christopher T. Kenny, Cory McCartan, and Ben Fifield. When using the package, please cite the package using the following:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">'redistmetrics'</span><span class="op">)</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; To cite redistmetrics in publications use:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   Christopher T. Kenny, Cory McCartan, Ben Fifield, and Kosuke Imai</span>
-<span class="co">#&gt;   (2021). redistmetrics: Redistricting Metrics. Available at The</span>
-<span class="co">#&gt;   Comprehensive R Archive Network (CRAN). URL</span>
-<span class="co">#&gt;   https://github.com/alarm-redist/redistmetrics.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; A BibTeX entry for LaTeX users is</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;   @Misc{,</span>
-<span class="co">#&gt;     title = {{redistmetrics}: Redistricting Metrics},</span>
-<span class="co">#&gt;     author = {Christopher T. Kenny and Cory McCartan and Ben Fifield and Kosuke Imai},</span>
-<span class="co">#&gt;     howpublished = {Available at The Comprehensive R Archive Network (CRAN)},</span>
-<span class="co">#&gt;     year = {2021},</span>
-<span class="co">#&gt;     url = {https://github.com/alarm-redist/redistmetrics},</span>
-<span class="co">#&gt;   }</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">'redistmetrics'</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; To cite redistmetrics in publications use:</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Christopher T. Kenny, Cory McCartan, Ben Fifield, and Kosuke Imai</span></span>
+<span><span class="co">#&gt;   (2021). redistmetrics: Redistricting Metrics. Available at The</span></span>
+<span><span class="co">#&gt;   Comprehensive R Archive Network (CRAN). URL</span></span>
+<span><span class="co">#&gt;   https://github.com/alarm-redist/redistmetrics.</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   @Misc{,</span></span>
+<span><span class="co">#&gt;     title = {{redistmetrics}: Redistricting Metrics},</span></span>
+<span><span class="co">#&gt;     author = {Christopher T. Kenny and Cory McCartan and Ben Fifield and Kosuke Imai},</span></span>
+<span><span class="co">#&gt;     howpublished = {Available at The Comprehensive R Archive Network (CRAN)},</span></span>
+<span><span class="co">#&gt;     year = {2021},</span></span>
+<span><span class="co">#&gt;     url = {https://github.com/alarm-redist/redistmetrics},</span></span>
+<span><span class="co">#&gt;   }</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -143,7 +143,7 @@
 <span id="cb2-5"><a href="#cb2-5"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">'alarm-redist/redistmetrics)</span></span></code></pre></div>
 <p>Once installed, the package can be loaded with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span></span></code></pre></div>
 <p>For example purposes, we include data about New Hampshire’s political geography and demographics. The following data is included:</p>
 <ul>
 <li>
@@ -160,7 +160,7 @@
 <p>Given some data set where the districts are indicated, we can begin to compute measures.</p>
 <p>We start with <code>nh</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span></code></pre></div>
 <p>Functions in <code>redistmetrics</code> use common prefixes to indicate their usage. The prefixes in the current version are:</p>
 <ul>
 <li>
@@ -180,21 +180,21 @@
 </ul>
 <p>With these, we can pick a measure that we’d like to compute, say the Reock compactness, via <code><a href="../reference/comp_reock.html">comp_reock()</a></code>. The major arguments are then the <code>plans</code>, or what the redistricting plan is, and the <code>shp</code>, which is the geography that the district is based on. Notably, <code>comp_</code> functions also typically take an <code>epsg</code> argument which has the goal of converting the object to a projected map. This allows for more accurate measurement by more correctly describing the relative location of points on a map.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_reock.html">comp_reock</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.4444653 0.2502152</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_reock.html">comp_reock</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.4444653 0.2502152</span></span></code></pre></div>
 <p>The output here is two Reock scores, the first being for the first district and the second for the second.</p>
 <p>We can similar look at a partisan score, perhaps the efficiency gap, via <code><a href="../reference/part_egap.html">part_egap()</a></code>. This takes additional arguments. As before, it wants the <code>plans</code> defining the assignment to districts, along with a <code>shp</code> object, which just contains the next two columns: <code>rvote</code> (votes for Republicans) and <code>dvote</code> (votes for Democrats).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/part_egap.html">part_egap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, 
-          rvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_rep_tru</span>, dvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_dem_bid</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.08174456 0.08174456</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/part_egap.html">part_egap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, </span>
+<span>          rvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_rep_tru</span>, dvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_dem_bid</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.08174456 0.08174456</span></span></code></pre></div>
 <p>As the variable names suggest, we compute the Efficiency Gap using 2020 presidential data. Now, because the Efficiency Gap is defined for a plan, rather than by district, it is repeated here for each district for consistency.</p>
 <p>If you want a plan-level metric to not be repeated, you can pipe through to <code>by_plan</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/part_egap.html">part_egap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, 
-          rvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_rep_tru</span>, dvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_dem_bid</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="../reference/by_plan.html">by_plan</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.08174456</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/part_egap.html">part_egap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, </span>
+<span>          rvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_rep_tru</span>, dvote <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">pre_20_dem_bid</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="../reference/by_plan.html">by_plan</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.08174456</span></span></code></pre></div>
 <p>For more information, view the other vignettes or the <a href="https://alarm-redist.github.io/redistmetrics/index.html">package website</a>.</p>
 </div>
   </div>
@@ -216,7 +216,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

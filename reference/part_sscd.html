@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">redistmetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -78,23 +78,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">part_sscd</span><span class="op">(</span><span class="va">plans</span>, <span class="va">shp</span>, <span class="va">dvote</span>, <span class="va">rvote</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">part_sscd</span><span class="op">(</span><span class="va">plans</span>, <span class="va">shp</span>, <span class="va">dvote</span>, <span class="va">rvote</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>plans</dt>
 <dd><p>redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan</p></dd>
+
+
 <dt>shp</dt>
 <dd><p>redist_map object, tibble, or data frame containing other columns</p></dd>
+
+
 <dt>dvote</dt>
 <dd><p>unqouted name of column in shp with total population</p></dd>
+
+
 <dt>rvote</dt>
 <dd><p>unqouted name of column in shp with group population</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>numeric vector</p>
+    
+
+<p>numeric vector</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -105,16 +114,16 @@ Statistics and Public Policy, 7:1, 30-38, DOI: 10.1080/2330443X.2020.1796400</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_m</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># For a single plan:</span></span>
-<span class="r-in"><span class="fu">part_sscd</span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_m</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># For a single plan:</span></span></span>
+<span class="r-in"><span><span class="fu">part_sscd</span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3819666 0.3819666</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Or many plans:</span></span>
-<span class="r-in"><span class="fu">part_sscd</span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Or many plans:</span></span></span>
+<span class="r-in"><span><span class="fu">part_sscd</span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span><span class="op">[</span>, <span class="fl">3</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2483146 0.2483146 0.2682273 0.2682273 0.2246389 0.2246389</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -129,7 +138,7 @@ Statistics and Public Policy, 7:1, 30-38, DOI: 10.1080/2330443X.2020.1796400</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

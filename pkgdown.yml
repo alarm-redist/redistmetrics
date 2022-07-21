@@ -1,5 +1,5 @@
 pandoc: 2.7.3
-pkgdown: 2.0.3
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   compactness: compactness.html
@@ -8,7 +8,7 @@ articles:
   party: party.html
   redistmetrics: redistmetrics.html
   splits: splits.html
-last_built: 2022-04-27T02:11Z
+last_built: 2022-07-21T02:54Z
 urls:
   reference: https://alarm-redist.github.io/redistmetrics/reference
   article: https://alarm-redist.github.io/redistmetrics/articles

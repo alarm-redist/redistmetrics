@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">redistmetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -113,8 +113,8 @@
 <p>This vignette introduces some of the most common measures of administrative splits. These functions are designed around common concerns generalized to keeping together “political subdivisions”. See the vignette “Using <code>redistmetrics</code>” for the bare-bones of the package.</p>
 <p>We first load the <code>redistmetrics</code> package and data from New Hampshire. For any function, the <code>shp</code> argument can be swapped out for your data, <code>county</code> for your administrative unit, and the <code>plans</code> argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a <code>redist_plans</code> object).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="administrative-splits">Administrative Splits<a class="anchor" aria-label="anchor" href="#administrative-splits"></a>
 </h2>
@@ -122,8 +122,8 @@
 <p>Every unit needs to be assigned to an administrative unit.</p>
 <p>The number of administrative splits can be computed with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/splits_admin.html">splits_admin</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span>
-<span class="co">#&gt; [1] 6 6</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/splits_admin.html">splits_admin</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 6 6</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="sub-administrative-splits">Sub-Administrative Splits<a class="anchor" aria-label="anchor" href="#sub-administrative-splits"></a>
@@ -131,8 +131,8 @@
 <p>Secondarily, we are often interested in how many municipalities are split by a plan. These units are smaller and may not cover the entire state. Units which are not assigned to a sub-administrative unit should be assigned <code>NA</code>.</p>
 <p>The number of sub-administrative splits can be computed with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/splits_sub_admin.html">splits_sub_admin</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, sub_admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span>
-<span class="co">#&gt; [1] 6 6</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/splits_sub_admin.html">splits_sub_admin</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, sub_admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 6 6</span></span></code></pre></div>
 <p>(Often you would not check <code>county</code> here, but instead some unit smaller than a county.)</p>
 </div>
 <div class="section level2">
@@ -142,8 +142,8 @@
 <p>Every unit needs to be assigned to an administrative unit.</p>
 <p>The number of multi-splits can be computed with:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/splits_multi.html">splits_multi</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0 0</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/splits_multi.html">splits_multi</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0 0</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="counting-splits">Counting Splits<a class="anchor" aria-label="anchor" href="#counting-splits"></a>
@@ -151,18 +151,18 @@
 <p>Finally, if a state has a special condition, you may be interested in how many times a particular administrative unit is split. We count here the number of districts that appear within an administrative unit. Unlike most other functions, this returns a matrix, where rows are counties and columns are plans.</p>
 <p>The number of splits for each county can be computed with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/splits_count.html">splits_count</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span>
-<span class="co">#&gt;       [,1]</span>
-<span class="co">#&gt;  [1,]    1</span>
-<span class="co">#&gt;  [2,]    2</span>
-<span class="co">#&gt;  [3,]    1</span>
-<span class="co">#&gt;  [4,]    1</span>
-<span class="co">#&gt;  [5,]    2</span>
-<span class="co">#&gt;  [6,]    2</span>
-<span class="co">#&gt;  [7,]    2</span>
-<span class="co">#&gt;  [8,]    2</span>
-<span class="co">#&gt;  [9,]    2</span>
-<span class="co">#&gt; [10,]    1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/splits_count.html">splits_count</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, admin <span class="op">=</span> <span class="va">county</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       [,1]</span></span>
+<span><span class="co">#&gt;  [1,]    1</span></span>
+<span><span class="co">#&gt;  [2,]    2</span></span>
+<span><span class="co">#&gt;  [3,]    1</span></span>
+<span><span class="co">#&gt;  [4,]    1</span></span>
+<span><span class="co">#&gt;  [5,]    2</span></span>
+<span><span class="co">#&gt;  [6,]    2</span></span>
+<span><span class="co">#&gt;  [7,]    2</span></span>
+<span><span class="co">#&gt;  [8,]    2</span></span>
+<span><span class="co">#&gt;  [9,]    2</span></span>
+<span><span class="co">#&gt; [10,]    1</span></span></code></pre></div>
 </div>
   </div>
 
@@ -183,7 +183,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

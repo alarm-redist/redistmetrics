@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">redistmetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -113,8 +113,8 @@
 <p>There are dozens of measures of compactness. This vignette introduces some of the most common and most important measures of compactness. See the vignette “Using <code>redistmetrics</code>” for the bare-bones of the package.</p>
 <p>We first load the <code>redistmetrics</code> package and data from New Hampshire. For any function, the <code>shp</code> argument can be swapped out for your data and the <code>plans</code> argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a <code>redist_plans</code> object).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.github.io/redistmetrics/">redistmetrics</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span></code></pre></div>
 <p>The New Hampshire proposed Republican plan looks like:</p>
 <p><img src="compactness_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
 <div class="section level2">
@@ -127,8 +127,8 @@
 <p><span class="math display">\[ \textrm{Polsby-Popper} = 4\pi\frac{A_D}{P_D}\]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>Polsby-Popper compactness can be computed with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_polsby.html">comp_polsby</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.2324375 0.1582763</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_polsby.html">comp_polsby</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.2324375 0.1582763</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="schwartzberg-compactness">Schwartzberg Compactness<a class="anchor" aria-label="anchor" href="#schwartzberg-compactness"></a>
 </h4>
@@ -137,8 +137,8 @@
 <p>Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>Schwartzberg compactness can be computed with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_schwartz.html">comp_schwartz</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.4821177 0.3978395</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_schwartz.html">comp_schwartz</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.4821177 0.3978395</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="reock-compactness">Reock Compactness<a class="anchor" aria-label="anchor" href="#reock-compactness"></a>
@@ -148,8 +148,8 @@
 <p><span class="math display">\[ \textrm{Reock} = \frac{A_D}{A_{MBC}} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>Reock compactness can be computed with:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_reock.html">comp_reock</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.4444653 0.2502152</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_reock.html">comp_reock</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.4444653 0.2502152</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="box-reock-compactness">Box Reock Compactness<a class="anchor" aria-label="anchor" href="#box-reock-compactness"></a>
@@ -160,8 +160,8 @@
 <p>Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>Box Reock compactness can be computed with:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_box_reock.html">comp_box_reock</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.5769441 0.4196260</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_box_reock.html">comp_box_reock</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.5769441 0.4196260</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="convex-hull-compactness">Convex Hull Compactness<a class="anchor" aria-label="anchor" href="#convex-hull-compactness"></a>
@@ -171,8 +171,8 @@
 <p><span class="math display">\[ \textrm{Convex Hull} = \frac{A_D}{A_{CV}} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>Convex Hull compactness can be computed with:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_ch.html">comp_ch</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.6763964 0.6626738</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_ch.html">comp_ch</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.6763964 0.6626738</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="skew-compactness">Skew Compactness<a class="anchor" aria-label="anchor" href="#skew-compactness"></a>
@@ -182,8 +182,8 @@
 <p><span class="math display">\[ \textrm{Skew} = \frac{A_{MIC}}{A_{MBC}} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>Skew compactness can be computed with:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_skew.html">comp_skew</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.3640221 0.2481286</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_skew.html">comp_skew</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.3640221 0.2481286</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="x-symmetry-compactness">X-Symmetry Compactness<a class="anchor" aria-label="anchor" href="#x-symmetry-compactness"></a>
@@ -193,8 +193,8 @@
 <p><span class="math display">\[ \textrm{X-Symmetry} = \frac{A(I(D, D^{X}))}{A_D} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>X-Symmetry compactness can be computed with:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_x_sym.html">comp_x_sym</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.6995961 0.3436371</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_x_sym.html">comp_x_sym</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.6995961 0.3436371</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="y-symmetry-compactness">Y-Symmetry Compactness<a class="anchor" aria-label="anchor" href="#y-symmetry-compactness"></a>
@@ -204,8 +204,8 @@
 <p><span class="math display">\[ \textrm{Y-Symmetry} = \frac{A(I(D, D^{Y}))}{A_D} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>Y-Symmetry compactness can be computed with:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_y_sym.html">comp_y_sym</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.7307813 0.4346136</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_y_sym.html">comp_y_sym</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.7307813 0.4346136</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -220,8 +220,8 @@
 <p><span class="math display">\[ \textrm{Length-Width} = \frac{Width}{Length} \]</span> Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.</p>
 <p>Length-Width compactness can be computed with:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_lw.html">comp_lw</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.9161576 0.5223455</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_lw.html">comp_lw</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.9161576 0.5223455</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="boyce-clark-compactness">Boyce-Clark Compactness<a class="anchor" aria-label="anchor" href="#boyce-clark-compactness"></a>
@@ -231,8 +231,8 @@
 <p><span class="math display">\[\textrm{Boyce-Clark} = \sum_{i=1}^{16}\big|\frac{r_{i}}{\sum_{i=1}^{16} r_i} * 100 - \frac{100}{n}\big|\]</span> Scores range from 0 to <span class="math inline">\(\infty\)</span>, where 0 is the most compact and <span class="math inline">\(\infty\)</span> is the least compact.</p>
 <p>Boyce-Clark compactness can be computed with:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_bc.html">comp_bc</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.7921350 0.8330235</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_bc.html">comp_bc</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.7921350 0.8330235</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="fryer-holden-compactness">Fryer Holden Compactness<a class="anchor" aria-label="anchor" href="#fryer-holden-compactness"></a>
@@ -242,8 +242,8 @@
 <p><span class="math display">\[\sum_{k = 1}^{n_d} = \sum_{i \in k} \sum{j \in k} P_iP_jD_{ij}^2\]</span> Smaller scores are more compact. When used with a denominator, a score of 1 is most compact and higher scores are less compact.</p>
 <p>Fryer-Holden compactness can be computed with:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_fh.html">comp_fh</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, total_pop <span class="op">=</span> <span class="va">pop</span><span class="op">)</span>
-<span class="co">#&gt; [1] 5.374691e+22 5.374691e+22</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_fh.html">comp_fh</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, total_pop <span class="op">=</span> <span class="va">pop</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 5.374691e+22 5.374691e+22</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -257,8 +257,8 @@
 <p><span class="math display">\[ \textrm{Edges Removed} = E(a) - E_\pi(a)\]</span> Larger scores are less compact.</p>
 <p>Edges-Removed compactness can be computed with:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_edges_rem.html">comp_edges_rem</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span>
-<span class="co">#&gt; [1] 73 73</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_edges_rem.html">comp_edges_rem</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 73 73</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="fraction-kept-compactness">Fraction Kept Compactness<a class="anchor" aria-label="anchor" href="#fraction-kept-compactness"></a>
@@ -268,8 +268,8 @@
 <p><span class="math display">\[ \textrm{Fraction Kept} = \frac{E(a) - E_\pi(a)}{E(a)}\]</span> Scores range from 0 to 1 where 0 is least compact and 1 is most compact.</p>
 <p>Fraction Kept compactness can be computed with:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_frac_kept.html">comp_frac_kept</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.9584755 0.9584755</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_frac_kept.html">comp_frac_kept</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.9584755 0.9584755</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="log-spanning-tree-compactness">Log Spanning Tree Compactness<a class="anchor" aria-label="anchor" href="#log-spanning-tree-compactness"></a>
@@ -280,8 +280,8 @@
 <p>A larger number of log spanning trees is more compact.</p>
 <p>Log Spanning Tree compactness can be computed with:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/comp_log_st.html">comp_log_st</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span>, counties <span class="op">=</span> <span class="va">county</span><span class="op">)</span>
-<span class="co">#&gt; [1] -Inf -Inf</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_log_st.html">comp_log_st</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span>, counties <span class="op">=</span> <span class="va">county</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -Inf -Inf</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -322,7 +322,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

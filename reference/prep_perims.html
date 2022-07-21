@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">redistmetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.3</span>
       </span>
     </div>
 
@@ -78,29 +78,38 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">prep_perims</span><span class="op">(</span><span class="va">shp</span>, epsg <span class="op">=</span> <span class="fl">3857</span>, <span class="va">perim_path</span>, ncores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prep_perims</span><span class="op">(</span><span class="va">shp</span>, epsg <span class="op">=</span> <span class="fl">3857</span>, <span class="va">perim_path</span>, ncores <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>shp</dt>
 <dd><p>redist_map object or tibble with sf geometry column</p></dd>
+
+
 <dt>epsg</dt>
 <dd><p>numeric EPSG code to planarize to. Default is 3857.</p></dd>
+
+
 <dt>perim_path</dt>
 <dd><p>A path to save an rds</p></dd>
+
+
 <dt>ncores</dt>
 <dd><p>numeric. Number of cores to use. Default is 1.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>tibble of perimeters and lengths</p>
+    
+
+<p>tibble of perimeters and lengths</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">prep_perims</span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">prep_perims</span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      origin touching         edge</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1        -1       20  78568.88296</span>
@@ -1936,7 +1945,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1831    326      204  32462.64452</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1832    326      317  18251.86103</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1833    326      320  31192.28593</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -1951,7 +1960,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
