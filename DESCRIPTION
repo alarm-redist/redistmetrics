@@ -24,8 +24,7 @@ Imports:
     dplyr,
     rlang,
     geos,
-    wk,
-    stringr
+    wk
 Suggests:
     rmarkdown,
     knitr,

@@ -259,20 +259,23 @@ splits_district_fuzzy <- function(plans, shp, nbr, epsg) {
       TRUE
     )
 
-    nbr$rep_d <- vapply(
+    nbr$rep_d <- lapply(
       nbr$NAME,
       function(n) {
-        which(sapply(x, function(y) any(n %in% y))) %>%
-          stringr::str_pad(width = 2, side = 'left') %>%
-          paste0(collapse = ',')
-      }, ''
+        which(sapply(x, function(y) any(n %in% y)))
+      }
     )
 
     vapply(seq_len(nd), function(i) {
-      nbr %>%
-        dplyr::filter(.data$rep) %>%
-        dplyr::pull(.data$rep_d) %>%
-        stringr::str_detect(pattern = stringr::str_pad(i, 2, 'left')) %>%
+      vapply(
+        nbr %>%
+          dplyr::filter(.data$rep) %>%
+          dplyr::pull(.data$rep_d),
+        function(x) {
+          any(i %in% x)
+        },
+        integer(1)
+      ) %>%
         sum()
     }, integer(1))
   })
