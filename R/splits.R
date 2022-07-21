@@ -190,3 +190,91 @@ splits_total <- function(plans, shp, admin) {
   colSums(admin_splits_count(plans, admin - 1) - 1L) %>%
     rep(each = nd)
 }
+
+#' Fuzzy Splits by District
+#'
+#' Not all relevant geographies nest neatly into Census blocks, including communities
+#' of interest or neighborhood. For these cases, this provides a tabulation by district of
+#' the number of splits. As some geographies can be split multiple times, the
+#' sum of these splits may not reflect the total number of splits.
+#'
+#' Beware, this requires a `nbr` shape input and will be slower than checking splits in cases where
+#' administrative unit nests cleanly into the geographies represented by `shp`.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @param nbr Geographic neighborhood, community, or other unit to check splits for.
+#' @param thresh Percent as decimal of an area to trim away. Default is .01, which is 1%.
+#' @templateVar epsg TRUE
+#' @template template
+#'
+#' @return numeric matrix
+#' @export
+#' @concept splits
+#'
+#' @examples
+#' data(nh)
+#' data(nh_m)
+#'
+#' # toy example,
+#' # suppose we care about the splits of the counties and they don't nest
+#' nh_cty <- nh %>% dplyr::group_by(county) %>% dplyr::summarize()
+#'
+#' # For a single plan:
+#' splits_district_fuzzy(plans = nh$r_2020, shp = nh, nbr = nh_cty)
+#'
+#' # Or many plans:
+#' splits_district_fuzzy(plans = nh_m[, 3:5], shp = nh, nbr = nh_cty)
+splits_district_fuzzy <- function(plans, shp, nbr, epsg) {
+  # prep inputs ----
+  plans <- process_plans(plans)
+  nd <- length(unique(plans[, 1]))
+
+  shp <- planarize(shp, epsg)
+  nbr <- planarize(nbr, epsg)
+  nbr$NAME <- seq_len(nrow(nbr))
+
+  apply(plans, MARGIN = 2, function(pl) {
+    un <- shp %>%
+      dplyr::mutate(plan_nbr = pl) %>%
+      dplyr::as_tibble() %>%
+      sf::st_as_sf() %>%
+      dplyr::group_by(.data$plan_nbr) %>%
+      dplyr::summarise()
+
+    x <- lapply(seq_len(nd), function(i) {
+      d <- un %>% dplyr::filter(.data$plan_nbr == i)
+      nbr %>%
+        geo_filter(to = d) %>%
+        geo_trim(to = d) %>%
+        dplyr::pull(.data$NAME) %>%
+        sort()
+    })
+
+    nbr$rep <- vapply(
+      nbr$NAME,
+      function(n) {
+        sum(sapply(x, function(y) any(n %in% y))) > 1
+      },
+      TRUE
+    )
+
+    nbr$rep_d <- vapply(
+      nbr$NAME,
+      function(n) {
+        which(sapply(x, function(y) any(n %in% y))) %>%
+          stringr::str_pad(width = 2, side = 'left') %>%
+          paste0(collapse = ',')
+      }, ''
+    )
+
+    vapply(seq_len(nd), function(i) {
+      nbr %>%
+        dplyr::filter(.data$rep) %>%
+        dplyr::pull(.data$rep_d) %>%
+        stringr::str_detect(pattern = stringr::str_pad(i, 2, 'left')) %>%
+        sum()
+    }, integer(1))
+  })
+
+}
