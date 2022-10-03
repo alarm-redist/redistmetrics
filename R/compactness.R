@@ -264,7 +264,7 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
-      united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
+      united <- geos::geos_make_collection(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
       area <- sum(areas[plans[, map] == dists[i]])
 
       mbc <- geos::geos_area(geos::geos_minimum_bounding_circle(united))
@@ -330,7 +330,7 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
     ret <- vector('numeric', nd)
 
     for (i in 1:nd) {
-      united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
+      united <- geos::geos_make_collection(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
       area <- sum(areas[plans[, map] == dists[i]])
 
       cvh <- geos::geos_area(geos::geos_convex_hull(united))

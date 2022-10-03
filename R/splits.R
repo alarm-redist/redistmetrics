@@ -225,7 +225,7 @@ splits_total <- function(plans, shp, admin) {
 #'
 #' # Or many plans:
 #' splits_district_fuzzy(plans = nh_m[, 3:5], shp = nh, nbr = nh_cty)
-splits_district_fuzzy <- function(plans, shp, nbr, epsg) {
+splits_district_fuzzy <- function(plans, shp, nbr, thresh = 0.01, epsg) {
   # prep inputs ----
   plans <- process_plans(plans)
   nd <- length(unique(plans[, 1]))
@@ -246,7 +246,7 @@ splits_district_fuzzy <- function(plans, shp, nbr, epsg) {
       d <- un %>% dplyr::filter(.data$plan_nbr == i)
       nbr %>%
         geo_filter(to = d) %>%
-        geo_trim(to = d) %>%
+        geo_trim(to = d, thresh) %>%
         dplyr::pull(.data$NAME) %>%
         sort()
     })
