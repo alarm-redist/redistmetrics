@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/alarm-redist/redistmetrics/workflows/R-CMD-check/badge.svg)](https://github.com/alarm-redist/redistmetrics/actions)
+[![CRAN status](https://www.r-pkg.org/badges/version/redistmetrics)](https://CRAN.R-project.org/package=redistmetrics)
+![CRAN downloads](http://cranlogs.r-pkg.org/badges/grand-total/redistmetrics)
 <!-- badges: end -->
 
 `redistmetrics` is one of the R packages developed and maintained by the [ALARM Project](https://alarm-redist.github.io/). `redistmetrics` provides the back-end for the computation of summary statistics for a redistricting plan. It provides a more direct access point to use methods in `redist` without requiring `redist` objects.
