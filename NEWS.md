@@ -1,3 +1,9 @@
+# redistmetrics 1.0.3
+* Minor improvements to compactness functions by removing costly unions where collections are sufficient.
+* Adds support for multi-threaded VI calculations.
+* Uses new logo to match the updated `redist` logo.
+* Implements an _experimental_ basic *fuzzy* splits function for non-nesting geographies. 
+
 # redistmetrics 1.0.2
 * Makes `ncores` argument work for `prep_polsby()`.
 * Speed improvements for compactness functions in serial.

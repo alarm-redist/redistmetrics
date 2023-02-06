@@ -191,7 +191,7 @@ splits_total <- function(plans, shp, admin) {
     rep(each = nd)
 }
 
-#' Fuzzy Splits by District
+#' Fuzzy Splits by District (Experimental)
 #'
 #' Not all relevant geographies nest neatly into Census blocks, including communities
 #' of interest or neighborhood. For these cases, this provides a tabulation by district of

@@ -308,11 +308,6 @@ part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
   dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
-  cli::cli_inform(
-    '{.pkg redistmetrics} 1.0.2 reverses tau gap direction. Positive is now pro-Republican bias.',
-    .frequency = 'once', .frequency_id = 'tau_gap'
-  )
-
   rep(taugap(tau = tau, dvs = dvs, dseat_vec = dseat_vec, nd = nd), each = nd)
 }
 

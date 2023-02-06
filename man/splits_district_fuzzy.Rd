@@ -2,7 +2,7 @@
 % Please edit documentation in R/splits.R
 \name{splits_district_fuzzy}
 \alias{splits_district_fuzzy}
-\title{Fuzzy Splits by District}
+\title{Fuzzy Splits by District (Experimental)}
 \usage{
 splits_district_fuzzy(plans, shp, nbr, thresh = 0.01, epsg)
 }
