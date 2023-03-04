@@ -37,7 +37,7 @@ compet_talisman <- function(plans, shp, rvote, dvote, alpha = 1, beta = 1) {
   # aggregate ---
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
-  dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
+  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
   talisman(dvs = dvs, nd = nd, alpha = alpha, beta = beta) %>%

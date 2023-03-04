@@ -97,7 +97,7 @@ part_dseats <- function(plans, shp, dvote, rvote) {
   nd <- length(unique(plans[, 1]))
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
-  dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
+  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
 
   rep(dseat_vec, each = nd)
 }
@@ -251,7 +251,7 @@ part_egap_ep <- function(plans, shp, dvote, rvote) {
   nd <- length(unique(plans[, 1]))
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
-  dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
+  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
   rep(effgapEP(dvs = dvs, dseat_vec = dseat_vec, nd = nd), each = nd)
@@ -305,7 +305,7 @@ part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
   nd <- length(unique(plans[, 1]))
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
-  dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
+  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
   rep(taugap(tau = tau, dvs = dvs, dseat_vec = dseat_vec, nd = nd), each = nd)
@@ -414,7 +414,7 @@ part_decl <- function(plans, shp, dvote, rvote, normalize = TRUE, adjust = TRUE)
   nd <- length(unique(plans[, 1]))
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
-  dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
+  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
   dec <- declination_angle(dvs = dvs, dseat_vec = dseat_vec, nd = nd)
@@ -478,7 +478,7 @@ part_decl_simple <- function(plans, shp, dvote, rvote) {
   nd <- length(unique(plans[, 1]))
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
-  dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
+  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
   declination_simple(dvs = dvs, dseat_vec = dseat_vec, nd = nd) %>%
@@ -536,7 +536,7 @@ part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = 0.01) {
   nd <- length(unique(plans[, 1]))
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
-  dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
+  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
   rep(responsiveness(dvs = dvs, v = v, nd = nd, bandwidth = bandwidth), each = nd)
@@ -589,7 +589,7 @@ part_lop_wins <- function(plans, shp, dvote, rvote) {
   nd <- length(unique(plans[, 1]))
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
-  dseat_vec <- dseats(dm = plans, rcounts = rcounts, dcounts = dcounts, nd = nd)
+  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
   dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
 
   rep(lopsidedwins(dvs = dvs, dseat_vec = dseat_vec, nd = nd), each = nd)

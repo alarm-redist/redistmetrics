@@ -37,8 +37,8 @@ agg_p2d <- function(dm, vote, nd) {
     .Call(`_redistmetrics_agg_p2d`, dm, vote, nd)
 }
 
-dseats <- function(dm, dcounts, rcounts, nd) {
-    .Call(`_redistmetrics_dseats`, dm, dcounts, rcounts, nd)
+dseats <- function(dcounts, rcounts) {
+    .Call(`_redistmetrics_dseats`, dcounts, rcounts)
 }
 
 dseatsDVS <- function(dvs) {

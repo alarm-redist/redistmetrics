@@ -165,7 +165,7 @@ RcppExport SEXP _redistmetrics_n_removed(SEXP gSEXP, SEXP districtsSEXP, SEXP n_
     return rcpp_result_gen;
 }
 // agg_p2d
-IntegerMatrix agg_p2d(IntegerMatrix dm, IntegerVector vote, int nd);
+NumericMatrix agg_p2d(IntegerMatrix dm, IntegerVector vote, int nd);
 RcppExport SEXP _redistmetrics_agg_p2d(SEXP dmSEXP, SEXP voteSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -177,15 +177,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // dseats
-IntegerVector dseats(IntegerMatrix dm, IntegerMatrix dcounts, IntegerMatrix rcounts, int nd);
-RcppExport SEXP _redistmetrics_dseats(SEXP dmSEXP, SEXP dcountsSEXP, SEXP rcountsSEXP, SEXP ndSEXP) {
+IntegerVector dseats(NumericMatrix dcounts, NumericMatrix rcounts);
+RcppExport SEXP _redistmetrics_dseats(SEXP dcountsSEXP, SEXP rcountsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type dcounts(dcountsSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type rcounts(rcountsSEXP);
-    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
-    rcpp_result_gen = Rcpp::wrap(dseats(dm, dcounts, rcounts, nd));
+    Rcpp::traits::input_parameter< NumericMatrix >::type dcounts(dcountsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type rcounts(rcountsSEXP);
+    rcpp_result_gen = Rcpp::wrap(dseats(dcounts, rcounts));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -200,12 +198,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // DVS
-NumericMatrix DVS(IntegerMatrix dcounts, IntegerMatrix rcounts);
+NumericMatrix DVS(NumericMatrix dcounts, NumericMatrix rcounts);
 RcppExport SEXP _redistmetrics_DVS(SEXP dcountsSEXP, SEXP rcountsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type dcounts(dcountsSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type rcounts(rcountsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type dcounts(dcountsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type rcounts(rcountsSEXP);
     rcpp_result_gen = Rcpp::wrap(DVS(dcounts, rcounts));
     return rcpp_result_gen;
 END_RCPP
@@ -223,12 +221,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // effgap
-NumericVector effgap(IntegerMatrix dcounts, IntegerMatrix rcounts, int totvote);
+NumericVector effgap(NumericMatrix dcounts, NumericMatrix rcounts, int totvote);
 RcppExport SEXP _redistmetrics_effgap(SEXP dcountsSEXP, SEXP rcountsSEXP, SEXP totvoteSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type dcounts(dcountsSEXP);
-    Rcpp::traits::input_parameter< IntegerMatrix >::type rcounts(rcountsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type dcounts(dcountsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type rcounts(rcountsSEXP);
     Rcpp::traits::input_parameter< int >::type totvote(totvoteSEXP);
     rcpp_result_gen = Rcpp::wrap(effgap(dcounts, rcounts, totvote));
     return rcpp_result_gen;
@@ -540,7 +538,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_log_st_map", (DL_FUNC) &_redistmetrics_log_st_map, 4},
     {"_redistmetrics_n_removed", (DL_FUNC) &_redistmetrics_n_removed, 3},
     {"_redistmetrics_agg_p2d", (DL_FUNC) &_redistmetrics_agg_p2d, 3},
-    {"_redistmetrics_dseats", (DL_FUNC) &_redistmetrics_dseats, 4},
+    {"_redistmetrics_dseats", (DL_FUNC) &_redistmetrics_dseats, 2},
     {"_redistmetrics_dseatsDVS", (DL_FUNC) &_redistmetrics_dseatsDVS, 1},
     {"_redistmetrics_DVS", (DL_FUNC) &_redistmetrics_DVS, 2},
     {"_redistmetrics_effgapEP", (DL_FUNC) &_redistmetrics_effgapEP, 3},

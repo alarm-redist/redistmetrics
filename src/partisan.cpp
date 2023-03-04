@@ -3,8 +3,8 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export(rng = false)]]
-IntegerMatrix agg_p2d(IntegerMatrix dm, IntegerVector vote, int nd) {
-  IntegerMatrix mat = IntegerMatrix(nd, dm.ncol());
+NumericMatrix agg_p2d(IntegerMatrix dm, IntegerVector vote, int nd) {
+  NumericMatrix mat = NumericMatrix(nd, dm.ncol());
   for(int j = 0; j < dm.ncol(); j++){
     for(int i = 0; i < dm.nrow(); i++){
       mat(dm(i,j)-1,j) += vote[i];
@@ -15,8 +15,8 @@ IntegerMatrix agg_p2d(IntegerMatrix dm, IntegerVector vote, int nd) {
 
 
 // [[Rcpp::export(rng = false)]]
-IntegerVector dseats(IntegerMatrix dm, IntegerMatrix dcounts, IntegerMatrix rcounts, int nd){
-  IntegerVector dseats(dm.ncol());
+IntegerVector dseats(NumericMatrix dcounts, NumericMatrix rcounts){
+  IntegerVector dseats(dcounts.ncol());
 
   for(int c = 0; c < dcounts.ncol(); c++){
     for(int r = 0; r < dcounts.nrow(); r++){
@@ -43,7 +43,7 @@ IntegerVector dseatsDVS(NumericMatrix dvs){
 }
 
 // [[Rcpp::export(rng = false)]]
-NumericMatrix DVS(IntegerMatrix dcounts, IntegerMatrix rcounts){
+NumericMatrix DVS(NumericMatrix dcounts, NumericMatrix rcounts){
   NumericMatrix mat = NumericMatrix(dcounts.nrow(), dcounts.ncol());
 
   for(int c = 0; c < mat.ncol(); c++){
@@ -69,11 +69,11 @@ NumericVector effgapEP(NumericMatrix dvs, IntegerVector dseat_vec, int nd){
 }
 
 // [[Rcpp::export(rng = false)]]
-NumericVector effgap(IntegerMatrix dcounts, IntegerMatrix rcounts, int totvote){
+NumericVector effgap(NumericMatrix dcounts, NumericMatrix rcounts, int totvote){
   NumericVector eg(dcounts.ncol());
 
-  IntegerMatrix dwaste(dcounts.nrow(), dcounts.ncol());
-  IntegerMatrix rwaste(rcounts.nrow(), rcounts.ncol());
+  NumericMatrix dwaste(dcounts.nrow(), dcounts.ncol());
+  NumericMatrix rwaste(rcounts.nrow(), rcounts.ncol());
   int minwin;
   for(int c = 0; c < dcounts.ncol(); c++){
     for(int r = 0; r < dcounts.nrow(); r++){
