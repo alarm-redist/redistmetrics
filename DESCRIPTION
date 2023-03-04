@@ -37,7 +37,7 @@ LazyData: true
 SystemRequirements: C++11
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://alarm-redist.github.io/redistmetrics/,
+URL: http://alarm-redist.org/redistmetrics/,
     https::/github.com/alarm-redist/redistmetrics/
 BugReports: https://github.com/alarm-redist/redistmetrics/issues
 VignetteBuilder: knitr

@@ -1,57 +1,50 @@
-url: https://alarm-redist.github.io/redistmetrics/
+url: http://alarm-redist.org/redistmetrics/
 template:
   bootstrap: 3
   bootswatch: yeti
 navbar:
   bg: dark
   components:
-   articles:
-     text: Articles
-     menu:
-     - text: Measures of Partisan Advantage
-       href: articles/party.html
-     - text: Measures of Compactness
-       href: articles/compactness.html
-     - text: Measures of Administrative Splits
-       href: articles/splits.html
-     - text: Measures of Plan Distance
-       href: articles/distances.html
-     - text: Other Measures
-       href: articles/other.html
+    articles:
+      text: Articles
+      menu:
+      - text: Measures of Partisan Advantage
+        href: articles/party.html
+      - text: Measures of Compactness
+        href: articles/compactness.html
+      - text: Measures of Administrative Splits
+        href: articles/splits.html
+      - text: Measures of Plan Distance
+        href: articles/distances.html
+      - text: Other Measures
+        href: articles/other.html
 reference:
 - title: Partisan Bias Calculations
-  desc: "Functions to calulate partisan bias measures"
-- contents:
-  - has_concept("partisan")
+  desc: Functions to calulate partisan bias measures
+- contents: has_concept("partisan")
 - title: Compactness Calculations
-  desc: "Functions to calculate compactness measures"
-- contents:
-  - has_concept("compactness")
+  desc: Functions to calculate compactness measures
+- contents: has_concept("compactness")
 - title: Split Calculations
-  desc: "Functions to calculate splits"
-- contents:
-  - has_concept("splits")
+  desc: Functions to calculate splits
+- contents: has_concept("splits")
 - title: Competitiveness Calculations
-  desc: "Functions to calculate competitiveness measures"
-- contents:
-  - has_concept("competitiveness")
+  desc: Functions to calculate competitiveness measures
+- contents: has_concept("competitiveness")
 - title: Distance Calculations
-  desc: "Functions to calculate distances between partitions"
-- contents:
-  - has_concept("distances")
+  desc: Functions to calculate distances between partitions
+- contents: has_concept("distances")
 - title: Segregation Calculations
-  desc: "Functions to calculate segregation measures"
-- contents:
-  - has_concept("segregation")
+  desc: Functions to calculate segregation measures
+- contents: has_concept("segregation")
 - title: Incumbent Calculations
-  desc: "Functions to assess incumbent pairings"
-- contents:
-  - has_concept("incumbent")
+  desc: Functions to assess incumbent pairings
+- contents: has_concept("incumbent")
 - title: Example Data
-  desc: "Data on New Hampshire for Examples"
-- contents:
-  - has_concept("data")
+  desc: Data on New Hampshire for Examples
+- contents: has_concept("data")
 - title: Misc.
-  desc: "Remaining tools that don't fit into other categories"
-- contents:
-  - lacks_concepts(c("partisan", "compactness", "splits", "competitiveness", "distances", "segregation", "incumbent", "data"))
+  desc: Remaining tools that don't fit into other categories
+- contents: lacks_concepts(c("partisan", "compactness", "splits", "competitiveness",
+    "distances", "segregation", "incumbent", "data"))
+
