@@ -147,7 +147,7 @@ more Democratic voters in a district relative to Republican voters.</p>
 <p>The Democratic vote share can be computed with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_dvs.html">part_dvs</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.4387424 0.5378594</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.4387596 0.5378342</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="democratic-seats">Democratic Seats<a class="anchor" aria-label="anchor" href="#democratic-seats"></a>
@@ -178,7 +178,7 @@ scores indicate bias in favor of Democrats. Scores are in the range of
 <p>Partisan Bias can be computed with:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_dvs.html">part_dvs</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.4387424 0.5378594</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.4387596 0.5378342</span></span></code></pre></div>
 <p>The argument <span class="math inline">\(v\)</span> (for <span class="math inline">\(\textrm{voteshare}_D\)</span>) can be set for any
 value in <span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span> and is <span class="math inline">\(0.5\)</span> by default.</p>
 </div>
@@ -228,7 +228,7 @@ average Democratic voteshare in Republican-won districts. <span class="math inli
 <p>Declination can be computed with:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_decl.html">part_decl</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -0.01022275 -0.01022275</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -0.01022629 -0.01022629</span></span></code></pre></div>
 <p>By default, declination is normalized to a fraction of an angle, via
 the <code>normalization</code> argument. Setting
 <code>normalization = FALSE</code> returns a variant of the declination
@@ -263,7 +263,7 @@ average Democratic voteshare in Republican-won districts. <span class="math inli
 bias and positive score indicates a pro-Republican bias.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_decl_simple.html">part_decl_simple</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -0.04679648 -0.04679648</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -0.04681234 -0.04681234</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="mean-median-score">Mean-Median Score<a class="anchor" aria-label="anchor" href="#mean-median-score"></a>
 </h3>
@@ -297,7 +297,7 @@ average Democratic voteshare in Republican-won districts.</p>
 <p>The Lopsided Wins score can be computed with:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_lop_wins.html">part_lop_wins</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -0.02339824 -0.02339824</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -0.02340617 -0.02340617</span></span></code></pre></div>
 <p>The output of this can be used for a t-test.</p>
 </div>
 <div class="section level3">
@@ -330,7 +330,7 @@ are the total votes.</p>
 <p>The Efficiency Gap can be computed with:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_egap.html">part_egap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -0.02007106 -0.02007106</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -0.0201538 -0.0201538</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="efficiency-gap-equal-population">Efficiency Gap (Equal Population)<a class="anchor" aria-label="anchor" href="#efficiency-gap-equal-population"></a>
@@ -346,7 +346,7 @@ pro-Republican bias.</p>
 <p>The Efficiency Gap (Equal Population) can be computed with:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_egap_ep.html">part_egap_ep</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -0.02339824 -0.02339824</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -0.02340617 -0.02340617</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="tau-gap">Tau Gap<a class="anchor" aria-label="anchor" href="#tau-gap"></a>
@@ -367,7 +367,7 @@ analogously.</p>
 with:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_tau_gap.html">part_tau_gap</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] -0.009276655 -0.009276655</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] -0.009275831 -0.009275831</span></span></code></pre></div>
 <p>The default is <code>tau = 1</code>.</p>
 </div>
 <div class="section level3">
@@ -387,7 +387,7 @@ vote share in Republican-won districts.</p>
 <p>The Smoothed Seat Count Deviation can be computed with:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_sscd.html">part_sscd</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.3819666 0.3819666</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.3818761 0.3818761</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="ranked-marginal-deviation">Ranked Marginal Deviation<a class="anchor" aria-label="anchor" href="#ranked-marginal-deviation"></a>
@@ -411,27 +411,27 @@ and 50 simulated plans.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh_m</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/part_rmd.html">part_rmd</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh_m</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   [1]  0.428370470  0.428370470 24.235421388 24.235421388  2.552997871</span></span>
-<span><span class="co">#&gt;   [6]  2.552997871  1.809043831  1.809043831  1.429493267  1.429493267</span></span>
-<span><span class="co">#&gt;  [11]  0.014890062  0.014890062  0.126809872  0.126809872  0.318627988</span></span>
-<span><span class="co">#&gt;  [16]  0.318627988  0.242831249  0.242831249  0.373011020  0.373011020</span></span>
-<span><span class="co">#&gt;  [21]  0.361538434  0.361538434  0.148772309  0.148772309  1.429493267</span></span>
-<span><span class="co">#&gt;  [26]  1.429493267  0.242831249  0.242831249  1.327300472  1.327300472</span></span>
-<span><span class="co">#&gt;  [31]  0.014890062  0.014890062  0.484450127  0.484450127  1.809043831</span></span>
-<span><span class="co">#&gt;  [36]  1.809043831  0.510055158  0.510055158  0.838740617  0.838740617</span></span>
-<span><span class="co">#&gt;  [41]  0.816550318  0.816550318  0.484450127  0.484450127  4.300606277</span></span>
-<span><span class="co">#&gt;  [46]  4.300606277  0.350729311  0.350729311  1.095627372  1.095627372</span></span>
-<span><span class="co">#&gt;  [51]  0.510055158  0.510055158  0.006126619  0.006126619  0.816550318</span></span>
-<span><span class="co">#&gt;  [56]  0.816550318  0.510055158  0.510055158  0.411542635  0.411542635</span></span>
-<span><span class="co">#&gt;  [61]  0.210448284  0.210448284  0.407899710  0.407899710  0.981914177</span></span>
-<span><span class="co">#&gt;  [66]  0.981914177  0.126809872  0.126809872  0.433177164  0.433177164</span></span>
-<span><span class="co">#&gt;  [71]  2.715473150  2.715473150  0.014890062  0.014890062  1.281220886</span></span>
-<span><span class="co">#&gt;  [76]  1.281220886  0.574561053  0.574561053  0.484450127  0.484450127</span></span>
-<span><span class="co">#&gt;  [81]  0.406901915  0.406901915  0.008658526  0.008658526  0.008658526</span></span>
-<span><span class="co">#&gt;  [86]  0.008658526  0.361538434  0.361538434  0.350729311  0.350729311</span></span>
-<span><span class="co">#&gt;  [91]  0.466205978  0.466205978  1.315020633  1.315020633  1.315020633</span></span>
-<span><span class="co">#&gt;  [96]  1.315020633  0.466205978  0.466205978  0.805815516  0.805815516</span></span>
-<span><span class="co">#&gt; [101]  2.613608371  2.613608371  1.281220886  1.281220886</span></span></code></pre></div>
+<span><span class="co">#&gt;   [1]  0.428306762  0.428306762 24.219447110 24.219447110  2.552987343</span></span>
+<span><span class="co">#&gt;   [6]  2.552987343  1.807712702  1.807712702  1.430841789  1.430841789</span></span>
+<span><span class="co">#&gt;  [11]  0.014897340  0.014897340  0.126702397  0.126702397  0.319358751</span></span>
+<span><span class="co">#&gt;  [16]  0.319358751  0.243484554  0.243484554  0.372941780  0.372941780</span></span>
+<span><span class="co">#&gt;  [21]  0.361636666  0.361636666  0.148703808  0.148703808  1.430841789</span></span>
+<span><span class="co">#&gt;  [26]  1.430841789  0.243484554  0.243484554  1.327059351  1.327059351</span></span>
+<span><span class="co">#&gt;  [31]  0.014897340  0.014897340  0.484383034  0.484383034  1.807712702</span></span>
+<span><span class="co">#&gt;  [36]  1.807712702  0.509814359  0.509814359  0.837801241  0.837801241</span></span>
+<span><span class="co">#&gt;  [41]  0.816016501  0.816016501  0.484383034  0.484383034  4.297252277</span></span>
+<span><span class="co">#&gt;  [46]  4.297252277  0.350898444  0.350898444  1.094269004  1.094269004</span></span>
+<span><span class="co">#&gt;  [51]  0.509814359  0.509814359  0.006160546  0.006160546  0.816016501</span></span>
+<span><span class="co">#&gt;  [56]  0.816016501  0.509814359  0.509814359  0.412033985  0.412033985</span></span>
+<span><span class="co">#&gt;  [61]  0.210313258  0.210313258  0.407710508  0.407710508  0.982443775</span></span>
+<span><span class="co">#&gt;  [66]  0.982443775  0.126702397  0.126702397  0.432856285  0.432856285</span></span>
+<span><span class="co">#&gt;  [71]  2.715581106  2.715581106  0.014897340  0.014897340  1.281534954</span></span>
+<span><span class="co">#&gt;  [76]  1.281534954  0.574665802  0.574665802  0.484383034  0.484383034</span></span>
+<span><span class="co">#&gt;  [81]  0.406929519  0.406929519  0.008614078  0.008614078  0.008614078</span></span>
+<span><span class="co">#&gt;  [86]  0.008614078  0.361636666  0.361636666  0.350898444  0.350898444</span></span>
+<span><span class="co">#&gt;  [91]  0.465927075  0.465927075  1.316510943  1.316510943  1.316510943</span></span>
+<span><span class="co">#&gt;  [96]  1.316510943  0.465927075  0.465927075  0.803319255  0.803319255</span></span>
+<span><span class="co">#&gt; [101]  2.610432184  2.610432184  1.281534954  1.281534954</span></span></code></pre></div>
 <p>This score is intended for comparison, which we can display as a plot
 such as:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
