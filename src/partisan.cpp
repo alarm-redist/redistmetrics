@@ -3,7 +3,7 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export(rng = false)]]
-NumericMatrix agg_p2d(IntegerMatrix dm, IntegerVector vote, int nd) {
+NumericMatrix agg_p2d(IntegerMatrix dm, NumericVector vote, int nd) {
   NumericMatrix mat = NumericMatrix(nd, dm.ncol());
   for(int j = 0; j < dm.ncol(); j++){
     for(int i = 0; i < dm.nrow(); i++){
@@ -88,7 +88,7 @@ NumericVector effgap(NumericMatrix dcounts, NumericMatrix rcounts, int totvote){
     }
   }
 
-  IntegerVector netwaste(dcounts.ncol());
+  NumericVector netwaste(dcounts.ncol());
   netwaste = colSums(dwaste) - colSums(rwaste);
 
   for(int i = 0; i < netwaste.size(); i++){

@@ -10,21 +10,21 @@ test_that("part_bias works", {
 
 test_that("part_decl works", {
   a <- part_decl(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.0332938444163178, 0.0332938444163178)
+  e <- c(0.0332887482661483, 0.0332887482661483)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_decl(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(NaN, NaN, 0.0332938444163178, 0.0332938444163178)
+  e <- c(NaN, NaN, 0.0332887482661483, 0.0332887482661483)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
 test_that("part_decl_simple works", {
   a <- part_decl_simple(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.152495322806012, 0.152495322806012)
+  e <- c(0.152471201485029, 0.152471201485029)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_decl_simple(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(NaN, NaN, 0.152495322806012, 0.152495322806012)
+  e <- c(NaN, NaN, 0.152471201485029, 0.152471201485029)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
@@ -50,31 +50,31 @@ test_that("part_dvs works", {
 
 test_that("part_egap works", {
   a <- part_egap(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.0817445550640845, 0.0817445550640845)
+  e <- c(0.0817197636722627, 0.0817197636722627)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_egap(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(-0.42490548281868, -0.42490548281868, 0.0817445550640845, 0.0817445550640845)
+  e <- c(-0.425023874363298, -0.425023874363298, 0.0817197636722627, 0.0817197636722627)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
 test_that("part_egap_ep works", {
   a <- part_egap_ep(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.0762476614030061, 0.0762476614030061)
+  e <- c(0.0762356007425145, 0.0762356007425145)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_egap_ep(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(-0.424977486779193, -0.424977486779193, 0.0762476614030061, 0.0762476614030061)
+  e <- c(-0.424981492869942, -0.424981492869942, 0.0762356007425145, 0.0762356007425145)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
 test_that("part_lop_wins works", {
   a <- part_lop_wins(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.0762476614030061, 0.0762476614030061)
+  e <- c(0.0762356007425145, 0.0762356007425145)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_lop_wins(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(NaN, NaN, 0.0762476614030061, 0.0762476614030061)
+  e <- c(NaN, NaN, 0.0762356007425145, 0.0762356007425145)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
@@ -110,7 +110,7 @@ test_that("part_rmd works", {
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_rmd(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(8.50003635946404, 8.50003635946404, 8.50003635946401, 8.50003635946401)
+  e <- c(8.49534111881552, 8.49534111881552, 8.49534111881552, 8.49534111881552)
   expect_equal(a, e, tolerance = 1e-4)
 })
 
@@ -126,10 +126,10 @@ test_that("part_sscd works", {
 
 test_that("part_tau_gap works", {
   a <- part_tau_gap(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(0.028456858885723, 0.028456858885723)
+  e <- c(0.0284448215286677, 0.0284448215286677)
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- part_tau_gap(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
-  e <- c(-0.98850776308525, -0.98850776308525, 0.028456858885723, 0.028456858885723)
+  e <- c(-0.98850905428411, -0.98850905428411, 0.0284448215286677, 0.0284448215286677)
   expect_equal(a, e, tolerance = 1e-4)
 })

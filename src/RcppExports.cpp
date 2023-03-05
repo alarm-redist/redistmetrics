@@ -165,12 +165,12 @@ RcppExport SEXP _redistmetrics_n_removed(SEXP gSEXP, SEXP districtsSEXP, SEXP n_
     return rcpp_result_gen;
 }
 // agg_p2d
-NumericMatrix agg_p2d(IntegerMatrix dm, IntegerVector vote, int nd);
+NumericMatrix agg_p2d(IntegerMatrix dm, NumericVector vote, int nd);
 RcppExport SEXP _redistmetrics_agg_p2d(SEXP dmSEXP, SEXP voteSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type vote(voteSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type vote(voteSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
     rcpp_result_gen = Rcpp::wrap(agg_p2d(dm, vote, nd));
     return rcpp_result_gen;
