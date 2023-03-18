@@ -877,7 +877,7 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
   areas <- geos::geos_area(shp)
   coords <- geox_coordinates(geos::geos_centroid(shp))
   out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
-                          .export = c('geox_union', 'geox_sub_centroid', 'id_holes')) %oper% {
+                          .export = c('geox_union', 'geox_sub_centroid')) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in seq_len(nd)) {
@@ -889,12 +889,13 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
       #coords_ctr <- coords[w_prec, ] - cent
       # need to do affine transformations in sf for now?
       shp_ctr <- sf::st_union(shp[w_prec] - cent)
-      shp_refl <- sf::st_coordinates(shp_ctr)[, 1:2]
+      coords_ctr <- sf::st_coordinates(shp_ctr)
+      shp_refl <- coords_ctr[, 1:2]
+
       if (!all(shp_refl[1, ] == shp_refl[nrow(shp_refl), ])) {
-        id <- id_holes(shp_refl)
         shp_refl[, 1] <- shp_refl[, 1] * -1
         shp_refl <- sf::st_sfc(sf::st_polygon(
-          lapply(unique(id), function(x) shp_refl[id == x, ])
+          lapply(unique(coords_ctr[, 3]), function(x) shp_refl[coords_ctr[, 3] == x, ])
         ))
       } else {
         shp_refl[, 1] <- shp_refl[, 1] * -1
@@ -986,7 +987,7 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
   #all_pts <- wk::wk_coords(shp)
 
   out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
-                          .export = c('geox_union', 'geox_sub_centroid', 'id_holes')) %oper% {
+                          .export = c('geox_union', 'geox_sub_centroid')) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in seq_len(nd)) {
@@ -999,13 +1000,13 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
 
       # center at 0, 0
       shp_ctr <- sf::st_union(shp[w_prec] - cent)
-      shp_refl <- sf::st_coordinates(shp_ctr)[, 1:2]
+      coords_ctr <- sf::st_coordinates(shp_ctr)
+      shp_refl <- coords_ctr[, 1:2]
 
       if (!all(shp_refl[1, ] == shp_refl[nrow(shp_refl), ])) {
-        id <- id_holes(shp_refl)
         shp_refl[, 2] <- shp_refl[, 2] * -1
         shp_refl <- sf::st_sfc(sf::st_polygon(
-          lapply(unique(id), function(x) shp_refl[id == x, ])
+          lapply(unique(coords_ctr[, 3]), function(x) shp_refl[coords_ctr[, 3] == x, ])
         ))
       } else {
         shp_refl[, 2] <- shp_refl[, 2] * -1
