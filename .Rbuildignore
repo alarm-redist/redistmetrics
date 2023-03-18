@@ -7,7 +7,7 @@
 ^pkgdown$
 ^\.github$
 man-roxygen
-^dev$
+^data-raw$
 ^doc$
 ^Meta$
 ^cran-comments\.md$
