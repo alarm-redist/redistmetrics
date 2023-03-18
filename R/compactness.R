@@ -74,10 +74,10 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
   # calculate ----
   areas <- geos::geos_area(shp)
   if (use_Rcpp) {
-    splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
+    splits <- split(x = plans, rep(seq_len(nc), each = ceiling(n_plans / nc) * V)[seq_len(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
-    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('redistmetrics'),
+    result <- foreach::foreach(map = seq_len(nc), .combine = 'cbind', .packages = c('redistmetrics'),
                                .export = 'polsbypopper') %oper% {
       polsbypopper(
         from = perim_df$origin, to = perim_df$touching, area = areas,
@@ -85,11 +85,11 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
       )
     }
   } else {
-    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos', 'redistmetrics'),
+    result <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos', 'redistmetrics'),
                                .export = 'geox_union') %oper% {
       ret <- vector('numeric', nd)
 
-      for (i in 1:nd) {
+      for (i in seq_len(nd)) {
         united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
         area <- sum(areas[plans[, map] == dists[i]])
 
@@ -176,10 +176,10 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
   # calculate ----
   areas <- geos::geos_area(shp)
   if (use_Rcpp) {
-    splits <- split(x = plans, rep(1:nc, each = ceiling(n_plans / nc) * V)[1:(n_plans * V)]) %>%
+    splits <- split(x = plans, rep(seq_len(nc), each = ceiling(n_plans / nc) * V)[seq_len(n_plans * V)]) %>%
       lapply(., FUN = function(x, r = V) matrix(data = x, nrow = r))
 
-    result <- foreach::foreach(map = 1:nc, .combine = 'cbind', .packages = c('redistmetrics'),
+    result <- foreach::foreach(map = seq_len(nc), .combine = 'cbind', .packages = c('redistmetrics'),
                                .export = 'schwartzberg') %oper% {
       schwartzberg(
         from = perim_df$origin, to = perim_df$touching, area = areas,
@@ -187,11 +187,11 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
       )
     }
   } else {
-    result <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+    result <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
                                .export = 'geox_union') %oper% {
       ret <- vector('numeric', nd)
 
-      for (i in 1:nd) {
+      for (i in seq_len(nd)) {
         united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
         area <- sum(areas[plans[, map] == dists[i]])
 
@@ -259,11 +259,11 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # compute ----
   areas <- geos::geos_area(shp)
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+  out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
                           .export = 'geox_union') %oper% {
     ret <- vector('numeric', nd)
 
-    for (i in 1:nd) {
+    for (i in seq_len(nd)) {
       united <- geos::geos_make_collection(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
       area <- sum(areas[plans[, map] == dists[i]])
 
@@ -325,11 +325,11 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # compute ----
   areas <- geos::geos_area(shp)
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+  out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
                           .export = 'geox_union') %oper% {
     ret <- vector('numeric', nd)
 
-    for (i in 1:nd) {
+    for (i in seq_len(nd)) {
       united <- geos::geos_make_collection(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
       area <- sum(areas[plans[, map] == dists[i]])
 
@@ -394,9 +394,9 @@ comp_lw <- function(plans, shp, epsg = 3857, ncores = 1) {
   shp <- geos::as_geos_geometry(shp)
   # compute ----
   bboxes <- as.matrix(geos::geos_envelope_rct(shp))
-  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind') %oper% {
+  result <- foreach::foreach(map = seq_len(n_plans), .combine = 'cbind') %oper% {
     out <- numeric(nd)
-    for (i in 1:nd) {
+    for (i in seq_len(nd)) {
       idx <- plans[, map] == dists[i]
       xdiff <- max(bboxes[idx, 3]) - min(bboxes[idx, 1])
       ydiff <- max(bboxes[idx, 4]) - min(bboxes[idx, 2])
@@ -463,11 +463,11 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
   }
 
   # compute ----
-  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('geos'),
+  result <- foreach::foreach(map = seq_len(n_plans), .combine = 'cbind', .packages = c('geos'),
                              .export = c('geox_union', 'geox_coordinates')) %oper% {
     out <- numeric(nd)
 
-    for (i in 1:nd) {
+    for (i in seq_len(nd)) {
       united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
       center <- geos::geos_centroid(united)
       if (!geos::geos_within(united, center)) {
@@ -535,7 +535,7 @@ comp_fh <- function(plans, shp, total_pop, epsg = 3857, ncores = 1) {
   pop <- total_pop * t(matrix(rep(total_pop, length(shp)), length(shp)))
   fh <- pop * dist_sqr
   out <- apply(plans, 2, function(x) {
-    sum(vapply(1:nd, function(i) {
+    sum(vapply(seq_len(nd), function(i) {
       ind <- x == i
       sum(fh[ind, ind])
     },
@@ -728,11 +728,11 @@ comp_skew <- function(plans, shp, epsg = 3857, ncores = 1) {
   }
 
   # compute ----
-  result <- foreach::foreach(map = 1:n_plans, .combine = 'cbind', .packages = c('geos'),
+  result <- foreach::foreach(map = seq_len(n_plans), .combine = 'cbind', .packages = c('geos'),
                              .export = 'geox_union') %oper% {
     out <- numeric(nd)
 
-    for (i in 1:nd) {
+    for (i in seq_len(nd)) {
       united <- geox_union(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
       w <- sqrt(geos::geos_area(geos::geos_maximum_inscribed_crc(united, tolerance = 0.01)))
       l <- sqrt(geos::geos_area(geos::geos_minimum_bounding_circle(united)))
@@ -800,11 +800,11 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
   # compute ----
 
   areas <- geos::geos_area(shp)
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+  out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
                           .export = 'geox_union') %oper% {
     ret <- vector('numeric', nd)
 
-    for (i in 1:nd) {
+    for (i in seq_len(nd)) {
       united <- geos::geos_make_collection(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
       area <- sum(areas[plans[, map] == dists[i]])
 
@@ -876,11 +876,11 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   areas <- geos::geos_area(shp)
   coords <- geox_coordinates(geos::geos_centroid(shp))
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+  out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
                           .export = c('geox_union', 'geox_sub_centroid')) %oper% {
     ret <- vector('numeric', nd)
 
-    for (i in 1:nd) {
+    for (i in seq_len(nd)) {
       w_prec <- which(plans[, map] == dists[i])
       # find centroid
       cent <- geox_sub_centroid(coords, areas, w_prec)
@@ -890,8 +890,15 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
       # need to do affine transformations in sf for now?
       shp_ctr <- sf::st_union(shp[w_prec] - cent)
       shp_refl <- sf::st_coordinates(shp_ctr)[, 1:2]
+      mv <- FALSE
+      if (!all(shp_refl[1, ] == shp_refl[nrow(shp_refl), ])) {
+        shp_refl <- rbind(shp_refl, shp_refl[1, ])
+        mv <- TRUE
+      }
+
       shp_refl[, 1] <- shp_refl[, 1] * -1
       shp_refl <- sf::st_sfc(sf::st_polygon(list(shp_refl)))
+      if (mv) shp_refl <- sf::st_make_valid(shp_refl)
 
 
       # Reflect over x = 0 and make shapes
@@ -978,11 +985,11 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
   ## experimental:
   #all_pts <- wk::wk_coords(shp)
 
-  out <- foreach::foreach(map = 1:n_plans, .combine = 'c', .packages = c('geos'),
+  out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
                           .export = c('geox_union', 'geox_sub_centroid')) %oper% {
     ret <- vector('numeric', nd)
 
-    for (i in 1:nd) {
+    for (i in seq_len(nd)) {
       w_prec <- which(plans[, map] == dists[i])
 
       # # experimental:
@@ -993,8 +1000,15 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
       # center at 0, 0
       shp_ctr <- sf::st_union(shp[w_prec] - cent)
       shp_refl <- sf::st_coordinates(shp_ctr)[, 1:2]
+      mv <- FALSE
+      if (!all(shp_refl[1, ] == shp_refl[nrow(shp_refl), ])) {
+        shp_refl <- rbind(shp_refl, shp_refl[1, ])
+        mv <- TRUE
+      }
+
       shp_refl[, 2] <- shp_refl[, 2] * -1
       shp_refl <- sf::st_sfc(sf::st_polygon(list(shp_refl)))
+      if (mv) shp_refl <- sf::st_make_valid(shp_refl)
 
       # # experimental:
       # # center at 0,0
