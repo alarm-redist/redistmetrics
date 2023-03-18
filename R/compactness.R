@@ -894,7 +894,7 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
         id <- id_holes(shp_refl)
         shp_refl[, 1] <- shp_refl[, 1] * -1
         shp_refl <- sf::st_sfc(sf::st_polygon(
-          lapply(seq_len(length(unique(id))), function(x) shp_refl[id == x, ])
+          lapply(unique(id), function(x) shp_refl[id == x, ])
         ))
       } else {
         shp_refl[, 1] <- shp_refl[, 1] * -1
@@ -1005,7 +1005,7 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
         id <- id_holes(shp_refl)
         shp_refl[, 2] <- shp_refl[, 2] * -1
         shp_refl <- sf::st_sfc(sf::st_polygon(
-          lapply(seq_len(length(unique(id))), function(x) shp_refl[id == x, ])
+          lapply(unique(id), function(x) shp_refl[id == x, ])
         ))
       } else {
         shp_refl[, 2] <- shp_refl[, 2] * -1
