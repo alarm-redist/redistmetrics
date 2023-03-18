@@ -114,3 +114,26 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
 
   perim_df
 }
+
+
+id_holes <- function(crds) {
+  id <- integer(nrow(crds))
+  # base case
+  tgt <- crds[1, ]
+  id[1] <- 1L
+  # rest
+  cur <- 1L
+  i <- 2L
+  while (i <= nrow(crds)) {
+    id[i] <- cur
+    if (all(crds[i, ] == tgt)) {
+      cur <- cur + 1L
+      i <- i + 1L
+      if (i > nrow(crds)) break
+      tgt <- crds[i, ]
+      id[i] <- cur
+    }
+    i <- i + 1L
+  }
+  id
+}

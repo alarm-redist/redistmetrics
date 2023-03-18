@@ -877,7 +877,7 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
   areas <- geos::geos_area(shp)
   coords <- geox_coordinates(geos::geos_centroid(shp))
   out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
-                          .export = c('geox_union', 'geox_sub_centroid')) %oper% {
+                          .export = c('geox_union', 'geox_sub_centroid', 'id_holes')) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in seq_len(nd)) {
@@ -890,16 +890,14 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
       # need to do affine transformations in sf for now?
       shp_ctr <- sf::st_union(shp[w_prec] - cent)
       shp_refl <- sf::st_coordinates(shp_ctr)[, 1:2]
-      mv <- FALSE
       if (!all(shp_refl[1, ] == shp_refl[nrow(shp_refl), ])) {
-        shp_refl <- rbind(shp_refl, shp_refl[1, ])
-        mv <- TRUE
+        shp_refl <- cbind(shp_refl, id_holes(shp_refl))
+        shp_refl[, 1] <- shp_refl[, 1] * -1
+        shp_refl <- sfheaders::sf_polygon(shp_refl, polygon_id = 3)
+      } else {
+        shp_refl[, 1] <- shp_refl[, 1] * -1
+        shp_refl <- sf::st_sfc(sf::st_polygon(list(shp_refl)))
       }
-
-      shp_refl[, 1] <- shp_refl[, 1] * -1
-      shp_refl <- sf::st_sfc(sf::st_polygon(list(shp_refl)))
-      if (mv) shp_refl <- sf::st_make_valid(shp_refl)
-
 
       # Reflect over x = 0 and make shapes
       # the idea, but needs to be the actual shapes, not the centers:
@@ -986,7 +984,7 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
   #all_pts <- wk::wk_coords(shp)
 
   out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
-                          .export = c('geox_union', 'geox_sub_centroid')) %oper% {
+                          .export = c('geox_union', 'geox_sub_centroid', 'id_holes')) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in seq_len(nd)) {
@@ -1000,15 +998,15 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
       # center at 0, 0
       shp_ctr <- sf::st_union(shp[w_prec] - cent)
       shp_refl <- sf::st_coordinates(shp_ctr)[, 1:2]
-      mv <- FALSE
-      if (!all(shp_refl[1, ] == shp_refl[nrow(shp_refl), ])) {
-        shp_refl <- rbind(shp_refl, shp_refl[1, ])
-        mv <- TRUE
-      }
 
-      shp_refl[, 2] <- shp_refl[, 2] * -1
-      shp_refl <- sf::st_sfc(sf::st_polygon(list(shp_refl)))
-      if (mv) shp_refl <- sf::st_make_valid(shp_refl)
+      if (!all(shp_refl[1, ] == shp_refl[nrow(shp_refl), ])) {
+        shp_refl <- cbind(shp_refl, id_holes(shp_refl))
+        shp_refl[, 2] <- shp_refl[, 2] * -1
+        shp_refl <- sfheaders::sf_polygon(shp_refl, polygon_id = 3)
+      } else {
+        shp_refl[, 2] <- shp_refl[, 2] * -1
+        shp_refl <- sf::st_sfc(sf::st_polygon(list(shp_refl)))
+      }
 
       # # experimental:
       # # center at 0,0
