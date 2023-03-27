@@ -311,8 +311,8 @@ district). These are normalized by the votes for the party, leading to a
 score between -1 and 1. A negative score indicates a pro-Democratic
 bias, whereas a positive score inidcates a pro-Republican bias.</p>
 <p>Formally, this can be written as:</p>
-<p><span class="math display">\[\textrm{Efficiency Gap} = \frac{W_R -
-W_D}{n_{votes}}\]</span></p>
+<p><span class="math display">\[\textrm{Efficiency Gap} = \frac{W_D -
+W_R}{n_{votes}}\]</span></p>
 <p>with <span class="math inline">\(W_R\)</span> as the wasted votes by
 Republicans and <span class="math inline">\(W_D\)</span> as the wasted
 votes by Democrats and <span class="math inline">\(n_{votes}\)</span>
@@ -335,14 +335,14 @@ are the total votes.</p>
 <div class="section level3">
 <h3 id="efficiency-gap-equal-population">Efficiency Gap (Equal Population)<a class="anchor" aria-label="anchor" href="#efficiency-gap-equal-population"></a>
 </h3>
-<p>This is the efficiency gap, with the assumption that parties have
+<p>This is the efficiency gap, with the assumption that districts have
 equal voter turnout and population. The scale is the same as for the
 regular efficiency gap, where all scores are between -1 and 1, with
 negative implying pro-Democratic bias and positive implying
 pro-Republican bias.</p>
 <p>Formally, this can be written as:</p>
-<p><span class="math display">\[ \textrm{Efficiency Gap (Eq. Pop.)} = -2
-* \textrm{voteshare}_D + S_D + 0.5\]</span> with <span class="math inline">\(S_D\)</span> as the seat share for Democrats.</p>
+<p><span class="math display">\[ \textrm{Efficiency Gap (Eq. Pop.)} = 2
+* \textrm{voteshare}_D - S_D - 0.5\]</span> with <span class="math inline">\(S_D\)</span> as the seat share for Democrats.</p>
 <p>The Efficiency Gap (Equal Population) can be computed with:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/part_egap_ep.html">part_egap_ep</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, dvote <span class="op">=</span> <span class="va">ndv</span>, rvote <span class="op">=</span> <span class="va">nrv</span><span class="op">)</span></span>
