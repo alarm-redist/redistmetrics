@@ -189,7 +189,7 @@ The Efficiency Gap describes the difference in wasted votes by a party. Wasted v
 
 Formally, this can be written as:
 
-$$\textrm{Efficiency Gap} = \frac{W_R - W_D}{n_{votes}}$$
+$$\textrm{Efficiency Gap} = \frac{W_D - W_R}{n_{votes}}$$
 
 with $W_R$ as the wasted votes by Republicans and $W_D$ as the wasted votes by Democrats and $n_{votes}$ are the total votes.
 
@@ -214,11 +214,11 @@ part_egap(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 
 ### Efficiency Gap (Equal Population)
 
-This is the efficiency gap, with the assumption that parties have equal voter turnout and population. The scale is the same as for the regular efficiency gap, where all scores are between -1 and 1, with negative implying pro-Democratic bias and positive implying pro-Republican bias.
+This is the efficiency gap, with the assumption that districts have equal voter turnout and population. The scale is the same as for the regular efficiency gap, where all scores are between -1 and 1, with negative implying pro-Democratic bias and positive implying pro-Republican bias.
 
 Formally, this can be written as:
 
-$$ \textrm{Efficiency Gap (Eq. Pop.)} = -2 * \textrm{voteshare}_D + S_D + 0.5$$
+$$ \textrm{Efficiency Gap (Eq. Pop.)} = 2 * \textrm{voteshare}_D - S_D - 0.5$$
 with $S_D$ as the seat share for Democrats.
 
 The Efficiency Gap (Equal Population) can be computed with:
