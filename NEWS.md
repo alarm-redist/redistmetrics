@@ -1,3 +1,6 @@
+# redistmetrics 1.0.4
+* Fix rare edge case in `prep_perims()` where a shape that is Queen's-contiguous to one other shape and contiguous to nothing else causes a loud failure when creating the perimeter output.
+
 # redistmetrics 1.0.3
 * Minor improvements to compactness functions by removing costly unions where collections are sufficient.
 * Adds support for multi-threaded VI calculations.
