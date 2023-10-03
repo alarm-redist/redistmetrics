@@ -92,11 +92,11 @@
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>plans</dt>
-<dd><p>redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan</p></dd>
+<dd><p>A <code>redist_plans</code> object or plans_matrix where each row indicates a district assignment and each column is a plan.</p></dd>
 
 
 <dt>shp</dt>
-<dd><p>redist_map object or tibble with sf geometry column</p></dd>
+<dd><p>A <code>redist_map</code> object, tibble, or data frame with an <code>sf</code> geometry column.</p></dd>
 
 
 <dt>use_Rcpp</dt>
@@ -105,26 +105,26 @@ shared by each pair of units and use them to quickly compute the compactness sco
 
 
 <dt>perim_path</dt>
-<dd><p>path to perimeter tibble saved by <code><a href="prep_perims.html">prep_perims()</a></code></p></dd>
+<dd><p>Path to perimeter tibble saved by <code><a href="prep_perims.html">prep_perims()</a></code></p></dd>
 
 
 <dt>perim_df</dt>
-<dd><p>tibble of perimeters from <code><a href="prep_perims.html">prep_perims()</a></code></p></dd>
+<dd><p>Tibble of perimeters from <code><a href="prep_perims.html">prep_perims()</a></code></p></dd>
 
 
 <dt>epsg</dt>
-<dd><p>numeric EPSG code to planarize to. Default is 3857.</p></dd>
+<dd><p>Numeric EPSG code to use to project the shapefile, if needed. Default is 3857.</p></dd>
 
 
 <dt>ncores</dt>
-<dd><p>numeric. Number of cores to use. Default is 1.</p></dd>
+<dd><p>Integer number of cores to use. Default is 1.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>numeric vector</p>
+<p>A numeric vector. Can be shaped into a district-by-plan matrix.</p>
     </div>
     <div id="references">
     <h2>References</h2>
