@@ -5,7 +5,7 @@
 #' @templateVar admin TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept splits
 #'
@@ -44,7 +44,7 @@ splits_admin <- function(plans, shp, admin) {
 #' @templateVar sub_admin TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept splits
 #'
@@ -87,7 +87,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
 #' @templateVar admin TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept splits
 #'

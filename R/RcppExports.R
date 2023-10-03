@@ -113,6 +113,10 @@ admin_splits_count <- function(dm, admin, nd, nc) {
     .Call(`_redistmetrics_admin_splits_count`, dm, admin, nd, nc)
 }
 
+tally_var <- function(dm, var, nd) {
+    .Call(`_redistmetrics_tally_var`, dm, var, nd)
+}
+
 var_info_mat <- function(m, pop, ndists, ncores) {
     .Call(`_redistmetrics_var_info_mat`, m, pop, ndists, ncores)
 }

@@ -7,11 +7,11 @@
 inc_pairs(plans, shp, inc)
 }
 \arguments{
-\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+\item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
 
-\item{shp}{redist_map object, tibble, or data frame containing other columns}
+\item{shp}{A \code{redist_map} object, tibble, or data frame containing other columns.}
 
-\item{inc}{unqouted name of logical column in shp indicating where incumbents live}
+\item{inc}{Unqouted name of logical column in \code{shp} indicating where incumbents live.}
 }
 \value{
 vector of number of incumbents paired

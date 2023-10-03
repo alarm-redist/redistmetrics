@@ -4,13 +4,13 @@
 #' @templateVar shp TRUE
 #' @param use_Rcpp If `TRUE` (the default for more than 8 plans), precompute boundaries
 #'   shared by each pair of units and use them to quickly compute the compactness score.
-#' @param perim_path path to perimeter tibble saved by `prep_perims()`
-#' @param perim_df tibble of perimeters from `prep_perims()`
+#' @param perim_path Path to perimeter tibble saved by `prep_perims()`
+#' @param perim_df Tibble of perimeters from `prep_perims()`
 #' @templateVar epsg TRUE
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -116,7 +116,7 @@ comp_polsby <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 3857,
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -215,7 +215,7 @@ comp_schwartz <- function(plans, shp, use_Rcpp, perim_path, perim_df, epsg = 385
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -285,7 +285,7 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -351,7 +351,7 @@ comp_ch <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -416,7 +416,7 @@ comp_lw <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -503,7 +503,7 @@ comp_bc <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @param ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -553,7 +553,7 @@ comp_fh <- function(plans, shp, total_pop, epsg = 3857, ncores = 1) {
 #' @templateVar adj TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -592,7 +592,7 @@ comp_edges_rem <- function(plans, shp, adj) {
 #' @templateVar adj TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -633,7 +633,7 @@ comp_frac_kept <- function(plans, shp, adj) {
 #' @templateVar adj TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -683,7 +683,7 @@ comp_log_st <- function(plans, shp, counties = NULL, adj) {
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -757,7 +757,7 @@ comp_skew <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -829,7 +829,7 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'
@@ -936,7 +936,7 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' @templateVar ncores TRUE
 #' @template template
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept compactness
 #'

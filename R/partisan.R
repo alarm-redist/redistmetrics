@@ -7,7 +7,7 @@
 #' @param v vote share to calculate bias at. Numeric. Default is 0.5.
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -61,7 +61,7 @@ part_bias <- function(plans, shp, dvote, rvote, v = 0.5) {
 #' @templateVar rvote TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -111,7 +111,7 @@ part_dseats <- function(plans, shp, dvote, rvote) {
 #' @templateVar rvote TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -158,7 +158,7 @@ part_dvs <- function(plans, shp, dvote, rvote) {
 #' @templateVar rvote TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -211,7 +211,7 @@ part_egap <- function(plans, shp, dvote, rvote) {
 #' @templateVar rvote TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -266,7 +266,7 @@ part_egap_ep <- function(plans, shp, dvote, rvote) {
 #' @param tau A non-negative numeric for calculating Tau Gap. Defaults to 1.
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -319,7 +319,7 @@ part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
 #' @templateVar rvote TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -375,7 +375,7 @@ part_mean_median <- function(plans, shp, dvote, rvote) {
 #' @param adjust Default is TRUE. Applies a correction to increase cross-size comparison.
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -438,7 +438,7 @@ part_decl <- function(plans, shp, dvote, rvote, normalize = TRUE, adjust = TRUE)
 #' @templateVar rvote TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -496,7 +496,7 @@ part_decl_simple <- function(plans, shp, dvote, rvote) {
 #' @param bandwidth Defaults to 0.01. A value between 0 and 1 for the step size to estimate the slope.
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -550,7 +550,7 @@ part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = 0.01) {
 #' @templateVar rvote TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -603,7 +603,7 @@ part_lop_wins <- function(plans, shp, dvote, rvote) {
 #' @templateVar rvote TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'
@@ -656,7 +656,7 @@ part_rmd <- function(plans, shp, dvote, rvote) {
 #' @templateVar rvote TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept partisan
 #'

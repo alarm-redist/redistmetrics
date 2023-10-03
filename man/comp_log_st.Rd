@@ -7,16 +7,16 @@
 comp_log_st(plans, shp, counties = NULL, adj)
 }
 \arguments{
-\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+\item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
 
-\item{shp}{redist_map object or tibble with sf geometry column}
+\item{shp}{A \code{redist_map} object, tibble, or data frame with an \code{sf} geometry column.}
 
 \item{counties}{column name in shp containing counties}
 
-\item{adj}{zero-indexed adjacency list. Not required if \code{redist_map} supplied to \code{shp}.}
+\item{adj}{Zero-indexed adjacency list. Not required if a \code{redist_map} is supplied for \code{shp}.}
 }
 \value{
-numeric vector
+A numeric vector. Can be shaped into a district-by-plan matrix.
 }
 \description{
 Calculate Log Spanning Tree Compactness

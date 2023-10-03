@@ -7,16 +7,16 @@
 seg_dissim(plans, shp, group_pop, total_pop)
 }
 \arguments{
-\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+\item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
 
-\item{shp}{redist_map object, tibble, or data frame containing other columns}
+\item{shp}{A \code{redist_map} object, tibble, or data frame containing other columns.}
 
-\item{group_pop}{unqouted name of column in shp with group population}
+\item{group_pop}{Unqouted name of column in \code{shp} with group population.}
 
-\item{total_pop}{unqouted name of column in shp with total population}
+\item{total_pop}{Unqouted name of column in \code{shp} with total population.}
 }
 \value{
-numeric vector
+A numeric vector. Can be shaped into a district-by-plan matrix.
 }
 \description{
 Compute Dissimilarity Index

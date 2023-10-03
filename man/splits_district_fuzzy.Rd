@@ -7,15 +7,15 @@
 splits_district_fuzzy(plans, shp, nbr, thresh = 0.01, epsg)
 }
 \arguments{
-\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+\item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
 
-\item{shp}{redist_map object or tibble with sf geometry column}
+\item{shp}{A \code{redist_map} object, tibble, or data frame with an \code{sf} geometry column.}
 
 \item{nbr}{Geographic neighborhood, community, or other unit to check splits for.}
 
 \item{thresh}{Percent as decimal of an area to trim away. Default is .01, which is 1\%.}
 
-\item{epsg}{numeric EPSG code to planarize to. Default is 3857.}
+\item{epsg}{Numeric EPSG code to use to project the shapefile, if needed. Default is 3857.}
 }
 \value{
 numeric matrix

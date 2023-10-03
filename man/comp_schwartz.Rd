@@ -15,9 +15,9 @@ comp_schwartz(
 )
 }
 \arguments{
-\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+\item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
 
-\item{shp}{redist_map object or tibble with sf geometry column}
+\item{shp}{A \code{redist_map} object, tibble, or data frame with an \code{sf} geometry column.}
 
 \item{use_Rcpp}{Logical. Use Rcpp?}
 
@@ -25,12 +25,12 @@ comp_schwartz(
 
 \item{perim_df}{tibble of perimeters from \code{prep_perims()}}
 
-\item{epsg}{numeric EPSG code to planarize to. Default is 3857.}
+\item{epsg}{Numeric EPSG code to use to project the shapefile, if needed. Default is 3857.}
 
-\item{ncores}{numeric. Number of cores to use. Default is 1.}
+\item{ncores}{Integer number of cores to use. Default is 1.}
 }
 \value{
-numeric vector
+A numeric vector. Can be shaped into a district-by-plan matrix.
 }
 \description{
 Calculate Schwartzberg Compactness

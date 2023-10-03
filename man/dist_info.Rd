@@ -7,13 +7,13 @@
 dist_info(plans, shp, total_pop, ncores = 1)
 }
 \arguments{
-\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+\item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
 
-\item{shp}{redist_map object, tibble, or data frame containing other columns}
+\item{shp}{A \code{redist_map} object, tibble, or data frame containing other columns.}
 
-\item{total_pop}{unqouted name of column in shp with total population}
+\item{total_pop}{Unqouted name of column in \code{shp} with total population.}
 
-\item{ncores}{numeric. Number of cores to use. Default is 1.}
+\item{ncores}{Integer number of cores to use. Default is 1.}
 }
 \value{
 matrix of plan distances

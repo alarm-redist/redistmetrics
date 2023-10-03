@@ -7,14 +7,14 @@
 splits_sub_admin(plans, shp, sub_admin)
 }
 \arguments{
-\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+\item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
 
-\item{shp}{redist_map object, tibble, or data frame containing other columns}
+\item{shp}{A \code{redist_map} object, tibble, or data frame containing other columns.}
 
-\item{sub_admin}{unqouted name of column in shp with numeric identifiers for subsidiary administrative units}
+\item{sub_admin}{Unqouted name of column in shp with numeric identifiers for subsidiary administrative units.}
 }
 \value{
-numeric vector
+A numeric vector. Can be shaped into a district-by-plan matrix.
 }
 \description{
 Compute Number of Sub-Administrative Units Split

@@ -7,18 +7,18 @@
 part_bias(plans, shp, dvote, rvote, v = 0.5)
 }
 \arguments{
-\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+\item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
 
-\item{shp}{redist_map object, tibble, or data frame containing other columns}
+\item{shp}{A \code{redist_map} object, tibble, or data frame containing other columns.}
 
-\item{dvote}{unqouted name of column in shp with total population}
+\item{dvote}{Unqouted name of column in \code{shp} with total population.}
 
-\item{rvote}{unqouted name of column in shp with group population}
+\item{rvote}{Unqouted name of column in \code{shp} with group population.}
 
 \item{v}{vote share to calculate bias at. Numeric. Default is 0.5.}
 }
 \value{
-numeric vector
+A numeric vector. Can be shaped into a district-by-plan matrix.
 }
 \description{
 Calculate Partisan Bias

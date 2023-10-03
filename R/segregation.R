@@ -6,7 +6,7 @@
 #' @templateVar total_pop TRUE
 #' @template template_nosf
 #'
-#' @return numeric vector
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
 #' @export
 #' @concept segregation
 #'

@@ -7,11 +7,11 @@
 splits_total(plans, shp, admin)
 }
 \arguments{
-\item{plans}{redist_plans object or plans_matrix where each row indicates a district assignment and each column is a plan}
+\item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
 
-\item{shp}{redist_map object, tibble, or data frame containing other columns}
+\item{shp}{A \code{redist_map} object, tibble, or data frame containing other columns.}
 
-\item{admin}{unqouted name of column in shp with numeric identifiers for administrative units}
+\item{admin}{Unqouted name of column in \code{shp} with numeric identifiers for administrative units.}
 }
 \value{
 numeric matrix
