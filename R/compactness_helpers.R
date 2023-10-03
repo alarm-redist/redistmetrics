@@ -25,6 +25,7 @@ planarize <- function(shp, epsg = 3857) {
 #'
 #' @return tibble of perimeters and lengths
 #' @export
+#' @concept compactness
 #'
 #' @examples
 #' data(nh)

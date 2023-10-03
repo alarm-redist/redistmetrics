@@ -26,3 +26,4 @@ data(nh)
 prep_perims(nh)
 
 }
+\concept{compactness}
