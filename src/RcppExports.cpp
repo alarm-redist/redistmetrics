@@ -467,6 +467,18 @@ RcppExport SEXP _redistmetrics_admin_splits_count(SEXP dmSEXP, SEXP adminSEXP, S
     UNPROTECT(1);
     return rcpp_result_gen;
 }
+// tally_var
+NumericMatrix tally_var(IntegerMatrix dm, NumericVector var, int nd);
+RcppExport SEXP _redistmetrics_tally_var(SEXP dmSEXP, SEXP varSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type var(varSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(tally_var(dm, var, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
 // var_info_mat
 arma::mat var_info_mat(const arma::umat m, const arma::vec pop, int ndists, int ncores);
 static SEXP _redistmetrics_var_info_mat_try(SEXP mSEXP, SEXP popSEXP, SEXP ndistsSEXP, SEXP ncoresSEXP) {
@@ -559,6 +571,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_splits", (DL_FUNC) &_redistmetrics_splits, 4},
     {"_redistmetrics_distr_cty_splits", (DL_FUNC) &_redistmetrics_distr_cty_splits, 3},
     {"_redistmetrics_admin_splits_count", (DL_FUNC) &_redistmetrics_admin_splits_count, 4},
+    {"_redistmetrics_tally_var", (DL_FUNC) &_redistmetrics_tally_var, 3},
     {"_redistmetrics_var_info_mat", (DL_FUNC) &_redistmetrics_var_info_mat, 4},
     {"_redistmetrics_RcppExport_registerCCallable", (DL_FUNC) &_redistmetrics_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}

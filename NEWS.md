@@ -1,4 +1,5 @@
 # redistmetrics 1.0.4
+* Add generic function to tally a varible by plan
 * Massively speed up calculation of county/admin/muni splits as well as plan reindexing
 * Fix rare edge case in `prep_perims()` where a shape that is Queen's-contiguous to one other shape and contiguous to nothing else causes a loud failure when creating the perimeter output.
 
