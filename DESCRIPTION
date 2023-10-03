@@ -17,6 +17,7 @@ Depends:
 Imports:
     sf,
     Rcpp,
+    vctrs,
     cli,
     foreach,
     doParallel,

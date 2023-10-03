@@ -67,11 +67,11 @@ namespace redistmetrics {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_split) {
+    inline IntegerVector splits(const IntegerMatrix& dm, const IntegerVector& community, int nd, int max_split) {
         typedef SEXP(*Ptr_splits)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_splits p_splits = NULL;
         if (p_splits == NULL) {
-            validateSignature("IntegerVector(*splits)(IntegerMatrix,IntegerVector,int,int)");
+            validateSignature("IntegerVector(*splits)(const IntegerMatrix&,const IntegerVector&,int,int)");
             p_splits = (Ptr_splits)R_GetCCallable("redistmetrics", "_redistmetrics_splits");
         }
         RObject rcpp_result_gen;
@@ -107,16 +107,16 @@ namespace redistmetrics {
         return Rcpp::as<IntegerMatrix >(rcpp_result_gen);
     }
 
-    inline IntegerMatrix admin_splits_count(IntegerMatrix dm, IntegerVector admin) {
-        typedef SEXP(*Ptr_admin_splits_count)(SEXP,SEXP);
+    inline IntegerMatrix admin_splits_count(const IntegerMatrix& dm, const IntegerVector& admin, int nd, int nc) {
+        typedef SEXP(*Ptr_admin_splits_count)(SEXP,SEXP,SEXP,SEXP);
         static Ptr_admin_splits_count p_admin_splits_count = NULL;
         if (p_admin_splits_count == NULL) {
-            validateSignature("IntegerMatrix(*admin_splits_count)(IntegerMatrix,IntegerVector)");
+            validateSignature("IntegerMatrix(*admin_splits_count)(const IntegerMatrix&,const IntegerVector&,int,int)");
             p_admin_splits_count = (Ptr_admin_splits_count)R_GetCCallable("redistmetrics", "_redistmetrics_admin_splits_count");
         }
         RObject rcpp_result_gen;
         {
-            rcpp_result_gen = p_admin_splits_count(Shield<SEXP>(Rcpp::wrap(dm)), Shield<SEXP>(Rcpp::wrap(admin)));
+            rcpp_result_gen = p_admin_splits_count(Shield<SEXP>(Rcpp::wrap(dm)), Shield<SEXP>(Rcpp::wrap(admin)), Shield<SEXP>(Rcpp::wrap(nd)), Shield<SEXP>(Rcpp::wrap(nc)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

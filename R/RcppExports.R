@@ -109,8 +109,8 @@ distr_cty_splits <- function(dm, community, nd) {
     .Call(`_redistmetrics_distr_cty_splits`, dm, community, nd)
 }
 
-admin_splits_count <- function(dm, admin) {
-    .Call(`_redistmetrics_admin_splits_count`, dm, admin)
+admin_splits_count <- function(dm, admin, nd, nc) {
+    .Call(`_redistmetrics_admin_splits_count`, dm, admin, nd, nc)
 }
 
 var_info_mat <- function(m, pop, ndists, ncores) {
@@ -119,5 +119,5 @@ var_info_mat <- function(m, pop, ndists, ncores) {
 
 # Register entry points for exported C++ functions
 methods::setLoadAction(function(ns) {
-    .Call('_redistmetrics_RcppExport_registerCCallable', PACKAGE = 'redistmetrics')
+    .Call(`_redistmetrics_RcppExport_registerCCallable`)
 })

@@ -361,12 +361,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // splits
-IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_split);
+IntegerVector splits(const IntegerMatrix& dm, const IntegerVector& community, int nd, int max_split);
 static SEXP _redistmetrics_splits_try(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type community(communitySEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type dm(dmSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type community(communitySEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
     Rcpp::traits::input_parameter< int >::type max_split(max_splitSEXP);
     rcpp_result_gen = Rcpp::wrap(splits(dm, community, nd, max_split));
@@ -432,20 +432,22 @@ RcppExport SEXP _redistmetrics_distr_cty_splits(SEXP dmSEXP, SEXP communitySEXP,
     return rcpp_result_gen;
 }
 // admin_splits_count
-IntegerMatrix admin_splits_count(IntegerMatrix dm, IntegerVector admin);
-static SEXP _redistmetrics_admin_splits_count_try(SEXP dmSEXP, SEXP adminSEXP) {
+IntegerMatrix admin_splits_count(const IntegerMatrix& dm, const IntegerVector& admin, int nd, int nc);
+static SEXP _redistmetrics_admin_splits_count_try(SEXP dmSEXP, SEXP adminSEXP, SEXP ndSEXP, SEXP ncSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type admin(adminSEXP);
-    rcpp_result_gen = Rcpp::wrap(admin_splits_count(dm, admin));
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type dm(dmSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type admin(adminSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    Rcpp::traits::input_parameter< int >::type nc(ncSEXP);
+    rcpp_result_gen = Rcpp::wrap(admin_splits_count(dm, admin, nd, nc));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _redistmetrics_admin_splits_count(SEXP dmSEXP, SEXP adminSEXP) {
+RcppExport SEXP _redistmetrics_admin_splits_count(SEXP dmSEXP, SEXP adminSEXP, SEXP ndSEXP, SEXP ncSEXP) {
     SEXP rcpp_result_gen;
     {
-        rcpp_result_gen = PROTECT(_redistmetrics_admin_splits_count_try(dmSEXP, adminSEXP));
+        rcpp_result_gen = PROTECT(_redistmetrics_admin_splits_count_try(dmSEXP, adminSEXP, ndSEXP, ncSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -508,9 +510,9 @@ static int _redistmetrics_RcppExport_validate(const char* sig) {
     if (signatures.empty()) {
         signatures.insert("NumericVector(*log_st_map)(const Graph&,const arma::umat&,const arma::uvec&,int)");
         signatures.insert("NumericVector(*n_removed)(const Graph&,const arma::umat&,int)");
-        signatures.insert("IntegerVector(*splits)(IntegerMatrix,IntegerVector,int,int)");
+        signatures.insert("IntegerVector(*splits)(const IntegerMatrix&,const IntegerVector&,int,int)");
         signatures.insert("IntegerMatrix(*distr_cty_splits)(IntegerMatrix,IntegerVector,int)");
-        signatures.insert("IntegerMatrix(*admin_splits_count)(IntegerMatrix,IntegerVector)");
+        signatures.insert("IntegerMatrix(*admin_splits_count)(const IntegerMatrix&,const IntegerVector&,int,int)");
         signatures.insert("arma::mat(*var_info_mat)(const arma::umat,const arma::vec,int,int)");
     }
     return signatures.find(sig) != signatures.end();
@@ -556,7 +558,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_segregationcalc", (DL_FUNC) &_redistmetrics_segregationcalc, 3},
     {"_redistmetrics_splits", (DL_FUNC) &_redistmetrics_splits, 4},
     {"_redistmetrics_distr_cty_splits", (DL_FUNC) &_redistmetrics_distr_cty_splits, 3},
-    {"_redistmetrics_admin_splits_count", (DL_FUNC) &_redistmetrics_admin_splits_count, 2},
+    {"_redistmetrics_admin_splits_count", (DL_FUNC) &_redistmetrics_admin_splits_count, 4},
     {"_redistmetrics_var_info_mat", (DL_FUNC) &_redistmetrics_var_info_mat, 4},
     {"_redistmetrics_RcppExport_registerCCallable", (DL_FUNC) &_redistmetrics_RcppExport_registerCCallable, 0},
     {NULL, NULL, 0}

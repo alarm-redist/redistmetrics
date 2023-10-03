@@ -1,34 +1,38 @@
 #include <Rcpp.h>
+#include <vector>
+#include <set>
 using namespace Rcpp;
 
 // [[Rcpp::interfaces(r, cpp)]]
+
 // [[Rcpp::export(rng = false)]]
-IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_split) {
+IntegerVector splits(const IntegerMatrix &dm, const IntegerVector &community,
+                     int nd, int max_split) {
   IntegerVector ret(dm.ncol());
-  IntegerVector com_name = sort_unique(community);
-  int nc = com_name.size();
-  IntegerMatrix com_found(nc, nd);
-  IntegerVector mid;
+  int nc = sort_unique(community).size();
+  std::vector<std::vector<bool>> seen(nc);
 
   // by column (aka map)
   for(int c = 0; c < dm.ncol(); c++){
-    com_found = IntegerMatrix(nc, nd);
-    // by district
-    for(int d = 0; d < nd; d++){
-      // across all rows
-      for(int r = 0; r < dm.nrow(); r++){
-        if (dm(r,c) == d) {
-          com_found(community(r), d) = 1;
+    for (int i = 0; i < nc; i++) {
+      seen[i] = std::vector<bool>(nd, false);
+    }
+    for(int r = 0; r < dm.nrow(); r++){
+      seen[community[r] - 1][dm(r, c) - 1] = true;
+    }
+
+    int splits = 0;
+    for (int i = 0; i < nc; i++) {
+      int tot_split = 0;
+      for (int j = 0; j < nd; j++) {
+        tot_split += seen[i][j];
+        if (tot_split > max_split) {
+          splits++;
+          break;
         }
       }
     }
-
-    mid = rowSums(com_found);
-    for(int q = 0; q < mid.size(); q++){
-      if (mid(q) > max_split) {
-        ret(c)++;
-      }
-    }
+    ret[c] = splits;
   }
   return ret;
 }
@@ -36,8 +40,8 @@ IntegerVector splits(IntegerMatrix dm, IntegerVector community, int nd, int max_
 // [[Rcpp::export(rng = false)]]
 IntegerMatrix distr_cty_splits(IntegerMatrix dm, IntegerVector community, int nd) {
   IntegerMatrix ret(nd, dm.ncol());
-  IntegerVector com_name = sort_unique(community);
-  IntegerVector com_found(com_name.size(), 0);
+  int nc = sort_unique(community).size();
+  IntegerVector com_found(nc, 0);
 
   // by column (aka map)
   for(int c = 0; c < dm.ncol(); c++){
@@ -57,23 +61,25 @@ IntegerMatrix distr_cty_splits(IntegerMatrix dm, IntegerVector community, int nd
 }
 
 // [[Rcpp::export(rng = false)]]
-IntegerMatrix admin_splits_count(IntegerMatrix dm, IntegerVector admin) {
-  IntegerVector com_name = sort_unique(admin);
-  int asize = com_name.size();
-  IntegerMatrix ret(asize, dm.ncol());
-  IntegerVector cur_col(dm.nrow());
-  IntegerVector temp;
+IntegerMatrix admin_splits_count(const IntegerMatrix &dm, const IntegerVector &admin,
+                                 int nd, int nc) {
+  IntegerMatrix ret(nc, dm.ncol());
+  std::vector<std::vector<bool>> seen(nc);
 
-  // by map (column)
-  for (int c = 0; c < dm.ncol(); c++) {
-    cur_col = dm(_, c);
+  // by column (aka map)
+  for(int c = 0; c < dm.ncol(); c++){
+    for (int i = 0; i < nc; i++) {
+      seen[i] = std::vector<bool>(nd, false);
+    }
+    for(int r = 0; r < dm.nrow(); r++){
+      seen[admin[r] - 1][dm(r, c) - 1] = true;
+    }
 
-    // by admin :
-    for (int a = 0; a < asize; a++) {
-      temp = cur_col[admin == a];
-      ret(a, c) = unique(temp).size();
+    for (int i = 0; i < nc; i++) {
+      for (int j = 0; j < nd; j++) {
+        ret(i, c) += seen[i][j];
+      }
     }
   }
-
   return ret;
 }
