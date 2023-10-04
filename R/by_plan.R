@@ -16,7 +16,7 @@
 #'
 by_plan <- function(x, ndists) {
   if (missing(ndists)) {
-    reps <- unique(rle(x)$lengths)
+    reps <- unique(rle(c(na.omit(x)))$lengths)
     ndists <- ifelse(length(reps) == 1, reps, Reduce(gcd, reps))
   }
 
