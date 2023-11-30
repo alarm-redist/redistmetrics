@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# redistmetrics <a href="https://alarm-redist.github.io/redistmetrics/"><img src="man/figures/logo.png" align="right" height="132" /></a>
+# redistmetrics <a href="https://alarm-redist.org/redistmetrics/"><img src="man/figures/logo.png" align="right" height="132" /></a>
 
 <!-- badges: start -->
 
@@ -13,7 +13,7 @@ downloads](http://cranlogs.r-pkg.org/badges/grand-total/redistmetrics)
 <!-- badges: end -->
 
 `redistmetrics` is one of the R packages developed and maintained by the
-[ALARM Project](https://alarm-redist.github.io/). `redistmetrics`
+[ALARM Project](https://alarm-redist.org/). `redistmetrics`
 provides the back-end for the computation of summary statistics for a
 redistricting plan. It provides a more direct access point to use
 methods in `redist` without requiring `redist` objects.

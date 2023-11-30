@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 `redistmetrics` provides an interface for computing common redistricting measures and metrics. This covers the range of compactness measures, partisan gerrymandering metrics, county splits, and more. The goal is to provide a flexible and friendly (to existing R users) implementation of scores which are often used in academic research, litigation, public projects, and journalism. This package began as a set of functions in [`redist`](https://CRAN.R-project.org/package=redist). While those features will remain, this package should offer friendlier examples by separating out measures into their own functions.
 
-The package is developed and maintained by the [ALARM Project](https://alarm-redist.github.io), the ALgorithm-Assisted Redistricting Methodology Project,a research project under the direction of Kosuke Imai. The code in this package was developed by Christopher T. Kenny, Cory McCartan, and Ben Fifield. When using the package, please cite the package using the following:
+The package is developed and maintained by the [ALARM Project](https://alarm-redist.org), the ALgorithm-Assisted Redistricting Methodology Project,a research project under the direction of Kosuke Imai. The code in this package was developed by Christopher T. Kenny, Cory McCartan, and Ben Fifield. When using the package, please cite the package using the following:
 
 ```{r}
 citation('redistmetrics')
@@ -96,4 +96,4 @@ part_egap(plans = nh$r_2020, shp = nh,
   by_plan()
 ```
 
-For more information, view the other vignettes or the [package website](https://alarm-redist.github.io/redistmetrics/index.html).
+For more information, view the other vignettes or the [package website](https://alarm-redist.org/redistmetrics/index.html).
