@@ -1,3 +1,7 @@
+## Submission notes
+
+* This patch should resolve both CRAN check issues, the warning for the Rcpp warning and the note for C++ versioning.
+
 ## Test environments
 * local R installation (Windows 11), R 4.1.2
 * local R installation (macOS), R 4.1.2
