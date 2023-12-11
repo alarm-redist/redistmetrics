@@ -46,3 +46,4 @@ inst/doc
 # misc
 *.tmp
 *.o
+revdep
