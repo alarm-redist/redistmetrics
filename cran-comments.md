@@ -1,7 +1,7 @@
 ## Submission notes
 
 * This patch should resolve both CRAN check issues, the warning for the Rcpp warning and the note for C++ versioning.
-* This is a resubmission which regenerates Rcpp headings and removes revdep files.
+* This is a resubmission which now should correctly address C++ flags conditionally, using `RcppThread::ldFlags()`.
 
 ## Test environments
 * local R installation (Windows 11), R 4.3.2
