@@ -12,5 +12,5 @@
 #' x[10] <- NA
 #' make_id(x)
 make_id <- function(x) {
-  vctrs::vec_group_id(x)
+  match(x, unique(sort(x, na.last = TRUE)))
 }
