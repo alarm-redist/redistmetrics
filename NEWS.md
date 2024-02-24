@@ -1,6 +1,7 @@
 # redistmetrics 1.0.8
 
 * Adds support for counting splits municipalities (sub-admin) units via `splits_sub_count()`.
+* `splits_count()` and `splits_sub_count()` now include rownames in the output.
 
 # redistmetrics 1.0.7
 

@@ -155,10 +155,12 @@ splits_count <- function(plans, shp, admin) {
   if (is.null(admin)) {
     cli::cli_abort('{.arg admin} not found in {.arg shp}.')
   }
+  row_names <- unique(admin)
   admin <- make_id(admin)
-  nc <- attr(admin, "n")
+  nc <- length(unique(admin))
 
-  admin_splits_count(plans, admin, nd, nc)
+  admin_splits_count(plans, admin, nd, nc) |>
+    `rownames<-`(value = row_names)
 }
 
 #' Count the Number of Splits in Each Sub-Administrative Unit
@@ -197,6 +199,7 @@ splits_sub_count <- function(plans, shp, sub_admin) {
 
   plans <- plans[!is.na(sub_admin), , drop = FALSE]
   sub_admin <- sub_admin[!is.na(sub_admin)]
+  row_names <- unique(sub_admin)
   sub_admin <- make_id(sub_admin)
 
   nd <- length(unique(plans[, 1]))
@@ -204,9 +207,10 @@ splits_sub_count <- function(plans, shp, sub_admin) {
     plans = reindex(plans)
   }
 
-  nc <- attr(sub_admin, "n")
+  nc <- length(unique(sub_admin))
 
-  admin_splits_count(plans, sub_admin, nd, nc)
+  admin_splits_count(plans, sub_admin, nd, nc) |>
+    `rownames<-`(value = row_names)
 }
 
 #' Count the Total Splits in Each Plan
@@ -242,7 +246,7 @@ splits_total <- function(plans, shp, admin) {
     cli::cli_abort('{.arg admin} not found in {.arg shp}.')
   }
   admin <- make_id(admin)
-  nc <- attr(admin, "n")
+  nc <- length(unique(admin))
 
   rep(colSums(admin_splits_count(plans, admin, nd, nc)) - nc, each = nd)
 }

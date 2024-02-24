@@ -31,13 +31,23 @@ test_that("splits_multi works", {
 test_that("splits_count works", {
   a <- splits_count(nh$r_2020, nh, county)
   e <- structure(c(1L, 2L, 1L, 1L, 2L, 2L, 2L, 2L, 2L, 1L),
-                 .Dim = c(10L, 1L))
+                 dim = c(10L, 1L),
+                 dimnames = list(
+                   c("Belknap County", "Carroll County", "Cheshire County",
+                     "Coos County", "Grafton County", "Hillsborough County", "Merrimack County",
+                     "Rockingham County", "Strafford County", "Sullivan County"),
+                   NULL))
   expect_equal(a, e, tolerance = 1e-4)
 
   a <- splits_count(nh_m[, 1:2], nh, county)
   e <- structure(c(2L, 1L, 1L, 1L, 2L, 2L, 2L, 2L, 1L, 1L, 1L, 2L, 1L,
                    1L, 2L, 2L, 2L, 2L, 2L, 1L),
-                 .Dim = c(10L, 2L))
+                 dim = c(10L, 2L),
+                 dimnames = list(
+                   c("Belknap County", "Carroll County", "Cheshire County",
+                     "Coos County", "Grafton County", "Hillsborough County", "Merrimack County",
+                     "Rockingham County", "Strafford County", "Sullivan County"
+                   ), NULL))
   expect_equal(a, e, tolerance = 1e-4)
 })
 
@@ -51,3 +61,4 @@ test_that("splits_total works", {
   e <- c(5, 5, 6, 6)
   expect_equal(a, e, tolerance = 1e-4)
 })
+
