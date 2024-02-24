@@ -11,7 +11,7 @@ splits_sub_count(plans, shp, sub_admin)
 
 \item{shp}{A \code{redist_map} object, tibble, or data frame containing other columns.}
 
-\item{admin}{Unqouted name of column in \code{shp} with numeric identifiers for administrative units.}
+\item{sub_admin}{Unqouted name of column in shp with numeric identifiers for subsidiary administrative units.}
 }
 \value{
 numeric matrix

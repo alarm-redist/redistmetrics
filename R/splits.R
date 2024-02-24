@@ -169,7 +169,7 @@ splits_count <- function(plans, shp, admin) {
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
-#' @templateVar admin TRUE
+#' @templateVar sub_admin TRUE
 #' @template template_nosf
 #'
 #' @return numeric matrix
