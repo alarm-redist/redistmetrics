@@ -1,3 +1,7 @@
+# redistmetrics 1.0.8
+
+* Adds support for counting splits municipalities (sub-admin) units via `splits_sub_count()`.
+
 # redistmetrics 1.0.7
 
 * Updates compilation flags for use of `RcppThread` on Linux.
