@@ -103,7 +103,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
 splits_multi <- function(plans, shp, admin) {
   # prep inputs ----
   plans <- process_plans(plans)
-  nd <- vctrs::vec_unique_count(plans[, 1]))
+  nd <- vctrs::vec_unique_count(plans[, 1])
   if (max(plans[, 1]) != nd) {
     plans = reindex(plans)
   }
@@ -157,7 +157,7 @@ splits_count <- function(plans, shp, admin) {
   }
   row_names <- unique(admin)
   admin <- make_id(admin)
-  nc <- vctrs::vec_unique_ct(admin)
+  nc <- vctrs::vec_unique_count(admin)
 
   admin_splits_count(plans, admin, nd, nc) |>
     `rownames<-`(value = row_names)
@@ -202,7 +202,7 @@ splits_sub_count <- function(plans, shp, sub_admin) {
   row_names <- unique(sub_admin)
   sub_admin <- make_id(sub_admin)
 
-  nd <- vctrs::vec_unique_count(plans[, 1]))
+  nd <- vctrs::vec_unique_count(plans[, 1])
   if (max(plans[, 1]) != nd) {
     plans = reindex(plans)
   }
