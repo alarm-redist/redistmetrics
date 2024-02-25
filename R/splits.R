@@ -71,7 +71,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
   sub_admin <- sub_admin[!is.na(sub_admin)]
   sub_admin <- make_id(sub_admin)
 
-  nd <- length(unique(plans[, 1]))
+  nd <- vctrs::vec_unique_count(plans[, 1])
   if (max(plans[, 1]) != nd) {
     plans = reindex(plans)
   }
@@ -103,7 +103,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
 splits_multi <- function(plans, shp, admin) {
   # prep inputs ----
   plans <- process_plans(plans)
-  nd <- length(unique(plans[, 1]))
+  nd <- vctrs::vec_unique_count(plans[, 1]))
   if (max(plans[, 1]) != nd) {
     plans = reindex(plans)
   }
@@ -148,7 +148,7 @@ splits_multi <- function(plans, shp, admin) {
 splits_count <- function(plans, shp, admin) {
   # prep inputs ----
   plans <- process_plans(plans)
-  nd <- length(unique(plans[, 1]))
+  nd <- vctrs::vec_unique_count(plans[, 1])
 
   # prep admin ----
   admin <- rlang::eval_tidy(rlang::enquo(admin), data = shp)
@@ -157,7 +157,7 @@ splits_count <- function(plans, shp, admin) {
   }
   row_names <- unique(admin)
   admin <- make_id(admin)
-  nc <- length(unique(admin))
+  nc <- vctrs::vec_unique_ct(admin)
 
   admin_splits_count(plans, admin, nd, nc) |>
     `rownames<-`(value = row_names)
@@ -202,12 +202,12 @@ splits_sub_count <- function(plans, shp, sub_admin) {
   row_names <- unique(sub_admin)
   sub_admin <- make_id(sub_admin)
 
-  nd <- length(unique(plans[, 1]))
+  nd <- vctrs::vec_unique_count(plans[, 1]))
   if (max(plans[, 1]) != nd) {
     plans = reindex(plans)
   }
 
-  nc <- length(unique(sub_admin))
+  nc <- vctrs::vec_unique_count(sub_admin)
 
   admin_splits_count(plans, sub_admin, nd, nc) |>
     `rownames<-`(value = row_names)
@@ -238,7 +238,7 @@ splits_sub_count <- function(plans, shp, sub_admin) {
 splits_total <- function(plans, shp, admin) {
   # prep inputs ----
   plans <- process_plans(plans)
-  nd <- length(unique(plans[, 1]))
+  nd <- vctrs::vec_unique_count(plans[, 1])
 
   # prep admin ----
   admin <- rlang::eval_tidy(rlang::enquo(admin), data = shp)
@@ -246,7 +246,7 @@ splits_total <- function(plans, shp, admin) {
     cli::cli_abort('{.arg admin} not found in {.arg shp}.')
   }
   admin <- make_id(admin)
-  nc <- length(unique(admin))
+  nc <- vctrs::vec_unique_count(admin)
 
   rep(colSums(admin_splits_count(plans, admin, nd, nc)) - nc, each = nd)
 }
@@ -288,7 +288,7 @@ splits_total <- function(plans, shp, admin) {
 splits_district_fuzzy <- function(plans, shp, nbr, thresh = 0.01, epsg) {
   # prep inputs ----
   plans <- process_plans(plans)
-  nd <- length(unique(plans[, 1]))
+  nd <- vctrs::vec_unique_count(plans[, 1])
 
   shp <- planarize(shp, epsg)
   nbr <- planarize(nbr, epsg)
