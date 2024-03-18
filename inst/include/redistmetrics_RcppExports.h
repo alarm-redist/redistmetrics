@@ -67,16 +67,16 @@ namespace redistmetrics {
         return Rcpp::as<NumericVector >(rcpp_result_gen);
     }
 
-    inline IntegerVector splits(const IntegerMatrix& dm, const IntegerVector& community, int nd, int max_split) {
-        typedef SEXP(*Ptr_splits)(SEXP,SEXP,SEXP,SEXP);
+    inline IntegerVector splits(const IntegerMatrix& dm, const IntegerVector& community, int nd, int max_split, bool skip_last = false) {
+        typedef SEXP(*Ptr_splits)(SEXP,SEXP,SEXP,SEXP,SEXP);
         static Ptr_splits p_splits = NULL;
         if (p_splits == NULL) {
-            validateSignature("IntegerVector(*splits)(const IntegerMatrix&,const IntegerVector&,int,int)");
+            validateSignature("IntegerVector(*splits)(const IntegerMatrix&,const IntegerVector&,int,int,bool)");
             p_splits = (Ptr_splits)R_GetCCallable("redistmetrics", "_redistmetrics_splits");
         }
         RObject rcpp_result_gen;
         {
-            rcpp_result_gen = p_splits(Shield<SEXP>(Rcpp::wrap(dm)), Shield<SEXP>(Rcpp::wrap(community)), Shield<SEXP>(Rcpp::wrap(nd)), Shield<SEXP>(Rcpp::wrap(max_split)));
+            rcpp_result_gen = p_splits(Shield<SEXP>(Rcpp::wrap(dm)), Shield<SEXP>(Rcpp::wrap(community)), Shield<SEXP>(Rcpp::wrap(nd)), Shield<SEXP>(Rcpp::wrap(max_split)), Shield<SEXP>(Rcpp::wrap(skip_last)));
         }
         if (rcpp_result_gen.inherits("interrupted-error"))
             throw Rcpp::internal::InterruptedException();

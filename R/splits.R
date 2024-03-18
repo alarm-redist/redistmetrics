@@ -34,7 +34,7 @@ splits_admin <- function(plans, shp, admin) {
   admin <- make_id(admin)
 
   # run splits with max_split = 1 ----
-  rep(splits(plans, admin, nd, 1), each = nd)
+  rep(splits(plans, admin, nd, 1, skip_last = FALSE), each = nd)
 }
 
 #' Compute Number of Sub-Administrative Units Split
@@ -67,8 +67,8 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
     cli::cli_abort('{.arg sub_admin} not found in {.arg shp}.')
   }
 
-  plans <- plans[!is.na(sub_admin), , drop = FALSE]
-  sub_admin <- sub_admin[!is.na(sub_admin)]
+  # plans <- plans[!is.na(sub_admin), , drop = FALSE]
+  # sub_admin <- sub_admin[!is.na(sub_admin)]
   sub_admin <- make_id(sub_admin)
 
   nd <- vctrs::vec_unique_count(plans[, 1])
@@ -77,7 +77,7 @@ splits_sub_admin <- function(plans, shp, sub_admin) {
   }
 
   # run splits with max_split = 1 ----
-  rep(splits(plans, sub_admin, nd, 1), each = nd)
+  rep(splits(plans, sub_admin, nd, 1, skip_last = TRUE), each = nd)
 }
 
 #' Compute Number of Administrative Units Split More than Once
@@ -116,7 +116,7 @@ splits_multi <- function(plans, shp, admin) {
   admin <- make_id(admin)
 
   # run splits with max_split = 2 ----
-  rep(splits(plans, admin, nd, 2), each = nd)
+  rep(splits(plans, admin, nd, 2, skip_last = FALSE), each = nd)
 }
 
 
@@ -154,6 +154,10 @@ splits_count <- function(plans, shp, admin) {
   admin <- rlang::eval_tidy(rlang::enquo(admin), data = shp)
   if (is.null(admin)) {
     cli::cli_abort('{.arg admin} not found in {.arg shp}.')
+  }
+  if (any(is.na(admin))) {
+    cli::cli_abort(c('{.arg admin} may not contain {.val NA}.',
+                     i = 'Consider using {.fn splits_sub_count} instead.'))
   }
   row_names <- unique(admin)
   admin <- make_id(admin)
@@ -197,20 +201,26 @@ splits_sub_count <- function(plans, shp, sub_admin) {
     cli::cli_abort('{.arg sub_admin} not found in {.arg shp}.')
   }
 
-  plans <- plans[!is.na(sub_admin), , drop = FALSE]
-  sub_admin <- sub_admin[!is.na(sub_admin)]
+  # plans <- plans[!is.na(sub_admin), , drop = FALSE]
+  # sub_admin <- sub_admin[!is.na(sub_admin)]
   row_names <- unique(sub_admin)
   sub_admin <- make_id(sub_admin)
+
 
   nd <- vctrs::vec_unique_count(plans[, 1])
   if (max(plans[, 1]) != nd) {
     plans = reindex(plans)
   }
-
   nc <- vctrs::vec_unique_count(sub_admin)
 
-  admin_splits_count(plans, sub_admin, nd, nc) |>
-    `rownames<-`(value = row_names)
+  if (any(is.na(sub_admin))) {
+    admin_splits_count(plans, sub_admin, nd, nc)[-max(sub_admin), ] |>
+      `rownames<-`(value = stats::na.omit(row_names))
+  } else {
+    admin_splits_count(plans, sub_admin, nd, nc) |>
+      `rownames<-`(value = row_names)
+  }
+
 }
 
 #' Count the Total Splits in Each Plan

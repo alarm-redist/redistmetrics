@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // [[Rcpp::export(rng = false)]]
 IntegerVector splits(const IntegerMatrix &dm, const IntegerVector &community,
-                     int nd, int max_split) {
+                     int nd, int max_split, bool skip_last = false) {
   IntegerVector ret(dm.ncol());
   int nc = sort_unique(community).size();
   std::vector<std::vector<bool>> seen(nc);
@@ -22,7 +22,11 @@ IntegerVector splits(const IntegerMatrix &dm, const IntegerVector &community,
     }
 
     int splits = 0;
-    for (int i = 0; i < nc; i++) {
+    int to = nc;
+    if (skip_last) {
+      to = nc - 1;
+    }
+    for (int i = 0; i < to; i++) {
       int tot_split = 0;
       for (int j = 0; j < nd; j++) {
         tot_split += seen[i][j];
@@ -81,5 +85,6 @@ IntegerMatrix admin_splits_count(const IntegerMatrix &dm, const IntegerVector &a
       }
     }
   }
+
   return ret;
 }

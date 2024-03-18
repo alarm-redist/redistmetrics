@@ -361,22 +361,23 @@ BEGIN_RCPP
 END_RCPP
 }
 // splits
-IntegerVector splits(const IntegerMatrix& dm, const IntegerVector& community, int nd, int max_split);
-static SEXP _redistmetrics_splits_try(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP) {
+IntegerVector splits(const IntegerMatrix& dm, const IntegerVector& community, int nd, int max_split, bool skip_last);
+static SEXP _redistmetrics_splits_try(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP, SEXP skip_lastSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const IntegerMatrix& >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< const IntegerVector& >::type community(communitySEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
     Rcpp::traits::input_parameter< int >::type max_split(max_splitSEXP);
-    rcpp_result_gen = Rcpp::wrap(splits(dm, community, nd, max_split));
+    Rcpp::traits::input_parameter< bool >::type skip_last(skip_lastSEXP);
+    rcpp_result_gen = Rcpp::wrap(splits(dm, community, nd, max_split, skip_last));
     return rcpp_result_gen;
 END_RCPP_RETURN_ERROR
 }
-RcppExport SEXP _redistmetrics_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP) {
+RcppExport SEXP _redistmetrics_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSEXP, SEXP max_splitSEXP, SEXP skip_lastSEXP) {
     SEXP rcpp_result_gen;
     {
-        rcpp_result_gen = PROTECT(_redistmetrics_splits_try(dmSEXP, communitySEXP, ndSEXP, max_splitSEXP));
+        rcpp_result_gen = PROTECT(_redistmetrics_splits_try(dmSEXP, communitySEXP, ndSEXP, max_splitSEXP, skip_lastSEXP));
     }
     Rboolean rcpp_isInterrupt_gen = Rf_inherits(rcpp_result_gen, "interrupted-error");
     if (rcpp_isInterrupt_gen) {
@@ -522,7 +523,7 @@ static int _redistmetrics_RcppExport_validate(const char* sig) {
     if (signatures.empty()) {
         signatures.insert("NumericVector(*log_st_map)(const Graph&,const arma::umat&,const arma::uvec&,int)");
         signatures.insert("NumericVector(*n_removed)(const Graph&,const arma::umat&,int)");
-        signatures.insert("IntegerVector(*splits)(const IntegerMatrix&,const IntegerVector&,int,int)");
+        signatures.insert("IntegerVector(*splits)(const IntegerMatrix&,const IntegerVector&,int,int,bool)");
         signatures.insert("IntegerMatrix(*distr_cty_splits)(IntegerMatrix,IntegerVector,int)");
         signatures.insert("IntegerMatrix(*admin_splits_count)(const IntegerMatrix&,const IntegerVector&,int,int)");
         signatures.insert("arma::mat(*var_info_mat)(const arma::umat,const arma::vec,int,int)");
@@ -568,7 +569,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_smoothseat", (DL_FUNC) &_redistmetrics_smoothseat, 2},
     {"_redistmetrics_reindex", (DL_FUNC) &_redistmetrics_reindex, 2},
     {"_redistmetrics_segregationcalc", (DL_FUNC) &_redistmetrics_segregationcalc, 3},
-    {"_redistmetrics_splits", (DL_FUNC) &_redistmetrics_splits, 4},
+    {"_redistmetrics_splits", (DL_FUNC) &_redistmetrics_splits, 5},
     {"_redistmetrics_distr_cty_splits", (DL_FUNC) &_redistmetrics_distr_cty_splits, 3},
     {"_redistmetrics_admin_splits_count", (DL_FUNC) &_redistmetrics_admin_splits_count, 4},
     {"_redistmetrics_tally_var", (DL_FUNC) &_redistmetrics_tally_var, 3},

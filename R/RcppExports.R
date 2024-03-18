@@ -101,8 +101,8 @@ segregationcalc <- function(distmat, grouppop, fullpop) {
     .Call(`_redistmetrics_segregationcalc`, distmat, grouppop, fullpop)
 }
 
-splits <- function(dm, community, nd, max_split) {
-    .Call(`_redistmetrics_splits`, dm, community, nd, max_split)
+splits <- function(dm, community, nd, max_split, skip_last = FALSE) {
+    .Call(`_redistmetrics_splits`, dm, community, nd, max_split, skip_last)
 }
 
 distr_cty_splits <- function(dm, community, nd) {
