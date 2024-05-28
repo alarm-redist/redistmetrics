@@ -40,7 +40,7 @@ nh %>%
 
 Polsby-Popper is proportional to the ratio of a districts area ($A_D$) and its perimeter ($P_D$). Formally, it can be written as:
 
-$$ \textrm{Polsby-Popper} = 4\pi\frac{A_D}{P_D}$$
+$$ \textrm{Polsby-Popper} = 4\pi\frac{A_D}{P_D^2}$$
 Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.
 
 Polsby-Popper compactness can be computed with:
