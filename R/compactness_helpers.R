@@ -66,7 +66,6 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
 
   perim_adj_df <- foreach::foreach(from = seq_along(alist), .combine = 'rbind',
                                    .packages = c('sf', 'redistmetrics')) %oper% {
-                                     cat(i)
     x <- geos::geos_geometry_n(shp_col, from)
     y <- geos::geos_geometry_n(shp_col, alist[[from]])
     l <- geos::geos_intersects_matrix(x, y) %>% unlist() %>% sort()
@@ -77,7 +76,7 @@ prep_perims <- function(shp, epsg = 3857, perim_path, ncores = 1) {
     if (length(alist[[from]] > 0)) {
       data.frame(
         origin = from,
-        touching = alist[[from]],
+        touching = as.integer(alist[[from]]),
         edge = l_lines
       )
     } else {
