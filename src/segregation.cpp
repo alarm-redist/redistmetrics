@@ -59,12 +59,19 @@ NumericVector segregationcalc(NumericMatrix distmat,
 
       }
 
-      // Get district proportions
-      double p = (double)gpop / tpop;
+      if (tpop == 0.0) {
 
-      // Add to dissimilarity index
-      dissim += (double)d * tpop * std::abs(p - P);
+        dissim += 0;
 
+      } else {
+
+        // Get district proportions
+        double p = (double)gpop / tpop;
+
+        // Add to dissimilarity index
+        dissim += (double)d * tpop * std::abs(p - P);
+
+      }
     }
 
     // Add to vector
