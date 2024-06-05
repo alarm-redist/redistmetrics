@@ -57,6 +57,10 @@ effgap <- function(dcounts, rcounts, totvote) {
     .Call(`_redistmetrics_effgap`, dcounts, rcounts, totvote)
 }
 
+dil_asym <- function(dcounts, rcounts, dvote, rvote) {
+    .Call(`_redistmetrics_dil_asym`, dcounts, rcounts, dvote, rvote)
+}
+
 taugap <- function(tau, dvs, dseat_vec, nd) {
     .Call(`_redistmetrics_taugap`, tau, dvs, dseat_vec, nd)
 }

@@ -311,6 +311,66 @@ part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
   rep(taugap(tau = tau, dvs = dvs, dseat_vec = dseat_vec, nd = nd), each = nd)
 }
 
+#' Calculate Dilution Asymmetry
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @template template_nosf
+#'
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
+#' @export
+#' @concept partisan
+#'
+#' @references
+#' Sanford C. Gordon and Sidak Yntiso. 2024.
+#' Base Rate Neglect and the Diagnosis of Partisan Gerrymanders.
+#' Election Law Journal: Rules, Politics, and Policy. \doi{10.1089/elj.2023.0005}.
+#'
+#' @examples
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_dil_asym(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_dil_asym(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
+part_dil_asym <- function(plans, shp, dvote, rvote) {
+
+  plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
+  if (any(is.na(dvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (any(is.na(rvote))) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
+  }
+  if (length(rvote) != nrow(plans)) {
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
+  }
+  if (length(dvote) != nrow(plans)) {
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
+  }
+
+  nd <- length(unique(plans[, 1]))
+  rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
+  dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
+  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
+  dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
+
+  nd <- length(unique(plans[, 1]))
+  tot_rvote <- sum(rvote)
+  tot_dvote <- sum(dvote)
+  rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
+  dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
+
+  rep(dil_asym(dcounts = dcounts, rcounts = rcounts, rvote = tot_rvote, dvote = tot_dvote), each = nd)
+}
+
 #' Calculate Mean Median Score
 #'
 #' @templateVar plans TRUE

@@ -232,6 +232,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dil_asym
+NumericVector dil_asym(NumericMatrix dcounts, NumericMatrix rcounts, int dvote, int rvote);
+RcppExport SEXP _redistmetrics_dil_asym(SEXP dcountsSEXP, SEXP rcountsSEXP, SEXP dvoteSEXP, SEXP rvoteSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type dcounts(dcountsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type rcounts(rcountsSEXP);
+    Rcpp::traits::input_parameter< int >::type dvote(dvoteSEXP);
+    Rcpp::traits::input_parameter< int >::type rvote(rvoteSEXP);
+    rcpp_result_gen = Rcpp::wrap(dil_asym(dcounts, rcounts, dvote, rvote));
+    return rcpp_result_gen;
+END_RCPP
+}
 // taugap
 NumericVector taugap(double tau, NumericMatrix dvs, IntegerVector dseat_vec, int nd);
 RcppExport SEXP _redistmetrics_taugap(SEXP tauSEXP, SEXP dvsSEXP, SEXP dseat_vecSEXP, SEXP ndSEXP) {
@@ -558,6 +571,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_DVS", (DL_FUNC) &_redistmetrics_DVS, 2},
     {"_redistmetrics_effgapEP", (DL_FUNC) &_redistmetrics_effgapEP, 3},
     {"_redistmetrics_effgap", (DL_FUNC) &_redistmetrics_effgap, 3},
+    {"_redistmetrics_dil_asym", (DL_FUNC) &_redistmetrics_dil_asym, 4},
     {"_redistmetrics_taugap", (DL_FUNC) &_redistmetrics_taugap, 4},
     {"_redistmetrics_meanmedian", (DL_FUNC) &_redistmetrics_meanmedian, 1},
     {"_redistmetrics_declination_simple", (DL_FUNC) &_redistmetrics_declination_simple, 3},

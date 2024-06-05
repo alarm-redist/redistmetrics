@@ -133,3 +133,13 @@ test_that("part_tau_gap works", {
   e <- c(-0.98850905428411, -0.98850905428411, 0.0284448215286677, 0.0284448215286677)
   expect_equal(a, e, tolerance = 1e-4)
 })
+
+test_that("part_dil_asym works", {
+  a <- part_dil_asym(nh$r_2020, shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
+  e <- c(0.0889622939876797, 0.0889622939876797)
+  expect_equal(a, e, tolerance = 1e-4)
+
+  a <- part_dil_asym(nh_m[, 1:2], shp = nh, dvote = pre_20_dem_bid, rvote = pre_20_rep_tru)
+  e <- c(-0.930254640596044, -0.930254640596044, 0.0889622939876797, 0.0889622939876797)
+  expect_equal(a, e, tolerance = 1e-4)
+})
