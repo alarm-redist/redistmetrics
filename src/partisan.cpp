@@ -99,33 +99,6 @@ NumericVector effgap(NumericMatrix dcounts, NumericMatrix rcounts, int totvote){
 }
 
 // [[Rcpp::export(rng = false)]]
-NumericVector dil_asym(NumericMatrix dcounts, NumericMatrix rcounts, int dvote, int rvote){
-  NumericVector eg(dcounts.ncol());
-
-  NumericMatrix dwaste(dcounts.nrow(), dcounts.ncol());
-  NumericMatrix rwaste(rcounts.nrow(), rcounts.ncol());
-  int minwin;
-  for(int c = 0; c < dcounts.ncol(); c++){
-    for(int r = 0; r < dcounts.nrow(); r++){
-      minwin = floor((dcounts(r,c) + rcounts(r,c))/2.0)+1;
-      if(dcounts(r,c) > rcounts(r,c)){
-        dwaste(r,c) += (dcounts(r,c) - minwin);
-        rwaste(r,c) += rcounts(r,c);
-      } else{
-        dwaste(r,c) += dcounts(r,c);
-        rwaste(r,c) += (rcounts(r,c) - minwin);
-      }
-    }
-  }
-
-  NumericVector dilasym(dcounts.ncol());
-  dilasym = (colSums(dwaste) / (double) dvote) - (colSums(rwaste) / (double) rvote);
-
-  return dilasym;
-}
-
-
-// [[Rcpp::export(rng = false)]]
 NumericVector taugap(double tau, NumericMatrix dvs, IntegerVector dseat_vec, int nd){
   NumericMatrix ai_mat = NumericMatrix(dvs.nrow(), dvs.ncol());
   IntegerMatrix ei_mat = IntegerMatrix(dvs.nrow(), dvs.ncol());

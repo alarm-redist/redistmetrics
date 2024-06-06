@@ -155,7 +155,7 @@ splits_count <- function(plans, shp, admin) {
   if (is.null(admin)) {
     cli::cli_abort('{.arg admin} not found in {.arg shp}.')
   }
-  if (any(is.na(admin))) {
+  if (anyNA(admin)) {
     cli::cli_abort(c('{.arg admin} may not contain {.val NA}.',
                      i = 'Consider using {.fn splits_sub_count} instead.'))
   }
@@ -213,7 +213,7 @@ splits_sub_count <- function(plans, shp, sub_admin) {
   }
   nc <- vctrs::vec_unique_count(sub_admin)
 
-  if (any(is.na(sub_admin))) {
+  if (anyNA(sub_admin)) {
     admin_splits_count(plans, sub_admin, nd, nc)[-max(sub_admin), ] |>
       `rownames<-`(value = stats::na.omit(row_names))
   } else {

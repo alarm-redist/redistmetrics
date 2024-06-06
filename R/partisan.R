@@ -31,10 +31,10 @@ part_bias <- function(plans, shp, dvote, rvote, v = 0.5) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -80,10 +80,10 @@ part_dseats <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -130,10 +130,10 @@ part_dvs <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -182,10 +182,10 @@ part_egap <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -235,10 +235,10 @@ part_egap_ep <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -289,10 +289,10 @@ part_tau_gap <- function(plans, shp, dvote, rvote, tau = 1) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -343,10 +343,10 @@ part_dil_asym <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -357,12 +357,15 @@ part_dil_asym <- function(plans, shp, dvote, rvote) {
   }
 
   nd <- length(unique(plans[, 1]))
-  tot_rvote <- sum(rvote)
-  tot_dvote <- sum(dvote)
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
   dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
+  half <- floor((rcounts + dcounts) / 2) + 1
 
-  rep(dil_asym(dcounts = dcounts, rcounts = rcounts, rvote = tot_rvote, dvote = tot_dvote), each = nd)
+  waste_dem <- matrix(ifelse(rcounts > dcounts, dcounts, dcounts - half), nrow = nd)
+  waste_rep <- matrix(ifelse(dcounts > rcounts, rcounts, rcounts - half), nrow = nd)
+
+  dil <- (colSums(waste_dem) / colSums(dcounts)) - (colSums(waste_rep) / colSums(rcounts))
+  rep(dil, each = nd)
 }
 
 #' Calculate Mean Median Score
@@ -398,10 +401,10 @@ part_mean_median <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -452,10 +455,10 @@ part_decl <- function(plans, shp, dvote, rvote, normalize = TRUE, adjust = TRUE)
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -516,10 +519,10 @@ part_decl_simple <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -574,10 +577,10 @@ part_resp <- function(plans, shp, dvote, rvote, v = 0.5, bandwidth = 0.01) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -627,10 +630,10 @@ part_lop_wins <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -681,10 +684,10 @@ part_rmd <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
@@ -734,10 +737,10 @@ part_sscd <- function(plans, shp, dvote, rvote) {
   dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
   rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
 
-  if (any(is.na(dvote))) {
+  if (anyNA(dvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
   }
-  if (any(is.na(rvote))) {
+  if (anyNA(rvote)) {
     cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
   }
   if (length(rvote) != nrow(plans)) {
