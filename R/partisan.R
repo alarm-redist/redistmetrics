@@ -357,12 +357,6 @@ part_dil_asym <- function(plans, shp, dvote, rvote) {
   }
 
   nd <- length(unique(plans[, 1]))
-  rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
-  dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
-  dseat_vec <- dseats(rcounts = rcounts, dcounts = dcounts)
-  dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
-
-  nd <- length(unique(plans[, 1]))
   tot_rvote <- sum(rvote)
   tot_dvote <- sum(dvote)
   rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
