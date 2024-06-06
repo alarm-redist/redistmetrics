@@ -364,7 +364,7 @@ part_dil_asym <- function(plans, shp, dvote, rvote) {
   waste_dem <- matrix(ifelse(rcounts > dcounts, dcounts, dcounts - half), nrow = nd)
   waste_rep <- matrix(ifelse(dcounts > rcounts, rcounts, rcounts - half), nrow = nd)
 
-  dil <- (colSums(waste_dem) / colSums(dcounts)) - (colSums(waste_rep) / colSums(rcounts))
+  dil <- colSums(waste_dem)/sum(dvote) - colSums(waste_rep)/sum(rvote)
   rep(dil, each = nd)
 }
 
