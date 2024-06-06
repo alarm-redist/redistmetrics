@@ -248,6 +248,16 @@ part_tau_gap(plans = nh$r_2020, shp = nh, dvote = ndv, rvote = nrv)
 
 The default is `tau = 1`.
 
+### Dilution Asymmetry
+
+The Dilution Asymmetry is the difference in rate of wasted votes by party. Wasted votes are as in the efficiency gap. A negative score indicates a pro-Democratic bias, whereas a positive score inidcates a pro-Republican bias.
+
+Formally, this can be written as:
+
+$$\textrm{Dilution Asymmetry} = \frac{W_D}{\textrm{votes}_D} - \frac{W_R}{\textrm{votes}_R}$$
+
+with $W_R$ as the wasted votes by Republicans and $W_D$ as the wasted votes by Democrats and $\textrm{votes}_D$ and$\textrm{votes}_R$ are the total votes for Democrats and Republicans, respectively.
+
 ### Smoothed Seat Count Deviation
 
 The Smoothed Seat Count Deviation offers an interpolation between seats when describing the number of seats won by a party. This can be added to the Democratic seats to describe the smoothed seat count. 

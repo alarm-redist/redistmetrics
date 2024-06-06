@@ -98,7 +98,6 @@ NumericVector effgap(NumericMatrix dcounts, NumericMatrix rcounts, int totvote){
   return eg;
 }
 
-
 // [[Rcpp::export(rng = false)]]
 NumericVector taugap(double tau, NumericMatrix dvs, IntegerVector dseat_vec, int nd){
   NumericMatrix ai_mat = NumericMatrix(dvs.nrow(), dvs.ncol());
