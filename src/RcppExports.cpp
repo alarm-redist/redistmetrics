@@ -349,13 +349,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // segregationcalc
-NumericVector segregationcalc(NumericMatrix distmat, NumericVector grouppop, NumericVector fullpop);
+arma::vec segregationcalc(const arma::umat distmat, const arma::vec grouppop, const arma::vec fullpop);
 RcppExport SEXP _redistmetrics_segregationcalc(SEXP distmatSEXP, SEXP grouppopSEXP, SEXP fullpopSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< NumericMatrix >::type distmat(distmatSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type grouppop(grouppopSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type fullpop(fullpopSEXP);
+    Rcpp::traits::input_parameter< const arma::umat >::type distmat(distmatSEXP);
+    Rcpp::traits::input_parameter< const arma::vec >::type grouppop(grouppopSEXP);
+    Rcpp::traits::input_parameter< const arma::vec >::type fullpop(fullpopSEXP);
     rcpp_result_gen = Rcpp::wrap(segregationcalc(distmat, grouppop, fullpop));
     return rcpp_result_gen;
 END_RCPP

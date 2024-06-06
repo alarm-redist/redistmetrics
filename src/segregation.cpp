@@ -1,80 +1,33 @@
 #include <RcppArmadillo.h>
 using namespace Rcpp;
+using namespace arma;
 
 // [[Rcpp::export(rng = false)]]
-NumericVector segregationcalc(NumericMatrix distmat,
-                              NumericVector grouppop,
-                              NumericVector fullpop) {
-
-  // Vector to hold dissimilarity indices
-  NumericVector diVec(distmat.ncol());
+arma::vec segregationcalc(const arma::umat distmat, const arma::vec grouppop, 
+        const arma::vec fullpop) {
+  int nd = max(distmat.col(0));
+  int V = distmat.n_rows;
+  int N = distmat.n_cols;
 
   // Population parameters
   int T = sum(fullpop);
-  double P = (double)sum(grouppop) / T;
+  double G = sum(grouppop) / T;
+  double denom = 2.0 * T * G * (1 - G);
 
-  // Calculate denominators
-  double d = (double)1 / (2 * T * P * (1 - P));
+  vec out = zeros(N);
+  for (int i = 0; i < N; i++) {
+    vec tpop = zeros(nd);
+    vec gpop = zeros(nd);
 
-  // Get the number of unique plans
-  NumericVector cd1 = distmat(_, 0);
-  arma::vec cdVec1 = as<arma::vec> (cd1);
-  arma::vec cdLabs = arma::unique(cdVec1);
-
-  // Range to look over for cd's
-  int start;
-  int end = max(cd1) + 1;
-  if(min(cd1) == 1){
-    start = 1;
-  }else{
-    start = 0;
-  }
-
-  // Loop over possible plans
-  for(int i = 0; i < distmat.ncol(); i++){
-
-    // Create dissimilarity objects
-    double dissim = 0;
-
-    // Get a plan
-    NumericVector cdvec = distmat(_,i);
-    arma::vec cds = as<arma::vec> (cdvec);
-
-    // Loop over congressional districts
-    for(int j = start; j < end; j++){
-
-      // Initialize counts of groups
-      int tpop = 0;
-      int gpop = 0;
-
-      // Which precincts in the plan are in this cd?
-      arma::uvec findCds = find(cds == j);
-
-      // Loop over precincts
-      for(int k = 0; k < findCds.size(); k++){
-
-        // Add population counts
-        tpop += fullpop(findCds(k));
-        gpop += grouppop(findCds(k));
-
-      }
-
-      // Get district proportions
-      double p = (double)gpop / tpop;
-
-      // Add to dissimilarity index
-      dissim += (double)d * tpop * std::abs(p - P);
-
+    for (int j = 0; j < V; j++) {      
+      tpop[distmat(j, i) - 1] += fullpop(j);
+      gpop[distmat(j, i) - 1] += grouppop(j);
     }
-
-    // Add to vector
-    diVec(i) = dissim;
-
+    
+    out(i) = sum(abs(gpop - G * tpop)) / denom;
   }
 
-  // Return vector
-  return diVec;
-
+  return out;
 }
 
 
