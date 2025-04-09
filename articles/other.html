@@ -18,15 +18,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Other Measures">
-<meta property="og:description" content="redistmetrics">
-<meta property="og:image" content="http://alarm-redist.org/redistmetrics/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -55,7 +53,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -84,7 +82,7 @@
 <li>
   <a href="https://github.com/alarm-redist/redistmetrics/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -95,7 +93,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
@@ -103,7 +101,7 @@
       <h1 data-toc-skip>Other Measures</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/alarm-redist/redistmetrics/blob/HEAD/vignettes/other.Rmd" class="external-link"><code>vignettes/other.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/alarm-redist/redistmetrics/blob/main/vignettes/other.Rmd" class="external-link"><code>vignettes/other.Rmd</code></a></small>
       <div class="hidden name"><code>other.Rmd</code></div>
 
     </div>
@@ -133,14 +131,9 @@ plan, a matrix of plans, or a <code>redist_plans</code> object).</p>
 <p>This is a measure which offers a balance between competitiveness
 across the state and competitiveness within individual districts.</p>
 <p>Formally, this can be written as:</p>
-<p><span class="math display">\[\textrm{Talismanic Competitiveness} =
-T_p (1 + \alpha T_e)\beta\]</span></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Talismanic Competitiveness</mtext><mo>=</mo><msub><mi>T</mi><mi>p</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>+</mo><mi>α</mi><msub><mi>T</mi><mi>e</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>β</mi></mrow><annotation encoding="application/x-tex">\textrm{Talismanic Competitiveness} = T_p (1 + \alpha T_e)\beta</annotation></semantics></math></p>
 <p>where</p>
-<p><span class="math display">\[ T_p = \frac{1}{n_d} *
-\sum_{k=1}^{n_\textrm{dists}} \big|\frac12 -
-\textrm{voteshare}_D\big|\]</span> <span class="math display">\[ T_e
-=  |\frac{n_\textrm{dists} - Seats_D}{n_\textrm{dists}}-\frac12|
-\]</span></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>p</mi></msub><mo>=</mo><mfrac><mn>1</mn><msub><mi>n</mi><mi>d</mi></msub></mfrac><mo>*</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mtext mathvariant="normal">dists</mtext></msub></munderover><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">|</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>−</mo><msub><mtext mathvariant="normal">voteshare</mtext><mi>D</mi></msub><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex"> T_p = \frac{1}{n_d} * \sum_{k=1}^{n_\textrm{dists}} \big|\frac12 - \textrm{voteshare}_D\big|</annotation></semantics></math><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>e</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">|</mo><mfrac><mrow><msub><mi>n</mi><mtext mathvariant="normal">dists</mtext></msub><mo>−</mo><mi>S</mi><mi>e</mi><mi>a</mi><mi>t</mi><msub><mi>s</mi><mi>D</mi></msub></mrow><msub><mi>n</mi><mtext mathvariant="normal">dists</mtext></msub></mfrac><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="true" form="postfix">|</mo></mrow></mrow><annotation encoding="application/x-tex"> T_e =  |\frac{n_\textrm{dists} - Seats_D}{n_\textrm{dists}}-\frac12| </annotation></semantics></math></p>
 <p>Talismanic Compactness can be computed with</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/compet_talisman.html">compet_talisman</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, rvote <span class="op">=</span> <span class="va">nrv</span>, dvote <span class="op">=</span> <span class="va">ndv</span><span class="op">)</span></span>
@@ -159,11 +152,17 @@ average them.)</p>
 <p>Dissimilarity describes how similar the demographic proportions in
 districts are to the total state population’s demographics.</p>
 <p>Formally, this can be written as:</p>
-<p><span class="math display">\[ \textrm{Dissimilarity} =  \sum_{i =
-1}^{n_\textrm{dists}} \frac{(t_d |g_d - G|)}{2T*G(1 - G)}\]</span></p>
-<p>for a group population proportion in district <span class="math inline">\(d\)</span>, <span class="math inline">\(g_d\)</span>, total population in district <span class="math inline">\(d\)</span>, <span class="math inline">\(t_d\)</span>, a group population proportion in a
-state <span class="math inline">\(G\)</span>, and total population in
-the state <span class="math inline">\(T\)</span>.</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Dissimilarity</mtext><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>n</mi><mtext mathvariant="normal">dists</mtext></msub></munderover><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mi>d</mi></msub><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>g</mi><mi>d</mi></msub><mo>−</mo><mi>G</mi><mo stretchy="true" form="postfix">|</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mn>2</mn><mi>T</mi><mo>*</mo><mi>G</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>G</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex"> \textrm{Dissimilarity} =  \sum_{i = 1}^{n_\textrm{dists}} \frac{(t_d |g_d - G|)}{2T*G(1 - G)}</annotation></semantics></math></p>
+<p>for a group population proportion in district
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>g</mi><mi>d</mi></msub><annotation encoding="application/x-tex">g_d</annotation></semantics></math>,
+total population in district
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mi>d</mi></msub><annotation encoding="application/x-tex">t_d</annotation></semantics></math>,
+a group population proportion in a state
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>,
+and total population in the state
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>.</p>
 <p>Dissimilarity can be computed with:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/seg_dissim.html">seg_dissim</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, group_pop <span class="op">=</span> <span class="va">pop_black</span>, total_pop <span class="op">=</span> <span class="va">pop</span><span class="op">)</span></span>
@@ -179,8 +178,7 @@ the state <span class="math inline">\(T\)</span>.</p>
 <p>We compute incumbent pairings as the number of incumbents who are
 placed into a district with other incumbents beyond those allowed.
 Formally, this is:</p>
-<p><span class="math display">\[\textrm{Inc. Pairs} = \sum_{d =
-1}^{\textrm{ndists}}\max(0, ~n^{(d)}_{inc} - 1)\]</span></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Inc. Pairs</mtext><mo>=</mo><munderover><mo>∑</mo><mrow><mi>d</mi><mo>=</mo><mn>1</mn></mrow><mtext mathvariant="normal">ndists</mtext></munderover><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>0</mn><mo>,</mo><mspace width="0.222em"></mspace><msubsup><mi>n</mi><mrow><mi>i</mi><mi>n</mi><mi>c</mi></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mi>d</mi><mo stretchy="true" form="postfix">)</mo></mrow></msubsup><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\textrm{Inc. Pairs} = \sum_{d = 1}^{\textrm{ndists}}\max(0, ~n^{(d)}_{inc} - 1)</annotation></semantics></math></p>
 <p>We do not have incumbent data included for New Hampshire. As such, we
 create fake incumbent data.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -198,9 +196,7 @@ rows of the data.</p>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
+      </div>
 
 </div>
 
@@ -213,16 +209,16 @@ rows of the data.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>

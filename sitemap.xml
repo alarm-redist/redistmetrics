@@ -1,198 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/404.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/articles/compactness.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/articles/distances.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/articles/other.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/articles/party.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/articles/redistmetrics.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/articles/splits.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/authors.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/index.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/news/index.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/by_plan.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_bc.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_box_reock.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_ch.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_edges_rem.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_fh.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_frac_kept.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_log_st.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_lw.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_polsby.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_reock.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_schwartz.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_skew.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_x_sym.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/comp_y_sym.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/compet_talisman.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/dist_euc.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/dist_ham.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/dist_info.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/dist_man.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/inc_pairs.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/list_fn.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/nh.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/nh_m.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/nh_map.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/nh_plans.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_bias.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_decl.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_decl_simple.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_dil_asym.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_dseats.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_dvs.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_egap.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_egap_ep.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_lop_wins.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_mean_median.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_resp.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_rmd.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_sscd.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/part_tau_gap.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/prep_perims.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/seg_dissim.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/splits_admin.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/splits_count.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/splits_district_fuzzy.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/splits_multi.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/splits_sub_admin.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/splits_sub_count.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/splits_total.html</loc>
-  </url>
-  <url>
-    <loc>http://alarm-redist.org/redistmetrics/reference/tally.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>http://alarm-redist.org/redistmetrics/404.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/LICENSE-text.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/LICENSE.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/articles/compactness.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/articles/distances.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/articles/index.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/articles/other.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/articles/party.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/articles/redistmetrics.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/articles/splits.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/authors.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/index.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/news/index.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/by_plan.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_bc.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_box_reock.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_ch.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_edges_rem.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_fh.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_frac_kept.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_log_st.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_lw.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_polsby.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_reock.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_schwartz.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_skew.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_x_sym.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_y_sym.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/compet_talisman.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/dist_euc.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/dist_ham.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/dist_info.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/dist_man.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/inc_pairs.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/index.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/list_fn.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/nh.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/nh_m.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/nh_map.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/nh_plans.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_bias.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_decl.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_decl_simple.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_dil_asym.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_dseats.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_dvs.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_egap.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_egap_ep.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_lop_wins.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_mean_median.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_resp.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_rmd.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_sscd.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_tau_gap.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/pipe.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/prep_perims.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/seg_dissim.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/splits_admin.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/splits_count.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/splits_district_fuzzy.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/splits_multi.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/splits_sub_admin.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/splits_sub_count.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/splits_total.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/tally.html</loc></url>
 </urlset>
+
