@@ -337,6 +337,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// k_nearest_vote_sums
+NumericMatrix k_nearest_vote_sums(NumericMatrix distmat, NumericVector totpop, double target, NumericVector rvote, NumericVector dvote);
+RcppExport SEXP _redistmetrics_k_nearest_vote_sums(SEXP distmatSEXP, SEXP totpopSEXP, SEXP targetSEXP, SEXP rvoteSEXP, SEXP dvoteSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type distmat(distmatSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type totpop(totpopSEXP);
+    Rcpp::traits::input_parameter< double >::type target(targetSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type rvote(rvoteSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dvote(dvoteSEXP);
+    rcpp_result_gen = Rcpp::wrap(k_nearest_vote_sums(distmat, totpop, target, rvote, dvote));
+    return rcpp_result_gen;
+END_RCPP
+}
 // reindex
 IntegerMatrix reindex(IntegerMatrix dm, int nd);
 RcppExport SEXP _redistmetrics_reindex(SEXP dmSEXP, SEXP ndSEXP) {
@@ -567,6 +581,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_biasatv", (DL_FUNC) &_redistmetrics_biasatv, 3},
     {"_redistmetrics_RankedMarginalDev", (DL_FUNC) &_redistmetrics_RankedMarginalDev, 1},
     {"_redistmetrics_smoothseat", (DL_FUNC) &_redistmetrics_smoothseat, 2},
+    {"_redistmetrics_k_nearest_vote_sums", (DL_FUNC) &_redistmetrics_k_nearest_vote_sums, 5},
     {"_redistmetrics_reindex", (DL_FUNC) &_redistmetrics_reindex, 2},
     {"_redistmetrics_segregationcalc", (DL_FUNC) &_redistmetrics_segregationcalc, 3},
     {"_redistmetrics_splits", (DL_FUNC) &_redistmetrics_splits, 5},

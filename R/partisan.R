@@ -757,3 +757,102 @@ part_sscd <- function(plans, shp, dvote, rvote) {
 
   rep(smoothseat(dvs = dvs, nd = nd), each = nd)
 }
+
+#' Calculate Partisan Dislocation
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar dvote TRUE
+#' @templateVar rvote TRUE
+#' @templateVar total_pop TRUE
+#' @templateVar epsg TRUE
+#' @param by_precinct Defaults to `FALSE`, returning district-level values.
+#' @param signed Defaults to `TRUE`. Should the output for district-level values be signed?
+#' Setting to `TRUE` returns precinct-level values.
+#' @template template
+#'
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
+#' @export
+#' @concept partisan
+#'
+#' @references
+#' DeFord, D. R., Eubank, N., & Rodden, J. (2022). Partisan dislocation: A
+#' precinct-level measure of representation and gerrymandering. Political
+#' Analysis, 30(3), 403-425.
+#'
+#' @examples
+#' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' part_dislocation(plans = nh$r_2020, shp = nh, rvote = nrv, dvote = ndv)
+#'
+#' # Or many plans:
+#' part_dislocation(plans = nh_m[, 3:5], shp = nh, rvote = nrv, dvote = ndv)
+#'
+part_dislocation <- function(plans, shp, dvote, rvote, total_pop = dvote + rvote,
+                             epsg = 3857, by_precinct = FALSE, signed = TRUE) {
+  shp <- planarize(shp, epsg)
+  plans <- process_plans(plans)
+  dvote <- rlang::eval_tidy(rlang::enquo(dvote), shp)
+  rvote <- rlang::eval_tidy(rlang::enquo(rvote), shp)
+
+  total_pop <- rvote + dvote
+
+  if (anyNA(dvote)) {
+    cli::cli_abort('{.val NA} in argument to {.arg dvote}.')
+  }
+  if (anyNA(rvote)) {
+    cli::cli_abort('{.val NA} in argument to {.arg rvote}.')
+  }
+  if (length(rvote) != nrow(plans)) {
+    cli::cli_abort('{.arg rvote} length and {.arg plans} rows are not equal.')
+  }
+  if (length(dvote) != nrow(plans)) {
+    cli::cli_abort('{.arg dvote} length and {.arg plans} rows are not equal.')
+  }
+
+  shp <- geos::as_geos_geometry(shp)
+  centroids <- geos::geos_centroid(shp)
+  dist_mat <- geox_distance_mat(centroids)
+  nd <- length(unique(plans[, 1]))
+  target <- sum(total_pop) / nd
+
+  # compute the nearest neighbors mapping for each precinct
+  knn <- k_nearest_vote_sums(dist_mat, total_pop, target, rvote, dvote)
+  knn_dvs <- knn[, 'dvote'] / rowSums(knn)
+
+  # compute the district democratic vote share
+  rcounts <- agg_p2d(vote = rvote, dm = plans, nd = nd)
+  dcounts <- agg_p2d(vote = dvote, dm = plans, nd = nd)
+  dvs <- DVS(dcounts = dcounts, rcounts = rcounts)
+
+  # replicate it at the precinct level
+  dvs_at_prec <- apply(plans, 2, function(x) {
+    dvs[x]
+  })
+
+  out_prec <- dvs_at_prec - knn_dvs
+
+  if (isTRUE(by_precinct)) {
+    out_prec
+  } else {
+    sapply(seq_len(ncol(out_prec)), function(i) {
+      vapply(seq_len(nd), function(j) {
+        if (signed) {
+          weighted.mean(
+            x = out_prec[plans[, i] ==j, i],
+            w = total_pop[plans[, i] == j],
+            na.rm = TRUE # some precincts may not have votes
+          )
+        } else {
+          weighted.mean(
+            x = abs(out_prec[plans[, i] ==j, i]),
+            w = total_pop[plans[, i] == j],
+            na.rm = TRUE # some precincts may not have votes
+          )
+        }
+      }, FUN.VALUE = numeric(1))
+    }) |>
+      as.vector()
+  }
+}

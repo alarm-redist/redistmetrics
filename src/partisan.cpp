@@ -282,3 +282,44 @@ NumericVector smoothseat(NumericMatrix dvs, int nd) {
   }
   return sscd;
 }
+
+// [[Rcpp::export(rng = false)]]
+NumericMatrix k_nearest_vote_sums(NumericMatrix distmat,
+                                  NumericVector totpop,
+                                  double target,
+                                  NumericVector rvote,
+                                  NumericVector dvote) {
+  int m = distmat.nrow();
+  NumericMatrix result(m, 2);
+  colnames(result) = CharacterVector::create("rvote", "dvote");
+
+  for (int i = 0; i < m; ++i) {
+    std::vector<std::pair<double, int>> dist_idx;
+    dist_idx.reserve(m - 1);
+    for (int j = 0; j < m; ++j) {
+      if (i != j) {
+        dist_idx.emplace_back(distmat(i, j), j);
+      }
+    }
+
+    std::sort(dist_idx.begin(), dist_idx.end());
+
+    double cum_pop = 0.0;
+    double cum_r = 0.0;
+    double cum_d = 0.0;
+
+    for (auto& p : dist_idx) {
+      int idx = p.second;
+      cum_pop += totpop[idx];
+      cum_r += rvote[idx];
+      cum_d += dvote[idx];
+      if (cum_pop >= target)
+        break;
+    }
+
+    result(i, 0) = cum_r;
+    result(i, 1) = cum_d;
+  }
+
+  return result;
+}

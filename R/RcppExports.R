@@ -93,6 +93,10 @@ smoothseat <- function(dvs, nd) {
     .Call(`_redistmetrics_smoothseat`, dvs, nd)
 }
 
+k_nearest_vote_sums <- function(distmat, totpop, target, rvote, dvote) {
+    .Call(`_redistmetrics_k_nearest_vote_sums`, distmat, totpop, target, rvote, dvote)
+}
+
 reindex <- function(dm, nd) {
     .Call(`_redistmetrics_reindex`, dm, nd)
 }
