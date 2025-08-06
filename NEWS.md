@@ -1,3 +1,13 @@
+# redistmetrics 1.0.10
+
+* Adds support for Partisan Dislocation (Deford, Eubank, and Rodden 2022) via `part_dislocation()`.
+
+# redistmetrics 1.0.9
+
+* Revises a minor bug in `seg_dissim()` where having a district with 0 population would yield NAs
+  for the dissimilarity index (#20)
+* Adds support for Dilution Asymmetry (Gordon and Yntiso 2024) via `part_dil_asym()`.
+
 # redistmetrics 1.0.8
 
 * Adds support for counting splits municipalities (sub-admin) units via `splits_sub_count()`.

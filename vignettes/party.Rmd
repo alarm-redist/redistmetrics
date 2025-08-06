@@ -304,3 +304,15 @@ dplyr::tibble(rmd = part_rmd(plans = nh_m, shp = nh, dvote = ndv, rvote = nrv),
 ```
 
 In this (small) set of simulations, the Democratic 2020 proposal is more similar to the simulated plans than the Republican 2020 proposal.
+
+### Partisan Dislocation
+
+Partisan dislocation is a measure of how different a voter's district is from the partisanship of their k-nearest neighbors.
+
+Formally, this can be written as:
+
+$$\textrm{Partisan Dislocation(i)} = \textrm{voteshare}_D - \textrm{voteshare}_{KNN(i)}$$
+
+where $KNN(i)$ denotes the k-nearest neighbors of a voter in precinct $i$. Note that for computational reasons and to match the inputs of other functions, we do not calculate random points for each voter. Instead, we use the distance between precincts to determine the k-nearest neighbors. 
+To create a single score for a district, we can take the mean of the partisan dislocation scores for each voter in the district. Following Deford, Eubank, and Rodden 2022, we can also take the absolute value of the partisan dislocation scores to get the partisan dislocation score for a district.
+
