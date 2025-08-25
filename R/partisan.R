@@ -831,7 +831,8 @@ part_dislocation <- function(plans, shp, dvote, rvote, total_pop = dvote + rvote
     dvs[x]
   })
 
-  out_prec <- dvs_at_prec - knn_dvs
+  # resign so Republican is + and Democrat is -
+  out_prec <- -1 * (dvs_at_prec - knn_dvs)
 
   if (isTRUE(by_precinct)) {
     out_prec
