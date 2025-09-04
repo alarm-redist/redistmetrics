@@ -840,13 +840,13 @@ part_dislocation <- function(plans, shp, dvote, rvote, total_pop = dvote + rvote
     sapply(seq_len(ncol(out_prec)), function(i) {
       vapply(seq_len(nd), function(j) {
         if (signed) {
-          weighted.mean(
+          stats::weighted.mean(
             x = out_prec[plans[, i] ==j, i],
             w = total_pop[plans[, i] == j],
             na.rm = TRUE # some precincts may not have votes
           )
         } else {
-          weighted.mean(
+          stats::weighted.mean(
             x = abs(out_prec[plans[, i] ==j, i]),
             w = total_pop[plans[, i] == j],
             na.rm = TRUE # some precincts may not have votes
