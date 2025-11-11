@@ -818,6 +818,87 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
   out
 }
 
+#' Calculate Bounding Box Reock Compactness
+#'
+#' Box reock is the ratio of the area of the district by the area of the minimum
+#' bounding box (of fixed rotation). Scores are bounded between 0 and 1, where 1 is
+#' most compact.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
+#'
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' #' data(nh)
+#' data(nh_m)
+#' # For a single plan:
+#' comp_bounding_box_reock(plans = nh$r_2020, shp = nh)
+#'
+#' # Or many plans:
+#' comp_bounding_box_reock(plans = nh_m[, 3:5], shp = nh)
+comp_bounding_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
+
+  # process objects ----
+  shp <- planarize(shp, epsg)
+  if (ncores > 1) {
+    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
+  } else {
+    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
+  }
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(nc, setup_strategy = 'sequential', methods = FALSE)
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  # compute ----
+  areas <- geos::geos_area(shp)
+  extents <- geos::geos_extent(shp)
+  if (nc == 1) {
+    chunks <- rep(1L, ncol(plans))
+  } else {
+    chunks <- cut(seq_len(ncol(plans)), nc, labels = FALSE)
+  }
+
+  plan_chunks <- lapply(seq_len(max(chunks)), function(x) {
+    plans[, chunks == x, drop = FALSE]
+  })
+  out <- foreach::foreach(map = seq_along(plan_chunks), .combine = 'c') %oper% {
+    plans <- plan_chunks[[map]]
+    apply(plans, 2, function(plan) {
+
+      areas_dist <- tapply(areas, plan, sum)
+      min_xmin_dist <- tapply(extents[, 'xmin'], plan, min)
+      max_xmax_dist <- tapply(extents[, 'xmax'], plan, max)
+      min_ymin_dist <- tapply(extents[, 'ymin'], plan, min)
+      max_ymax_dist <- tapply(extents[, 'ymax'], plan, max)
+
+      mbbox <- (max_xmax_dist - min_xmin_dist) * (max_ymax_dist - min_ymin_dist)
+      areas_dist / mbbox
+    }) |>
+      t() |>
+      c()
+  }
+
+  out
+}
+
 #' Calculate Y Symmetry Compactness
 #'
 #' Y symmetry is the overlapping area of a shape and its projection over the

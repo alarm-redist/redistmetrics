@@ -94,6 +94,22 @@ Box Reock compactness can be computed with:
 comp_box_reock(plans = nh$r_2020, shp = nh)
 ```
 
+### Bounding Box Reock Compactness
+
+Bounding Box Reock compactness compares the area of the district ($A_D$) to the area of the bounding box ($A_{BB}$).
+
+Formally, it can be written as:
+
+$$ \textrm{Bounding Box Reock} = \frac{A_D}{A_{BB}} $$
+
+Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact.
+
+Bounding Box Reock compactness can be computed with:
+
+```{r}
+comp_bounding_box_reock(plans = nh$r_2020, shp = nh)
+```
+
 ### Convex Hull Compactness
 
 Convex Hull compactness compares the area of the district ($A_D$) to the area of the convex hull ($A_{CV}$).

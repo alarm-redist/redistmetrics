@@ -1,6 +1,7 @@
 # redistmetrics 1.0.10
 
 * Adds support for Partisan Dislocation (Deford, Eubank, and Rodden 2022) via `part_dislocation()`.
+* Adds support for Bounding Box Reock via `comp_bounding_box_reock()`.
 
 # redistmetrics 1.0.9
 
