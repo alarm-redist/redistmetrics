@@ -200,6 +200,7 @@ splits_sub_count <- function(plans, shp, sub_admin) {
   if (is.null(sub_admin)) {
     cli::cli_abort('{.arg sub_admin} not found in {.arg shp}.')
   }
+  any_na <- anyNA(sub_admin)
 
   # plans <- plans[!is.na(sub_admin), , drop = FALSE]
   # sub_admin <- sub_admin[!is.na(sub_admin)]
@@ -213,7 +214,7 @@ splits_sub_count <- function(plans, shp, sub_admin) {
   }
   nc <- vctrs::vec_unique_count(sub_admin)
 
-  if (anyNA(sub_admin)) {
+  if (any_na) {
     admin_splits_count(plans, sub_admin, nd, nc)[-max(sub_admin), ] |>
       `rownames<-`(value = stats::na.omit(row_names))
   } else {
@@ -293,6 +294,7 @@ splits_sub_total <- function(plans, shp, sub_admin) {
   if (is.null(sub_admin)) {
     cli::cli_abort('{.arg sub_admin} not found in {.arg shp}.')
   }
+  any_na <- anyNA(sub_admin)
 
   # plans <- plans[!is.na(sub_admin), , drop = FALSE]
   # sub_admin <- sub_admin[!is.na(sub_admin)]
@@ -300,7 +302,11 @@ splits_sub_total <- function(plans, shp, sub_admin) {
   nc <- vctrs::vec_unique_count(sub_admin)
   nd <- vctrs::vec_unique_count(plans[, 1])
 
-  rep(colSums(admin_splits_count(plans, sub_admin, nd, nc)) - nc, each = nd)
+  cnts <- admin_splits_count(plans, sub_admin, nd, nc)
+  if (any_na) {
+    cnts <- cnts[-max(sub_admin), , drop = FALSE]
+  }
+  rep(colSums(cnts) - nc, each = nd)
 }
 
 #' Fuzzy Splits by District (Experimental)
