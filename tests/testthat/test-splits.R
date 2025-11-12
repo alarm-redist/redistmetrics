@@ -62,3 +62,13 @@ test_that("splits_total works", {
   expect_equal(a, e, tolerance = 1e-4)
 })
 
+test_that("splits_sub_total works", {
+  a <- splits_sub_total(nh$r_2020, nh, county)
+  e <- c(6, 6)
+  expect_equal(a, e, tolerance = 1e-4)
+
+  a <- splits_sub_total(nh_m[, 1:2], nh, county)
+  e <- c(5, 5, 6, 6)
+  expect_equal(a, e, tolerance = 1e-4)
+})
+
