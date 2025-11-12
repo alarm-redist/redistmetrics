@@ -46,6 +46,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// bbox_reock
+NumericMatrix bbox_reock(IntegerMatrix dm, NumericVector areas, NumericMatrix extents, int nd);
+RcppExport SEXP _redistmetrics_bbox_reock(SEXP dmSEXP, SEXP areasSEXP, SEXP extentsSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type areas(areasSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type extents(extentsSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(bbox_reock(dm, areas, extents, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
 // talisman
 NumericVector talisman(NumericMatrix dvs, double nd, double alpha, double beta);
 RcppExport SEXP _redistmetrics_talisman(SEXP dvsSEXP, SEXP ndSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
@@ -560,6 +573,7 @@ RcppExport SEXP _redistmetrics_RcppExport_registerCCallable() {
 static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_polsbypopper", (DL_FUNC) &_redistmetrics_polsbypopper, 6},
     {"_redistmetrics_schwartzberg", (DL_FUNC) &_redistmetrics_schwartzberg, 6},
+    {"_redistmetrics_bbox_reock", (DL_FUNC) &_redistmetrics_bbox_reock, 4},
     {"_redistmetrics_talisman", (DL_FUNC) &_redistmetrics_talisman, 4},
     {"_redistmetrics_contiguity", (DL_FUNC) &_redistmetrics_contiguity, 2},
     {"_redistmetrics_hamming", (DL_FUNC) &_redistmetrics_hamming, 2},

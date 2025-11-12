@@ -841,7 +841,7 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' comp_bounding_box_reock(plans = nh$r_2020, shp = nh)
 #'
 #' # Or many plans:
-#' comp_bounding_box_reock(plans = nh_m[, 3:5], shp = nh)
+#' comp_bounding_box_reock(plans = nh_m[, 1:5], shp = nh)
 comp_bounding_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
@@ -869,7 +869,8 @@ comp_bounding_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # compute ----
   areas <- geos::geos_area(shp)
-  extents <- geos::geos_extent(shp)
+  extents <- geos::geos_extent(shp) |>
+    as.matrix()
   if (nc == 1) {
     chunks <- rep(1L, ncol(plans))
   } else {
@@ -879,24 +880,15 @@ comp_bounding_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
   plan_chunks <- lapply(seq_len(max(chunks)), function(x) {
     plans[, chunks == x, drop = FALSE]
   })
-  out <- foreach::foreach(map = seq_along(plan_chunks), .combine = 'c') %oper% {
-    plans <- plan_chunks[[map]]
-    apply(plans, 2, function(plan) {
-
-      areas_dist <- tapply(areas, plan, sum)
-      min_xmin_dist <- tapply(extents[, 'xmin'], plan, min)
-      max_xmax_dist <- tapply(extents[, 'xmax'], plan, max)
-      min_ymin_dist <- tapply(extents[, 'ymin'], plan, min)
-      max_ymax_dist <- tapply(extents[, 'ymax'], plan, max)
-
-      mbbox <- (max_xmax_dist - min_xmin_dist) * (max_ymax_dist - min_ymin_dist)
-      areas_dist / mbbox
-    }) |>
-      t() |>
-      c()
+  out <- foreach::foreach(
+    map = seq_along(plan_chunks),
+    .combine = 'cbind', .packages = c('redistmetrics'),
+    .export = 'bbox_reock'
+  ) %oper% {
+    bbox_reock(dm = plan_chunks[[map]], areas = areas, extents = extents, nd = nd)
   }
 
-  out
+  c(out)
 }
 
 #' Calculate Y Symmetry Compactness

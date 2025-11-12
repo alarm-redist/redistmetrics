@@ -9,6 +9,10 @@ schwartzberg <- function(from, to, area, perimeter, dm, nd) {
     .Call(`_redistmetrics_schwartzberg`, from, to, area, perimeter, dm, nd)
 }
 
+bbox_reock <- function(dm, areas, extents, nd) {
+    .Call(`_redistmetrics_bbox_reock`, dm, areas, extents, nd)
+}
+
 talisman <- function(dvs, nd, alpha = 1, beta = 1) {
     .Call(`_redistmetrics_talisman`, dvs, nd, alpha, beta)
 }

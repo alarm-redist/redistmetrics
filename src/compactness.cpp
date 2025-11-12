@@ -1,4 +1,6 @@
 #include <Rcpp.h>
+#include <iostream>
+#include <unistd.h>
 using namespace Rcpp;
 
 
@@ -86,4 +88,49 @@ NumericMatrix schwartzberg(IntegerVector from,
   }
 
   return ret;
+}
+
+// [[Rcpp::export(rng = false)]]
+NumericMatrix bbox_reock(IntegerMatrix dm,
+                         NumericVector areas,
+                         NumericMatrix extents,
+                         int nd) {
+
+  NumericMatrix out(nd, dm.ncol());
+  NumericVector dist_area(nd);
+  // NumericVector min_xmin_dist(nd);
+  // NumericVector max_xmax_dist(nd);
+  // NumericVector min_ymin_dist(nd);
+  // NumericVector max_ymax_dist(nd);
+  NumericVector zerovec(nd);
+
+  for (int c = 0; c < dm.ncol(); c++) {
+    // Initialize aggregation vectors
+    dist_area = clone(zerovec);
+    NumericVector min_xmin_dist(nd, R_PosInf);
+    NumericVector max_xmax_dist(nd, R_NegInf);
+    NumericVector min_ymin_dist(nd, R_PosInf);
+    NumericVector max_ymax_dist(nd, R_NegInf);
+
+    // Aggregate by district
+    for (int r = 0; r < dm.nrow(); r++) {
+      int dist = dm(r, c) - 1; // Convert to 0-indexed
+
+      dist_area(dist) += areas(r);
+
+      if (extents(r, 0) < min_xmin_dist[dist]) min_xmin_dist[dist] = extents(r, 0);
+      if (extents(r, 1) < min_ymin_dist[dist]) min_ymin_dist[dist] = extents(r, 1);
+      if (extents(r, 2) > max_xmax_dist[dist]) max_xmax_dist[dist] = extents(r, 2);
+      if (extents(r, 3) > max_ymax_dist[dist]) max_ymax_dist[dist] = extents(r, 3);
+    }
+
+    // Compute compactness for each district
+    for (int d = 0; d < nd; d++) {
+      double mbbox = (max_xmax_dist[d] - min_xmin_dist[d]) *
+        (max_ymax_dist[d] - min_ymin_dist[d]);
+      out(d, c) = dist_area[d] / mbbox;
+    }
+  }
+
+  return out;
 }
