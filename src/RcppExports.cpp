@@ -106,6 +106,27 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// reock_scores_matrix
+NumericVector reock_scores_matrix(const std::vector<std::string>& wkt_vector, const IntegerMatrix& plans);
+RcppExport SEXP _redistmetrics_reock_scores_matrix(SEXP wkt_vectorSEXP, SEXP plansSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::vector<std::string>& >::type wkt_vector(wkt_vectorSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    rcpp_result_gen = Rcpp::wrap(reock_scores_matrix(wkt_vector, plans));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_libgeos_init_api
+void cpp_libgeos_init_api();
+RcppExport SEXP _redistmetrics_cpp_libgeos_init_api() {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    cpp_libgeos_init_api();
+    return R_NilValue;
+END_RCPP
+}
 // log_st_map
 NumericVector log_st_map(const Graph& g, const arma::umat& districts, const arma::uvec& counties, int n_distr);
 static SEXP _redistmetrics_log_st_map_try(SEXP gSEXP, SEXP districtsSEXP, SEXP countiesSEXP, SEXP n_distrSEXP) {
@@ -578,6 +599,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_contiguity", (DL_FUNC) &_redistmetrics_contiguity, 2},
     {"_redistmetrics_hamming", (DL_FUNC) &_redistmetrics_hamming, 2},
     {"_redistmetrics_minkowski", (DL_FUNC) &_redistmetrics_minkowski, 3},
+    {"_redistmetrics_reock_scores_matrix", (DL_FUNC) &_redistmetrics_reock_scores_matrix, 2},
+    {"_redistmetrics_cpp_libgeos_init_api", (DL_FUNC) &_redistmetrics_cpp_libgeos_init_api, 0},
     {"_redistmetrics_log_st_map", (DL_FUNC) &_redistmetrics_log_st_map, 4},
     {"_redistmetrics_n_removed", (DL_FUNC) &_redistmetrics_n_removed, 3},
     {"_redistmetrics_agg_p2d", (DL_FUNC) &_redistmetrics_agg_p2d, 3},

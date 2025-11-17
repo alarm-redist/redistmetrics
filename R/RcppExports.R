@@ -29,6 +29,14 @@ minkowski <- function(v, m, p) {
     .Call(`_redistmetrics_minkowski`, v, m, p)
 }
 
+reock_scores_matrix <- function(wkt_vector, plans) {
+    .Call(`_redistmetrics_reock_scores_matrix`, wkt_vector, plans)
+}
+
+cpp_libgeos_init_api <- function() {
+    invisible(.Call(`_redistmetrics_cpp_libgeos_init_api`))
+}
+
 log_st_map <- function(g, districts, counties, n_distr) {
     .Call(`_redistmetrics_log_st_map`, g, districts, counties, n_distr)
 }
