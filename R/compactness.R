@@ -259,22 +259,23 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # compute ----
   areas <- geos::geos_area(shp)
-  out <- foreach::foreach(map = seq_len(n_plans), .combine = 'c', .packages = c('geos'),
-                          .export = 'geox_union') %oper% {
+
+  area_mat <- agg_p2d(plans, vote = areas, nd = nd)
+  out <- foreach::foreach(
+    map = seq_len(n_plans), .combine = 'c', .packages = c('geos')
+  ) %oper% {
     ret <- vector('numeric', nd)
 
     for (i in seq_len(nd)) {
       united <- geos::geos_make_collection(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
-      area <- sum(areas[plans[, map] == dists[i]])
-
       mbc <- geos::geos_area(geos::geos_minimum_bounding_circle(united))
-      ret[i] <- area / mbc
+      ret[i] <- mbc
     }
 
     ret
   }
 
-  out
+  c(area_mat) / out
 }
 
 #' Calculate Convex Hull Compactness
