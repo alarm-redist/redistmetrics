@@ -107,14 +107,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // compute_mbc_area
-NumericVector compute_mbc_area(const std::string& wkt_collection, const IntegerMatrix& plans_chunk, int nd);
-RcppExport SEXP _redistmetrics_compute_mbc_area(SEXP wkt_collectionSEXP, SEXP plans_chunkSEXP, SEXP ndSEXP) {
+NumericVector compute_mbc_area(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_mbc_area(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
-    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans_chunk(plans_chunkSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
     Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
-    rcpp_result_gen = Rcpp::wrap(compute_mbc_area(wkt_collection, plans_chunk, nd));
+    rcpp_result_gen = Rcpp::wrap(compute_mbc_area(wkt_collection, plans, nd));
     return rcpp_result_gen;
 END_RCPP
 }

@@ -88,6 +88,16 @@ test_that("comp_reock works", {
   e <- c(0.302484301653267, 0.234708920045101, 0.444465285671442, 0.250215157908113)
   expect_equal(a, e, tolerance = 1e-4)
 })
+test_that("comp_reock_cpp works", {
+  a <- comp_reock_cpp(nh$r_2020, shp = nh)
+  e <- c(0.444465285671442, 0.250215157908113)
+  expect_equal(a, e, tolerance = 1e-2)
+
+  a <- comp_reock_cpp(nh_m[, 1:2], shp = nh)
+  e <- c(0.302484301653267, 0.234708920045101, 0.444465285671442, 0.250215157908113)
+  expect_equal(a, e, tolerance = 1e-2)
+})
+
 
 test_that("comp_schwartz works", {
   a <- comp_schwartz(nh$r_2020, shp = nh)

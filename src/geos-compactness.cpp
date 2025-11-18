@@ -6,10 +6,10 @@ using namespace Rcpp;
 
 // [[Rcpp::export(rng = false)]]
 NumericVector compute_mbc_area(const std::string& wkt_collection,
-                               const IntegerMatrix& plans_chunk,
+                               const IntegerMatrix& plans,
                                int nd) {
-  int n_plans = plans_chunk.ncol();
-  int n_rows = plans_chunk.nrow();
+  const int n_plans = plans.ncol();
+  const int n_rows = plans.nrow();
 
   // Initialize GEOS context
   GEOSContextHandle_t ctx = GEOS_init_r();
@@ -19,11 +19,11 @@ NumericVector compute_mbc_area(const std::string& wkt_collection,
   GEOSGeometry* collection = GEOSWKTReader_read_r(ctx, reader, wkt_collection.c_str());
   GEOSWKTReader_destroy_r(ctx, reader);
 
+  // check read
   if (collection == NULL) {
     GEOS_finish_r(ctx);
     stop("Failed to read WKT collection");
   }
-
   int n_geoms = GEOSGetNumGeometries_r(ctx, collection);
   if (n_geoms != n_rows) {
     GEOSGeom_destroy_r(ctx, collection);
@@ -32,9 +32,9 @@ NumericVector compute_mbc_area(const std::string& wkt_collection,
   }
 
   // Extract individual geometries
-  std::vector<const GEOSGeometry*> geoms(n_geoms);
+  std::vector<GEOSGeometry*> geoms(n_geoms);
   for (int i = 0; i < n_geoms; i++) {
-    geoms[i] = GEOSGetGeometryN_r(ctx, collection, i);
+    geoms[i] = const_cast<GEOSGeometry*>(GEOSGetGeometryN_r(ctx, collection, i));
     if (geoms[i] == NULL) {
       GEOSGeom_destroy_r(ctx, collection);
       GEOS_finish_r(ctx);
@@ -44,81 +44,61 @@ NumericVector compute_mbc_area(const std::string& wkt_collection,
 
   NumericVector results(nd * n_plans);
 
-  std::vector<std::vector<int>> district_indices(nd);
-  std::vector<GEOSGeometry*> district_geoms_cloned;
-  district_geoms_cloned.reserve(n_rows);
-
+  GEOSGeometry* center;
+  GEOSGeometry* temp_collection;
+  std::vector<std::vector<GEOSGeometry*>> district_geoms(nd);
+  for (int d = 0; d < nd; d++) {
+    district_geoms[d].reserve(n_rows);
+  }
   // Process each plan
   for (int p = 0; p < n_plans; p++) {
-    // clear indices
-    for (int d = 0; d < nd; d++) {
-      district_indices[d].clear();
+    // arrange geos by district
+    for (auto &vec : district_geoms) {
+      vec.clear();
     }
-
     for (int i = 0; i < n_rows; i++) {
-      int dist = plans_chunk(i, p);
-      district_indices[dist - 1].push_back(i);
+      int dist = plans(i, p);
+      district_geoms[dist - 1].push_back(geoms[i]);
     }
 
     // calculate MBC for each district
     for (int d = 0; d < nd; d++) {
-      if (district_indices[d].empty()) {
-        results[p * nd + d] = NA_REAL;
+      int out_idx = p * nd + d;
+
+      temp_collection = NULL;
+      auto n_geom = district_geoms[d].size();
+      // convert geometry list into a collection
+      if (n_geom == 0) {
+        results[out_idx] = NA_REAL;
         continue;
-      }
-
-      // clone geometries for this district
-      district_geoms_cloned.clear();
-      for (int idx : district_indices[d]) {
-        GEOSGeometry* cloned = GEOSGeom_clone_r(ctx, geoms[idx]);
-        if (cloned == NULL) {
-          for (GEOSGeometry* g : district_geoms_cloned) {
-            GEOSGeom_destroy_r(ctx, g);
-          }
-          results[p * nd + d] = NA_REAL;
-          continue;
-        }
-        district_geoms_cloned.push_back(cloned);
-      }
-
-      // Create collection
-      GEOSGeometry* temp_collection = NULL;
-      if (district_geoms_cloned.size() == 1) {
-        temp_collection = district_geoms_cloned[0];
+      } else if (n_geom == 1) {
+        temp_collection = district_geoms[d][0];
       } else {
         temp_collection = GEOSGeom_createCollection_r(
           ctx, GEOS_GEOMETRYCOLLECTION,
-          district_geoms_cloned.data(),
-          district_geoms_cloned.size()
+          district_geoms[d].data(),
+          district_geoms[d].size()
         );
 
         if (temp_collection == NULL) {
-          for (GEOSGeometry* g : district_geoms_cloned) {
-            GEOSGeom_destroy_r(ctx, g);
-          }
-          results[p * nd + d] = NA_REAL;
+          results[out_idx] = NA_REAL;
           continue;
         }
       }
 
       // Get minimum bounding circle radius
       double radius;
-      GEOSGeometry* center = NULL;
       GEOSMinimumBoundingCircle_r(ctx, temp_collection, &radius, &center);
-
-      // Clean up
-      GEOSGeom_destroy_r(ctx, temp_collection);
       if (center != NULL) {
         GEOSGeom_destroy_r(ctx, center);
       }
 
-      if (radius < 0) {
-        results[p * nd + d] = NA_REAL;
-        continue;
-      }
-
       // Calculate and store MBC area
-      results[p * nd + d] = M_PI * radius * radius;
+      if (radius < 0) {
+        results[out_idx] = NA_REAL;
+      } else {
+        results[out_idx] = M_PI * radius * radius;
+      }
     }
   }
 

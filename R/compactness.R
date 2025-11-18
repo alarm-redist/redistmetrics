@@ -278,6 +278,55 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
   c(area_mat) / out
 }
 
+comp_reock_cpp <- function(plans, shp, epsg = 3857, ncores = 1) {
+  # process objects ----
+  shp <- planarize(shp, epsg)
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  if (n_plans == 0) return(numeric(0))
+  nd <- vctrs::vec_unique_count(plans[, 1])
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(nc, setup_strategy = 'sequential', methods = FALSE)
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  # compute ----
+  areas <- geos::geos_area(shp)
+  area_mat <- agg_p2d(plans, vote = areas, nd = nd)
+
+  # compute ----
+  if (nc == 1) {
+    chunks <- rep(1L, ncol(plans))
+  } else {
+    chunks <- cut(seq_len(ncol(plans)), nc, labels = FALSE)
+  }
+
+  plan_chunks <- lapply(seq_len(max(chunks)), function(x) {
+    plans[, chunks == x, drop = FALSE]
+  })
+
+  # Convert collection to WKT if needed
+  shp_col_wkt <- geos::as_geos_geometry(shp) |>
+      geos::geos_make_collection() |>
+      wk::as_wkt()
+
+  out <- foreach::foreach(
+    map = seq_along(plan_chunks), .packages = c('redistmetrics'),
+    .export = 'bbox_reock', .combine = 'c'
+  ) %oper% {
+    compute_mbc_area(shp_col_wkt, plan_chunks[[map]], nd)
+  }
+
+  c(area_mat) / out
+}
+
 #' Calculate Convex Hull Compactness
 #'
 #' @templateVar plans TRUE
