@@ -45,6 +45,7 @@ NumericVector compute_mbc_area(const std::string& wkt_collection,
   NumericVector results(nd * n_plans);
 
   GEOSGeometry* center;
+  GEOSGeometry* circle;
   GEOSGeometry* temp_collection;
   std::vector<std::vector<GEOSGeometry*>> district_geoms(nd);
   for (int d = 0; d < nd; d++) {
@@ -86,19 +87,33 @@ NumericVector compute_mbc_area(const std::string& wkt_collection,
         }
       }
 
-      // Get minimum bounding circle radius
+      // Get minimum bounding circle geometry
       double radius;
-      GEOSMinimumBoundingCircle_r(ctx, temp_collection, &radius, &center);
+      center = NULL;
+      circle = GEOSMinimumBoundingCircle_r(ctx, temp_collection, &radius, &center);
+
       if (center != NULL) {
         GEOSGeom_destroy_r(ctx, center);
       }
 
-      // Calculate and store MBC area
-      if (radius < 0) {
+      if (circle == NULL || radius < 0) {
+        if (circle != NULL) {
+          GEOSGeom_destroy_r(ctx, circle);
+        }
         results[out_idx] = NA_REAL;
-      } else {
-        results[out_idx] = M_PI * radius * radius;
+        continue;
       }
+
+      // Get area of the circle geometry
+      double circle_area;
+      if (GEOSArea_r(ctx, circle, &circle_area) == 0) {
+        GEOSGeom_destroy_r(ctx, circle);
+        results[out_idx] = NA_REAL;
+        continue;
+      }
+
+      GEOSGeom_destroy_r(ctx, circle);
+      results[out_idx] = circle_area;
     }
   }
 

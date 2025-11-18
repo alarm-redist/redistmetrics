@@ -1,3 +1,3 @@
-.onLoad <- function(pkg, name) {
+.onLoad <- function(libname, pkgname) {
   cpp_libgeos_init_api()
 }

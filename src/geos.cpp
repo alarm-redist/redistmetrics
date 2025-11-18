@@ -1,4 +1,5 @@
 // this is copied directly from the readme of libgeos as a required fn
+#include "libgeos.h"
 #include "libgeos.c"
 
 // [[Rcpp::export(rng = false)]]
