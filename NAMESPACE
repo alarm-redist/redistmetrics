@@ -2,8 +2,8 @@
 
 export("%>%")
 export(by_plan)
+export(comp_bbox_reock)
 export(comp_bc)
-export(comp_bounding_box_reock)
 export(comp_box_reock)
 export(comp_ch)
 export(comp_edges_rem)

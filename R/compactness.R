@@ -839,11 +839,11 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' #' data(nh)
 #' data(nh_m)
 #' # For a single plan:
-#' comp_bounding_box_reock(plans = nh$r_2020, shp = nh)
+#' comp_bbox_reock(plans = nh$r_2020, shp = nh)
 #'
 #' # Or many plans:
-#' comp_bounding_box_reock(plans = nh_m[, 1:5], shp = nh)
-comp_bounding_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
+#' comp_bbox_reock(plans = nh_m[, 1:5], shp = nh)
+comp_bbox_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)

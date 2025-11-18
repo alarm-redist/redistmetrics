@@ -14,9 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-There are dozens of measures of compactness. This vignette introduces some of the most common and most important measures of compactness. See the vignette "Using `redistmetrics`" for the bare-bones of the package. 
+There are dozens of measures of compactness. This vignette introduces some of the most common and most important measures of compactness. See the vignette "Using `redistmetrics`" for the bare-bones of the package.
 
-We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data and the `plans` argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object).  
+We first load the `redistmetrics` package and data from New Hampshire. For any function, the `shp` argument can be swapped out for your data and the `plans` argument can be swapped out for your redistricting plans (be it a single plan, a matrix of plans, or a `redist_plans` object).
 
 ```{r setup}
 library(redistmetrics)
@@ -28,9 +28,9 @@ The New Hampshire proposed Republican plan looks like:
 ```{r, echo = FALSE}
 library(ggplot2)
 
-nh %>% 
+nh %>%
   ggplot() +
-  geom_sf(aes(fill = as.character(r_2020))) + 
+  geom_sf(aes(fill = as.character(r_2020))) +
   labs(fill = 'none')
 ```
 
@@ -107,7 +107,7 @@ Scores range from 0 to 1, where 0 is the least compact and 1 is the most compact
 Bounding Box Reock compactness can be computed with:
 
 ```{r}
-comp_bounding_box_reock(plans = nh$r_2020, shp = nh)
+comp_bbox_reock(plans = nh$r_2020, shp = nh)
 ```
 
 ### Convex Hull Compactness
@@ -225,7 +225,7 @@ comp_fh(plans = nh$r_2020, shp = nh, total_pop = pop)
 
 ### Edges-Removed Compactness
 
-Edges Removed compactness describes the number of edges that have to be removed from an adjacency graph to draw a district. Inuitively, the edges between redistricting units which are in districts are removed. This correlates to Polsby-Popper compactness. For a given adjacency graph $a$, we can write out the number of edges as $E(a)$ and consider the edges removed for a plan $\pi$. 
+Edges Removed compactness describes the number of edges that have to be removed from an adjacency graph to draw a district. Inuitively, the edges between redistricting units which are in districts are removed. This correlates to Polsby-Popper compactness. For a given adjacency graph $a$, we can write out the number of edges as $E(a)$ and consider the edges removed for a plan $\pi$.
 
 Formally, this is then written as:
 
@@ -240,7 +240,7 @@ comp_edges_rem(plans = nh$r_2020, shp = nh, adj = nh$adj)
 
 ### Fraction Kept Compactness
 
-Fraction Kept compactness describes the fraction of edges that have to be kept when an adjacency graph is cut to form a district. This is rescaling of Edges Removed Compactness for more consistent interpretation. For a given adjacency graph $a$, we can write out the number of edges as $E(a)$ and consider the edges removed for a plan $\pi$. 
+Fraction Kept compactness describes the fraction of edges that have to be kept when an adjacency graph is cut to form a district. This is rescaling of Edges Removed Compactness for more consistent interpretation. For a given adjacency graph $a$, we can write out the number of edges as $E(a)$ and consider the edges removed for a plan $\pi$.
 
 Formally, this is then written as:
 
