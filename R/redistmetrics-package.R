@@ -5,6 +5,7 @@ NULL
 
 ## usethis namespace: start
 #' @importFrom Rcpp sourceCpp
+#' @importFrom libgeos libgeos_version
 ## usethis namespace: end
 NULL
 

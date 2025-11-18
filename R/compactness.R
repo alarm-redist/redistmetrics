@@ -314,16 +314,16 @@ comp_reock_cpp <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   shp_col_wkt <- geos::as_geos_geometry(shp) |>
     geos::geos_make_collection() |>
-    wk::as_wkt()
+    geos::geos_write_wkt()
 
   out <- foreach::foreach(
     map = seq_along(plan_chunks), .packages = c('redistmetrics'),
     .export = 'compute_mbc_area', .combine = 'c'
   ) %oper% {
-    compute_mbc_area(shp_col_wkt, plan_chunks[[map]], nd)
+    c(compute_mbc_area(shp_col_wkt, plan_chunks[[map]], nd))
   }
 
-  c(area_mat) / out
+  c(area_mat) / c(out)
 }
 
 #' Calculate Convex Hull Compactness
