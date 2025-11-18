@@ -282,8 +282,9 @@ comp_reock_cpp <- function(plans, shp, epsg = 3857, ncores = 1) {
   # process objects ----
   shp <- planarize(shp, epsg)
   plans <- process_plans(plans)
-  n_plans <- ncol(plans)
-  if (n_plans == 0) return(numeric(0))
+  if (ncol(plans) == 0) {
+    return(numeric(0))
+  }
   nd <- vctrs::vec_unique_count(plans[, 1])
 
   # set up parallel ----
@@ -301,7 +302,6 @@ comp_reock_cpp <- function(plans, shp, epsg = 3857, ncores = 1) {
   areas <- geos::geos_area(shp)
   area_mat <- agg_p2d(plans, vote = areas, nd = nd)
 
-  # compute ----
   if (nc == 1) {
     chunks <- rep(1L, ncol(plans))
   } else {
@@ -312,14 +312,13 @@ comp_reock_cpp <- function(plans, shp, epsg = 3857, ncores = 1) {
     plans[, chunks == x, drop = FALSE]
   })
 
-  # Convert collection to WKT if needed
   shp_col_wkt <- geos::as_geos_geometry(shp) |>
-      geos::geos_make_collection() |>
-      wk::as_wkt()
+    geos::geos_make_collection() |>
+    wk::as_wkt()
 
   out <- foreach::foreach(
     map = seq_along(plan_chunks), .packages = c('redistmetrics'),
-    .export = 'bbox_reock', .combine = 'c'
+    .export = 'compute_mbc_area', .combine = 'c'
   ) %oper% {
     compute_mbc_area(shp_col_wkt, plan_chunks[[map]], nd)
   }
