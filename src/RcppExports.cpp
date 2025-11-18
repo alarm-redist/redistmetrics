@@ -47,14 +47,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // bbox_reock
-NumericMatrix bbox_reock(IntegerMatrix dm, NumericVector areas, NumericMatrix extents, int nd);
+NumericMatrix bbox_reock(IntegerMatrix dm, NumericVector areas, NumericMatrix extents, const int nd);
 RcppExport SEXP _redistmetrics_bbox_reock(SEXP dmSEXP, SEXP areasSEXP, SEXP extentsSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type areas(areasSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type extents(extentsSEXP);
-    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    Rcpp::traits::input_parameter< const int >::type nd(ndSEXP);
     rcpp_result_gen = Rcpp::wrap(bbox_reock(dm, areas, extents, nd));
     return rcpp_result_gen;
 END_RCPP
