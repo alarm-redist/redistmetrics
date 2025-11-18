@@ -1,12 +1,7 @@
-// needed exactly once in your package or Rcpp script
-// contains all the function pointers and the
-// implementation of the function to initialize them
-// (`libgeos_init_api()`)
+// this is copied directly from the readme of libgeos as a required fn
 #include "libgeos.c"
 
-// this function needs to be called once before any GEOS functions
-// are called (e.g., in .onLoad() for your package)
-// [[Rcpp::export]]
+// [[Rcpp::export(rng = false)]]
 void cpp_libgeos_init_api() {
   libgeos_init_api();
 }

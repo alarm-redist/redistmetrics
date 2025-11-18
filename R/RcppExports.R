@@ -29,8 +29,8 @@ minkowski <- function(v, m, p) {
     .Call(`_redistmetrics_minkowski`, v, m, p)
 }
 
-reock_scores_matrix <- function(wkt_vector, plans) {
-    .Call(`_redistmetrics_reock_scores_matrix`, wkt_vector, plans)
+compute_mbc_area <- function(wkt_collection, plans_chunk, nd) {
+    .Call(`_redistmetrics_compute_mbc_area`, wkt_collection, plans_chunk, nd)
 }
 
 cpp_libgeos_init_api <- function() {
