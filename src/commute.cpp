@@ -15,21 +15,12 @@ inline int first_match(const IntegerVector& school_distr, int n_schools, int tar
 NumericMatrix phasecommute(const IntegerMatrix& plans,
                                 const IntegerVector& current,
                                 const NumericVector& pop,
-                                const IntegerVector& schools, // 1-based
+                                const IntegerVector& schools_idx, // 1-based
                                 const NumericMatrix& commute_times,  // n_units x n_schools
                                 const int ndists) {
     const int n_units   = plans.nrow();
     const int n_plans   = plans.ncol();
-    const int n_schools = schools.size();
-    
-    // 1-based -> 0-based copy
-    IntegerVector schools_idx(n_schools);
-    for (int j = 0; j < n_schools; j++) {
-        int idx = schools[j];
-        if (idx < 1 || idx > n_units)
-            stop("schools_idx out of range.");
-        schools_idx[j] = idx - 1;
-    }
+    const int n_schools = schools_idx.size();
     
     // schools' districts under current plan
     IntegerVector schools_current_distr(n_schools);
@@ -96,21 +87,12 @@ NumericMatrix phasecommute(const IntegerMatrix& plans,
 // Calculate matrix of max commute scores
 // [[Rcpp::export(rng = false)]]
 NumericMatrix maxcommute(const IntegerMatrix& plans,
-                                const IntegerVector& schools, // 1-based
+                                const IntegerVector& schools_idx, // 1-based
                                 const NumericMatrix& commute_times,  // n_units x n_schools
                                 const int ndists) {
     const int n_units   = plans.nrow();
     const int n_plans   = plans.ncol();
-    const int n_schools = schools.size();
-    
-    // 1-based -> 0-based copy
-    IntegerVector schools_idx(n_schools);
-    for (int j = 0; j < n_schools; j++) {
-        int idx = schools[j];
-        if (idx < 1 || idx > n_units)
-            stop("schools_idx out of range.");
-        schools_idx[j] = idx - 1;
-    }
+    const int n_schools = schools_idx.size();
     
     // create empty output matrix
     NumericMatrix out(ndists, n_plans);

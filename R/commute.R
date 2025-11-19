@@ -71,7 +71,7 @@ phase_commute <- function(plans, map, current, schools, commute_times, pop = NUL
         plans          = plans_matrix,
         current        = current,
         pop            = pop,
-        schools        = schools,
+        schools        = schools - 1L,
         commute_times  = commute_times,
         ndists         = as.integer(ndists)
     )
@@ -129,7 +129,7 @@ max_commute <- function(plans, map, schools, commute_times) {
     # call C++ function to calculate phase commute scores
     res_mat <- maxcommute(
         plans          = plans_matrix,
-        schools        = schools,
+        schools        = schools - 1L,
         commute_times  = commute_times,
         ndists         = as.integer(ndists)
     )
