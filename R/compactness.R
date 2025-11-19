@@ -236,51 +236,6 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  if (ncores > 1) {
-    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
-  } else {
-    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
-  }
-  plans <- process_plans(plans)
-  n_plans <- ncol(plans)
-  dists <- sort(unique(c(plans)))
-  nd <- length(dists)
-
-  # set up parallel ----
-  nc <- min(ncores, ncol(plans))
-  if (nc == 1) {
-    `%oper%` <- foreach::`%do%`
-  } else {
-    `%oper%` <- foreach::`%dopar%`
-    cl <- parallel::makeCluster(nc, setup_strategy = 'sequential', methods = FALSE)
-    doParallel::registerDoParallel(cl)
-    on.exit(parallel::stopCluster(cl))
-  }
-
-  # compute ----
-  areas <- geos::geos_area(shp)
-
-  area_mat <- agg_p2d(plans, vote = areas, nd = nd)
-  out <- foreach::foreach(
-    map = seq_len(n_plans), .combine = 'c', .packages = c('geos')
-  ) %oper% {
-    ret <- vector('numeric', nd)
-
-    for (i in seq_len(nd)) {
-      united <- geos::geos_make_collection(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
-      mbc <- geos::geos_area(geos::geos_minimum_bounding_circle(united))
-      ret[i] <- mbc
-    }
-
-    ret
-  }
-
-  c(area_mat) / out
-}
-
-comp_reock_cpp <- function(plans, shp, epsg = 3857, ncores = 1) {
-  # process objects ----
-  shp <- planarize(shp, epsg)
   plans <- process_plans(plans)
   if (ncol(plans) == 0) {
     return(numeric(0))
