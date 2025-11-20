@@ -1,8 +1,11 @@
+# redistmetrics 1.0.11
+
+* Adds support for Bounding Box Reock via `comp_bbox_reock()`.
+* Adds support for counting total splits for sub-adminstrative units via `splits_sub_total()`.
+
 # redistmetrics 1.0.10
 
 * Adds support for Partisan Dislocation (Deford, Eubank, and Rodden 2022) via `part_dislocation()`.
-* Adds support for Bounding Box Reock via `comp_bounding_box_reock()`.
-* Adds support for counting total splits for sub-adminstrative units via `splits_sub_total()`.
 
 # redistmetrics 1.0.9
 
@@ -37,7 +40,7 @@
 * Minor improvements to compactness functions by removing costly unions where collections are sufficient.
 * Adds support for multi-threaded VI calculations.
 * Uses new logo to match the updated `redist` logo.
-* Implements an _experimental_ basic *fuzzy* splits function for non-nesting geographies. 
+* Implements an _experimental_ basic *fuzzy* splits function for non-nesting geographies.
 
 # redistmetrics 1.0.2
 * Makes `ncores` argument work for `prep_polsby()`.

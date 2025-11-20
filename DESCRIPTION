@@ -1,7 +1,7 @@
 Package: redistmetrics
 Title: Redistricting Metrics
-Version: 1.0.10
-Date: 2025-08-06
+Version: 1.0.11
+Date: 2025-11-20
 Authors@R: c(
     person("Christopher T.", "Kenny", email = "christopherkenny@fas.harvard.edu", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9386-6860")),
     person("Cory", "McCartan", email = "mccartan@psu.edu", role = "aut"),
@@ -25,13 +25,14 @@ Imports:
     dplyr,
     rlang,
     geos,
-    wk
+    wk,
+    libgeos
 Suggests:
     rmarkdown,
     knitr,
     testthat (>= 3.0.0),
     ggplot2
-LinkingTo: Rcpp, RcppArmadillo, RcppThread
+LinkingTo: Rcpp, RcppArmadillo, RcppThread, libgeos
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

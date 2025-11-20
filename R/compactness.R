@@ -236,15 +236,11 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)
-  if (ncores > 1) {
-    shp_col <- wk::as_wkt(geos::geos_make_collection(geos::as_geos_geometry(shp)))
-  } else {
-    shp_col <- geos::geos_make_collection(geos::as_geos_geometry(shp))
-  }
   plans <- process_plans(plans)
-  n_plans <- ncol(plans)
-  dists <- sort(unique(c(plans)))
-  nd <- length(dists)
+  if (ncol(plans) == 0) {
+    return(numeric(0))
+  }
+  nd <- vctrs::vec_unique_count(plans[, 1])
 
   # set up parallel ----
   nc <- min(ncores, ncol(plans))
@@ -259,23 +255,30 @@ comp_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # compute ----
   areas <- geos::geos_area(shp)
-
   area_mat <- agg_p2d(plans, vote = areas, nd = nd)
-  out <- foreach::foreach(
-    map = seq_len(n_plans), .combine = 'c', .packages = c('geos')
-  ) %oper% {
-    ret <- vector('numeric', nd)
 
-    for (i in seq_len(nd)) {
-      united <- geos::geos_make_collection(geos::geos_geometry_n(shp_col, which(plans[, map] == dists[i])))
-      mbc <- geos::geos_area(geos::geos_minimum_bounding_circle(united))
-      ret[i] <- mbc
-    }
-
-    ret
+  if (nc == 1) {
+    chunks <- rep(1L, ncol(plans))
+  } else {
+    chunks <- cut(seq_len(ncol(plans)), nc, labels = FALSE)
   }
 
-  c(area_mat) / out
+  plan_chunks <- lapply(seq_len(max(chunks)), function(x) {
+    plans[, chunks == x, drop = FALSE]
+  })
+
+  shp_col_wkt <- geos::as_geos_geometry(shp) |>
+    geos::geos_make_collection() |>
+    geos::geos_write_wkt()
+
+  out <- foreach::foreach(
+    map = seq_along(plan_chunks), .packages = c('redistmetrics'),
+    .export = 'compute_mbc_area', .combine = 'c'
+  ) %oper% {
+    c(compute_mbc_area(shp_col_wkt, plan_chunks[[map]], nd))
+  }
+
+  c(area_mat) / c(out)
 }
 
 #' Calculate Convex Hull Compactness
@@ -839,11 +842,11 @@ comp_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 #' #' data(nh)
 #' data(nh_m)
 #' # For a single plan:
-#' comp_bounding_box_reock(plans = nh$r_2020, shp = nh)
+#' comp_bbox_reock(plans = nh$r_2020, shp = nh)
 #'
 #' # Or many plans:
-#' comp_bounding_box_reock(plans = nh_m[, 1:5], shp = nh)
-comp_bounding_box_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
+#' comp_bbox_reock(plans = nh_m[, 1:5], shp = nh)
+comp_bbox_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
 
   # process objects ----
   shp <- planarize(shp, epsg)

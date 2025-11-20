@@ -47,14 +47,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // bbox_reock
-NumericMatrix bbox_reock(IntegerMatrix dm, NumericVector areas, NumericMatrix extents, int nd);
+NumericMatrix bbox_reock(IntegerMatrix dm, NumericVector areas, NumericMatrix extents, const int nd);
 RcppExport SEXP _redistmetrics_bbox_reock(SEXP dmSEXP, SEXP areasSEXP, SEXP extentsSEXP, SEXP ndSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type areas(areasSEXP);
     Rcpp::traits::input_parameter< NumericMatrix >::type extents(extentsSEXP);
-    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    Rcpp::traits::input_parameter< const int >::type nd(ndSEXP);
     rcpp_result_gen = Rcpp::wrap(bbox_reock(dm, areas, extents, nd));
     return rcpp_result_gen;
 END_RCPP
@@ -104,6 +104,26 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type p(pSEXP);
     rcpp_result_gen = Rcpp::wrap(minkowski(v, m, p));
     return rcpp_result_gen;
+END_RCPP
+}
+// compute_mbc_area
+NumericVector compute_mbc_area(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_mbc_area(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_mbc_area(wkt_collection, plans, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cpp_libgeos_init_api
+void cpp_libgeos_init_api();
+RcppExport SEXP _redistmetrics_cpp_libgeos_init_api() {
+BEGIN_RCPP
+    cpp_libgeos_init_api();
+    return R_NilValue;
 END_RCPP
 }
 // log_st_map
@@ -578,6 +598,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_contiguity", (DL_FUNC) &_redistmetrics_contiguity, 2},
     {"_redistmetrics_hamming", (DL_FUNC) &_redistmetrics_hamming, 2},
     {"_redistmetrics_minkowski", (DL_FUNC) &_redistmetrics_minkowski, 3},
+    {"_redistmetrics_compute_mbc_area", (DL_FUNC) &_redistmetrics_compute_mbc_area, 3},
+    {"_redistmetrics_cpp_libgeos_init_api", (DL_FUNC) &_redistmetrics_cpp_libgeos_init_api, 0},
     {"_redistmetrics_log_st_map", (DL_FUNC) &_redistmetrics_log_st_map, 4},
     {"_redistmetrics_n_removed", (DL_FUNC) &_redistmetrics_n_removed, 3},
     {"_redistmetrics_agg_p2d", (DL_FUNC) &_redistmetrics_agg_p2d, 3},
