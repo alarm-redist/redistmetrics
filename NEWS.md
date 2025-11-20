@@ -1,8 +1,11 @@
+# redistmetrics 1.0.11
+
+* Adds support for Bounding Box Reock via `comp_bbox_reock()`.
+* Adds support for counting total splits for sub-adminstrative units via `splits_sub_total()`.
+
 # redistmetrics 1.0.10
 
 * Adds support for Partisan Dislocation (Deford, Eubank, and Rodden 2022) via `part_dislocation()`.
-* Adds support for Bounding Box Reock via `comp_bbox_reock()`.
-* Adds support for counting total splits for sub-adminstrative units via `splits_sub_total()`.
 
 # redistmetrics 1.0.9
 
