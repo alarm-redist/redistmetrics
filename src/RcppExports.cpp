@@ -32,13 +32,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // maxcommute
-NumericMatrix maxcommute(const IntegerMatrix& plans, const IntegerVector& schools_idx, const NumericMatrix& commute_times, const int ndists);
+NumericMatrix maxcommute(const IntegerMatrix& plans, const IntegerVector& schools_idx, NumericMatrix& commute_times, const int ndists);
 RcppExport SEXP _redistmetrics_maxcommute(SEXP plansSEXP, SEXP schools_idxSEXP, SEXP commute_timesSEXP, SEXP ndistsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
     Rcpp::traits::input_parameter< const IntegerVector& >::type schools_idx(schools_idxSEXP);
-    Rcpp::traits::input_parameter< const NumericMatrix& >::type commute_times(commute_timesSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix& >::type commute_times(commute_timesSEXP);
     Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
     rcpp_result_gen = Rcpp::wrap(maxcommute(plans, schools_idx, commute_times, ndists));
     return rcpp_result_gen;
@@ -390,6 +390,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// splitfeeders
+NumericMatrix splitfeeders(const IntegerMatrix& plans, const IntegerVector& lower, const IntegerVector& schools_idx, const IntegerVector& pop, const int ndists);
+RcppExport SEXP _redistmetrics_splitfeeders(SEXP plansSEXP, SEXP lowerSEXP, SEXP schools_idxSEXP, SEXP popSEXP, SEXP ndistsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type lower(lowerSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type schools_idx(schools_idxSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type pop(popSEXP);
+    Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
+    rcpp_result_gen = Rcpp::wrap(splitfeeders(plans, lower, schools_idx, pop, ndists));
+    return rcpp_result_gen;
+END_RCPP
+}
+// capacityutil
+NumericMatrix capacityutil(const IntegerMatrix& plans, const IntegerVector& schools_idx, const IntegerVector& schools_capacity, const IntegerVector& pop, const int ndists);
+RcppExport SEXP _redistmetrics_capacityutil(SEXP plansSEXP, SEXP schools_idxSEXP, SEXP schools_capacitySEXP, SEXP popSEXP, SEXP ndistsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type schools_idx(schools_idxSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type schools_capacity(schools_capacitySEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type pop(popSEXP);
+    Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
+    rcpp_result_gen = Rcpp::wrap(capacityutil(plans, schools_idx, schools_capacity, pop, ndists));
+    return rcpp_result_gen;
+END_RCPP
+}
 // segregationcalc
 arma::vec segregationcalc(const arma::umat distmat, const arma::vec grouppop, const arma::vec fullpop);
 RcppExport SEXP _redistmetrics_segregationcalc(SEXP distmatSEXP, SEXP grouppopSEXP, SEXP fullpopSEXP) {
@@ -613,6 +641,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_smoothseat", (DL_FUNC) &_redistmetrics_smoothseat, 2},
     {"_redistmetrics_k_nearest_vote_sums", (DL_FUNC) &_redistmetrics_k_nearest_vote_sums, 5},
     {"_redistmetrics_reindex", (DL_FUNC) &_redistmetrics_reindex, 2},
+    {"_redistmetrics_splitfeeders", (DL_FUNC) &_redistmetrics_splitfeeders, 5},
+    {"_redistmetrics_capacityutil", (DL_FUNC) &_redistmetrics_capacityutil, 5},
     {"_redistmetrics_segregationcalc", (DL_FUNC) &_redistmetrics_segregationcalc, 3},
     {"_redistmetrics_splits", (DL_FUNC) &_redistmetrics_splits, 5},
     {"_redistmetrics_distr_cty_splits", (DL_FUNC) &_redistmetrics_distr_cty_splits, 3},

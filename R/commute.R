@@ -1,13 +1,8 @@
 #' Commute-disruption penalty per district
 #'
-#' For each plan and district, computes
-#' \deqn{ \log\!\big(1 + \text{avg extra commute time per person}\big) }
-#' where a unit's "zoned" school is one that lies in the same district
-#' (under the current plan vs the proposed plan).
-#'
 #' @param plans A `redist_plans` object or an integer matrix (n_units × n_plans)
 #' of district labels.
-#' @param shp A `redist_map` or an `sf` with one row per unit.
+#' @param map A `redist_map` or an `sf` with one row per unit.
 #' @param current An integer vector of district assignments under the old plan.
 #' @param schools An integer vector (1-based) of row indices that correspond to
 #' school units in `shp`.
@@ -81,23 +76,14 @@ phase_commute <- function(plans, map, current, schools, commute_times, pop = NUL
 
 #' Max commute penalty per district
 #'
-#' For each plan and district, computes
-#' \deqn{ \log\!\big(1 + \text{max commute time for any person in the district}\big) }
-#' where a unit's "zoned" school is one that lies in the same district
-#' (under the current plan vs the proposed plan).
-#'
 #' @param plans A `redist_plans` object or an integer matrix (n_units × n_plans)
 #' of district labels.
-#' @param shp A `redist_map` or an `sf` with one row per unit.
-#' @param current An integer vector of district assignments under the old plan.
+#' @param map A `redist_map` or an `sf` with one row per unit.
 #' @param schools An integer vector (1-based) of row indices that correspond to
 #' school units in `shp`.
 #' @param commute_times A numeric matrix (n_units × n_schools) of commute times
 #' (in seconds) from each unit to each school. Can be computed via
 #' `redistmetrics::get_commute_matrix()`.
-#' @param pop Optional numeric vector (length n_units) of unit populations.
-#' If `NULL`, attempts to infer from common column names in `shp`; falls back
-#' to all ones.
 #'
 #' @return A numeric vector of length `ndists * nplans`, i.e., the district-by-plan
 #' scores flattened column-major. Use `by_plan()` to get one value per plan.

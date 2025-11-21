@@ -109,6 +109,14 @@ reindex <- function(dm, nd) {
     .Call(`_redistmetrics_reindex`, dm, nd)
 }
 
+splitfeeders <- function(plans, lower, schools_idx, pop, ndists) {
+    .Call(`_redistmetrics_splitfeeders`, plans, lower, schools_idx, pop, ndists)
+}
+
+capacityutil <- function(plans, schools_idx, schools_capacity, pop, ndists) {
+    .Call(`_redistmetrics_capacityutil`, plans, schools_idx, schools_capacity, pop, ndists)
+}
+
 segregationcalc <- function(distmat, grouppop, fullpop) {
     .Call(`_redistmetrics_segregationcalc`, distmat, grouppop, fullpop)
 }
