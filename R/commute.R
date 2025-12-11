@@ -61,25 +61,6 @@ phase_commute <- function(plans, map, current, schools, commute_times, pop = NUL
     if (!is.finite(ndists) || ndists < 1L)
         stop("District labels in `plans` must be positive integers.", call. = FALSE)
 
-
-    # 1. commute_times dimensions
-    if (nrow(commute_times) != n_units)
-        stop("`commute_times` must have nrow equal to nrow(plans).", call. = FALSE)
-
-    if (ncol(commute_times) < ndists)
-        stop("`commute_times` must have at least as many columns as there are districts in `plans`.", call. = FALSE)
-
-    # 2. current must be within commute_times columns
-    max_cur <- max(current, na.rm = TRUE)
-    min_cur <- min(current, na.rm = TRUE)
-    if (min_cur < 1L || max_cur > ncol(commute_times))
-        stop("`current` contains district IDs outside the range of `commute_times` columns.", call. = FALSE)
-
-    # 3. plans must also be within commute_times columns
-    if (any(plans_matrix < 1L | plans_matrix > ncol(commute_times), na.rm = TRUE))
-        stop("`plans` contains district labels outside the range of `commute_times` columns.", call. = FALSE)
-        
-                                        
     # call C++ function to calculate phase commute scores
     res_mat <- phasecommute(
         plans          = plans_matrix,
