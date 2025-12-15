@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">redistmetrics</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.11</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@
       <h1 data-toc-skip>Measures of Partisan Advantage</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/alarm-redist/redistmetrics/blob/v1.0.9/vignettes/party.Rmd" class="external-link"><code>vignettes/party.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/alarm-redist/redistmetrics/blob/main/vignettes/party.Rmd" class="external-link"><code>vignettes/party.Rmd</code></a></small>
       <div class="hidden name"><code>party.Rmd</code></div>
 
     </div>
@@ -476,6 +476,26 @@ such as:</p>
 <p>In this (small) set of simulations, the Democratic 2020 proposal is
 more similar to the simulated plans than the Republican 2020
 proposal.</p>
+</div>
+<div class="section level3">
+<h3 id="partisan-dislocation">Partisan Dislocation<a class="anchor" aria-label="anchor" href="#partisan-dislocation"></a>
+</h3>
+<p>Partisan dislocation is a measure of how different a voter’s district
+is from the partisanship of their k-nearest neighbors.</p>
+<p>Formally, this can be written as:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Partisan Dislocation(i)</mtext><mo>=</mo><msub><mtext mathvariant="normal">voteshare</mtext><mi>D</mi></msub><mo>−</mo><msub><mtext mathvariant="normal">voteshare</mtext><mrow><mi>K</mi><mi>N</mi><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msub></mrow><annotation encoding="application/x-tex">\textrm{Partisan Dislocation(i)} = \textrm{voteshare}_D - \textrm{voteshare}_{KNN(i)}</annotation></semantics></math></p>
+<p>where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mi>N</mi><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">KNN(i)</annotation></semantics></math>
+denotes the k-nearest neighbors of a voter in precinct
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
+Note that for computational reasons and to match the inputs of other
+functions, we do not calculate random points for each voter. Instead, we
+use the distance between precincts to determine the k-nearest neighbors.
+To create a single score for a district, we can take the mean of the
+partisan dislocation scores for each voter in the district. Following
+Deford, Eubank, and Rodden 2022, we can also take the absolute value of
+the partisan dislocation scores to get the partisan dislocation score
+for a district.</p>
 </div>
 </div>
   </div>

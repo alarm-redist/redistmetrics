@@ -13,6 +13,7 @@
 <url><loc>http://alarm-redist.org/redistmetrics/index.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/news/index.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/by_plan.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/comp_bbox_reock.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/comp_bc.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/comp_box_reock.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/comp_ch.html</loc></url>
@@ -43,6 +44,7 @@
 <url><loc>http://alarm-redist.org/redistmetrics/reference/part_decl.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/part_decl_simple.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/part_dil_asym.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/part_dislocation.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/part_dseats.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/part_dvs.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/part_egap.html</loc></url>
@@ -62,6 +64,7 @@
 <url><loc>http://alarm-redist.org/redistmetrics/reference/splits_multi.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/splits_sub_admin.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/splits_sub_count.html</loc></url>
+<url><loc>http://alarm-redist.org/redistmetrics/reference/splits_sub_total.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/splits_total.html</loc></url>
 <url><loc>http://alarm-redist.org/redistmetrics/reference/tally.html</loc></url>
 </urlset>
