@@ -109,12 +109,16 @@ reindex <- function(dm, nd) {
     .Call(`_redistmetrics_reindex`, dm, nd)
 }
 
-splitfeeders <- function(plans, lower, schools_idx, pop, ndists) {
-    .Call(`_redistmetrics_splitfeeders`, plans, lower, schools_idx, pop, ndists)
+splitfeeders <- function(plans, lower, pop, ndists) {
+    .Call(`_redistmetrics_splitfeeders`, plans, lower, pop, ndists)
 }
 
-capacityutil <- function(plans, schools_idx, schools_capacity, pop, ndists) {
-    .Call(`_redistmetrics_capacityutil`, plans, schools_idx, schools_capacity, pop, ndists)
+capacityutil <- function(plans, schools_capacity, pop, ndists) {
+    .Call(`_redistmetrics_capacityutil`, plans, schools_capacity, pop, ndists)
+}
+
+schooloutsidezone <- function(plans, schools_idx, ndists) {
+    .Call(`_redistmetrics_schooloutsidezone`, plans, schools_idx, ndists)
 }
 
 segregationcalc <- function(distmat, grouppop, fullpop) {

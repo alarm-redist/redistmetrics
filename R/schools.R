@@ -3,8 +3,6 @@
 #' @param plans A `redist_plans` object or an integer matrix (n_units × n_plans)
 #' of district labels.
 #' @param lower An assignment vector of lower level school assignments.
-#' @param schools An integer vector (1-based) of row indices that correspond to
-#' school units in `shp`.
 #' @param pop Optional numeric vector (length n_units) of unit populations.
 #' If `NULL`, attempts to infer from common column names in `shp`; falls back
 #' to all ones.
@@ -12,7 +10,7 @@
 #' @return A numeric vector of length `ndists * nplans`, i.e., the district-by-plan
 #' scores flattened column-major. Use `by_plan()` to get one value per plan.
 #' @export
-split_feeders <- function(plans, lower, schools, pop = NULL) {
+split_feeders <- function(plans, lower, pop = NULL) {
     # coerce plans to integer matrix
     plans_matrix <- if (inherits(plans, "redist_plans")) {
         redist::get_plans_matrix(plans)
@@ -30,11 +28,6 @@ split_feeders <- function(plans, lower, schools, pop = NULL) {
     if (length(lower) != n_units)
         stop("`lower` must have length equal to nrow(plans).", call. = FALSE)
     lower <- as.integer(lower)
-    
-    # validate school indices
-    schools <- as.integer(schools)
-    if (any(schools < 1L | schools > n_units))
-        stop("`schools` contains indices out of range.", call. = FALSE)
     
     # validate districts
     ndists <- max(plans_matrix, na.rm = TRUE)
@@ -61,7 +54,6 @@ split_feeders <- function(plans, lower, schools, pop = NULL) {
     res_mat <- splitfeeders(
         plans          = plans_matrix,
         lower          = lower,
-        schools        = schools - 1L,
         pop            = pop,
         ndists         = as.integer(ndists)
     )
@@ -73,8 +65,6 @@ split_feeders <- function(plans, lower, schools, pop = NULL) {
 #'
 #' @param plans A `redist_plans` object or an integer matrix (n_units × n_plans)
 #' of district labels.
-#' @param schools An integer vector (1-based) of row indices that correspond to
-#' school units in `shp`.
 #' @param schools_capacity An integer vector of school capacities in the same order as schools.
 #' @param pop Optional numeric vector (length n_units) of unit populations.
 #' If `NULL`, attempts to infer from common column names in `shp`; falls back
@@ -83,7 +73,7 @@ split_feeders <- function(plans, lower, schools, pop = NULL) {
 #' @return A numeric vector of length `ndists * nplans`, i.e., the district-by-plan
 #' scores flattened column-major. Use `by_plan()` to get one value per plan.
 #' @export
-capacity_util <- function(plans, schools, schools_capacity, pop = NULL) {
+capacity_util <- function(plans, schools_capacity, pop = NULL) {
     # coerce plans to integer matrix
     plans_matrix <- if (inherits(plans, "redist_plans")) {
         redist::get_plans_matrix(plans)
@@ -96,11 +86,6 @@ capacity_util <- function(plans, schools, schools_capacity, pop = NULL) {
     n_plans <- ncol(plans_matrix)
     if (n_units == 0L || n_plans == 0L)
         stop("`plans` must have at least one unit and one plan.", call. = FALSE)
-    
-    # validate school indices
-    schools <- as.integer(schools)
-    if (any(schools < 1L | schools > n_units))
-        stop("`schools` contains indices out of range.", call. = FALSE)
     
     # validate districts
     ndists <- max(plans_matrix, na.rm = TRUE)
@@ -126,11 +111,106 @@ capacity_util <- function(plans, schools, schools_capacity, pop = NULL) {
     # call C++ function to calculate phase commute scores
     res_mat <- capacityutil(
         plans          = plans_matrix,
-        schools        = schools - 1L,
         schools_capacity = schools_capacity,
         pop            = pop,
         ndists         = as.integer(ndists)
     )
+    
+    c(res_mat)
+}
+
+#' School outside zone penalty per district
+#'
+#' @param plans A `redist_plans` object or an integer matrix (n_units × n_plans)
+#' of district labels.
+#' @param schools An integer vector (1-based) of row indices that correspond to
+#' school units in `shp`.
+#'
+#' @return A numeric vector of length `ndists * nplans`, i.e., the district-by-plan
+#' scores flattened column-major. Use `by_plan()` to get one value per plan.
+#' @export
+school_outside_zone <- function(plans, schools) {
+    # coerce plans to integer matrix
+    plans_matrix <- if (inherits(plans, "redist_plans")) {
+        redist::get_plans_matrix(plans)
+    } else {
+        as.matrix(plans)
+    }
+    storage.mode(plans_matrix) <- "integer"
+    
+    n_units <- nrow(plans_matrix)
+    n_plans <- ncol(plans_matrix)
+    if (n_units == 0L || n_plans == 0L)
+        stop("`plans` must have at least one unit and one plan.", call. = FALSE)
+    
+    # validate school indices
+    schools <- as.integer(schools)
+    if (any(schools < 1L | schools > n_units))
+        stop("`schools` contains indices out of range.", call. = FALSE)
+    
+    # validate districts
+    ndists <- max(plans_matrix, na.rm = TRUE)
+    if (!is.finite(ndists) || ndists < 1L)
+        stop("District labels in `plans` must be positive integers.", call. = FALSE)
+                                        
+    # call C++ function to calculate phase commute scores
+    res_mat <- schooloutsidezone(
+        plans          = plans_matrix,
+        schools        = schools - 1L,
+        ndists         = as.integer(ndists)
+    )
+    
+    c(res_mat)
+}
+
+#' Attendance island penalty per district
+#'
+#' @param plans A `redist_plans` object or an integer matrix (n_units × n_plans)
+#' of district labels.
+#'
+#' @return A numeric vector of length `ndists * nplans`, i.e., the district-by-plan
+#' scores flattened column-major. Use `by_plan()` to get one value per plan.
+#' @export
+attendance_islands <- function(plans) {
+    # coerce plans to integer matrix
+    plans_matrix <- if (inherits(plans, "redist_plans")) {
+        redist::get_plans_matrix(plans)
+    } else {
+        as.matrix(plans)
+    }
+    storage.mode(plans_matrix) <- "integer"
+    
+    n_units <- nrow(plans_matrix)
+    n_plans <- ncol(plans_matrix)
+    if (n_units == 0L || n_plans == 0L)
+        stop("`plans` must have at least one unit and one plan.", call. = FALSE)
+    
+    # validate districts
+    ndists <- max(plans_matrix, na.rm = TRUE)
+    if (!is.finite(ndists) || ndists < 1L)
+        stop("District labels in `plans` must be positive integers.", call. = FALSE)
+                                        
+    # matrix to hold counts
+    res_mat <- matrix(NA_real_, nrow = ndists, ncol = n_plans)
+
+    for (p in seq_len(n_plans)) {
+        plan <- plans_matrix[, p]
+
+        for (d in seq_len(ndists)) {
+            idx <- which(!is.na(plan) & plan == d)
+
+            if (length(idx) == 0L) {
+                # no units assigned to this district in this plan
+                res_mat[d, p] <- NA_real_
+            } else {
+                # union all units in district, cast to MULTIPOLYGON, count parts
+                uni <- sf::st_union(geom[idx])
+                mp  <- sf::st_cast(uni, "MULTIPOLYGON")
+                # number of discontiguous parts in this district
+                res_mat[d, p] <- sf::lengths(sf::st_geometry(mp))
+            }
+        }
+    }
     
     c(res_mat)
 }

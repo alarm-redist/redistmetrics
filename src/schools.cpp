@@ -6,12 +6,10 @@ using namespace Rcpp;
 // [[Rcpp::export(rng = false)]]
 NumericMatrix splitfeeders(const IntegerMatrix& plans,
                            const IntegerVector& lower,
-                           const IntegerVector& schools_idx, // 0-based
                            const IntegerVector& pop,
                            const int ndists) {
     const int n_units   = plans.nrow();
     const int n_plans   = plans.ncol();
-    const int n_schools = schools_idx.size();
     const int n_lower   = unique(lower).size();
     
     // create empty output matrix
@@ -42,16 +40,14 @@ NumericMatrix splitfeeders(const IntegerMatrix& plans,
     return out;
 }
 
-// Calculate matrix of capacity utilization scores
+// Calculate matrix of capacity utilization percentages
 // [[Rcpp::export(rng = false)]]
 NumericMatrix capacityutil(const IntegerMatrix& plans,
-                       const IntegerVector& schools_idx, // 0-based
                        const IntegerVector& schools_capacity, // same order as schools_idx
                        const IntegerVector& pop,
                        const int ndists) {
     const int n_units   = plans.nrow();
     const int n_plans   = plans.ncol();
-    const int n_schools = schools_idx.size();
     
     // create empty output matrix
     NumericMatrix out(ndists, n_plans);
@@ -67,15 +63,31 @@ NumericMatrix capacityutil(const IntegerMatrix& plans,
         // Compute capacity utilization percentage for each district
         for (int d = 0; d < ndists; d++) {
             double ratio = distr_pop[d] / schools_capacity[d];
-            if (ratio < 0.85 || ratio > 1.15) {
-                out(d, p) = 20;
+            out(d, p) = ratio;
+        }
+    }
+    
+    return out;
+}
+
+// Calculate matrix of school outside zone counts
+// [[Rcpp::export(rng = false)]]
+NumericMatrix schooloutsidezone(const IntegerMatrix& plans,
+                       const IntegerVector& schools_idx, // 0-based
+                       const int ndists) {
+    const int n_plans   = plans.ncol();
+    
+    // create empty output matrix
+    NumericMatrix out(ndists, n_plans);
+    
+    for (int p = 0; p < n_plans; ++p) {
+        int count = 0;
+        for (int d = 0; d < ndists; d++) {
+            // Ensure that the school assigned to district d is actually in district d
+            if (plans(schools_idx[d], p) != d) {
+                count++;
             }
-            else if ((0.85 <= ratio && ratio <= 0.94) || 1.05 <= ratio <= 1.14) {
-                out(d, p) = 10;
-            }
-            else if (0.95 <= ratio && ratio <= 1.04) {
-                out(d, p) = 0;
-            }
+            out(d, p) = count;
         }
     }
     

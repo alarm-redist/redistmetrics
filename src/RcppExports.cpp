@@ -391,30 +391,40 @@ BEGIN_RCPP
 END_RCPP
 }
 // splitfeeders
-NumericMatrix splitfeeders(const IntegerMatrix& plans, const IntegerVector& lower, const IntegerVector& schools_idx, const IntegerVector& pop, const int ndists);
-RcppExport SEXP _redistmetrics_splitfeeders(SEXP plansSEXP, SEXP lowerSEXP, SEXP schools_idxSEXP, SEXP popSEXP, SEXP ndistsSEXP) {
+NumericMatrix splitfeeders(const IntegerMatrix& plans, const IntegerVector& lower, const IntegerVector& pop, const int ndists);
+RcppExport SEXP _redistmetrics_splitfeeders(SEXP plansSEXP, SEXP lowerSEXP, SEXP popSEXP, SEXP ndistsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
     Rcpp::traits::input_parameter< const IntegerVector& >::type lower(lowerSEXP);
-    Rcpp::traits::input_parameter< const IntegerVector& >::type schools_idx(schools_idxSEXP);
     Rcpp::traits::input_parameter< const IntegerVector& >::type pop(popSEXP);
     Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
-    rcpp_result_gen = Rcpp::wrap(splitfeeders(plans, lower, schools_idx, pop, ndists));
+    rcpp_result_gen = Rcpp::wrap(splitfeeders(plans, lower, pop, ndists));
     return rcpp_result_gen;
 END_RCPP
 }
 // capacityutil
-NumericMatrix capacityutil(const IntegerMatrix& plans, const IntegerVector& schools_idx, const IntegerVector& schools_capacity, const IntegerVector& pop, const int ndists);
-RcppExport SEXP _redistmetrics_capacityutil(SEXP plansSEXP, SEXP schools_idxSEXP, SEXP schools_capacitySEXP, SEXP popSEXP, SEXP ndistsSEXP) {
+NumericMatrix capacityutil(const IntegerMatrix& plans, const IntegerVector& schools_capacity, const IntegerVector& pop, const int ndists);
+RcppExport SEXP _redistmetrics_capacityutil(SEXP plansSEXP, SEXP schools_capacitySEXP, SEXP popSEXP, SEXP ndistsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type schools_capacity(schools_capacitySEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type pop(popSEXP);
+    Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
+    rcpp_result_gen = Rcpp::wrap(capacityutil(plans, schools_capacity, pop, ndists));
+    return rcpp_result_gen;
+END_RCPP
+}
+// schooloutsidezone
+NumericMatrix schooloutsidezone(const IntegerMatrix& plans, const IntegerVector& schools_idx, const int ndists);
+RcppExport SEXP _redistmetrics_schooloutsidezone(SEXP plansSEXP, SEXP schools_idxSEXP, SEXP ndistsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
     Rcpp::traits::input_parameter< const IntegerVector& >::type schools_idx(schools_idxSEXP);
-    Rcpp::traits::input_parameter< const IntegerVector& >::type schools_capacity(schools_capacitySEXP);
-    Rcpp::traits::input_parameter< const IntegerVector& >::type pop(popSEXP);
     Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
-    rcpp_result_gen = Rcpp::wrap(capacityutil(plans, schools_idx, schools_capacity, pop, ndists));
+    rcpp_result_gen = Rcpp::wrap(schooloutsidezone(plans, schools_idx, ndists));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -641,8 +651,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_smoothseat", (DL_FUNC) &_redistmetrics_smoothseat, 2},
     {"_redistmetrics_k_nearest_vote_sums", (DL_FUNC) &_redistmetrics_k_nearest_vote_sums, 5},
     {"_redistmetrics_reindex", (DL_FUNC) &_redistmetrics_reindex, 2},
-    {"_redistmetrics_splitfeeders", (DL_FUNC) &_redistmetrics_splitfeeders, 5},
-    {"_redistmetrics_capacityutil", (DL_FUNC) &_redistmetrics_capacityutil, 5},
+    {"_redistmetrics_splitfeeders", (DL_FUNC) &_redistmetrics_splitfeeders, 4},
+    {"_redistmetrics_capacityutil", (DL_FUNC) &_redistmetrics_capacityutil, 4},
+    {"_redistmetrics_schooloutsidezone", (DL_FUNC) &_redistmetrics_schooloutsidezone, 3},
     {"_redistmetrics_segregationcalc", (DL_FUNC) &_redistmetrics_segregationcalc, 3},
     {"_redistmetrics_splits", (DL_FUNC) &_redistmetrics_splits, 5},
     {"_redistmetrics_distr_cty_splits", (DL_FUNC) &_redistmetrics_distr_cty_splits, 3},
