@@ -62,7 +62,9 @@ NumericMatrix capacityutil(const IntegerMatrix& plans,
 
         // Compute capacity utilization percentage for each district
         for (int d = 0; d < ndists; d++) {
-            double ratio = distr_pop[d] / schools_capacity[d];
+            // estimate population of school aged children assigned to district d
+            double normalized_pop = distr_pop[d] / sum(pop) * sum(schools_capacity);
+            double ratio = normalized_pop / schools_capacity[d];
             out(d, p) = ratio;
         }
     }
