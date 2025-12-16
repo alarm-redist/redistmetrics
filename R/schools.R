@@ -207,7 +207,9 @@ attendance_islands <- function(plans) {
                 uni <- sf::st_union(geom[idx])
                 mp  <- sf::st_cast(uni, "MULTIPOLYGON")
                 # number of discontiguous parts in this district
-                res_mat[d, p] <- sf::lengths(sf::st_geometry(mp))
+                n_parts <- sf::lengths(sf::st_geometry(mp))
+                # only count extra islands
+                res_mat[d, p] <- max(n_parts - 1L, 0L)
             }
         }
     }
