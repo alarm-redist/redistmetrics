@@ -112,7 +112,7 @@ max_commute <- function(plans, map, schools, commute_times) {
     if (!is.finite(ndists) || ndists < 1L)
         stop("District labels in `plans` must be positive integers.", call. = FALSE)
                                         
-    # call C++ function to calculate phase commute scores
+    # call C++ function to calculate max commute scores
     res_mat <- maxcommute(
         plans          = plans_matrix,
         schools        = schools - 1L,

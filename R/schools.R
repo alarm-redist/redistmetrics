@@ -197,6 +197,7 @@ attendance_islands <- function(plans) {
         plan <- plans_matrix[, p]
 
         for (d in seq_len(ndists)) {
+            # get indices of units in this district
             idx <- which(!is.na(plan) & plan == d)
 
             if (length(idx) == 0L) {

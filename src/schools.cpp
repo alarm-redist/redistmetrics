@@ -86,6 +86,8 @@ NumericMatrix schooloutsidezone(const IntegerMatrix& plans,
         int count = 0;
         for (int d = 0; d < ndists; d++) {
             // Ensure that the school assigned to district d is actually in district d
+            // TODO: verify that district i always corresponds to school i
+            // Otherwise, just count how many districts have more than 1 school within its boundaries
             if (plans(schools_idx[d], p) != d) {
                 count++;
             }
