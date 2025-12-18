@@ -196,6 +196,7 @@ attendance_islands <- function(plans) {
     for (p in seq_len(n_plans)) {
         plan <- plans_matrix[, p]
 
+        count <- 0
         for (d in seq_len(ndists)) {
             # get indices of units in this district
             idx <- which(!is.na(plan) & plan == d)
@@ -210,9 +211,11 @@ attendance_islands <- function(plans) {
                 # number of discontiguous parts in this district
                 n_parts <- sf::lengths(sf::st_geometry(mp))
                 # only count extra islands
-                res_mat[d, p] <- max(n_parts - 1L, 0L)
+                count <- count + max(n_parts - 1L, 0L)
             }
         }
+
+        res_mat[, p] <- count
     }
     
     c(res_mat)
