@@ -4,14 +4,11 @@
 \alias{capacity_util}
 \title{Capacity utilization penalty per district}
 \usage{
-capacity_util(plans, schools, schools_capacity, pop = NULL)
+capacity_util(plans, schools_capacity, pop = NULL)
 }
 \arguments{
 \item{plans}{A \code{redist_plans} object or an integer matrix (n_units × n_plans)
 of district labels.}
-
-\item{schools}{An integer vector (1-based) of row indices that correspond to
-school units in \code{shp}.}
 
 \item{schools_capacity}{An integer vector of school capacities in the same order as schools.}
 

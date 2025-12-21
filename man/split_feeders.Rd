@@ -4,16 +4,13 @@
 \alias{split_feeders}
 \title{Split feeder penalty per district}
 \usage{
-split_feeders(plans, lower, schools, pop = NULL)
+split_feeders(plans, lower, pop = NULL)
 }
 \arguments{
 \item{plans}{A \code{redist_plans} object or an integer matrix (n_units × n_plans)
 of district labels.}
 
 \item{lower}{An assignment vector of lower level school assignments.}
-
-\item{schools}{An integer vector (1-based) of row indices that correspond to
-school units in \code{shp}.}
 
 \item{pop}{Optional numeric vector (length n_units) of unit populations.
 If \code{NULL}, attempts to infer from common column names in \code{shp}; falls back
