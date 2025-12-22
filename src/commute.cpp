@@ -7,12 +7,10 @@ using namespace Rcpp;
 NumericMatrix phasecommute(const IntegerMatrix& plans,
                            const IntegerVector& current,
                            const NumericVector& pop,
-                           const IntegerVector& schools_idx, // 0-based
                            const NumericMatrix& commute_times,  // n_units x n_schools
                            const int ndists) {
     const int n_units   = plans.nrow();
     const int n_plans   = plans.ncol();
-    const int n_schools = schools_idx.size();
     
     // create empty output matrix
     NumericMatrix out(ndists, n_plans);
@@ -54,12 +52,10 @@ NumericMatrix phasecommute(const IntegerMatrix& plans,
 // Calculate matrix of max commute scores
 // [[Rcpp::export(rng = false)]]
 NumericMatrix maxcommute(const IntegerMatrix& plans,
-                         const IntegerVector& schools_idx, // 0-based
                          NumericMatrix& commute_times,  // n_units x n_schools
                          const int ndists) {
     const int n_units   = plans.nrow();
     const int n_plans   = plans.ncol();
-    const int n_schools = schools_idx.size();
     
     // create empty output matrix
     NumericMatrix out(ndists, n_plans);
@@ -76,7 +72,7 @@ NumericMatrix maxcommute(const IntegerMatrix& plans,
             }
         }
         
-        // per-district score: log1p(max extra commute for a person in the district)
+        // per-district score: log1p(max commute for a person in the district)
         for (int d = 0; d < ndists; d++) {
             out(d, p) = std::log1p(max_time[d]);
         }

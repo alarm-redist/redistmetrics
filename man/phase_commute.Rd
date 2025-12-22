@@ -4,7 +4,7 @@
 \alias{phase_commute}
 \title{Commute-disruption penalty per district}
 \usage{
-phase_commute(plans, map, current, schools, commute_times, pop = NULL)
+phase_commute(plans, map, current, commute_times, pop = NULL)
 }
 \arguments{
 \item{plans}{A \code{redist_plans} object or an integer matrix (n_units × n_plans)
@@ -13,9 +13,6 @@ of district labels.}
 \item{map}{A \code{redist_map} or an \code{sf} with one row per unit.}
 
 \item{current}{An integer vector of district assignments under the old plan.}
-
-\item{schools}{An integer vector (1-based) of row indices that correspond to
-school units in \code{shp}.}
 
 \item{commute_times}{A numeric matrix (n_units × n_schools) of commute times
 (in seconds) from each unit to each school. Can be computed via

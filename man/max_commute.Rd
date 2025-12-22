@@ -4,16 +4,13 @@
 \alias{max_commute}
 \title{Max commute penalty per district}
 \usage{
-max_commute(plans, map, schools, commute_times)
+max_commute(plans, map, commute_times)
 }
 \arguments{
 \item{plans}{A \code{redist_plans} object or an integer matrix (n_units × n_plans)
 of district labels.}
 
 \item{map}{A \code{redist_map} or an \code{sf} with one row per unit.}
-
-\item{schools}{An integer vector (1-based) of row indices that correspond to
-school units in \code{shp}.}
 
 \item{commute_times}{A numeric matrix (n_units × n_schools) of commute times
 (in seconds) from each unit to each school. Can be computed via

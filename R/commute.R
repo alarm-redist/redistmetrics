@@ -4,8 +4,6 @@
 #' of district labels.
 #' @param map A `redist_map` or an `sf` with one row per unit.
 #' @param current An integer vector of district assignments under the old plan.
-#' @param schools An integer vector (1-based) of row indices that correspond to
-#' school units in `shp`.
 #' @param commute_times A numeric matrix (n_units × n_schools) of commute times
 #' (in seconds) from each unit to each school. Can be computed via
 #' `redistmetrics::get_commute_matrix()`.
@@ -16,7 +14,7 @@
 #' @return A numeric vector of length `ndists * nplans`, i.e., the district-by-plan
 #' scores flattened column-major. Use `by_plan()` to get one value per plan.
 #' @export
-phase_commute <- function(plans, map, current, schools, commute_times, pop = NULL) {
+phase_commute <- function(plans, map, current, commute_times, pop = NULL) {
     # coerce plans to integer matrix
     plans_matrix <- if (inherits(plans, "redist_plans")) {
         redist::get_plans_matrix(plans)
@@ -34,11 +32,6 @@ phase_commute <- function(plans, map, current, schools, commute_times, pop = NUL
     if (length(current) != n_units)
         stop("`current` must have length equal to nrow(plans).", call. = FALSE)
     current <- as.integer(current)
-    
-    # validate school indices
-    schools <- as.integer(schools)
-    if (any(schools < 1L | schools > n_units))
-        stop("`schools` contains indices out of range.", call. = FALSE)
         
     # get population
     shp <- as_sf(map)
@@ -66,7 +59,6 @@ phase_commute <- function(plans, map, current, schools, commute_times, pop = NUL
         plans          = plans_matrix,
         current        = current,
         pop            = pop,
-        schools        = schools - 1L,
         commute_times  = commute_times,
         ndists         = as.integer(ndists)
     )
@@ -79,8 +71,6 @@ phase_commute <- function(plans, map, current, schools, commute_times, pop = NUL
 #' @param plans A `redist_plans` object or an integer matrix (n_units × n_plans)
 #' of district labels.
 #' @param map A `redist_map` or an `sf` with one row per unit.
-#' @param schools An integer vector (1-based) of row indices that correspond to
-#' school units in `shp`.
 #' @param commute_times A numeric matrix (n_units × n_schools) of commute times
 #' (in seconds) from each unit to each school. Can be computed via
 #' `redistmetrics::get_commute_matrix()`.
@@ -88,7 +78,7 @@ phase_commute <- function(plans, map, current, schools, commute_times, pop = NUL
 #' @return A numeric vector of length `ndists * nplans`, i.e., the district-by-plan
 #' scores flattened column-major. Use `by_plan()` to get one value per plan.
 #' @export
-max_commute <- function(plans, map, schools, commute_times) {
+max_commute <- function(plans, map, commute_times) {
     # coerce plans to integer matrix
     plans_matrix <- if (inherits(plans, "redist_plans")) {
         redist::get_plans_matrix(plans)
@@ -102,11 +92,6 @@ max_commute <- function(plans, map, schools, commute_times) {
     if (n_units == 0L || n_plans == 0L)
         stop("`plans` must have at least one unit and one plan.", call. = FALSE)
     
-    # validate school indices
-    schools <- as.integer(schools)
-    if (any(schools < 1L | schools > n_units))
-        stop("`schools` contains indices out of range.", call. = FALSE)
-    
     # validate districts
     ndists <- max(plans_matrix, na.rm = TRUE)
     if (!is.finite(ndists) || ndists < 1L)
@@ -115,7 +100,6 @@ max_commute <- function(plans, map, schools, commute_times) {
     # call C++ function to calculate max commute scores
     res_mat <- maxcommute(
         plans          = plans_matrix,
-        schools        = schools - 1L,
         commute_times  = commute_times,
         ndists         = as.integer(ndists)
     )

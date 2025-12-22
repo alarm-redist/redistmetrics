@@ -17,30 +17,28 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // phasecommute
-NumericMatrix phasecommute(const IntegerMatrix& plans, const IntegerVector& current, const NumericVector& pop, const IntegerVector& schools_idx, const NumericMatrix& commute_times, const int ndists);
-RcppExport SEXP _redistmetrics_phasecommute(SEXP plansSEXP, SEXP currentSEXP, SEXP popSEXP, SEXP schools_idxSEXP, SEXP commute_timesSEXP, SEXP ndistsSEXP) {
+NumericMatrix phasecommute(const IntegerMatrix& plans, const IntegerVector& current, const NumericVector& pop, const NumericMatrix& commute_times, const int ndists);
+RcppExport SEXP _redistmetrics_phasecommute(SEXP plansSEXP, SEXP currentSEXP, SEXP popSEXP, SEXP commute_timesSEXP, SEXP ndistsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
     Rcpp::traits::input_parameter< const IntegerVector& >::type current(currentSEXP);
     Rcpp::traits::input_parameter< const NumericVector& >::type pop(popSEXP);
-    Rcpp::traits::input_parameter< const IntegerVector& >::type schools_idx(schools_idxSEXP);
     Rcpp::traits::input_parameter< const NumericMatrix& >::type commute_times(commute_timesSEXP);
     Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
-    rcpp_result_gen = Rcpp::wrap(phasecommute(plans, current, pop, schools_idx, commute_times, ndists));
+    rcpp_result_gen = Rcpp::wrap(phasecommute(plans, current, pop, commute_times, ndists));
     return rcpp_result_gen;
 END_RCPP
 }
 // maxcommute
-NumericMatrix maxcommute(const IntegerMatrix& plans, const IntegerVector& schools_idx, NumericMatrix& commute_times, const int ndists);
-RcppExport SEXP _redistmetrics_maxcommute(SEXP plansSEXP, SEXP schools_idxSEXP, SEXP commute_timesSEXP, SEXP ndistsSEXP) {
+NumericMatrix maxcommute(const IntegerMatrix& plans, NumericMatrix& commute_times, const int ndists);
+RcppExport SEXP _redistmetrics_maxcommute(SEXP plansSEXP, SEXP commute_timesSEXP, SEXP ndistsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
-    Rcpp::traits::input_parameter< const IntegerVector& >::type schools_idx(schools_idxSEXP);
     Rcpp::traits::input_parameter< NumericMatrix& >::type commute_times(commute_timesSEXP);
     Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
-    rcpp_result_gen = Rcpp::wrap(maxcommute(plans, schools_idx, commute_times, ndists));
+    rcpp_result_gen = Rcpp::wrap(maxcommute(plans, commute_times, ndists));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -624,8 +622,8 @@ RcppExport SEXP _redistmetrics_RcppExport_registerCCallable() {
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_redistmetrics_phasecommute", (DL_FUNC) &_redistmetrics_phasecommute, 6},
-    {"_redistmetrics_maxcommute", (DL_FUNC) &_redistmetrics_maxcommute, 4},
+    {"_redistmetrics_phasecommute", (DL_FUNC) &_redistmetrics_phasecommute, 5},
+    {"_redistmetrics_maxcommute", (DL_FUNC) &_redistmetrics_maxcommute, 3},
     {"_redistmetrics_polsbypopper", (DL_FUNC) &_redistmetrics_polsbypopper, 6},
     {"_redistmetrics_schwartzberg", (DL_FUNC) &_redistmetrics_schwartzberg, 6},
     {"_redistmetrics_talisman", (DL_FUNC) &_redistmetrics_talisman, 4},

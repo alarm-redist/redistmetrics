@@ -21,7 +21,7 @@ NumericMatrix splitfeeders(const IntegerMatrix& plans,
 
         // For each lower level district and upper level district, store how many students went from lower to upper
         for (int v = 0; v < n_units; ++v) {
-            int lower_distr = lower[v];
+            int lower_distr = lower[v] - 1;
             int upper_distr = plans(v, p);
             lower_to_upper(lower_distr, upper_distr) += pop[v];
         }
