@@ -14,24 +14,10 @@ NumericMatrix phasecommute(const IntegerMatrix& plans,
     const int n_plans   = plans.ncol();
     const int n_schools = schools_idx.size();
     
-    // schools' districts under current plan
-    IntegerVector schools_current_distr(n_schools);
-    for (int j = 0; j < n_schools; j++) {
-        int school_row = schools_idx[j];  // jth school's row number in map
-        schools_current_distr[j] = current[school_row];  // current district ID of jth school
-    }
-    
     // create empty output matrix
     NumericMatrix out(ndists, n_plans);
     
     for (int p = 0; p < n_plans; ++p) {
-        // schools' districts under proposed plan p
-        IntegerVector schools_new_distr(n_schools);
-        for (int j = 0; j < n_schools; j++) {
-            int school_row = schools_idx[j];
-            schools_new_distr[j] = plans(school_row, p);
-        }
-        
         std::vector<double> reassigned_extra(ndists, 0.0);
         std::vector<double> distr_pop(ndists, 0.0);
         
@@ -39,18 +25,18 @@ NumericMatrix phasecommute(const IntegerMatrix& plans,
             int distr_new = plans(k, p);
 
             // denominator: total population in each new district
-            if (distr_new >= 1 && distr_new <= ndists && std::isfinite(pop[k])) {
-                distr_pop[distr_new - 1] += pop[k];
+            if (distr_new >= 0 && distr_new < ndists && std::isfinite(pop[k])) {
+                distr_pop[distr_new] += pop[k];
             }
 
             // numerator: add commute where the zoned school changes
-            if (current[k] == distr_new) continue;
+            if (current[k] - 1 == distr_new) continue;
             
             double commute_old = commute_times(k, current[k] - 1);
-            double commute_new = commute_times(k, distr_new - 1);
+            double commute_new = commute_times(k, distr_new);
             
             if (std::isfinite(commute_old) && std::isfinite(commute_new) && commute_old < commute_new && std::isfinite(pop[k]) && pop[k] > 0.0) {
-                reassigned_extra[distr_new - 1] += pop[k] * (commute_new - commute_old);
+                reassigned_extra[distr_new] += pop[k] * (commute_new - commute_old);
             }
         }
         
@@ -79,21 +65,14 @@ NumericMatrix maxcommute(const IntegerMatrix& plans,
     NumericMatrix out(ndists, n_plans);
     
     for (int p = 0; p < n_plans; ++p) {
-        // schools' districts under proposed plan p
-        IntegerVector schools_new_distr(n_schools);
-        for (int j = 0; j < n_schools; j++) {
-            int school_row = schools_idx[j];
-            schools_new_distr[j] = plans(school_row, p);
-        }
-        
         std::vector<double> max_time(ndists, 0.0);
         
         // find the maximum commute for any individual in each new district
         for (int k = 0; k < n_units; ++k) {
             int distr_new = plans(k, p);
-            double commute_new = commute_times(k, distr_new - 1);
-            if (std::isfinite(commute_new) && commute_new > max_time[distr_new - 1]) {
-                max_time[distr_new - 1] = commute_new;
+            double commute_new = commute_times(k, distr_new);
+            if (std::isfinite(commute_new) && commute_new > max_time[distr_new]) {
+                max_time[distr_new] = commute_new;
             }
         }
         
