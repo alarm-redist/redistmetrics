@@ -167,11 +167,12 @@ school_outside_zone <- function(plans, schools) {
 #'
 #' @param plans A `redist_plans` object or an integer matrix (n_units × n_plans)
 #' of district labels.
+#' @param map A `redist_map` or an `sf` with one row per unit.
 #'
 #' @return A numeric vector of length `ndists * nplans`, i.e., the district-by-plan
 #' scores flattened column-major. Use `by_plan()` to get one value per plan.
 #' @export
-attendance_islands <- function(plans) {
+attendance_islands <- function(plans, map) {
     # coerce plans to integer matrix
     plans_matrix <- if (inherits(plans, "redist_plans")) {
         redist::get_plans_matrix(plans)
@@ -192,6 +193,9 @@ attendance_islands <- function(plans) {
                                         
     # matrix to hold counts
     res_mat <- matrix(NA_real_, nrow = ndists, ncol = n_plans)
+
+    # get geometries
+    geom <- sf::st_geometry(map)
 
     for (p in seq_len(n_plans)) {
         plan <- plans_matrix[, p]

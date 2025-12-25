@@ -4,11 +4,13 @@
 \alias{attendance_islands}
 \title{Attendance island penalty per district}
 \usage{
-attendance_islands(plans)
+attendance_islands(plans, map)
 }
 \arguments{
 \item{plans}{A \code{redist_plans} object or an integer matrix (n_units × n_plans)
 of district labels.}
+
+\item{map}{A \code{redist_map} or an \code{sf} with one row per unit.}
 }
 \value{
 A numeric vector of length \code{ndists * nplans}, i.e., the district-by-plan
