@@ -191,36 +191,12 @@ attendance_islands <- function(plans, map) {
     if (!is.finite(ndists) || ndists < 1L)
         stop("District labels in `plans` must be positive integers.", call. = FALSE)
                                         
-    # matrix to hold counts
-    res_mat <- matrix(NA_real_, nrow = ndists, ncol = n_plans)
-
-    # get geometries
-    geom <- sf::st_geometry(map)
-
-    for (p in seq_len(n_plans)) {
-        plan <- plans_matrix[, p]
-
-        count <- 0
-        for (d in seq_len(ndists)) {
-            # get indices of units in this district
-            idx <- which(!is.na(plan) & plan == d)
-
-            if (length(idx) == 0L) {
-                # no units assigned to this district in this plan
-                res_mat[d, p] <- NA_real_
-            } else {
-                # union all units in district, cast to MULTIPOLYGON, count parts
-                uni <- sf::st_union(geom[idx])
-                mp  <- sf::st_cast(uni, "MULTIPOLYGON")
-                # number of discontiguous parts in this district
-                n_parts <- lengths(sf::st_geometry(mp))
-                # only count extra islands
-                count <- count + max(n_parts - 1L, 0L)
-            }
-        }
-
-        res_mat[, p] <- count
-    }
+    # call C++ function to calculate phase commute scores
+    res_mat <- attendanceisland(
+        plans          = plans_matrix,
+        adjacency      = map$adj,
+        ndists         = as.integer(ndists)
+    )
     
     c(res_mat)
 }

@@ -121,6 +121,10 @@ schooloutsidezone <- function(plans, schools_idx, ndists) {
     .Call(`_redistmetrics_schooloutsidezone`, plans, schools_idx, ndists)
 }
 
+attendanceisland <- function(plans, adjacency, ndists) {
+    .Call(`_redistmetrics_attendanceisland`, plans, adjacency, ndists)
+}
+
 segregationcalc <- function(distmat, grouppop, fullpop) {
     .Call(`_redistmetrics_segregationcalc`, distmat, grouppop, fullpop)
 }

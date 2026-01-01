@@ -1,5 +1,7 @@
 #include <Rcpp.h>
 #include <cmath>
+#include <queue>
+#include <set>
 using namespace Rcpp;
 
 // Calculate matrix of split feeder scores
@@ -92,6 +94,68 @@ NumericMatrix schooloutsidezone(const IntegerMatrix& plans,
         }
         for (int d = 0; d < ndists; d++) {
             out(d, p) = count;
+        }
+    }
+    
+    return out;
+}
+
+// Calculate matrix of connected components per district
+// [[Rcpp::export(rng = false)]]
+NumericMatrix attendanceisland(const IntegerMatrix& plans,
+                               const Rcpp::List& adjacency,
+                               const int ndists) {
+    const int n_units = plans.nrow();
+    const int n_plans = plans.ncol();
+    
+    // create empty output matrix
+    NumericMatrix out(ndists, n_plans);
+    
+    for (int p = 0; p < n_plans; ++p) {
+        // For each district, count connected components
+        for (int d = 0; d < ndists; ++d) {
+            // Get all units in district d (1-indexed in plans)
+            std::vector<int> units_in_district;
+            for (int k = 0; k < n_units; ++k) {
+                if (plans(k, p) == d + 1) {  // d+1 because districts are 1-indexed
+                    units_in_district.push_back(k);
+                }
+            }
+            
+            // Track visited units
+            std::set<int> units_set(units_in_district.begin(), units_in_district.end());
+            std::set<int> visited;
+            int components = 0;
+            
+            // BFS to count connected components
+            for (int start : units_in_district) {
+                if (visited.find(start) != visited.end()) continue;
+                
+                components++;
+                std::queue<int> q;
+                q.push(start);
+                visited.insert(start);
+                
+                while (!q.empty()) {
+                    int u = q.front();
+                    q.pop();
+                    
+                    // Get neighbors of u
+                    IntegerVector neighbors = adjacency[u];
+                    for (int i = 0; i < neighbors.length(); ++i) {
+                        int v = neighbors[i];
+                        
+                        // If v is in same district and not visited, explore it
+                        if (units_set.find(v) != units_set.end() && 
+                            visited.find(v) == visited.end()) {
+                            visited.insert(v);
+                            q.push(v);
+                        }
+                    }
+                }
+            }
+            
+            out(d, p) = components - 1; // store number of islands
         }
     }
     

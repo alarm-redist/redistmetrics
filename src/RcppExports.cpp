@@ -426,6 +426,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// attendanceisland
+NumericMatrix attendanceisland(const IntegerMatrix& plans, const Rcpp::List& adjacency, const int ndists);
+RcppExport SEXP _redistmetrics_attendanceisland(SEXP plansSEXP, SEXP adjacencySEXP, SEXP ndistsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< const Rcpp::List& >::type adjacency(adjacencySEXP);
+    Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
+    rcpp_result_gen = Rcpp::wrap(attendanceisland(plans, adjacency, ndists));
+    return rcpp_result_gen;
+END_RCPP
+}
 // segregationcalc
 arma::vec segregationcalc(const arma::umat distmat, const arma::vec grouppop, const arma::vec fullpop);
 RcppExport SEXP _redistmetrics_segregationcalc(SEXP distmatSEXP, SEXP grouppopSEXP, SEXP fullpopSEXP) {
@@ -652,6 +664,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_splitfeeders", (DL_FUNC) &_redistmetrics_splitfeeders, 4},
     {"_redistmetrics_capacityutil", (DL_FUNC) &_redistmetrics_capacityutil, 4},
     {"_redistmetrics_schooloutsidezone", (DL_FUNC) &_redistmetrics_schooloutsidezone, 3},
+    {"_redistmetrics_attendanceisland", (DL_FUNC) &_redistmetrics_attendanceisland, 3},
     {"_redistmetrics_segregationcalc", (DL_FUNC) &_redistmetrics_segregationcalc, 3},
     {"_redistmetrics_splits", (DL_FUNC) &_redistmetrics_splits, 5},
     {"_redistmetrics_distr_cty_splits", (DL_FUNC) &_redistmetrics_distr_cty_splits, 3},
