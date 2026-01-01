@@ -74,7 +74,7 @@ NumericMatrix capacityutil(const IntegerMatrix& plans,
     return out;
 }
 
-// Calculate matrix of school outside zone counts
+// Calculate matrix of school outside zone counts for each plan
 // [[Rcpp::export(rng = false)]]
 NumericMatrix schooloutsidezone(const IntegerMatrix& plans,
                        const IntegerVector& schools_idx, // 0-based
@@ -100,7 +100,7 @@ NumericMatrix schooloutsidezone(const IntegerMatrix& plans,
     return out;
 }
 
-// Calculate matrix of connected components per district
+// Calculate matrix of connected components in each plan
 // [[Rcpp::export(rng = false)]]
 NumericMatrix attendanceisland(const IntegerMatrix& plans,
                                const Rcpp::List& adjacency,
@@ -112,6 +112,8 @@ NumericMatrix attendanceisland(const IntegerMatrix& plans,
     NumericMatrix out(ndists, n_plans);
     
     for (int p = 0; p < n_plans; ++p) {
+        int island_count = 0;
+
         // For each district, count connected components
         for (int d = 0; d < ndists; ++d) {
             // Get all units in district d (1-indexed in plans)
@@ -155,7 +157,11 @@ NumericMatrix attendanceisland(const IntegerMatrix& plans,
                 }
             }
             
-            out(d, p) = components - 1; // store number of islands
+            island_count += components - 1; // add number of islands
+        }
+
+        for (int d = 0; d < ndists; d++) {
+            out(d, p) = island_count;
         }
     }
     
