@@ -22,7 +22,7 @@ NumericMatrix splitfeeders(const IntegerMatrix& plans,
         // For each lower level district and upper level district, store how many students went from lower to upper
         for (int v = 0; v < n_units; ++v) {
             int lower_distr = lower[v] - 1;
-            int upper_distr = plans(v, p);
+            int upper_distr = plans(v, p) - 1;
             lower_to_upper(lower_distr, upper_distr) += pop[v];
         }
 
@@ -56,7 +56,7 @@ NumericMatrix capacityutil(const IntegerMatrix& plans,
         // Store how many people are assigned to each district
         std::vector<double> distr_pop(ndists, 0.0);
         for (int k = 0; k < n_units; ++k) {
-            int distr_assigned = plans(k, p);
+            int distr_assigned = plans(k, p) - 1;
             distr_pop[distr_assigned] += pop[k];
         }
 

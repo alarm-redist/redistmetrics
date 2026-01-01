@@ -20,7 +20,7 @@ NumericMatrix phasecommute(const IntegerMatrix& plans,
         std::vector<double> distr_pop(ndists, 0.0);
         
         for (int k = 0; k < n_units; ++k) {
-            int distr_new = plans(k, p);
+            int distr_new = plans(k, p) - 1;
 
             // denominator: total population in each new district
             if (distr_new >= 0 && distr_new < ndists && std::isfinite(pop[k])) {
@@ -65,7 +65,7 @@ NumericMatrix maxcommute(const IntegerMatrix& plans,
         
         // find the maximum commute for any individual in each new district
         for (int k = 0; k < n_units; ++k) {
-            int distr_new = plans(k, p);
+            int distr_new = plans(k, p) - 1;
             double commute_new = commute_times(k, distr_new);
             if (std::isfinite(commute_new) && commute_new > max_time[distr_new]) {
                 max_time[distr_new] = commute_new;
