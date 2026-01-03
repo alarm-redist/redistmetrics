@@ -80,18 +80,23 @@ NumericMatrix schooloutsidezone(const IntegerMatrix& plans,
                        const IntegerVector& schools_idx, // 0-based
                        const int ndists) {
     const int n_plans   = plans.ncol();
+    const int n_schools = schools_idx.size();
     
     // create empty output matrix
     NumericMatrix out(ndists, n_plans);
     
     for (int p = 0; p < n_plans; ++p) {
-        int count = 0;
-        for (int d = 0; d < ndists; d++) {
-            // Count how many schools are assigned outside their own district
-            if (plans(schools_idx[d], p) != d + 1) {
-                count++;
-            }
-        }
+        // calculate the number of districts with no school within their zone
+        IntegerVector col = plans(_, p);
+        IntegerVector vals = col[schools_idx];
+        int count = n_schools - unique(vals).size();
+        // int count = 0;
+        // for (int d = 0; d < ndists; d++) {
+        //     // Count how many schools are assigned outside their own district
+        //     if (plans(schools_idx[d], p) != d + 1) {
+        //         count++;
+        //     }
+        // }
         for (int d = 0; d < ndists; d++) {
             out(d, p) = count;
         }
