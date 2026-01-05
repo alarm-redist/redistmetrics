@@ -29,13 +29,18 @@ NumericMatrix splitfeeders(const IntegerMatrix& plans,
         }
 
         // Count how many lower level districts are sending less than 25% of their students to each upper level district
+        int count = 0;
         for (int d = 0; d < n_lower; ++d) {
             for (int u = 0; u < ndists; ++u) {
                 double frac = lower_to_upper(d, u) / sum(lower_to_upper(d, _));
                 if (frac < 0.25) {
-                    out(u, p) += 1;
+                    count += 1;
                 }
             }
+        }
+
+        for (int d = 0; d < ndists; d++) {
+            out(d, p) = count;
         }
     }
     
