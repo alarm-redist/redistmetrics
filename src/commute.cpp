@@ -38,11 +38,11 @@ NumericMatrix phasecommute(const IntegerMatrix& plans,
             }
         }
         
-        // per-district score: log1p(average extra commute per person)
+        // per-district score: average extra commute per person (in minutes)
         for (int d = 0; d < ndists; d++) {
             double denom = distr_pop[d];
             double avg_extra = (denom > 0.0) ? (reassigned_extra[d] / denom) : 0.0;
-            out(d, p) = std::log1p(avg_extra);
+            out(d, p) = avg_extra / 60.0; // convert to minutes
         }
     }
     
@@ -72,9 +72,9 @@ NumericMatrix maxcommute(const IntegerMatrix& plans,
             }
         }
         
-        // per-district score: log1p(max commute for a person in the district)
+        // per-district score: max commute for a person in the district (in minutes)
         for (int d = 0; d < ndists; d++) {
-            out(d, p) = std::log1p(max_time[d]);
+            out(d, p) = max_time[d] / 60.0; // convert to minutes
         }
     }
     
