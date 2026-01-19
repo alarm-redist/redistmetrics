@@ -34,6 +34,7 @@ NumericMatrix splitfeeders(const IntegerMatrix& plans,
         int count = 0;
         for (int d = 0; d < n_lower; ++d) {
             for (int u = 0; u < ndists; ++u) {
+                if (lower_to_upper(d, u) == 0) continue;
                 double frac = lower_to_upper(d, u) / lower_pops[d];
                 if (frac < 0.25) {
                     count += 1;
