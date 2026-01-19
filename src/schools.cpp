@@ -20,19 +20,21 @@ NumericMatrix splitfeeders(const IntegerMatrix& plans,
     for (int p = 0; p < n_plans; ++p) {
         // create empty lower to upper district matrix
         NumericMatrix lower_to_upper(n_lower, ndists);
+        IntegerVector lower_pops(n_lower);
 
         // For each lower level district and upper level district, store how many students went from lower to upper
         for (int v = 0; v < n_units; ++v) {
             int lower_distr = lower[v] - 1;
             int upper_distr = plans(v, p) - 1;
             lower_to_upper(lower_distr, upper_distr) += pop[v];
+            lower_pops[lower_distr] += pop[v];
         }
 
         // Count how many lower level districts are sending less than 25% of their students to each upper level district
         int count = 0;
         for (int d = 0; d < n_lower; ++d) {
             for (int u = 0; u < ndists; ++u) {
-                double frac = lower_to_upper(d, u) / sum(lower_to_upper(d, _));
+                double frac = lower_to_upper(d, u) / lower_pops[d];
                 if (frac < 0.25) {
                     count += 1;
                 }
