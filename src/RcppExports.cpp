@@ -42,6 +42,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// disruptcount
+NumericMatrix disruptcount(const IntegerMatrix& plans, const IntegerVector& current, const NumericVector& pop, const int ndists);
+RcppExport SEXP _redistmetrics_disruptcount(SEXP plansSEXP, SEXP currentSEXP, SEXP popSEXP, SEXP ndistsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector& >::type current(currentSEXP);
+    Rcpp::traits::input_parameter< const NumericVector& >::type pop(popSEXP);
+    Rcpp::traits::input_parameter< const int >::type ndists(ndistsSEXP);
+    rcpp_result_gen = Rcpp::wrap(disruptcount(plans, current, pop, ndists));
+    return rcpp_result_gen;
+END_RCPP
+}
 // polsbypopper
 NumericMatrix polsbypopper(IntegerVector from, IntegerVector to, NumericVector area, NumericVector perimeter, IntegerMatrix dm, int nd);
 RcppExport SEXP _redistmetrics_polsbypopper(SEXP fromSEXP, SEXP toSEXP, SEXP areaSEXP, SEXP perimeterSEXP, SEXP dmSEXP, SEXP ndSEXP) {
@@ -636,6 +649,7 @@ RcppExport SEXP _redistmetrics_RcppExport_registerCCallable() {
 static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_phasecommute", (DL_FUNC) &_redistmetrics_phasecommute, 5},
     {"_redistmetrics_maxcommute", (DL_FUNC) &_redistmetrics_maxcommute, 3},
+    {"_redistmetrics_disruptcount", (DL_FUNC) &_redistmetrics_disruptcount, 4},
     {"_redistmetrics_polsbypopper", (DL_FUNC) &_redistmetrics_polsbypopper, 6},
     {"_redistmetrics_schwartzberg", (DL_FUNC) &_redistmetrics_schwartzberg, 6},
     {"_redistmetrics_talisman", (DL_FUNC) &_redistmetrics_talisman, 4},

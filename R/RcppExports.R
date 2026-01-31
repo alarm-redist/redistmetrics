@@ -9,6 +9,10 @@ maxcommute <- function(plans, commute_times, ndists) {
     .Call(`_redistmetrics_maxcommute`, plans, commute_times, ndists)
 }
 
+disruptcount <- function(plans, current, pop, ndists) {
+    .Call(`_redistmetrics_disruptcount`, plans, current, pop, ndists)
+}
+
 polsbypopper <- function(from, to, area, perimeter, dm, nd) {
     .Call(`_redistmetrics_polsbypopper`, from, to, area, perimeter, dm, nd)
 }

@@ -80,3 +80,37 @@ NumericMatrix maxcommute(const IntegerMatrix& plans,
     
     return out;
 }
+
+
+// Calculate matrix of people disrupted counts
+// [[Rcpp::export(rng = false)]]
+NumericMatrix disruptcount(const IntegerMatrix& plans,
+                              const IntegerVector& current,
+                              const NumericVector& pop,
+                              const int ndists) {
+    const int n_units   = plans.nrow();
+    const int n_plans   = plans.ncol();
+    
+    // create empty output matrix
+    NumericMatrix out(ndists, n_plans);
+    
+    for (int p = 0; p < n_plans; ++p) {
+        std::vector<double> disrupt_counts(ndists, 0.0);
+        
+        // find the number of people disrupted in each old district
+        for (int k = 0; k < n_units; ++k) {
+            int distr_old = current[k] - 1;
+            int distr_new = plans(k, p) - 1;
+            if (distr_old != distr_new) {
+                disrupt_counts[distr_old] += pop[k];
+            }
+        }
+        
+        // per-district score: number of people disrupted in the district
+        for (int d = 0; d < ndists; d++) {
+            out(d, p) = disrupt_counts[d];
+        }
+    }
+    
+    return out;
+}

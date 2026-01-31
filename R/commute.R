@@ -107,6 +107,70 @@ max_commute <- function(plans, map, commute_times) {
     c(res_mat)
 }
 
+#' Disruption count penalty per district
+#'
+#' @param plans A `redist_plans` object or an integer matrix (n_units × n_plans)
+#' of district labels.
+#' @param map A `redist_map` or an `sf` with one row per unit.
+#' @param current An integer vector of district assignments under the old plan.
+#' @param pop Optional numeric vector (length n_units) of unit populations.
+#' If `NULL`, attempts to infer from common column names in `shp`; falls back
+#' to all ones.
+#'
+#' @return A numeric vector of length `ndists * nplans`, i.e., the district-by-plan
+#' scores flattened column-major. Use `by_plan()` to get one value per plan.
+#' @export
+disrupt_count <- function(plans, map, current, pop = NULL) {
+    # coerce plans to integer matrix
+    plans_matrix <- if (inherits(plans, "redist_plans")) {
+        redist::get_plans_matrix(plans)
+    } else {
+        as.matrix(plans)
+    }
+    storage.mode(plans_matrix) <- "integer"
+    
+    n_units <- nrow(plans_matrix)
+    n_plans <- ncol(plans_matrix)
+    if (n_units == 0L || n_plans == 0L)
+        stop("`plans` must have at least one unit and one plan.", call. = FALSE)
+    
+    # validate old plan
+    if (length(current) != n_units)
+        stop("`current` must have length equal to nrow(plans).", call. = FALSE)
+    current <- as.integer(current)
+        
+    # get population
+    shp <- as_sf(map)
+    if (is.null(pop)) {
+        dat <- if (inherits(shp, "redist_map")) attr(shp, "shp") %||% shp else shp
+        if (inherits(dat, "sf")) {
+            pop_candidates <- c("pop", "population", "total_pop", "TOTPOP", "TOT_POP", "pop_total")
+            pick <- pop_candidates[pop_candidates %in% names(dat)]
+            pop <- if (length(pick)) dat[[pick[1]]] else rep(1, n_units)
+        } else {
+            pop <- rep(1, n_units)
+        }
+    }
+    if (length(pop) != n_units)
+        stop("`pop` must have length equal to nrow(plans).", call. = FALSE)
+    pop <- as.numeric(pop)
+    
+    # validate districts
+    ndists <- max(plans_matrix, na.rm = TRUE)
+    if (!is.finite(ndists) || ndists < 1L)
+        stop("District labels in `plans` must be positive integers.", call. = FALSE)
+
+    # call C++ function to calculate phase commute scores
+    res_mat <- disruptcount(
+        plans          = plans_matrix,
+        current        = current,
+        pop            = pop,
+        ndists         = as.integer(ndists)
+    )
+    
+    c(res_mat)
+}
+
 # Safely turn a redist_map into its underlying sf (or pass sf through)
 as_sf <- function(map) {
     if (inherits(map, "redist_map")) {
