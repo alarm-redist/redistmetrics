@@ -969,7 +969,8 @@ comp_y_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
       coords_ctr <- sf::st_coordinates(shp_ctr)
       shp_refl <- coords_ctr[, 1:2]
 
-      if (!all(shp_refl[1, ] == shp_refl[nrow(shp_refl), ])) {
+      # Check if there are multiple rings (exterior + holes)
+      if (length(unique(coords_ctr[, 3])) > 1) {
         shp_refl[, 1] <- shp_refl[, 1] * -1
         shp_refl <- sf::st_sfc(sf::st_polygon(
           lapply(unique(coords_ctr[, 3]), function(x) shp_refl[coords_ctr[, 3] == x, ])
@@ -1080,7 +1081,8 @@ comp_x_sym <- function(plans, shp, epsg = 3857, ncores = 1) {
       coords_ctr <- sf::st_coordinates(shp_ctr)
       shp_refl <- coords_ctr[, 1:2]
 
-      if (!all(shp_refl[1, ] == shp_refl[nrow(shp_refl), ])) {
+      # Check if there are multiple rings (exterior + holes)
+      if (length(unique(coords_ctr[, 3])) > 1) {
         shp_refl[, 2] <- shp_refl[, 2] * -1
         shp_refl <- sf::st_sfc(sf::st_polygon(
           lapply(unique(coords_ctr[, 3]), function(x) shp_refl[coords_ctr[, 3] == x, ])
