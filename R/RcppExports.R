@@ -13,6 +13,14 @@ bbox_reock <- function(dm, areas, extents, nd) {
     .Call(`_redistmetrics_bbox_reock`, dm, areas, extents, nd)
 }
 
+fryer_holden <- function(dm, pop, coords, nd) {
+    .Call(`_redistmetrics_fryer_holden`, dm, pop, coords, nd)
+}
+
+length_width <- function(dm, extents, nd) {
+    .Call(`_redistmetrics_length_width`, dm, extents, nd)
+}
+
 talisman <- function(dvs, nd, alpha = 1, beta = 1) {
     .Call(`_redistmetrics_talisman`, dvs, nd, alpha, beta)
 }
@@ -31,6 +39,30 @@ minkowski <- function(v, m, p) {
 
 compute_mbc_area <- function(wkt_collection, plans, nd) {
     .Call(`_redistmetrics_compute_mbc_area`, wkt_collection, plans, nd)
+}
+
+compute_convex_hull_area <- function(wkt_collection, plans, nd) {
+    .Call(`_redistmetrics_compute_convex_hull_area`, wkt_collection, plans, nd)
+}
+
+compute_rotated_box_area <- function(wkt_collection, plans, nd) {
+    .Call(`_redistmetrics_compute_rotated_box_area`, wkt_collection, plans, nd)
+}
+
+compute_skew_score <- function(wkt_collection, plans, nd) {
+    .Call(`_redistmetrics_compute_skew_score`, wkt_collection, plans, nd)
+}
+
+compute_boyce_clark_score <- function(wkt_collection, plans, nd) {
+    .Call(`_redistmetrics_compute_boyce_clark_score`, wkt_collection, plans, nd)
+}
+
+compute_y_symmetry_overlap <- function(wkt_collection, plans, nd) {
+    .Call(`_redistmetrics_compute_y_symmetry_overlap`, wkt_collection, plans, nd)
+}
+
+compute_x_symmetry_overlap <- function(wkt_collection, plans, nd) {
+    .Call(`_redistmetrics_compute_x_symmetry_overlap`, wkt_collection, plans, nd)
 }
 
 cpp_libgeos_init_api <- function() {

@@ -59,6 +59,31 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// fryer_holden
+NumericVector fryer_holden(IntegerMatrix dm, NumericVector pop, NumericMatrix coords, const int nd);
+RcppExport SEXP _redistmetrics_fryer_holden(SEXP dmSEXP, SEXP popSEXP, SEXP coordsSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type pop(popSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type coords(coordsSEXP);
+    Rcpp::traits::input_parameter< const int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(fryer_holden(dm, pop, coords, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// length_width
+NumericMatrix length_width(IntegerMatrix dm, NumericMatrix extents, const int nd);
+RcppExport SEXP _redistmetrics_length_width(SEXP dmSEXP, SEXP extentsSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< IntegerMatrix >::type dm(dmSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type extents(extentsSEXP);
+    Rcpp::traits::input_parameter< const int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(length_width(dm, extents, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
 // talisman
 NumericVector talisman(NumericMatrix dvs, double nd, double alpha, double beta);
 RcppExport SEXP _redistmetrics_talisman(SEXP dvsSEXP, SEXP ndSEXP, SEXP alphaSEXP, SEXP betaSEXP) {
@@ -118,6 +143,78 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// compute_convex_hull_area
+NumericVector compute_convex_hull_area(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_convex_hull_area(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_convex_hull_area(wkt_collection, plans, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_rotated_box_area
+NumericVector compute_rotated_box_area(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_rotated_box_area(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_rotated_box_area(wkt_collection, plans, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_skew_score
+NumericVector compute_skew_score(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_skew_score(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_skew_score(wkt_collection, plans, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_boyce_clark_score
+NumericVector compute_boyce_clark_score(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_boyce_clark_score(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_boyce_clark_score(wkt_collection, plans, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_y_symmetry_overlap
+NumericVector compute_y_symmetry_overlap(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_y_symmetry_overlap(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_y_symmetry_overlap(wkt_collection, plans, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_x_symmetry_overlap
+NumericVector compute_x_symmetry_overlap(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_x_symmetry_overlap(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_x_symmetry_overlap(wkt_collection, plans, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cpp_libgeos_init_api
 void cpp_libgeos_init_api();
 RcppExport SEXP _redistmetrics_cpp_libgeos_init_api() {
@@ -157,7 +254,7 @@ RcppExport SEXP _redistmetrics_log_st_map(SEXP gSEXP, SEXP districtsSEXP, SEXP c
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
         UNPROTECT(1);
-        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+        (Rf_error)("%s", CHAR(rcpp_msgSEXP_gen));
     }
     UNPROTECT(1);
     return rcpp_result_gen;
@@ -192,7 +289,7 @@ RcppExport SEXP _redistmetrics_n_removed(SEXP gSEXP, SEXP districtsSEXP, SEXP n_
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
         UNPROTECT(1);
-        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+        (Rf_error)("%s", CHAR(rcpp_msgSEXP_gen));
     }
     UNPROTECT(1);
     return rcpp_result_gen;
@@ -439,7 +536,7 @@ RcppExport SEXP _redistmetrics_splits(SEXP dmSEXP, SEXP communitySEXP, SEXP ndSE
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
         UNPROTECT(1);
-        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+        (Rf_error)("%s", CHAR(rcpp_msgSEXP_gen));
     }
     UNPROTECT(1);
     return rcpp_result_gen;
@@ -474,7 +571,7 @@ RcppExport SEXP _redistmetrics_distr_cty_splits(SEXP dmSEXP, SEXP communitySEXP,
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
         UNPROTECT(1);
-        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+        (Rf_error)("%s", CHAR(rcpp_msgSEXP_gen));
     }
     UNPROTECT(1);
     return rcpp_result_gen;
@@ -510,7 +607,7 @@ RcppExport SEXP _redistmetrics_admin_splits_count(SEXP dmSEXP, SEXP adminSEXP, S
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
         UNPROTECT(1);
-        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+        (Rf_error)("%s", CHAR(rcpp_msgSEXP_gen));
     }
     UNPROTECT(1);
     return rcpp_result_gen;
@@ -558,7 +655,7 @@ RcppExport SEXP _redistmetrics_var_info_mat(SEXP mSEXP, SEXP popSEXP, SEXP ndist
     if (rcpp_isError_gen) {
         SEXP rcpp_msgSEXP_gen = Rf_asChar(rcpp_result_gen);
         UNPROTECT(1);
-        Rf_error("%s", CHAR(rcpp_msgSEXP_gen));
+        (Rf_error)("%s", CHAR(rcpp_msgSEXP_gen));
     }
     UNPROTECT(1);
     return rcpp_result_gen;
@@ -594,11 +691,19 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_polsbypopper", (DL_FUNC) &_redistmetrics_polsbypopper, 6},
     {"_redistmetrics_schwartzberg", (DL_FUNC) &_redistmetrics_schwartzberg, 6},
     {"_redistmetrics_bbox_reock", (DL_FUNC) &_redistmetrics_bbox_reock, 4},
+    {"_redistmetrics_fryer_holden", (DL_FUNC) &_redistmetrics_fryer_holden, 4},
+    {"_redistmetrics_length_width", (DL_FUNC) &_redistmetrics_length_width, 3},
     {"_redistmetrics_talisman", (DL_FUNC) &_redistmetrics_talisman, 4},
     {"_redistmetrics_contiguity", (DL_FUNC) &_redistmetrics_contiguity, 2},
     {"_redistmetrics_hamming", (DL_FUNC) &_redistmetrics_hamming, 2},
     {"_redistmetrics_minkowski", (DL_FUNC) &_redistmetrics_minkowski, 3},
     {"_redistmetrics_compute_mbc_area", (DL_FUNC) &_redistmetrics_compute_mbc_area, 3},
+    {"_redistmetrics_compute_convex_hull_area", (DL_FUNC) &_redistmetrics_compute_convex_hull_area, 3},
+    {"_redistmetrics_compute_rotated_box_area", (DL_FUNC) &_redistmetrics_compute_rotated_box_area, 3},
+    {"_redistmetrics_compute_skew_score", (DL_FUNC) &_redistmetrics_compute_skew_score, 3},
+    {"_redistmetrics_compute_boyce_clark_score", (DL_FUNC) &_redistmetrics_compute_boyce_clark_score, 3},
+    {"_redistmetrics_compute_y_symmetry_overlap", (DL_FUNC) &_redistmetrics_compute_y_symmetry_overlap, 3},
+    {"_redistmetrics_compute_x_symmetry_overlap", (DL_FUNC) &_redistmetrics_compute_x_symmetry_overlap, 3},
     {"_redistmetrics_cpp_libgeos_init_api", (DL_FUNC) &_redistmetrics_cpp_libgeos_init_api, 0},
     {"_redistmetrics_log_st_map", (DL_FUNC) &_redistmetrics_log_st_map, 4},
     {"_redistmetrics_n_removed", (DL_FUNC) &_redistmetrics_n_removed, 3},
