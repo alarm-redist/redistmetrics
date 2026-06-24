@@ -120,7 +120,7 @@ of plans, or a <code>redist_plans</code> object).</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alarm-redist.org/redistmetrics/" class="external-link">redistmetrics</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">nh</span><span class="op">)</span></span></code></pre></div>
 <p>The New Hampshire proposed Republican plan looks like:</p>
-<p><img src="compactness_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" width="700"></p>
+<p><img src="compactness_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="" width="700"></p>
 <div class="section level2">
 <h2 id="area-based-compactness">Area-Based Compactness<a class="anchor" aria-label="anchor" href="#area-based-compactness"></a>
 </h2>
@@ -241,11 +241,11 @@ compact.</p>
 </h4>
 <p>X-Symmetry compactness compares the area of the intersection of a
 district reflected over its x-axis
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>D</mi><mo>,</mo><msup><mi>D</mi><mi>X</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">A(I(D, D^{X}))</annotation></semantics></math>)
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo stretchy="false" form="prefix">(</mo><mi>I</mi><mo stretchy="false" form="prefix">(</mo><mi>D</mi><mo>,</mo><msup><mi>D</mi><mi>X</mi></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A(I(D, D^{X}))</annotation></semantics></math>)
 to the area of the district
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mi>D</mi></msub><annotation encoding="application/x-tex">A_D</annotation></semantics></math>).</p>
 <p>Formally, it can be written as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">X-Symmetry</mtext><mo>=</mo><mfrac><mrow><mi>A</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>D</mi><mo>,</mo><msup><mi>D</mi><mi>X</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msub><mi>A</mi><mi>D</mi></msub></mfrac></mrow><annotation encoding="application/x-tex"> \textrm{X-Symmetry} = \frac{A(I(D, D^{X}))}{A_D} </annotation></semantics></math>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">X-Symmetry</mtext><mo>=</mo><mfrac><mrow><mi>A</mi><mo stretchy="false" form="prefix">(</mo><mi>I</mi><mo stretchy="false" form="prefix">(</mo><mi>D</mi><mo>,</mo><msup><mi>D</mi><mi>X</mi></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><msub><mi>A</mi><mi>D</mi></msub></mfrac></mrow><annotation encoding="application/x-tex"> \textrm{X-Symmetry} = \frac{A(I(D, D^{X}))}{A_D} </annotation></semantics></math>
 Scores range from 0 to 1, where 0 is the least compact and 1 is the most
 compact.</p>
 <p>X-Symmetry compactness can be computed with:</p>
@@ -258,11 +258,11 @@ compact.</p>
 </h4>
 <p>Y-Symmetry compactness compares the area of the intersection of a
 district reflected over its y-axis
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>D</mi><mo>,</mo><msup><mi>D</mi><mi>Y</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">A(I(D, D^{Y}))</annotation></semantics></math>)
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo stretchy="false" form="prefix">(</mo><mi>I</mi><mo stretchy="false" form="prefix">(</mo><mi>D</mi><mo>,</mo><msup><mi>D</mi><mi>Y</mi></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A(I(D, D^{Y}))</annotation></semantics></math>)
 to the area of the district
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mi>D</mi></msub><annotation encoding="application/x-tex">A_D</annotation></semantics></math>).</p>
 <p>Formally, it can be written as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Y-Symmetry</mtext><mo>=</mo><mfrac><mrow><mi>A</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>I</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>D</mi><mo>,</mo><msup><mi>D</mi><mi>Y</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><msub><mi>A</mi><mi>D</mi></msub></mfrac></mrow><annotation encoding="application/x-tex"> \textrm{Y-Symmetry} = \frac{A(I(D, D^{Y}))}{A_D} </annotation></semantics></math>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Y-Symmetry</mtext><mo>=</mo><mfrac><mrow><mi>A</mi><mo stretchy="false" form="prefix">(</mo><mi>I</mi><mo stretchy="false" form="prefix">(</mo><mi>D</mi><mo>,</mo><msup><mi>D</mi><mi>Y</mi></msup><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><msub><mi>A</mi><mi>D</mi></msub></mfrac></mrow><annotation encoding="application/x-tex"> \textrm{Y-Symmetry} = \frac{A(I(D, D^{Y}))}{A_D} </annotation></semantics></math>
 Scores range from 0 to 1, where 0 is the least compact and 1 is the most
 compact.</p>
 <p>Y-Symmetry compactness can be computed with:</p>
@@ -311,7 +311,7 @@ for each of the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>16</mn></mrow><annotation encoding="application/x-tex">n = 16</annotation></semantics></math>)
 radials and look at the mean absolute deviation.</p>
 <p>Formally, it can be written as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Boyce-Clark</mtext><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>16</mn></munderover><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">|</mo><mfrac><msub><mi>r</mi><mi>i</mi></msub><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>16</mn></munderover><msub><mi>r</mi><mi>i</mi></msub></mrow></mfrac><mo>*</mo><mn>100</mn><mo>−</mo><mfrac><mn>100</mn><mi>n</mi></mfrac><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">\textrm{Boyce-Clark} = \sum_{i=1}^{16}\big|\frac{r_{i}}{\sum_{i=1}^{16} r_i} * 100 - \frac{100}{n}\big|</annotation></semantics></math>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Boyce-Clark</mtext><mo>=</mo><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>16</mn></munderover><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">|</mo><mfrac><msub><mi>r</mi><mi>i</mi></msub><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mn>16</mn></munderover><msub><mi>r</mi><mi>i</mi></msub></mrow></mfrac><mo>*</mo><mn>100</mn><mo>−</mo><mfrac><mn>100</mn><mi>n</mi></mfrac><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">|</mo></mrow><annotation encoding="application/x-tex">\textrm{Boyce-Clark} = \sum_{i=1}^{16}\big|\frac{r_{i}}{\sum_{i=1}^{16} r_i} * 100 - \frac{100}{n}\big|</annotation></semantics></math>
 Scores range from 0 to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∞</mi><annotation encoding="application/x-tex">\infty</annotation></semantics></math>,
 where 0 is the most compact and
@@ -361,11 +361,11 @@ This correlates to Polsby-Popper compactness. For a given adjacency
 graph
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>,
 we can write out the number of edges as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">E(a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">E(a)</annotation></semantics></math>
 and consider the edges removed for a plan
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>π</mi><annotation encoding="application/x-tex">\pi</annotation></semantics></math>.</p>
 <p>Formally, this is then written as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Edges Removed</mtext><mo>=</mo><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><msub><mi>E</mi><mi>π</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex"> \textrm{Edges Removed} = E(a) - E_\pi(a)</annotation></semantics></math>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Edges Removed</mtext><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><msub><mi>E</mi><mi>π</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex"> \textrm{Edges Removed} = E(a) - E_\pi(a)</annotation></semantics></math>
 Larger scores are less compact.</p>
 <p>Edges-Removed compactness can be computed with:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -381,11 +381,11 @@ rescaling of Edges Removed Compactness for more consistent
 interpretation. For a given adjacency graph
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>,
 we can write out the number of edges as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">E(a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">E(a)</annotation></semantics></math>
 and consider the edges removed for a plan
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>π</mi><annotation encoding="application/x-tex">\pi</annotation></semantics></math>.</p>
 <p>Formally, this is then written as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Fraction Kept</mtext><mo>=</mo><mfrac><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><msub><mi>E</mi><mi>π</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mi>E</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex"> \textrm{Fraction Kept} = \frac{E(a) - E_\pi(a)}{E(a)}</annotation></semantics></math>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Fraction Kept</mtext><mo>=</mo><mfrac><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><msub><mi>E</mi><mi>π</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex"> \textrm{Fraction Kept} = \frac{E(a) - E_\pi(a)}{E(a)}</annotation></semantics></math>
 Scores range from 0 to 1 where 0 is least compact and 1 is most
 compact.</p>
 <p>Fraction Kept compactness can be computed with:</p>
@@ -403,7 +403,7 @@ can be constrained more meaningfully by first drawing spanning trees
 within districts, which describes the compactness component of the
 Sequential Monte Carlo (McCartan and Imai 2020) algorithm.</p>
 <p>Formally, it can be written as:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Log Spanning Tree</mtext><mo>=</mo><mtext mathvariant="normal">log</mtext><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>n</mi><mi>s</mi></msub><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex"> \textrm{Log Spanning Tree} = \textrm{log}(n_st)</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Log Spanning Tree</mtext><mo>=</mo><mtext mathvariant="normal">log</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>n</mi><mi>s</mi></msub><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex"> \textrm{Log Spanning Tree} = \textrm{log}(n_st)</annotation></semantics></math></p>
 <p>A larger number of log spanning trees is more compact.</p>
 <p>Log Spanning Tree compactness can be computed with:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
