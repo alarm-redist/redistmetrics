@@ -306,7 +306,7 @@ splits_sub_total <- function(plans, shp, sub_admin) {
   if (any_na) {
     cnts <- cnts[-max(sub_admin), , drop = FALSE]
   }
-  rep(colSums(cnts) - nc, each = nd)
+  rep(colSums(cnts) - nrow(cnts), each = nd)
 }
 
 #' Fuzzy Splits by District (Experimental)
