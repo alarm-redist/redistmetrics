@@ -169,6 +169,30 @@ test_that("comp_kiwysi works", {
   a <- comp_kiwysi(nh$r_2020, shp = nh)
   expect_length(a, 2)
   expect_true(all(a >= 0 & a <= 100))
+
+  feats <- comp_kiwysi(nh$r_2020, shp = nh, return_all = TRUE)
+  expect_s3_class(feats, "tbl_df")
+  expect_true(all(c("kiwysi", "polsby", "hull", "jagged") %in% names(feats)))
+
+  b <- comp_kiwysi(
+    nh$r_2020,
+    shp = nh,
+    comp_polsby = feats$polsby,
+    comp_ch = feats$hull,
+    comp_reock = feats$reock,
+    comp_bbox_reock = feats$bbox,
+    comp_box_reock = feats$box_reock,
+    comp_lw = feats$lenwid,
+    comp_bc = feats$boyce,
+    comp_x_sym = feats$sym_x,
+    comp_y_sym = feats$sym_y,
+    comp_skew = feats$skew,
+    comp_corners = feats$corners,
+    comp_jagged = feats$jagged,
+    comp_components = feats$components,
+    comp_holes = feats$holes
+  )
+  expect_equal(b, a)
 })
 
 test_that("comp_y_sym works", {

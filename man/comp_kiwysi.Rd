@@ -4,7 +4,7 @@
 \alias{comp_kiwysi}
 \title{Calculate KIWSI Compactness}
 \usage{
-comp_kiwysi(plans, shp, epsg = 3857, ncores = 1)
+comp_kiwysi(plans, shp, epsg = 3857, ncores = 1, return_all = FALSE, ...)
 }
 \arguments{
 \item{plans}{A \code{redist_plans} object or plans_matrix where each row indicates a district assignment and each column is a plan.}
@@ -14,6 +14,12 @@ comp_kiwysi(plans, shp, epsg = 3857, ncores = 1)
 \item{epsg}{Numeric EPSG code to use to project the shapefile, if needed. Default is 3857.}
 
 \item{ncores}{Integer number of cores to use. Default is 1.}
+
+\item{return_all}{If \code{TRUE}, return a tibble containing the score and all
+features used by the model.}
+
+\item{...}{Precomputed feature vectors. These are tidy-evaluated in \code{shp}.
+Use the corresponding function name, such as \code{comp_polsby = polsby}.}
 }
 \value{
 A numeric vector. Can be shaped into a district-by-plan matrix.
