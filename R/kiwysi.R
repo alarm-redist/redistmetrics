@@ -2,7 +2,7 @@
 #'
 #' Predicts the Kaufman, King, and Komisarchik "know it when you see it"
 #' compactness score from `redistmetrics` compactness measures. Scores are
-#' bounded between 0 and 100, where larger values indicate less compact
+#' bounded between 0 and 100, where larger values indicate more compact
 #' districts.
 #'
 #' @templateVar plans TRUE
@@ -38,6 +38,7 @@ comp_kiwysi <- function(
   features <- kiwysi_features(plans, shp, epsg = epsg, ncores = ncores, ...)
   pred <- as.numeric(stats::predict(kiwysi_model, newdata = features))
   pred <- pmin(100, pmax(0, pred))
+  pred <- 100 - pred
 
   if (return_all) {
     return(dplyr::as_tibble(cbind(kiwysi = pred, features)))

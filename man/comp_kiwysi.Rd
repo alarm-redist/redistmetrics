@@ -27,7 +27,7 @@ A numeric vector. Can be shaped into a district-by-plan matrix.
 \description{
 Predicts the Kaufman, King, and Komisarchik "know it when you see it"
 compactness score from \code{redistmetrics} compactness measures. Scores are
-bounded between 0 and 100, where larger values indicate less compact
+bounded between 0 and 100, where larger values indicate more compact
 districts.
 }
 \examples{
