@@ -15,6 +15,11 @@ struct ReflectionData {
   bool reflect_x;
 };
 
+struct Point {
+  double x;
+  double y;
+};
+
 int reflect_coordinate(double* x, double* y, void* userdata) {
   ReflectionData* data = static_cast<ReflectionData*>(userdata);
   if (data->reflect_x) {
@@ -91,6 +96,180 @@ double minimum_rotated_rectangle_area(GEOSContextHandle_t ctx,
     GEOSGeom_destroy_r(ctx, rectangle);
   }
   return area;
+}
+
+int count_polygon_holes(GEOSContextHandle_t ctx, const GEOSGeometry* geom) {
+  if (geom == nullptr) {
+    return 0;
+  }
+
+  const int type = GEOSGeomTypeId_r(ctx, geom);
+  if (type == GEOS_POLYGON) {
+    const int n_holes = GEOSGetNumInteriorRings_r(ctx, geom);
+    return n_holes < 0 ? 0 : n_holes;
+  }
+
+  if (type == GEOS_MULTIPOLYGON || type == GEOS_GEOMETRYCOLLECTION) {
+    int holes = 0;
+    const int n_geoms = GEOSGetNumGeometries_r(ctx, geom);
+    for (int i = 0; i < n_geoms; i++) {
+      holes += count_polygon_holes(ctx, GEOSGetGeometryN_r(ctx, geom, i));
+    }
+    return holes;
+  }
+
+  return 0;
+}
+
+double hole_count(GEOSContextHandle_t ctx, const GEOSGeometry* district) {
+  GEOSGeometry* united = GEOSUnaryUnion_r(ctx, district);
+  const int holes = count_polygon_holes(ctx, united);
+  if (united != nullptr) {
+    GEOSGeom_destroy_r(ctx, united);
+  }
+  return static_cast<double>(holes);
+}
+
+int count_polygon_components(GEOSContextHandle_t ctx, const GEOSGeometry* geom) {
+  if (geom == nullptr) {
+    return 0;
+  }
+
+  const int type = GEOSGeomTypeId_r(ctx, geom);
+  if (type == GEOS_POLYGON) {
+    return 1;
+  }
+
+  if (type == GEOS_MULTIPOLYGON || type == GEOS_GEOMETRYCOLLECTION) {
+    int components = 0;
+    const int n_geoms = GEOSGetNumGeometries_r(ctx, geom);
+    for (int i = 0; i < n_geoms; i++) {
+      components += count_polygon_components(ctx, GEOSGetGeometryN_r(ctx, geom, i));
+    }
+    return components;
+  }
+
+  return 0;
+}
+
+double component_count(GEOSContextHandle_t ctx, const GEOSGeometry* district) {
+  GEOSGeometry* united = GEOSUnaryUnion_r(ctx, district);
+  const int components = count_polygon_components(ctx, united);
+  if (united != nullptr) {
+    GEOSGeom_destroy_r(ctx, united);
+  }
+  return static_cast<double>(components);
+}
+
+double clamp_unit(double x) {
+  return std::max(-1.0, std::min(1.0, x));
+}
+
+int count_ring_corners(GEOSContextHandle_t ctx,
+                       const GEOSGeometry* ring,
+                       double min_turn) {
+  const GEOSCoordSequence* seq = ring == nullptr
+    ? nullptr : GEOSGeom_getCoordSeq_r(ctx, ring);
+  unsigned int n = 0;
+  if (seq == nullptr || !GEOSCoordSeq_getSize_r(ctx, seq, &n) || n < 4) {
+    return 0;
+  }
+
+  std::vector<Point> points;
+  points.reserve(n);
+  for (unsigned int i = 0; i < n; i++) {
+    double x, y;
+    if (!GEOSCoordSeq_getXY_r(ctx, seq, i, &x, &y)) {
+      return 0;
+    }
+    points.push_back(Point{x, y});
+  }
+
+  if (points.size() > 1) {
+    const Point& first = points.front();
+    const Point& last = points.back();
+    if (first.x == last.x && first.y == last.y) {
+      points.pop_back();
+    }
+  }
+  const int m = static_cast<int>(points.size());
+  if (m < 3) {
+    return 0;
+  }
+
+  int corners = 0;
+  for (int i = 0; i < m; i++) {
+    const Point& prev = points[(i + m - 1) % m];
+    const Point& curr = points[i];
+    const Point& next = points[(i + 1) % m];
+    const double v1x = curr.x - prev.x;
+    const double v1y = curr.y - prev.y;
+    const double v2x = next.x - curr.x;
+    const double v2y = next.y - curr.y;
+    const double l1 = std::hypot(v1x, v1y);
+    const double l2 = std::hypot(v2x, v2y);
+    if (l1 == 0.0 || l2 == 0.0) {
+      continue;
+    }
+    const double turn = std::acos(clamp_unit((v1x * v2x + v1y * v2y) / (l1 * l2)));
+    if (turn >= min_turn) {
+      corners++;
+    }
+  }
+  return corners;
+}
+
+int count_polygon_corners(GEOSContextHandle_t ctx,
+                          const GEOSGeometry* geom,
+                          double min_turn) {
+  if (geom == nullptr) {
+    return 0;
+  }
+
+  const int type = GEOSGeomTypeId_r(ctx, geom);
+  if (type == GEOS_POLYGON) {
+    return count_ring_corners(ctx, GEOSGetExteriorRing_r(ctx, geom), min_turn);
+  }
+
+  if (type == GEOS_MULTIPOLYGON || type == GEOS_GEOMETRYCOLLECTION) {
+    int corners = 0;
+    const int n_geoms = GEOSGetNumGeometries_r(ctx, geom);
+    for (int i = 0; i < n_geoms; i++) {
+      corners += count_polygon_corners(ctx, GEOSGetGeometryN_r(ctx, geom, i), min_turn);
+    }
+    return corners;
+  }
+
+  return 0;
+}
+
+double corner_count(GEOSContextHandle_t ctx,
+                    const GEOSGeometry* district,
+                    double tolerance,
+                    double corner_angle) {
+  GEOSGeometry* united = GEOSUnaryUnion_r(ctx, district);
+  double area = geometry_area(ctx, united);
+  if (united == nullptr || !R_finite(area) || area <= 0.0) {
+    if (united != nullptr) {
+      GEOSGeom_destroy_r(ctx, united);
+    }
+    return NA_REAL;
+  }
+
+  const double pi = std::acos(-1.0);
+  const double tol = tolerance * std::sqrt(area / pi);
+  GEOSGeometry* simplified = tol > 0.0
+    ? GEOSTopologyPreserveSimplify_r(ctx, united, tol)
+    : GEOSGeom_clone_r(ctx, united);
+  const GEOSGeometry* corner_geom = simplified == nullptr ? united : simplified;
+  const double min_turn = corner_angle * pi / 180.0;
+  const int corners = count_polygon_corners(ctx, corner_geom, min_turn);
+
+  if (simplified != nullptr) {
+    GEOSGeom_destroy_r(ctx, simplified);
+  }
+  GEOSGeom_destroy_r(ctx, united);
+  return static_cast<double>(corners);
 }
 
 double skew_score(GEOSContextHandle_t ctx, const GEOSGeometry* district) {
@@ -305,6 +484,78 @@ NumericVector compute_district_metric(const std::string& wkt_collection,
   return results;
 }
 
+NumericVector compute_district_corner_count(const std::string& wkt_collection,
+                                            const IntegerMatrix& plans,
+                                            int nd,
+                                            double tolerance,
+                                            double corner_angle) {
+  const int n_plans = plans.ncol();
+  const int n_rows = plans.nrow();
+  GEOSContextHandle_t ctx = GEOS_init_r();
+  GEOSWKTReader* reader = GEOSWKTReader_create_r(ctx);
+  GEOSGeometry* collection = GEOSWKTReader_read_r(
+    ctx, reader, wkt_collection.c_str());
+  GEOSWKTReader_destroy_r(ctx, reader);
+
+  if (collection == nullptr) {
+    GEOS_finish_r(ctx);
+    stop("Failed to read WKT collection");
+  }
+  if (GEOSGetNumGeometries_r(ctx, collection) != n_rows) {
+    GEOSGeom_destroy_r(ctx, collection);
+    GEOS_finish_r(ctx);
+    stop("Number of geometries in collection must match number of rows in plans");
+  }
+
+  std::vector<GEOSGeometry*> source_geometries(n_rows);
+  for (int i = 0; i < n_rows; i++) {
+    source_geometries[i] = const_cast<GEOSGeometry*>(
+      GEOSGetGeometryN_r(ctx, collection, i));
+    if (source_geometries[i] == nullptr) {
+      GEOSGeom_destroy_r(ctx, collection);
+      GEOS_finish_r(ctx);
+      stop("Failed to extract geometry from collection");
+    }
+  }
+
+  NumericVector results(nd * n_plans, NA_REAL);
+  std::vector<std::vector<GEOSGeometry*>> district_geometries(nd);
+  for (int p = 0; p < n_plans; p++) {
+    for (auto& district : district_geometries) {
+      district.clear();
+    }
+    for (int i = 0; i < n_rows; i++) {
+      int district = plans(i, p) - 1;
+      if (district < 0 || district >= nd) {
+        GEOSGeom_destroy_r(ctx, collection);
+        GEOS_finish_r(ctx);
+        stop("District labels must be integers from 1 through nd");
+      }
+      district_geometries[district].push_back(source_geometries[i]);
+    }
+
+    for (int d = 0; d < nd; d++) {
+      if (district_geometries[d].empty()) {
+        continue;
+      }
+      bool owns_district = district_geometries[d].size() > 1;
+      GEOSGeometry* district = owns_district
+        ? make_owned_collection(ctx, district_geometries[d])
+        : district_geometries[d][0];
+      if (district != nullptr) {
+        results[p * nd + d] = corner_count(ctx, district, tolerance, corner_angle);
+      }
+      if (owns_district && district != nullptr) {
+        GEOSGeom_destroy_r(ctx, district);
+      }
+    }
+  }
+
+  GEOSGeom_destroy_r(ctx, collection);
+  GEOS_finish_r(ctx);
+  return results;
+}
+
 } // namespace
 
 // [[Rcpp::export(rng = false)]]
@@ -329,6 +580,30 @@ NumericVector compute_rotated_box_area(const std::string& wkt_collection,
                                        int nd) {
   return compute_district_metric(
     wkt_collection, plans, nd, minimum_rotated_rectangle_area);
+}
+
+// [[Rcpp::export(rng = false)]]
+NumericVector compute_hole_count(const std::string& wkt_collection,
+                                 const IntegerMatrix& plans,
+                                 int nd) {
+  return compute_district_metric(wkt_collection, plans, nd, hole_count);
+}
+
+// [[Rcpp::export(rng = false)]]
+NumericVector compute_component_count(const std::string& wkt_collection,
+                                      const IntegerMatrix& plans,
+                                      int nd) {
+  return compute_district_metric(wkt_collection, plans, nd, component_count);
+}
+
+// [[Rcpp::export(rng = false)]]
+NumericVector compute_corner_count(const std::string& wkt_collection,
+                                   const IntegerMatrix& plans,
+                                   int nd,
+                                   double tolerance,
+                                   double corner_angle) {
+  return compute_district_corner_count(
+    wkt_collection, plans, nd, tolerance, corner_angle);
 }
 
 // [[Rcpp::export(rng = false)]]

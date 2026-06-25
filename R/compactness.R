@@ -991,6 +991,222 @@ comp_bbox_reock <- function(plans, shp, epsg = 3857, ncores = 1) {
   c(out)
 }
 
+#' Count District Holes
+#'
+#' Counts interior rings after uniting each district geometry.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
+#'
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' data(nh)
+#' data(nh_m)
+#' comp_holes(plans = nh$r_2020, shp = nh)
+#' comp_holes(plans = nh_m[, 1:2], shp = nh)
+comp_holes <- function(plans, shp, epsg = 3857, ncores = 1) {
+  # process objects ----
+  shp <- planarize(shp, epsg)
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(
+      nc,
+      setup_strategy = 'sequential',
+      methods = FALSE
+    )
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  if (nc == 1) {
+    chunks <- rep(1L, n_plans)
+  } else {
+    chunks <- cut(seq_len(n_plans), nc, labels = FALSE)
+  }
+  plan_chunks <- lapply(seq_len(max(chunks)), function(x) {
+    plans[, chunks == x, drop = FALSE]
+  })
+  shp_col_wkt <- geos::as_geos_geometry(shp) |>
+    geos::geos_make_collection() |>
+    geos::geos_write_wkt()
+  out <- foreach::foreach(
+    map = seq_along(plan_chunks),
+    .combine = 'c',
+    .packages = 'redistmetrics',
+    .export = 'compute_hole_count'
+  ) %oper%
+    {
+      compute_hole_count(shp_col_wkt, plan_chunks[[map]], nd)
+    }
+
+  c(out)
+}
+
+#' Count District Components
+#'
+#' Counts polygon components after uniting each district geometry. Holes are not
+#' counted as components.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @template template
+#'
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' data(nh)
+#' data(nh_m)
+#' comp_components(plans = nh$r_2020, shp = nh)
+#' comp_components(plans = nh_m[, 1:2], shp = nh)
+comp_components <- function(plans, shp, epsg = 3857, ncores = 1) {
+  # process objects ----
+  shp <- planarize(shp, epsg)
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(
+      nc,
+      setup_strategy = 'sequential',
+      methods = FALSE
+    )
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  if (nc == 1) {
+    chunks <- rep(1L, n_plans)
+  } else {
+    chunks <- cut(seq_len(n_plans), nc, labels = FALSE)
+  }
+  plan_chunks <- lapply(seq_len(max(chunks)), function(x) {
+    plans[, chunks == x, drop = FALSE]
+  })
+  shp_col_wkt <- geos::as_geos_geometry(shp) |>
+    geos::geos_make_collection() |>
+    geos::geos_write_wkt()
+  out <- foreach::foreach(
+    map = seq_along(plan_chunks),
+    .combine = 'c',
+    .packages = 'redistmetrics',
+    .export = 'compute_component_count'
+  ) %oper%
+    {
+      compute_component_count(shp_col_wkt, plan_chunks[[map]], nd)
+    }
+
+  c(out)
+}
+
+#' Count District Corners
+#'
+#' Counts significant exterior-boundary turns after scale-normalized
+#' topology-preserving simplification.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @param tolerance Simplification tolerance as a share of the equivalent-circle
+#'   radius.
+#' @param corner_angle Minimum turning angle, in degrees, counted as a corner.
+#' @template template
+#'
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' data(nh)
+#' data(nh_m)
+#' comp_corners(plans = nh$r_2020, shp = nh)
+#' comp_corners(plans = nh_m[, 1:2], shp = nh)
+comp_corners <- function(
+  plans,
+  shp,
+  epsg = 3857,
+  ncores = 1,
+  tolerance = 0.01,
+  corner_angle = 30
+) {
+  # process objects ----
+  shp <- planarize(shp, epsg)
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(
+      nc,
+      setup_strategy = 'sequential',
+      methods = FALSE
+    )
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  if (nc == 1) {
+    chunks <- rep(1L, n_plans)
+  } else {
+    chunks <- cut(seq_len(n_plans), nc, labels = FALSE)
+  }
+  plan_chunks <- lapply(seq_len(max(chunks)), function(x) {
+    plans[, chunks == x, drop = FALSE]
+  })
+  shp_col_wkt <- geos::as_geos_geometry(shp) |>
+    geos::geos_make_collection() |>
+    geos::geos_write_wkt()
+  out <- foreach::foreach(
+    map = seq_along(plan_chunks),
+    .combine = 'c',
+    .packages = 'redistmetrics',
+    .export = 'compute_corner_count'
+  ) %oper%
+    {
+      compute_corner_count(
+        shp_col_wkt,
+        plan_chunks[[map]],
+        nd,
+        tolerance,
+        corner_angle
+      )
+    }
+
+  c(out)
+}
+
 #' Calculate Y Symmetry Compactness
 #'
 #' Y symmetry is the overlapping area of a shape and its projection over the

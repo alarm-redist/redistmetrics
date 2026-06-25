@@ -49,6 +49,18 @@ compute_rotated_box_area <- function(wkt_collection, plans, nd) {
     .Call(`_redistmetrics_compute_rotated_box_area`, wkt_collection, plans, nd)
 }
 
+compute_hole_count <- function(wkt_collection, plans, nd) {
+    .Call(`_redistmetrics_compute_hole_count`, wkt_collection, plans, nd)
+}
+
+compute_component_count <- function(wkt_collection, plans, nd) {
+    .Call(`_redistmetrics_compute_component_count`, wkt_collection, plans, nd)
+}
+
+compute_corner_count <- function(wkt_collection, plans, nd, tolerance, corner_angle) {
+    .Call(`_redistmetrics_compute_corner_count`, wkt_collection, plans, nd, tolerance, corner_angle)
+}
+
 compute_skew_score <- function(wkt_collection, plans, nd) {
     .Call(`_redistmetrics_compute_skew_score`, wkt_collection, plans, nd)
 }

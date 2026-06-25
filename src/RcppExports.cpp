@@ -167,6 +167,44 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// compute_hole_count
+NumericVector compute_hole_count(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_hole_count(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_hole_count(wkt_collection, plans, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_component_count
+NumericVector compute_component_count(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
+RcppExport SEXP _redistmetrics_compute_component_count(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_component_count(wkt_collection, plans, nd));
+    return rcpp_result_gen;
+END_RCPP
+}
+// compute_corner_count
+NumericVector compute_corner_count(const std::string& wkt_collection, const IntegerMatrix& plans, int nd, double tolerance, double corner_angle);
+RcppExport SEXP _redistmetrics_compute_corner_count(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP, SEXP toleranceSEXP, SEXP corner_angleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type wkt_collection(wkt_collectionSEXP);
+    Rcpp::traits::input_parameter< const IntegerMatrix& >::type plans(plansSEXP);
+    Rcpp::traits::input_parameter< int >::type nd(ndSEXP);
+    Rcpp::traits::input_parameter< double >::type tolerance(toleranceSEXP);
+    Rcpp::traits::input_parameter< double >::type corner_angle(corner_angleSEXP);
+    rcpp_result_gen = Rcpp::wrap(compute_corner_count(wkt_collection, plans, nd, tolerance, corner_angle));
+    return rcpp_result_gen;
+END_RCPP
+}
 // compute_skew_score
 NumericVector compute_skew_score(const std::string& wkt_collection, const IntegerMatrix& plans, int nd);
 RcppExport SEXP _redistmetrics_compute_skew_score(SEXP wkt_collectionSEXP, SEXP plansSEXP, SEXP ndSEXP) {
@@ -700,6 +738,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_redistmetrics_compute_mbc_area", (DL_FUNC) &_redistmetrics_compute_mbc_area, 3},
     {"_redistmetrics_compute_convex_hull_area", (DL_FUNC) &_redistmetrics_compute_convex_hull_area, 3},
     {"_redistmetrics_compute_rotated_box_area", (DL_FUNC) &_redistmetrics_compute_rotated_box_area, 3},
+    {"_redistmetrics_compute_hole_count", (DL_FUNC) &_redistmetrics_compute_hole_count, 3},
+    {"_redistmetrics_compute_component_count", (DL_FUNC) &_redistmetrics_compute_component_count, 3},
+    {"_redistmetrics_compute_corner_count", (DL_FUNC) &_redistmetrics_compute_corner_count, 5},
     {"_redistmetrics_compute_skew_score", (DL_FUNC) &_redistmetrics_compute_skew_score, 3},
     {"_redistmetrics_compute_boyce_clark_score", (DL_FUNC) &_redistmetrics_compute_boyce_clark_score, 3},
     {"_redistmetrics_compute_y_symmetry_overlap", (DL_FUNC) &_redistmetrics_compute_y_symmetry_overlap, 3},

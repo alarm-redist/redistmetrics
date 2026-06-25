@@ -129,6 +129,34 @@ test_that("comp_bbox_reock works", {
   expect_equal(a, e, tolerance = 1e-4)
 })
 
+test_that("comp_holes works", {
+  expect_equal(comp_holes(nh$r_2020, shp = nh), c(0, 0))
+
+  outer <- rbind(c(0, 0), c(4, 0), c(4, 4), c(0, 4), c(0, 0))
+  inner <- rbind(c(1, 1), c(1, 3), c(3, 3), c(3, 1), c(1, 1))
+  shp <- sf::st_sf(
+    geometry = sf::st_sfc(sf::st_polygon(list(outer, inner)), crs = 3857)
+  )
+  expect_equal(comp_holes(1, shp), 1)
+})
+
+test_that("comp_components works", {
+  p1 <- rbind(c(0, 0), c(1, 0), c(1, 1), c(0, 1), c(0, 0))
+  p2 <- rbind(c(2, 0), c(3, 0), c(3, 1), c(2, 1), c(2, 0))
+  shp <- sf::st_sf(
+    geometry = sf::st_sfc(sf::st_multipolygon(list(list(p1), list(p2))), crs = 3857)
+  )
+  expect_equal(comp_components(1, shp), 2)
+})
+
+test_that("comp_corners works", {
+  rectangle <- rbind(c(0, 0), c(4, 0), c(4, 2), c(0, 2), c(0, 0))
+  shp <- sf::st_sf(
+    geometry = sf::st_sfc(sf::st_polygon(list(rectangle)), crs = 3857)
+  )
+  expect_equal(comp_corners(1, shp, tolerance = 0), 4)
+})
+
 test_that("comp_y_sym works", {
   a <- comp_y_sym(nh$r_2020, shp = nh)
   e <- c(0.730781251478271, 0.434613580171782)
