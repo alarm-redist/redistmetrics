@@ -61,6 +61,10 @@ compute_corner_count <- function(wkt_collection, plans, nd, tolerance, corner_an
     .Call(`_redistmetrics_compute_corner_count`, wkt_collection, plans, nd, tolerance, corner_angle)
 }
 
+compute_jagged_score <- function(wkt_collection, plans, nd, tolerance) {
+    .Call(`_redistmetrics_compute_jagged_score`, wkt_collection, plans, nd, tolerance)
+}
+
 compute_skew_score <- function(wkt_collection, plans, nd) {
     .Call(`_redistmetrics_compute_skew_score`, wkt_collection, plans, nd)
 }

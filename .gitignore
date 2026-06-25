@@ -47,3 +47,5 @@ inst/doc
 *.tmp
 *.o
 revdep
+/data-raw/kiwysi
+data-raw/kiwysi-compare-scores.R

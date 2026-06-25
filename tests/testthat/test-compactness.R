@@ -157,6 +157,20 @@ test_that("comp_corners works", {
   expect_equal(comp_corners(1, shp, tolerance = 0), 4)
 })
 
+test_that("comp_jagged works", {
+  rectangle <- rbind(c(0, 0), c(4, 0), c(4, 2), c(0, 2), c(0, 0))
+  shp <- sf::st_sf(
+    geometry = sf::st_sfc(sf::st_polygon(list(rectangle)), crs = 3857)
+  )
+  expect_true(comp_jagged(1, shp, tolerance = 0) > 0)
+})
+
+test_that("comp_kiwysi works", {
+  a <- comp_kiwysi(nh$r_2020, shp = nh)
+  expect_length(a, 2)
+  expect_true(all(a >= 0 & a <= 100))
+})
+
 test_that("comp_y_sym works", {
   a <- comp_y_sym(nh$r_2020, shp = nh)
   e <- c(0.730781251478271, 0.434613580171782)

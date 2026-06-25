@@ -1207,6 +1207,87 @@ comp_corners <- function(
   c(out)
 }
 
+#' Calculate Boundary Jaggedness
+#'
+#' Counts simplified exterior boundary segments per equivalent-circle
+#' circumference. Larger values indicate more boundary segment changes for the
+#' district's size.
+#'
+#' @templateVar plans TRUE
+#' @templateVar shp TRUE
+#' @templateVar epsg TRUE
+#' @templateVar ncores TRUE
+#' @param tolerance Simplification tolerance as a share of the equivalent-circle
+#'   radius.
+#' @template template
+#'
+#' @returns A numeric vector. Can be shaped into a district-by-plan matrix.
+#' @export
+#' @concept compactness
+#'
+#' @examples
+#' data(nh)
+#' data(nh_m)
+#' comp_jagged(plans = nh$r_2020, shp = nh)
+#' comp_jagged(plans = nh_m[, 1:2], shp = nh)
+comp_jagged <- function(
+  plans,
+  shp,
+  epsg = 3857,
+  ncores = 1,
+  tolerance = 0.01
+) {
+  # process objects ----
+  shp <- planarize(shp, epsg)
+  plans <- process_plans(plans)
+  n_plans <- ncol(plans)
+  dists <- sort(unique(c(plans)))
+  nd <- length(dists)
+
+  # set up parallel ----
+  nc <- min(ncores, ncol(plans))
+  if (nc == 1) {
+    `%oper%` <- foreach::`%do%`
+  } else {
+    `%oper%` <- foreach::`%dopar%`
+    cl <- parallel::makeCluster(
+      nc,
+      setup_strategy = 'sequential',
+      methods = FALSE
+    )
+    doParallel::registerDoParallel(cl)
+    on.exit(parallel::stopCluster(cl))
+  }
+
+  if (nc == 1) {
+    chunks <- rep(1L, n_plans)
+  } else {
+    chunks <- cut(seq_len(n_plans), nc, labels = FALSE)
+  }
+  plan_chunks <- lapply(seq_len(max(chunks)), function(x) {
+    plans[, chunks == x, drop = FALSE]
+  })
+  shp_col_wkt <- geos::as_geos_geometry(shp) |>
+    geos::geos_make_collection() |>
+    geos::geos_write_wkt()
+  out <- foreach::foreach(
+    map = seq_along(plan_chunks),
+    .combine = 'c',
+    .packages = 'redistmetrics',
+    .export = 'compute_jagged_score'
+  ) %oper%
+    {
+      compute_jagged_score(
+        shp_col_wkt,
+        plan_chunks[[map]],
+        nd,
+        tolerance
+      )
+    }
+
+  c(out)
+}
+
 #' Calculate Y Symmetry Compactness
 #'
 #' Y symmetry is the overlapping area of a shape and its projection over the

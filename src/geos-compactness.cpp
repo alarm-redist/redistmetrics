@@ -219,6 +219,25 @@ int count_ring_corners(GEOSContextHandle_t ctx,
   return corners;
 }
 
+int count_ring_segments(GEOSContextHandle_t ctx, const GEOSGeometry* ring) {
+  const GEOSCoordSequence* seq = ring == nullptr
+    ? nullptr : GEOSGeom_getCoordSeq_r(ctx, ring);
+  unsigned int n = 0;
+  if (seq == nullptr || !GEOSCoordSeq_getSize_r(ctx, seq, &n) || n < 2) {
+    return 0;
+  }
+
+  double first_x, first_y, last_x, last_y;
+  if (!GEOSCoordSeq_getXY_r(ctx, seq, 0, &first_x, &first_y) ||
+      !GEOSCoordSeq_getXY_r(ctx, seq, n - 1, &last_x, &last_y)) {
+    return 0;
+  }
+
+  return first_x == last_x && first_y == last_y
+    ? static_cast<int>(n) - 1
+    : static_cast<int>(n);
+}
+
 int count_polygon_corners(GEOSContextHandle_t ctx,
                           const GEOSGeometry* geom,
                           double min_turn) {
@@ -238,6 +257,28 @@ int count_polygon_corners(GEOSContextHandle_t ctx,
       corners += count_polygon_corners(ctx, GEOSGetGeometryN_r(ctx, geom, i), min_turn);
     }
     return corners;
+  }
+
+  return 0;
+}
+
+int count_polygon_segments(GEOSContextHandle_t ctx, const GEOSGeometry* geom) {
+  if (geom == nullptr) {
+    return 0;
+  }
+
+  const int type = GEOSGeomTypeId_r(ctx, geom);
+  if (type == GEOS_POLYGON) {
+    return count_ring_segments(ctx, GEOSGetExteriorRing_r(ctx, geom));
+  }
+
+  if (type == GEOS_MULTIPOLYGON || type == GEOS_GEOMETRYCOLLECTION) {
+    int segments = 0;
+    const int n_geoms = GEOSGetNumGeometries_r(ctx, geom);
+    for (int i = 0; i < n_geoms; i++) {
+      segments += count_polygon_segments(ctx, GEOSGetGeometryN_r(ctx, geom, i));
+    }
+    return segments;
   }
 
   return 0;
@@ -270,6 +311,42 @@ double corner_count(GEOSContextHandle_t ctx,
   }
   GEOSGeom_destroy_r(ctx, united);
   return static_cast<double>(corners);
+}
+
+double jagged_score(GEOSContextHandle_t ctx,
+                    const GEOSGeometry* district,
+                    double tolerance) {
+  GEOSGeometry* united = GEOSUnaryUnion_r(ctx, district);
+  double area = geometry_area(ctx, united);
+  if (united == nullptr || !R_finite(area) || area <= 0.0) {
+    if (united != nullptr) {
+      GEOSGeom_destroy_r(ctx, united);
+    }
+    return NA_REAL;
+  }
+
+  const double pi = std::acos(-1.0);
+  const double r_eq = std::sqrt(area / pi);
+  const double tol = tolerance * r_eq;
+  GEOSGeometry* simplified = tol > 0.0
+    ? GEOSTopologyPreserveSimplify_r(ctx, united, tol)
+    : GEOSGeom_clone_r(ctx, united);
+  const GEOSGeometry* jagged_geom = simplified == nullptr ? united : simplified;
+
+  double perimeter = 0.0;
+  GEOSLength_r(ctx, jagged_geom, &perimeter);
+  const int segments = count_polygon_segments(ctx, jagged_geom);
+
+  double score = NA_REAL;
+  if (perimeter > 0.0) {
+    score = segments * (2.0 * pi * r_eq) / perimeter;
+  }
+
+  if (simplified != nullptr) {
+    GEOSGeom_destroy_r(ctx, simplified);
+  }
+  GEOSGeom_destroy_r(ctx, united);
+  return score;
 }
 
 double skew_score(GEOSContextHandle_t ctx, const GEOSGeometry* district) {
@@ -556,6 +633,77 @@ NumericVector compute_district_corner_count(const std::string& wkt_collection,
   return results;
 }
 
+NumericVector compute_district_jagged_score(const std::string& wkt_collection,
+                                            const IntegerMatrix& plans,
+                                            int nd,
+                                            double tolerance) {
+  const int n_plans = plans.ncol();
+  const int n_rows = plans.nrow();
+  GEOSContextHandle_t ctx = GEOS_init_r();
+  GEOSWKTReader* reader = GEOSWKTReader_create_r(ctx);
+  GEOSGeometry* collection = GEOSWKTReader_read_r(
+    ctx, reader, wkt_collection.c_str());
+  GEOSWKTReader_destroy_r(ctx, reader);
+
+  if (collection == nullptr) {
+    GEOS_finish_r(ctx);
+    stop("Failed to read WKT collection");
+  }
+  if (GEOSGetNumGeometries_r(ctx, collection) != n_rows) {
+    GEOSGeom_destroy_r(ctx, collection);
+    GEOS_finish_r(ctx);
+    stop("Number of geometries in collection must match number of rows in plans");
+  }
+
+  std::vector<GEOSGeometry*> source_geometries(n_rows);
+  for (int i = 0; i < n_rows; i++) {
+    source_geometries[i] = const_cast<GEOSGeometry*>(
+      GEOSGetGeometryN_r(ctx, collection, i));
+    if (source_geometries[i] == nullptr) {
+      GEOSGeom_destroy_r(ctx, collection);
+      GEOS_finish_r(ctx);
+      stop("Failed to extract geometry from collection");
+    }
+  }
+
+  NumericVector results(nd * n_plans, NA_REAL);
+  std::vector<std::vector<GEOSGeometry*>> district_geometries(nd);
+  for (int p = 0; p < n_plans; p++) {
+    for (auto& district : district_geometries) {
+      district.clear();
+    }
+    for (int i = 0; i < n_rows; i++) {
+      int district = plans(i, p) - 1;
+      if (district < 0 || district >= nd) {
+        GEOSGeom_destroy_r(ctx, collection);
+        GEOS_finish_r(ctx);
+        stop("District labels must be integers from 1 through nd");
+      }
+      district_geometries[district].push_back(source_geometries[i]);
+    }
+
+    for (int d = 0; d < nd; d++) {
+      if (district_geometries[d].empty()) {
+        continue;
+      }
+      bool owns_district = district_geometries[d].size() > 1;
+      GEOSGeometry* district = owns_district
+        ? make_owned_collection(ctx, district_geometries[d])
+        : district_geometries[d][0];
+      if (district != nullptr) {
+        results[p * nd + d] = jagged_score(ctx, district, tolerance);
+      }
+      if (owns_district && district != nullptr) {
+        GEOSGeom_destroy_r(ctx, district);
+      }
+    }
+  }
+
+  GEOSGeom_destroy_r(ctx, collection);
+  GEOS_finish_r(ctx);
+  return results;
+}
+
 } // namespace
 
 // [[Rcpp::export(rng = false)]]
@@ -604,6 +752,14 @@ NumericVector compute_corner_count(const std::string& wkt_collection,
                                    double corner_angle) {
   return compute_district_corner_count(
     wkt_collection, plans, nd, tolerance, corner_angle);
+}
+
+// [[Rcpp::export(rng = false)]]
+NumericVector compute_jagged_score(const std::string& wkt_collection,
+                                   const IntegerMatrix& plans,
+                                   int nd,
+                                   double tolerance) {
+  return compute_district_jagged_score(wkt_collection, plans, nd, tolerance);
 }
 
 // [[Rcpp::export(rng = false)]]
