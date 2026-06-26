@@ -148,3 +148,31 @@ test_that("comp_x_sym works", {
   e <- c(0.560213275968141, 0.474006808670672, 0.699596108300562, 0.343637149393331)
   expect_equal(a, e, tolerance = 1e-4)
 })
+
+test_that("comp_x_sym works with polygons with holes", {
+  # Create a test polygon with a hole (donut shape)
+  outer <- matrix(c(0, 0, 10, 0, 10, 10, 0, 10, 0, 0), ncol = 2, byrow = TRUE)
+  hole <- matrix(c(3, 3, 7, 3, 7, 7, 3, 7, 3, 3), ncol = 2, byrow = TRUE)
+  poly_with_hole <- sf::st_polygon(list(outer, hole))
+  shp_test <- sf::st_sf(geometry = sf::st_sfc(poly_with_hole, crs = 3857))
+  
+  # Test that comp_x_sym doesn't error with polygons with holes
+  a <- comp_x_sym(plans = c(1), shp = shp_test)
+  expect_true(is.numeric(a))
+  expect_equal(length(a), 1)
+  expect_true(a >= 0 && a <= 1)
+})
+
+test_that("comp_y_sym works with polygons with holes", {
+  # Create a test polygon with a hole (donut shape)
+  outer <- matrix(c(0, 0, 10, 0, 10, 10, 0, 10, 0, 0), ncol = 2, byrow = TRUE)
+  hole <- matrix(c(3, 3, 7, 3, 7, 7, 3, 7, 3, 3), ncol = 2, byrow = TRUE)
+  poly_with_hole <- sf::st_polygon(list(outer, hole))
+  shp_test <- sf::st_sf(geometry = sf::st_sfc(poly_with_hole, crs = 3857))
+  
+  # Test that comp_y_sym doesn't error with polygons with holes
+  a <- comp_y_sym(plans = c(1), shp = shp_test)
+  expect_true(is.numeric(a))
+  expect_equal(length(a), 1)
+  expect_true(a >= 0 && a <= 1)
+})
