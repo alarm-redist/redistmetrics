@@ -172,6 +172,81 @@ Y-Symmetry compactness can be computed with:
 comp_y_sym(plans = nh$r_2020, shp = nh)
 ```
 
+# Shape-Based Compactness
+
+### Holes Compactness
+
+Holes compactness counts the number of holes in a district.
+A hole is an area enclosed by the district but not included in the district.
+
+Scores range from 0 to $\infty$, where 0 is the most compact and larger scores are less compact.
+
+Holes compactness can be computed with:
+
+```{r}
+comp_holes(plans = nh$r_2020, shp = nh)
+```
+
+### Components Compactness
+
+Components compactness counts the number of separate pieces in a district.
+Holes are not counted as separate pieces.
+
+Scores range from 1 to $\infty$, where 1 is the most compact and larger scores are less compact.
+
+Components compactness can be computed with:
+
+```{r}
+comp_components(plans = nh$r_2020, shp = nh)
+```
+
+### Corners Compactness
+
+Corners compactness counts the number of sharp turns on a district's boundary.
+The `corner_angle` argument defines how much the boundary must turn to be counted as a corner.
+By default, turns of at least 30 degrees are counted.
+
+The `tolerance` argument controls how much small boundary detail is ignored before corners are counted.
+It is measured as a share of the radius of a circle with the same area as the district, $\sqrt{A_D / \pi}$.
+
+Scores range from 0 to $\infty$, where smaller scores are more compact and larger scores are less compact.
+
+Corners compactness can be computed with:
+
+```{r}
+comp_corners(plans = nh$r_2020, shp = nh)
+```
+
+### Boundary Jaggedness Compactness
+
+Boundary Jaggedness compactness measures how many boundary segments a district has relative to its perimeter and area.
+Let $S_D$ be the number of segments in the district's boundary after small boundary detail is ignored, $P_D$ be the district's perimeter, and $r_{eq} = \sqrt{A_D / \pi}$ be the radius of a circle with the same area as the district.
+
+Formally, it can be written as:
+
+$$ \textrm{Boundary Jaggedness} = \frac{S_D(2\pi r_{eq})}{P_D} $$
+
+Scores range from 0 to $\infty$, where smaller scores are more compact and larger scores are less compact.
+
+Boundary Jaggedness compactness can be computed with:
+
+```{r}
+comp_jagged(plans = nh$r_2020, shp = nh)
+```
+
+### KIWSI Compactness
+
+KIWSI compactness reimplements the Kaufman, King, and Komisarchik "know it when you see it" compactness measure.
+It combines 14 compactness scores to predict a compactness rating based on human ratings of how compact districts are.
+
+Scores range from 0 to 100, where 0 is the least compact and 100 is the most compact.
+
+KIWSI compactness can be computed with:
+
+```{r}
+comp_kiwysi(plans = nh$r_2020, shp = nh)
+```
+
 # Distance-Based Compactness
 
 ### Length-Width Compactness
