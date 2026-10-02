@@ -3,7 +3,8 @@
 devtools::load_all()
 library(dplyr)
 
-load('C:/Users/chris/Documents/GitHub/compactness/data/training_labels.RData')
+# requires https://github.com/aaronrkaufman/compactness available to avoid copying that data
+load('../compactness/data/training_labels.RData')
 
 shp <- sf::st_read('data-raw/kiwysi/both.shp', quiet = TRUE)
 plans <- seq_len(nrow(shp))
