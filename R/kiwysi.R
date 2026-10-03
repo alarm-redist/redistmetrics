@@ -48,6 +48,7 @@ comp_kiwysi <- function(
 }
 
 kiwysi_features <- function(plans, shp, epsg = 3857, ncores = 1, ...) {
+  plans <- process_plans(plans)
   dots <- rlang::enquos(...)
   if (length(dots) > 0 && any(names(dots) == '')) {
     cli::cli_abort(
@@ -78,86 +79,95 @@ kiwysi_features <- function(plans, shp, epsg = 3857, ncores = 1, ...) {
     )
   }
 
+  expected <- length(unique(c(plans))) * ncol(plans)
+  dots <- lapply(dots, function(dot) as.numeric(rlang::eval_tidy(dot, data = shp)))
+  wrong_length <- names(dots)[lengths(dots) != expected]
+  if (length(wrong_length) > 0) {
+    cli::cli_abort(
+      'KIWSI feature vectors {.val {wrong_length}} must have length {expected} (one value per district per plan).'
+    )
+  }
+
   if ('comp_polsby' %in% names(dots)) {
-    polsby <- as.numeric(rlang::eval_tidy(dots$comp_polsby, data = shp))
+    polsby <- dots$comp_polsby
   } else {
     polsby <- comp_polsby(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_ch' %in% names(dots)) {
-    hull <- as.numeric(rlang::eval_tidy(dots$comp_ch, data = shp))
+    hull <- dots$comp_ch
   } else {
     hull <- comp_ch(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_reock' %in% names(dots)) {
-    reock <- as.numeric(rlang::eval_tidy(dots$comp_reock, data = shp))
+    reock <- dots$comp_reock
   } else {
     reock <- comp_reock(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_bbox_reock' %in% names(dots)) {
-    bbox <- as.numeric(rlang::eval_tidy(dots$comp_bbox_reock, data = shp))
+    bbox <- dots$comp_bbox_reock
   } else {
     bbox <- comp_bbox_reock(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_box_reock' %in% names(dots)) {
-    box_reock <- as.numeric(rlang::eval_tidy(dots$comp_box_reock, data = shp))
+    box_reock <- dots$comp_box_reock
   } else {
     box_reock <- comp_box_reock(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_lw' %in% names(dots)) {
-    lenwid <- as.numeric(rlang::eval_tidy(dots$comp_lw, data = shp))
+    lenwid <- dots$comp_lw
   } else {
     lenwid <- comp_lw(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_bc' %in% names(dots)) {
-    boyce <- as.numeric(rlang::eval_tidy(dots$comp_bc, data = shp))
+    boyce <- dots$comp_bc
   } else {
     boyce <- comp_bc(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_x_sym' %in% names(dots)) {
-    sym_x <- as.numeric(rlang::eval_tidy(dots$comp_x_sym, data = shp))
+    sym_x <- dots$comp_x_sym
   } else {
     sym_x <- comp_x_sym(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_y_sym' %in% names(dots)) {
-    sym_y <- as.numeric(rlang::eval_tidy(dots$comp_y_sym, data = shp))
+    sym_y <- dots$comp_y_sym
   } else {
     sym_y <- comp_y_sym(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_skew' %in% names(dots)) {
-    skew <- as.numeric(rlang::eval_tidy(dots$comp_skew, data = shp))
+    skew <- dots$comp_skew
   } else {
     skew <- comp_skew(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_corners' %in% names(dots)) {
-    corners <- as.numeric(rlang::eval_tidy(dots$comp_corners, data = shp))
+    corners <- dots$comp_corners
   } else {
     corners <- comp_corners(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_jagged' %in% names(dots)) {
-    jagged <- as.numeric(rlang::eval_tidy(dots$comp_jagged, data = shp))
+    jagged <- dots$comp_jagged
   } else {
     jagged <- comp_jagged(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_components' %in% names(dots)) {
-    components <- as.numeric(rlang::eval_tidy(dots$comp_components, data = shp))
+    components <- dots$comp_components
   } else {
     components <- comp_components(plans, shp, epsg = epsg, ncores = ncores)
   }
 
   if ('comp_holes' %in% names(dots)) {
-    holes <- as.numeric(rlang::eval_tidy(dots$comp_holes, data = shp))
+    holes <- dots$comp_holes
   } else {
     holes <- comp_holes(plans, shp, epsg = epsg, ncores = ncores)
   }
