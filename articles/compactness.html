@@ -273,6 +273,93 @@ compact.</p>
 </div>
 </div>
 <div class="section level2">
+<h2 id="shape-based-compactness">Shape-Based Compactness<a class="anchor" aria-label="anchor" href="#shape-based-compactness"></a>
+</h2>
+<div class="section level4">
+<h4 id="holes-compactness">Holes Compactness<a class="anchor" aria-label="anchor" href="#holes-compactness"></a>
+</h4>
+<p>Holes compactness counts the number of holes in a district. A hole is
+an area enclosed by the district but not included in the district.</p>
+<p>Scores range from 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∞</mi><annotation encoding="application/x-tex">\infty</annotation></semantics></math>,
+where 0 is the most compact and larger scores are less compact.</p>
+<p>Holes compactness can be computed with:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_holes.html">comp_holes</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0 0</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="components-compactness">Components Compactness<a class="anchor" aria-label="anchor" href="#components-compactness"></a>
+</h4>
+<p>Components compactness counts the number of separate pieces in a
+district. Holes are not counted as separate pieces.</p>
+<p>Scores range from 1 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∞</mi><annotation encoding="application/x-tex">\infty</annotation></semantics></math>,
+where 1 is the most compact and larger scores are less compact.</p>
+<p>Components compactness can be computed with:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_components.html">comp_components</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 1 1</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="corners-compactness">Corners Compactness<a class="anchor" aria-label="anchor" href="#corners-compactness"></a>
+</h4>
+<p>Corners compactness counts the number of sharp turns on a district’s
+boundary. The <code>corner_angle</code> argument defines how much the
+boundary must turn to be counted as a corner. By default, turns of at
+least 30 degrees are counted.</p>
+<p>The <code>tolerance</code> argument controls how much small boundary
+detail is ignored before corners are counted. It is measured as a share
+of the radius of a circle with the same area as the district,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msqrt><mrow><msub><mi>A</mi><mi>D</mi></msub><mi>/</mi><mi>π</mi></mrow></msqrt><annotation encoding="application/x-tex">\sqrt{A_D / \pi}</annotation></semantics></math>.</p>
+<p>Scores range from 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∞</mi><annotation encoding="application/x-tex">\infty</annotation></semantics></math>,
+where smaller scores are more compact and larger scores are less
+compact.</p>
+<p>Corners compactness can be computed with:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_corners.html">comp_corners</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1]  97 155</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="boundary-jaggedness-compactness">Boundary Jaggedness Compactness<a class="anchor" aria-label="anchor" href="#boundary-jaggedness-compactness"></a>
+</h4>
+<p>Boundary Jaggedness compactness measures how many boundary segments a
+district has relative to its perimeter and area. Let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mi>D</mi></msub><annotation encoding="application/x-tex">S_D</annotation></semantics></math>
+be the number of segments in the district’s boundary after small
+boundary detail is ignored,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>P</mi><mi>D</mi></msub><annotation encoding="application/x-tex">P_D</annotation></semantics></math>
+be the district’s perimeter, and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>r</mi><mrow><mi>e</mi><mi>q</mi></mrow></msub><mo>=</mo><msqrt><mrow><msub><mi>A</mi><mi>D</mi></msub><mi>/</mi><mi>π</mi></mrow></msqrt></mrow><annotation encoding="application/x-tex">r_{eq} = \sqrt{A_D / \pi}</annotation></semantics></math>
+be the radius of a circle with the same area as the district.</p>
+<p>Formally, it can be written as:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Boundary Jaggedness</mtext><mo>=</mo><mfrac><mrow><msub><mi>S</mi><mi>D</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>2</mn><mi>π</mi><msub><mi>r</mi><mrow><mi>e</mi><mi>q</mi></mrow></msub><mo stretchy="false" form="postfix">)</mo></mrow><msub><mi>P</mi><mi>D</mi></msub></mfrac></mrow><annotation encoding="application/x-tex"> \textrm{Boundary Jaggedness} = \frac{S_D(2\pi r_{eq})}{P_D} </annotation></semantics></math></p>
+<p>Scores range from 0 to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∞</mi><annotation encoding="application/x-tex">\infty</annotation></semantics></math>,
+where smaller scores are more compact and larger scores are less
+compact.</p>
+<p>Boundary Jaggedness compactness can be computed with:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_jagged.html">comp_jagged</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 57.11748 71.40272</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="kiwsi-compactness">KIWSI Compactness<a class="anchor" aria-label="anchor" href="#kiwsi-compactness"></a>
+</h4>
+<p>KIWSI compactness reimplements the Kaufman, King, and Komisarchik
+“know it when you see it” compactness measure. It combines 14
+compactness scores to predict a compactness rating based on human
+ratings of how compact districts are.</p>
+<p>Scores range from 0 to 100, where 0 is the least compact and 100 is
+the most compact.</p>
+<p>KIWSI compactness can be computed with:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_kiwysi.html">comp_kiwysi</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 36.66705 18.39815</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
 <h2 id="distance-based-compactness">Distance-Based Compactness<a class="anchor" aria-label="anchor" href="#distance-based-compactness"></a>
 </h2>
 <div class="section level4">
@@ -291,7 +378,7 @@ as the longer side of that box.</p>
 Scores range from 0 to 1, where 0 is the least compact and 1 is the most
 compact.</p>
 <p>Length-Width compactness can be computed with:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_lw.html">comp_lw</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.9161576 0.5223455</span></span></code></pre></div>
 </div>
@@ -318,7 +405,7 @@ where 0 is the most compact and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>∞</mi><annotation encoding="application/x-tex">\infty</annotation></semantics></math>
 is the least compact.</p>
 <p>Boyce-Clark compactness can be computed with:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_bc.html">comp_bc</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.7921350 0.8330235</span></span></code></pre></div>
 </div>
@@ -343,7 +430,7 @@ and
 Smaller scores are more compact. When used with a denominator, a score
 of 1 is most compact and higher scores are less compact.</p>
 <p>Fryer-Holden compactness can be computed with:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_fh.html">comp_fh</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, total_pop <span class="op">=</span> <span class="va">pop</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 5.374691e+22 5.374691e+22</span></span></code></pre></div>
 </div>
@@ -368,7 +455,7 @@ and consider the edges removed for a plan
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Edges Removed</mtext><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><msub><mi>E</mi><mi>π</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex"> \textrm{Edges Removed} = E(a) - E_\pi(a)</annotation></semantics></math>
 Larger scores are less compact.</p>
 <p>Edges-Removed compactness can be computed with:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_edges_rem.html">comp_edges_rem</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 73 73</span></span></code></pre></div>
 </div>
@@ -389,7 +476,7 @@ and consider the edges removed for a plan
 Scores range from 0 to 1 where 0 is least compact and 1 is most
 compact.</p>
 <p>Fraction Kept compactness can be computed with:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_frac_kept.html">comp_frac_kept</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.9584755 0.9584755</span></span></code></pre></div>
 </div>
@@ -406,7 +493,7 @@ Sequential Monte Carlo (McCartan and Imai 2020) algorithm.</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">Log Spanning Tree</mtext><mo>=</mo><mtext mathvariant="normal">log</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>n</mi><mi>s</mi></msub><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex"> \textrm{Log Spanning Tree} = \textrm{log}(n_st)</annotation></semantics></math></p>
 <p>A larger number of log spanning trees is more compact.</p>
 <p>Log Spanning Tree compactness can be computed with:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/comp_log_st.html">comp_log_st</a></span><span class="op">(</span>plans <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">r_2020</span>, shp <span class="op">=</span> <span class="va">nh</span>, adj <span class="op">=</span> <span class="va">nh</span><span class="op">$</span><span class="va">adj</span>, counties <span class="op">=</span> <span class="va">county</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] -Inf -Inf</span></span></code></pre></div>
 </div>
@@ -459,7 +546,7 @@ plan (Boyce-Clark)</li>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer>
