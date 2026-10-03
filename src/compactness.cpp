@@ -137,3 +137,71 @@ NumericMatrix bbox_reock(IntegerMatrix dm,
 
   return out;
 }
+
+// [[Rcpp::export(rng = false)]]
+NumericVector fryer_holden(IntegerMatrix dm,
+                           NumericVector pop,
+                           NumericMatrix coords,
+                           const int nd) {
+  const int n = dm.nrow();
+  const int n_plans = dm.ncol();
+  NumericVector out(n_plans);
+  std::vector<double> weight(nd), weighted_r2(nd), weighted_x(nd), weighted_y(nd);
+
+  for (int p = 0; p < n_plans; p++) {
+    std::fill(weight.begin(), weight.end(), 0.0);
+    std::fill(weighted_r2.begin(), weighted_r2.end(), 0.0);
+    std::fill(weighted_x.begin(), weighted_x.end(), 0.0);
+    std::fill(weighted_y.begin(), weighted_y.end(), 0.0);
+
+    for (int i = 0; i < n; i++) {
+      const int d = dm(i, p) - 1;
+      const double w = pop[i];
+      const double x = coords(i, 0);
+      const double y = coords(i, 1);
+      weight[d] += w;
+      weighted_r2[d] += w * (x * x + y * y);
+      weighted_x[d] += w * x;
+      weighted_y[d] += w * y;
+    }
+
+    double total = 0.0;
+    for (int d = 0; d < nd; d++) {
+      total += 2.0 * (weight[d] * weighted_r2[d] -
+        weighted_x[d] * weighted_x[d] - weighted_y[d] * weighted_y[d]);
+    }
+    out[p] = total;
+  }
+
+  return out;
+}
+
+// [[Rcpp::export(rng = false)]]
+NumericMatrix length_width(IntegerMatrix dm,
+                           NumericMatrix extents,
+                           const int nd) {
+  const int n = dm.nrow();
+  const int n_plans = dm.ncol();
+  NumericMatrix out(nd, n_plans);
+  std::vector<double> xmin(nd), ymin(nd), xmax(nd), ymax(nd);
+
+  for (int p = 0; p < n_plans; p++) {
+    std::fill(xmin.begin(), xmin.end(), INFINITY);
+    std::fill(ymin.begin(), ymin.end(), INFINITY);
+    std::fill(xmax.begin(), xmax.end(), -INFINITY);
+    std::fill(ymax.begin(), ymax.end(), -INFINITY);
+    for (int i = 0; i < n; i++) {
+      const int d = dm(i, p) - 1;
+      xmin[d] = std::min(xmin[d], extents(i, 0));
+      ymin[d] = std::min(ymin[d], extents(i, 1));
+      xmax[d] = std::max(xmax[d], extents(i, 2));
+      ymax[d] = std::max(ymax[d], extents(i, 3));
+    }
+    for (int d = 0; d < nd; d++) {
+      const double width = xmax[d] - xmin[d];
+      const double height = ymax[d] - ymin[d];
+      out(d, p) = std::min(width, height) / std::max(width, height);
+    }
+  }
+  return out;
+}
