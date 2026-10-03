@@ -3,7 +3,7 @@
 #' Predicts the Kaufman, King, and Komisarchik "know it when you see it"
 #' compactness score by combining 14 `redistmetrics` compactness measures in a
 #' linear model. Scores are bounded between 0 and 100, where 0 is least compact
-#' and 100 is most compact under this model.
+#' and 100 is most compact.
 #'
 #' @templateVar plans TRUE
 #' @templateVar shp TRUE
